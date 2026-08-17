@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 试点门店调研报告</title>
+<style>
+  :root {
+    --bg: #FAF6F0;
+    --card: #FFFFFF;
+    --gold: #C6A15B;
+    --gold-deep: #A8853F;
+    --gold-line: #E5D5BC;
+    --rose: #C88B7A;
+    --ink: #3D3A36;
+    --ink-soft: #7A7268;
+    --ink-faint: #A99F92;
+    --chip-bg: rgba(198,161,91,.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #2E2A24;
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Stage ===== */
+  #stage {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px; height: 720px;
+    transform-origin: 0 0;
+    background: var(--bg);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    padding: 54px 72px 64px;
+    background:
+      radial-gradient(1100px 520px at 92% -10%, rgba(198,161,91,.10), transparent 60%),
+      radial-gradient(900px 500px at -8% 108%, rgba(200,139,122,.07), transparent 55%),
+      var(--bg);
+  }
+  .slide.active { display: flex; animation: fadeIn .45s ease both; }
+  #s6.active, #s7.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* ===== Typography ===== */
+  .serif { font-family: Georgia, "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif; }
+
+  .slide-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; letter-spacing: 3px; color: var(--gold-deep);
+    text-transform: uppercase; font-weight: 600;
+  }
+  .slide-kicker::before {
+    content: ""; width: 26px; height: 1px; background: var(--gold);
+  }
+  .slide-title {
+    font-family: Georgia, "Songti SC", "STSong", "SimSun", serif;
+    font-size: 40px; font-weight: 700; letter-spacing: 2px;
+    margin: 14px 0 0; color: var(--ink);
+  }
+  .slide-sub {
+    margin-top: 8px; font-size: 15px; color: var(--ink-soft);
+    letter-spacing: 1px;
+  }
+  .rule {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-line) 42%, transparent 100%);
+    margin: 22px 0 26px;
+  }
+
+  .page-num {
+    position: absolute; right: 34px; bottom: 20px;
+    font-size: 12px; letter-spacing: 2px; color: var(--ink-faint);
+  }
+
+  /* ===== Cover ===== */
+  #s1 {
+    display: none; align-items: stretch;
+    flex-direction: row;
+    padding: 0;
+    background:
+      radial-gradient(900px 600px at 85% 0%, rgba(198,161,91,.16), transparent 60%),
+      radial-gradient(800px 500px at 0% 100%, rgba(200,139,122,.10), transparent 55%),
+      var(--bg);
+  }
+  #s1.active { display: flex; }
+
+  .cover-left {
+    flex: 1.35;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 76px;
+    position: relative;
+  }
+  .cover-left::after {
+    content: ""; position: absolute; right: 0; top: 12%; bottom: 12%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold-line), transparent);
+  }
+
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 44px;
+  }
+  .brand-mark {
+    width: 52px; height: 52px; flex: none;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-deep);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 24px; font-weight: 700;
+    background: rgba(198,161,91,.08);
+    letter-spacing: 1px;
+  }
+  .brand-name { font-size: 20px; letter-spacing: 6px; color: var(--ink); font-weight: 600; }
+  .brand-sub { font-size: 11px; letter-spacing: 3px; color: var(--ink-faint); margin-top: 3px; }
+
+  .cover-title {
+    font-size: 56px; font-weight: 700; line-height: 1.35;
+    letter-spacing: 4px;
+    margin-bottom: 26px;
+  }
+  .cover-title em { font-style: normal; color: var(--gold-deep); }
+
+  .cover-desc { font-size: 17px; color: var(--ink-soft); letter-spacing: 2px; line-height: 2; }
+
+  .cover-meta {
+    margin-top: 44px;
+    display: grid; grid-template-columns: 96px 1fr;
+    gap: 10px 18px;
+    font-size: 14px;
+  }
+  .cover-meta dt { color: var(--gold-deep); letter-spacing: 2px; font-weight: 600; }
+  .cover-meta dd { color: var(--ink); letter-spacing: 1px; }
+
+  .cover-right {
+    flex: 1;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 60px;
+  }
+  .cover-ring {
+    position: absolute; top: 15%; right: 16%;
+    width: 340px; height: 340px;
+    border: 1px solid var(--gold-line);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: ringSpin 60s linear infinite;
+  }
+  .cover-ring::after {
+    content: ""; position: absolute;
+    width: 260px; height: 260px;
+    border: 1px dashed rgba(198,161,91,.45);
+    border-radius: 50%;
+  }
+  .cover-ring span {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: rgba(198,161,91,.14);
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-deep);
+    font-family: Georgia, serif;
+    font-size: 14px; letter-spacing: 2px;
+  }
+  @keyframes ringSpin { to { transform: rotate(360deg); } }
+
+  .cover-org {
+    font-size: 15px; letter-spacing: 4px; color: var(--ink-soft);
+  }
+  .cover-place {
+    font-size: 13px; letter-spacing: 2px; color: var(--ink-faint);
+    margin-top: 8px;
+  }
+  .cover-tag {
+    position: absolute; top: 40px; right: 44px;
+    font-size: 12px; letter-spacing: 3px; color: var(--gold-deep);
+    border: 1px solid var(--gold-line);
+    padding: 8px 18px; border-radius: 30px;
+    background: rgba(255,255,255,.6);
+  }
+
+  /* ===== Generic layout helpers ===== */
+  .toc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 22px 60px;
+    margin-top: 18px;
+  }
+  .toc-item {
+    display: flex; align-items: baseline; gap: 20px;
+    padding: 18px 8px;
+    border-bottom: 1px solid var(--gold-line);
+  }
+  .toc-num {
+    font-family: Georgia, serif;
+    font-size: 26px; font-weight: 700; color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .toc-name { font-size: 20px; font-weight: 600; letter-spacing: 2px; }
+  .toc-en { font-size: 12px; color: var(--ink-faint); letter-spacing: 2px; margin-top: 4px; }
+
+  .two-col { display: flex; gap: 34px; flex: 1 1 auto; min-height: 0; }
+  .col { flex: 1; min-width: 0; min-height: 0; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 12px;
+    padding: 22px 26px;
+    box-shadow: 0 6px 24px rgba(166,138,88,.08);
+  }
+
+  .card-title {
+    position: relative;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold-deep);
+    margin-bottom: 14px;
+  }
+  .card-title::before {
+    content: ""; width: 16px; height: 16px; flex: none;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px var(--card);
+    background: var(--gold);
+  }
+
+  .list { list-style: none; }
+  .list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14.5px; line-height: 1.7; color: var(--ink);
+    margin-bottom: 9px;
+    letter-spacing: .3px;
+  }
+  .list li::before {
+    content: ""; position: absolute; left: 2px; top: 10px;
+    width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+  }
+  .list li b { color: var(--ink); font-weight: 600; }
+  .list li .tag-inline {
+    display: inline-block; font-size: 11px; color: var(--gold-deep);
+    border: 1px solid var(--gold-line); border-radius: 4px;
+    padding: 1px 7px; margin-left: 6px; vertical-align: 1px;
+    background: var(--chip-bg);
+  }
+
+  .pill {
+    display: inline-block; font-size: 12px; letter-spacing: 2px;
+    color: var(--gold-deep); background: var(--chip-bg);
+    border: 1px solid var(--gold-line);
+    padding: 6px 16px; border-radius: 30px;
+  }
+
+  /* ===== Personnel ===== */
+  .person-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .person {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 10px;
+    padding: 16px 18px 14px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(166,138,88,.07);
+  }
+  .person .avatar {
+    width: 46px; height: 46px; margin: 0 auto 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(198,161,91,.22), rgba(200,139,122,.18));
+    border: 1.5px solid var(--gold-line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; color: var(--gold-deep);
+    font-family: Georgia, serif;
+  }
+  .person .name { font-size: 16px; font-weight: 600; letter-spacing: 1px; }
+  .person .role { font-size: 12px; color: var(--ink-soft); margin-top: 4px; letter-spacing: 1px; }
+  .person.highlight { border-color: var(--gold); background: linear-gradient(180deg, #FFFDF9, var(--card)); }
+  .person.highlight .avatar { border-color: var(--gold); background: var(--gold); color: #fff; }
+  .person.highlight .name { color: var(--gold-deep); }
+
+  .staff-note {
+    margin-top: 18px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--ink-soft);
+    background: rgba(198,161,91,.07);
+    border: 1px dashed var(--gold-line);
+    border-radius: 10px; padding: 14px 20px;
+  }
+  .staff-note b { color: var(--gold-deep); }
+
+  .photo-caption {
+    position: absolute; left: 14px; bottom: 12px;
+    font-size: 12.5px; color: #fff; letter-spacing: 1px;
+    background: rgba(45,40,33,.62); padding: 5px 14px; border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ===== Meeting minutes ===== */
+  .agenda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1 1 auto; min-height: 0; }
+  .agenda {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 12px;
+    padding: 22px 26px;
+    position: relative;
+    box-shadow: 0 6px 24px rgba(166,138,88,.08);
+  }
+  .agenda .no {
+    position: absolute; top: 16px; right: 20px;
+    font-family: Georgia, serif; font-size: 40px; font-weight: 700;
+    color: rgba(198,161,91,.18); line-height: 1;
+  }
+  .agenda h3 { font-size: 18px; font-weight: 700; letter-spacing: 1px; color: var(--ink); margin-bottom: 8px; }
+  .agenda h3 .k { color: var(--gold-deep); font-size: 13px; letter-spacing: 2px; vertical-align: 2px; margin-right: 8px; }
+  .agenda p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+
+  .quote-note {
+    margin-top: 22px;
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14px; color: var(--ink-soft); line-height: 1.8;
+    border-left: 3px solid var(--gold);
+    background: rgba(198,161,91,.06);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 22px;
+  }
+  .quote-note b { color: var(--gold-deep); }
+
+  /* ===== Store findings ===== */
+  .store-head {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 18px;
+  }
+  .store-badge {
+    flex: none;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: var(--card);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 22px; color: var(--gold-deep); font-weight: 700;
+    box-shadow: 0 4px 14px rgba(166,138,88,.15);
+  }
+  .store-badge img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .store-name { font-size: 26px; font-weight: 700; letter-spacing: 3px; }
+  .store-sub { font-size: 13px; color: var(--ink-soft); letter-spacing: 1px; margin-top: 4px; }
+
+  .store-meta {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-bottom: 20px;
+  }
+  .meta-cell {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .meta-cell .k { font-size: 11.5px; color: var(--gold-deep); letter-spacing: 2px; margin-bottom: 5px; }
+  .meta-cell .v { font-size: 14px; color: var(--ink); line-height: 1.6; font-weight: 500; }
+
+  .find-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .find-card {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-top: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: 0 4px 18px rgba(166,138,88,.07);
+  }
+  .find-card h4 {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15.5px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold-deep); margin-bottom: 12px;
+  }
+  .find-card h4 .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex: none;
+  }
+  .find-card.rose { border-top-color: var(--rose); }
+  .find-card.rose h4 .dot { background: var(--rose); }
+
+  .find-card .list li { font-size: 13.5px; margin-bottom: 8px; line-height: 1.65; }
+  .find-card .list li b { font-weight: 600; }
+
+  .store-gallery {
+    margin-top: 18px;
+    display: flex; gap: 14px;
+  }
+  .g-item {
+    flex: 1; min-width: 0;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--gold-line);
+    cursor: zoom-in; position: relative;
+    box-shadow: 0 6px 20px rgba(166,138,88,.10);
+  }
+  .g-item img { width: 100%; height: 132px; object-fit: cover; display: block; transition: transform .5s; }
+  .g-item:hover img { transform: scale(1.05); }
+  .g-item .g-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    font-size: 12px; color: #fff; letter-spacing: 1px;
+    background: linear-gradient(180deg, transparent, rgba(45,40,33,.72));
+    padding: 18px 12px 8px;
+  }
+
+  /* ===== Problem matrix ===== */
+  .problem-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: stretch; flex: 1 1 auto; min-height: 0; }
+
+  .matrix {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    position: relative;
+  }
+  .matrix .axis-x { position: absolute; bottom: 8px; right: 14px; font-size: 11px; color: var(--ink-faint); letter-spacing: 1px; }
+  .matrix .axis-y { position: absolute; left: 8px; top: 30%; font-size: 11px; color: var(--ink-faint); letter-spacing: 1px; transform: rotate(-90deg) translateX(-50%); transform-origin: left center; }
+  .matrix .quad { position: absolute; border-radius: 8px; font-size: 11.5px; color: var(--ink); }
+  .quad { display: flex; flex-direction: column; justify-content: center; padding: 12px; line-height: 1.6; }
+
+  .priority-list .list li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px;
+  }
+  .p-badge {
+    flex: none; font-size: 11px; letter-spacing: 1px;
+    border-radius: 4px; padding: 2px 9px; font-weight: 600;
+  }
+  .p-high { background: rgba(200,139,122,.16); color: #A05F4C; border: 1px solid rgba(200,139,122,.4); }
+  .p-mid { background: rgba(198,161,91,.16); color: var(--gold-deep); border: 1px solid rgba(198,161,91,.4); }
+  .p-low { background: rgba(122,114,104,.12); color: var(--ink-soft); border: 1px solid rgba(122,114,104,.3); }
+
+  /* ===== Roadmap ===== */
+  .roadmap { display: flex; flex-direction: column; gap: 16px; flex: 1 1 auto; min-height: 0; }
+  .road {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 22px; align-items: start;
+  }
+  .road .phase {
+    text-align: center;
+    border: 1px solid var(--gold-line);
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px 8px;
+  }
+  .road .phase .t { font-size: 15px; font-weight: 700; color: var(--gold-deep); letter-spacing: 2px; }
+  .road .phase .s { font-size: 11px; color: var(--ink-faint); letter-spacing: 1px; margin-top: 3px; }
+  .road .items {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 10px;
+    padding: 14px 22px;
+  }
+  .road .items .list li { margin-bottom: 6px; font-size: 13.5px; }
+
+  /* ===== Timeline ===== */
+  .timeline { position: relative; margin-top: 10px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 1px; background: linear-gradient(180deg, var(--gold), var(--gold-line));
+  }
+  .tl-item { position: relative; padding-left: 40px; margin-bottom: 20px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: 3px; top: 5px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--card); border: 2px solid var(--gold);
+  }
+  .tl-item .tl-time { font-size: 12px; color: var(--gold-deep); letter-spacing: 2px; font-weight: 600; }
+  .tl-item .tl-name { font-size: 15px; font-weight: 600; letter-spacing: 1px; margin: 3px 0; }
+  .tl-item .tl-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+  .tl-item .owner { display: inline-block; font-size: 11px; color: var(--gold-deep); background: var(--chip-bg); border: 1px solid var(--gold-line); padding: 2px 10px; border-radius: 20px; margin-top: 5px; letter-spacing: 1px; }
+
+  /* ===== Next-step grid ===== */
+  .next-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: 4px;
+  }
+  .next-cell {
+    background: rgba(198,161,91,.05);
+    border: 1px solid var(--gold-line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .next-cell .nc-name { font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+  .next-cell .nc-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* ===== Placeholder ===== */
+  .placeholder {
+    position: relative;
+    border: 2px dashed #D9C7A6;
+    background: rgba(198,161,91,.045);
+    border-radius: 10px;
+    padding: 26px 30px;
+    text-align: center;
+    color: #A08A5F;
+  }
+  .placeholder .p-title { font-size: 15px; letter-spacing: 2px; font-weight: 600; margin-bottom: 8px; }
+  .placeholder .p-hint { font-size: 12.5px; color: #B7A584; letter-spacing: 1px; line-height: 1.8; }
+  .placeholder::after {
+    content: "待补充";
+    position: absolute; top: -10px; right: 14px;
+    font-size: 11px; letter-spacing: 2px;
+    color: #fff; background: var(--gold);
+    padding: 3px 12px; border-radius: 20px;
+  }
+
+  /* ===== Closing ===== */
+  #s12 {
+    display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  #s12.active { display: flex; }
+  .close-mark {
+    width: 96px; height: 96px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 40px;
+    font-size: 36px; color: var(--gold-deep);
+    background: rgba(198,161,91,.08);
+    font-family: Georgia, "Songti SC", serif;
+  }
+  .close-title { font-size: 46px; letter-spacing: 6px; font-weight: 700; }
+  .close-sub { font-size: 15px; color: var(--ink-soft); letter-spacing: 3px; margin-top: 18px; }
+  .close-line { width: 160px; height: 1px; background: var(--gold-line); margin: 34px 0; }
+  .close-thanks { font-size: 16px; color: var(--gold-deep); letter-spacing: 4px; }
+
+  /* ===== Nav ===== */
+  #nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 52px;
+    display: flex; align-items: center; justify-content: center; gap: 22px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.38));
+    z-index: 50;
+    padding: 0 24px;
+    pointer-events: none;
+  }
+  #nav > * { pointer-events: auto; }
+  .nav-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .25s;
+    backdrop-filter: blur(4px);
+  }
+  .nav-btn:hover { background: rgba(198,161,91,.85); border-color: transparent; }
+  .nav-btn:disabled { opacity: .3; cursor: default; }
+  .nav-btn:disabled:hover { background: rgba(255,255,255,.08); }
+
+  #progressWrap {
+    width: min(420px, 32vw); height: 3px;
+    border-radius: 3px;
+    background: rgba(255,255,255,.22);
+    overflow: hidden;
+  }
+  #progressBar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--gold), #E8CE9C);
+    border-radius: 3px;
+    transition: width .35s ease;
+  }
+  #pageInfo {
+    font-size: 13px; color: rgba(255,255,255,.85);
+    letter-spacing: 2px; font-family: Georgia, serif;
+    min-width: 60px; text-align: center;
+  }
+
+  /* ===== Lightbox ===== */
+  #lightbox {
+    position: fixed; inset: 0;
+    background: rgba(20,17,13,.9);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 90vw; max-height: 88vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.6);
+  }
+  #lightbox .lb-cap {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,.8); font-size: 14px; letter-spacing: 2px;
+  }
+
+  /* ===== Overflow-tuning / portrait photos ===== */
+  .problem-grid .list li { font-size: 13px; margin-bottom: 5px; line-height: 1.55; }
+  .priority-list .list li { font-size: 13.5px; margin-bottom: 7px; }
+  .road .items .list li { font-size: 13px; margin-bottom: 5px; }
+
+  .photo-vert {
+    flex: none;
+    width: 150px;
+    height: 260px;
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--gold-line);
+    box-shadow: 0 8px 28px rgba(166,138,88,.12);
+    cursor: zoom-in;
+    position: relative;
+  }
+  .photo-vert img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; display: block; }
+  .photo-vert .photo-caption { left: 50%; transform: translateX(-50%); bottom: 10px; white-space: nowrap; }
+
+  .g-item img { object-position: center 30%; }
+
+  @media print {
+    #nav, #lightbox { display: none !important; }
+    #stage { position: static; transform: none !important; width: 100%; height: auto; box-shadow: none; }
+    .slide { position: relative; display: block !important; page-break-after: always; height: auto; min-height: 720px; }
+  }
+</style>
+</head>
+<body>
+
+<main id="stage">
+
+  <!-- ============ 1. 封面 ============ -->
+  <section class="slide" id="s1">
+    <div class="cover-left">
+      <div class="brand">
+        <div class="brand-mark">剑</div>
+        <div>
+          <div class="brand-name">剑琅联盟</div>
+          <div class="brand-sub">JIANLANG ALLIANCE</div>
+        </div>
+      </div>
+      <h1 class="cover-title serif">试点门店<em>调研报告</em></h1>
+      <p class="cover-desc">剑琅联盟APP · 苏州太仓试点阶段 · 一线实地调研</p>
+      <dl class="cover-meta">
+        <dt>调研地点</dt><dd>苏州 · 太仓市</dd>
+        <dt>调研门店</dt><dd>高美丝 / 艾美</dd>
+        <dt>汇报人</dt><dd>薛鼎</dd>
+        <dt>调研日期</dt><dd>2026 年 8 月 17 日</dd>
+      </dl>
+    </div>
+    <div class="cover-right">
+      <div class="cover-ring"><span>2026<br>太仓</span></div>
+      <div class="cover-org serif">以一线声音 · 校准产品方向</div>
+      <div class="cover-place">FOR PILOT STORES IN TAICANG</div>
+    </div>
+  </section>
+
+  <!-- ============ 2. 目录 ============ -->
+  <section class="slide" id="s2">
+    <div class="slide-kicker">Contents</div>
+    <h2 class="slide-title">目录</h2>
+    <div class="rule"></div>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">01</span><div><div class="toc-name">调研背景与目标</div><div class="toc-en">Background &amp; Goals</div></div></div>
+      <div class="toc-item"><span class="toc-num">02</span><div><div class="toc-name">调研安排</div><div class="toc-en">Itinerary &amp; Team</div></div></div>
+      <div class="toc-item"><span class="toc-num">03</span><div><div class="toc-name">出发前会议纪要</div><div class="toc-en">Pre-trip Meeting</div></div></div>
+      <div class="toc-item"><span class="toc-num">04</span><div><div class="toc-name">门店一 · 高美丝</div><div class="toc-en">Store 01 · GAOMEISI</div></div></div>
+      <div class="toc-item"><span class="toc-num">05</span><div><div class="toc-name">门店二 · 艾美</div><div class="toc-en">Store 02 · AIMEI</div></div></div>
+      <div class="toc-item"><span class="toc-num">06</span><div><div class="toc-name">核心问题汇总</div><div class="toc-en">Key Findings</div></div></div>
+      <div class="toc-item"><span class="toc-num">07</span><div><div class="toc-name">产品优化建议</div><div class="toc-en">Optimization</div></div></div>
+      <div class="toc-item"><span class="toc-num">08</span><div><div class="toc-name">合作情况</div><div class="toc-en">Partnerships</div></div></div>
+      <div class="toc-item"><span class="toc-num">09</span><div><div class="toc-name">下一步计划</div><div class="toc-en">Next Steps</div></div></div>
+      <div class="toc-item"><span class="toc-num" style="color:rgba(198,161,91,.35)">＋</span><div><div class="toc-name" style="color:var(--ink-faint)">结束 · 开放讨论</div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 调研背景与目标 ============ -->
+  <section class="slide" id="s3">
+    <div class="slide-kicker">Chapter 01 · Background</div>
+    <h2 class="slide-title">调研背景与目标</h2>
+    <div class="rule"></div>
+    <div class="two-col">
+      <div class="col">
+        <div class="card" style="height:100%;">
+          <div class="card-title">项目背景</div>
+          <ul class="list">
+            <li><b>剑琅联盟</b>：面向美业小 B 门店的经营管理产品，涵盖 B 端门店管理、C 端小程序等模块。</li>
+            <li><b>当前阶段</b>：正处于<b>试点测试阶段</b>，产品与商业模式仍需一线验证、迭代打磨。</li>
+            <li><b>试点范围</b>：苏州太仓市共 <b>4 家试点门店</b>，本次实地调研其中 2 家。</li>
+            <li><b>调研动机</b>：产品现存问题需要<b>试点门店老板的真实反馈</b>来驱动优化，而非闭门造车。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="height:100%;">
+          <div class="card-title">调研目标</div>
+          <ul class="list">
+            <li>获取门店老板对<b>产品现存问题</b>的一手反馈，明确优化方向与优先级。</li>
+            <li>深入了解小 B 门店的<b>真实运营模式</b>与经营场景，校准产品设计假设。</li>
+            <li>评估<b>试点门店与供应商</b>的合作现状，为合作模式优化提供依据。</li>
+            <li>验证<b>产品规划方向</b>与创新功能需求，如开单重构、AI 能力、优惠营销等。</li>
+          </ul>
+          <div class="quote-note" style="margin-top:16px;">
+            <b>Danny 会中重申的产品目标：</b>不需要销售、不需要教学，让门店业绩增长 50%。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. 调研安排 ============ -->
+  <section class="slide" id="s4">
+    <div class="slide-kicker">Chapter 02 · Itinerary</div>
+    <h2 class="slide-title">调研安排</h2>
+    <div class="rule"></div>
+    <div class="two-col" style="gap:40px;">
+      <div class="col">
+        <div class="staff-note" style="margin-top:0;margin-bottom:18px;">
+          <span>🗓</span>
+          <span><b>2026 年 8 月 17 日</b> · 太仓市 · 实地走访 + 深度访谈</span>
+        </div>
+        <p style="font-size:15px;font-weight:600;letter-spacing:2px;color:var(--ink);margin-bottom:14px;">调研团队 · 7 人</p>
+        <div class="person-grid">
+          <div class="person highlight"><div class="avatar">D</div><div class="name">Danny</div><div class="role">Boss</div></div>
+          <div class="person"><div class="avatar">L</div><div class="name">Leon</div><div class="role">CTO</div></div>
+          <div class="person"><div class="avatar">潘</div><div class="name">潘雪</div><div class="role">运营</div></div>
+          <div class="person"><div class="avatar">A</div><div class="name">Abby</div><div class="role">运营</div></div>
+          <div class="person"><div class="avatar">薛</div><div class="name">薛鼎</div><div class="role">产品 / 设计</div></div>
+          <div class="person"><div class="avatar">吴</div><div class="name">吴琼</div><div class="role">产品</div></div>
+          <div class="person"><div class="avatar">R</div><div class="name">Reni</div><div class="role">产品</div></div>
+          <div class="person"><div class="avatar">L</div><div class="name">Liz</div><div class="role">运营</div></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink-soft);margin-top:14px;line-height:1.8;letter-spacing:.5px;">
+          调研门店：<b style="color:var(--gold-deep);">高美丝</b>（第一场，女老板高总） · <b style="color:var(--gold-deep);">艾美</b>（第二场，男老板喜哥；另一试点门店老板阿军到场）<br>
+          高美丝门店另驻有公司人员 <b>Liz</b>；两场均由 Danny 带队、全员参与。
+        </p>
+      </div>
+      <div class="col" style="display:flex; gap:18px; align-items:center;">
+        <div class="card" style="flex:1;">
+          <div class="card-title">当日行程</div>
+          <ul class="list">
+            <li><b>早上</b> · 调研团队与 Danny 于<b>太仓亚朵酒店</b>汇合。</li>
+            <li><b>出发前</b> · Danny 主持召开调研前会议，明确问题清单、合作议题、产品目标与分工安排。</li>
+            <li><b>第一场</b> · 高美丝门店调研，与高总深度交流，驻店 Liz 协同。</li>
+            <li><b>第二场</b> · 转场艾美门店，与喜哥、阿军交流，高总同行前往。</li>
+          </ul>
+        </div>
+        <div class="photo-vert" onclick="openLightbox(this)">
+          <img src="照片/早上酒店大堂.jpg" alt="调研团队亚朵酒店汇合">
+          <span class="photo-caption">调研团队 · 亚朵酒店汇合</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. 出发前会议纪要 ============ -->
+  <section class="slide" id="s5">
+    <div class="slide-kicker">Chapter 03 · Pre-trip Meeting</div>
+    <h2 class="slide-title">出发前会议纪要</h2>
+    <div class="rule"></div>
+    <div class="agenda-grid">
+      <div class="agenda">
+        <span class="no">01</span>
+        <h3><span class="k">议题</span>产品现存问题梳理</h3>
+        <p>系统梳理产品当前存在的问题与改进方向，明确哪些需要<b>试点门店老板的一线反馈</b>来验证与驱动优化。</p>
+      </div>
+      <div class="agenda">
+        <span class="no">02</span>
+        <h3><span class="k">议题</span>试点门店与供应商合作情况</h3>
+        <p>与运营销售同事共同讨论目前与<b>试点门店、供应商</b>的合作进展，识别合作中的堵点与机会点。</p>
+      </div>
+      <div class="agenda">
+        <span class="no">03</span>
+        <h3><span class="k">议题</span>重申产品目标</h3>
+        <p>再次明确剑琅联盟的产品目标：<b>不需要销售、不需要教学，让门店业绩增长 50%</b>——以产品本身的自助化与智能化，降低门店使用门槛。</p>
+      </div>
+      <div class="agenda">
+        <span class="no">04</span>
+        <h3><span class="k">议题</span>调研安排分配</h3>
+        <p>分配本次调研的具体任务与分工：确定访谈重点、记录口径与人员职责，确保<b>信息收集完整、口径统一</b>。</p>
+      </div>
+    </div>
+    <div class="quote-note">
+      <b>本次调研的行动纲领：</b>带着"产品现存问题清单"出发，回到一线门店中去寻找真实答案——用老板的反馈校准产品方向，用门店的场景验证合作模式。
+    </div>
+  </section>
+
+  <!-- ============ 6. 门店一 · 高美丝 ============ -->
+  <section class="slide" id="s6">
+    <div class="slide-kicker">Chapter 04 · Store 01</div>
+    <div class="store-head">
+      <div class="store-badge"><img src="照片/高美丝门头.jpg" alt="高美丝门头"></div>
+      <div>
+        <div class="store-name">门店一 · 高美丝</div>
+        <div class="store-sub">苏州太仓 · 第一场调研 · 特色业务：中药头发养护产品</div>
+      </div>
+    </div>
+    <div class="store-meta">
+      <div class="meta-cell"><div class="k">门店老板</div><div class="v">高总（女）· 外形气质佳 · 更关注产品销售</div></div>
+      <div class="meta-cell"><div class="k">团队规模</div><div class="v">高总 + 1 名年轻男店员，共 2 人运营</div></div>
+      <div class="meta-cell"><div class="k">门店配置</div><div class="v">6 个工作位（实际经营仅需 4 个）· 缺沙发休息区</div></div>
+    </div>
+    <div class="find-grid">
+      <div class="find-card">
+        <h4><span class="dot"></span>产品方向 · 正向验证</h4>
+        <ul class="list">
+          <li><b>客户资料顺利导入</b>，数据迁移顺畅，为业务上线打下良好基础。</li>
+          <li>支付播报（<b>"小喇叭"</b>）被评价为<b>"很有必要"</b>，即时感知客人支付结果的价值获验证。</li>
+          <li>店主主动提出 <b>"快速消费"</b>需求：不填字段直接输金额开单，支持备注与事后编辑，与开单重构方案<b>不谋而合</b>。</li>
+        </ul>
+      </div>
+      <div class="find-card rose">
+        <h4><span class="dot"></span>行业运营特征</h4>
+        <ul class="list">
+          <li>业绩计算<b>不区分"点客/散客"</b>，管理颗粒度较粗，也为业绩归因留出机会。</li>
+          <li>开卡充卡存在<b>"协商制"</b>，实际支付与记账常有差异，属行业日常现象。</li>
+          <li>门店产能存在冗余：<b>6 个工作位仅需 4 个</b>；缺少沙发休息区，客户等候体验待改善。</li>
+        </ul>
+      </div>
+      <div class="find-card">
+        <h4><span class="dot"></span>使用反馈与现存问题</h4>
+        <ul class="list">
+          <li>C 端小程序获客受阻：<b>仅熟客愿扫码注册</b>，散客意愿极低，转化链路存在卡点。</li>
+          <li>价目表与库存管理<b>使用率低</b>：门店以服务型消费为主，线下卖货场景少，功能价值有限。</li>
+        </ul>
+      </div>
+      <div class="find-card rose">
+        <h4><span class="dot"></span>需求与商业机会</h4>
+        <ul class="list">
+          <li>分销需求明确但通道受阻：高总主营<b>中药头发养护产品</b>，有分销需求，但其供应商对 RTP 系统有顾虑不愿接入。</li>
+          <li>异业客源共享设想：高总愿提供客源，由<b>丽妍雅集</b>派专人上门对接服务，可成协同获客样板。</li>
+          <li>短视频推广机会：Abby 提议为高总拍短视频推特色项目，<b>公司团队可提供支持</b>。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="store-gallery">
+      <div class="g-item" onclick="openLightbox(this)">
+        <img src="照片/高美丝门头.jpg" alt="高美丝门店门头">
+        <span class="g-cap">高美丝门店门头</span>
+      </div>
+      <div class="g-item" onclick="openLightbox(this)">
+        <img src="照片/高美丝产品.jpg" alt="高美丝门店产品陈列">
+        <span class="g-cap">门店产品陈列</span>
+      </div>
+      <div class="g-item" onclick="openLightbox(this)">
+        <img src="照片/高美丝价目表.jpg" alt="高美丝价目表">
+        <span class="g-cap">高美丝价目表</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. 门店二 · 艾美 ============ -->
+  <section class="slide" id="s7">
+    <div class="slide-kicker">Chapter 05 · Store 02</div>
+    <div class="store-head">
+      <div class="store-badge"><img src="照片/艾美价目表.jpg" alt="艾美价目表"></div>
+      <div>
+        <div class="store-name">门店二 · 艾美</div>
+        <div class="store-sub">苏州太仓 · 第二场调研 · 主营烫发项目</div>
+      </div>
+    </div>
+    <div class="store-meta">
+      <div class="meta-cell"><div class="k">门店老板</div><div class="v">喜哥（男）· 热情善交际</div></div>
+      <div class="meta-cell"><div class="k">到场人员</div><div class="v">喜哥 + 另一试点店老板阿军 · 高总同行</div></div>
+      <div class="meta-cell"><div class="k">经营特征</div><div class="v">主营烫发项目 · 门店规模大于高美丝</div></div>
+    </div>
+    <div class="find-grid">
+      <div class="find-card">
+        <h4><span class="dot"></span>产品方向 · 正向验证</h4>
+        <ul class="list">
+          <li><b>AI 开单方向获一线确认</b>：店主主动提出需要 AI 助手语音开单功能。</li>
+          <li>"下次减 5 元"防流失券，当前系统用<b>5 元无门槛券 + 次日生效</b>即可实现，3 位老板均认可期待。</li>
+          <li>现场获客验证：喜哥引导带 2 个孩子进店的熟客扫码注册并预告优惠——<b>"老板引导 + 优惠预期"</b>最有效。</li>
+        </ul>
+      </div>
+      <div class="find-card rose">
+        <h4><span class="dot"></span>行业运营特征</h4>
+        <ul class="list">
+          <li>老板自带内容营销属性：喜哥<b>平时常拍短视频做个人展示</b>，具备成为内容 IP 的天然条件。</li>
+          <li>客群以<b>熟客与家庭客</b>为主，依赖复购与口碑，获客以到店转化为主。</li>
+        </ul>
+      </div>
+      <div class="find-card">
+        <h4><span class="dot"></span>使用反馈与现存问题</h4>
+        <ul class="list">
+          <li>当前版本 <b>AI 功能不好用</b>，未达可辅助一线经营的水准。</li>
+          <li><b>短信通知</b>功能不够完善，消息触达体验有待补齐。</li>
+          <li>C 端小程序<b>支付信任度低</b>，顾客存在安全顾虑。</li>
+          <li>无优惠福利，<b>C 端小程序推广较难</b>。</li>
+          <li>优惠券系统逻辑完整但<b>缺少模板式操作</b>，配置门槛与店主能力不匹配。</li>
+        </ul>
+      </div>
+      <div class="find-card rose">
+        <h4><span class="dot"></span>需求与商业机会</h4>
+        <ul class="list">
+          <li><b>AI 助手语音开单</b>：明确的功能需求，建议纳入开单重构一并规划。</li>
+          <li><b>老板短视频矩阵</b>：Abby 提议 3 家试点门店老板共做视频推广，均表示有意向。</li>
+          <li><b>优惠券模板化改造</b>：以"下次减 5 元"为典型场景，做模板式入口降低门槛。</li>
+          <li><b>简化操作路径</b>：阿军明确希望功能更简单、每页入口更少，产品需做减法。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="store-gallery">
+      <div class="g-item" onclick="openLightbox(this)">
+        <img src="照片/艾美产品.jpg" alt="艾美门店产品陈列">
+        <span class="g-cap">艾美门店产品陈列</span>
+      </div>
+      <div class="g-item" onclick="openLightbox(this)">
+        <img src="照片/艾美价目表.jpg" alt="艾美价目表">
+        <span class="g-cap">艾美价目表</span>
+      </div>
+      <div class="g-item" style="flex:1;border-style:dashed;background:rgba(198,161,91,.05);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;color:#A08A5F;">
+          <div style="font-size:20px;margin-bottom:6px;">＋</div>
+          <div style="font-size:12px;letter-spacing:2px;">现场交流照片 · 待补充</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. 核心问题汇总 ============ -->
+  <section class="slide" id="s8">
+    <div class="slide-kicker">Chapter 06 · Key Findings</div>
+    <h2 class="slide-title">核心问题汇总</h2>
+    <div class="rule"></div>
+    <div class="problem-grid">
+      <div class="col">
+        <div class="card" style="height:100%;">
+          <div class="card-title">分类问题清单</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <p style="font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold-deep);margin-bottom:8px;">功能层面</p>
+              <ul class="list">
+                <li>开单流程繁琐，缺"<b>快速消费</b>"入口 <span class="tag-inline">高美丝</span></li>
+                <li><b>APP 首页需改版</b>：入口更简单，强化开单与办卡占比 <span class="tag-inline">高美丝</span></li>
+                <li>优惠券系统逻辑完整但缺<b>模板式操作</b>，门槛偏高 <span class="tag-inline">艾美</span></li>
+                <li>AI 功能当前体验不佳，未达辅助经营水准 <span class="tag-inline">艾美</span></li>
+                <li>价目表 / 库存管理对服务型小店价值有限，使用率低 <span class="tag-inline">高美丝</span></li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold-deep);margin-bottom:8px;">体验与信任层面</p>
+              <ul class="list">
+                <li>C 端小程序<b>支付信任度低</b>，顾客有安全顾虑 <span class="tag-inline">艾美</span></li>
+                <li>散客<b>扫码注册意愿极低</b>，获客转化链路有卡点 <span class="tag-inline">高美丝</span></li>
+                <li><b>短信通知</b>功能不够完善 <span class="tag-inline">艾美</span></li>
+                <li>门店缺少休息区，客户<b>等候体验</b>待改善 <span class="tag-inline">高美丝</span></li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold-deep);margin-bottom:8px;">流程与合作层面</p>
+              <ul class="list">
+                <li>开卡充卡<b>协商制</b>，记账与实际收款存在差异 <span class="tag-inline">高美丝</span></li>
+                <li>分销通道受阻：<b>供应商对 RTP 系统有顾虑</b> <span class="tag-inline">高美丝</span></li>
+                <li>页面入口过多、操作偏重，与店主能力不匹配 <span class="tag-inline">阿军</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="height:100%;display:flex;flex-direction:column;">
+          <div class="card-title">优先级概览</div>
+          <ul class="list priority-list">
+            <li>开单重构落地"快速消费"<span class="p-badge p-high">P0</span></li>
+            <li>APP 首页改版，强化开单 / 办卡入口<span class="p-badge p-high">P0</span></li>
+            <li>优惠券模板化，降低配置门槛<span class="p-badge p-high">P0</span></li>
+            <li>C 端支付信任与扫码获客优化<span class="p-badge p-high">P0</span></li>
+            <li>AI 助手根据语音快速开单<span class="p-badge p-high">P0</span></li>
+            <li>页面做减法，简化操作路径<span class="p-badge p-mid">P1</span></li>
+            <li>短信通知功能完善<span class="p-badge p-mid">P1</span></li>
+            <li>供应商顾虑专项沟通<span class="p-badge p-mid">P1</span></li>
+          </ul>
+          <div class="card-note" style="margin-top:14px;border-left:3px solid var(--gold);background:rgba(198,161,91,.06);border-radius:0 10px 10px 0;padding:14px 18px;">
+            <div style="font-size:12px;letter-spacing:2px;color:var(--gold-deep);margin-bottom:6px;">小结</div>
+            <div style="font-size:13.5px;line-height:1.75;color:var(--ink-soft);">问题主要集中在<b>开单效率</b>与<b>C 端获客转化</b>两大方向：开单相关（快速消费、首页改版、AI 语音开单）均为 P0，是本次调研最明确的产品抓手；支付信任与扫码获客关乎 C 端冷启动，同样优先解决。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. 产品优化建议 ============ -->
+  <section class="slide" id="s9">
+    <div class="slide-kicker">Chapter 07 · Optimization</div>
+    <h2 class="slide-title">产品优化建议</h2>
+    <div class="rule"></div>
+    <div class="roadmap">
+      <div class="road">
+        <div class="phase"><div class="t">短期</div><div class="s">快速见效</div></div>
+        <div class="items">
+          <ul class="list">
+            <li><b>开单落地"快速消费"</b>：免填字段直接输金额开单，支持备注与事后编辑（一线验证方向）。</li>
+            <li><b>优惠券模板化</b>：内置"下次消费减 5 元"等常用券模板，一键创建、次日生效。</li>
+            <li><b>页面做减法</b>：精简首页与核心操作页的功能入口，匹配小 B 店主操作能力。</li>
+            <li><b>AI 语音开单助手</b>：打磨 AI 能力，落地语音开单场景。</li>
+            <li><b>扫码获客</b>：以优惠福利 + 老板引导话术提升散客注册转化。</li>
+            <li><b>短信通知</b>：完善消息触达链路与体验。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="road">
+        <div class="phase"><div class="t">中期</div><div class="s">体验补齐</div></div>
+        <div class="items">
+          <ul class="list">
+            <li><b>强化支付播报（小喇叭）</b>：优化支付结果实时触达体验。</li>
+            <li><b>C 端支付信任</b>：强化支付安全背书与说明，降低顾客安全顾虑。</li>
+            <li><b>分销生态打通</b>：针对供应商对 RTP 系统的顾虑给出解决方案，打通门店分销通道。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="road">
+        <div class="phase"><div class="t">长期</div><div class="s">生态探索</div></div>
+        <div class="items">
+          <ul class="list">
+            <li><b>客源协同模式</b>：门店客源 × 丽妍雅集上门服务，跑通协同获客样板。</li>
+            <li><b>老板短视频矩阵</b>：以试点门店老板个人 IP 带动线上引流与品牌传播。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10. 合作情况 ============ -->
+  <section class="slide" id="s10">
+    <div class="slide-kicker">Chapter 08 · Partnerships</div>
+    <h2 class="slide-title">合作情况</h2>
+    <div class="rule"></div>
+    <div class="two-col" style="gap:28px;">
+      <div class="col">
+        <div class="card" style="height:100%;">
+          <div class="card-title">试点门店合作</div>
+          <ul class="list">
+            <li><b>高美丝</b>：公司驻店人员 Liz 已进驻，客户资料完成导入；高总对合作配合度高，<b>分销合作因供应商顾虑受阻</b>。</li>
+            <li><b>艾美</b>：喜哥配合意愿强，现场即引导熟客完成小程序注册；对短视频推广、优惠营销<b>兴趣浓厚</b>。</li>
+            <li><b>阿军（另一试点店）</b>：明确表达"功能更简单、入口更少"的诉求，是产品减法的关键样本。</li>
+          </ul>
+          <div class="quote-note" style="margin-top:16px;">
+            <b>合作小结：</b>目前处于驻店推进试点阶段，店主配合积极性较高，并期待版本更新。
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="height:100%;">
+          <div class="card-title">供应商与生态合作</div>
+          <ul class="list">
+            <li><b>分销通道受阻</b>：高总的供应商对剑琅联盟 RTP（零售模块）系统存在顾虑，目前不愿接入。</li>
+            <li><b>异业协同设想</b>：高总愿提供店内客源，由丽妍雅集派专人上门服务，跨品牌协同机会待验证。</li>
+            <li><b>内容营销协同</b>：公司团队可支持门店老板短视频拍摄与运营，共创内容营销样板。</li>
+          </ul>
+          <div class="quote-note" style="margin-top:16px;">
+            <b>展望：</b>如何引导供应商放下顾虑、加入 RTP，是需要解决的关键问题。
+          </div>
+          <div class="quote-note" style="margin-top:10px;">
+            <b>内容营销：</b>值得尝试
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11. 下一步计划 ============ -->
+  <section class="slide" id="s11">
+    <div class="slide-kicker">Chapter 09 · Next Steps</div>
+    <h2 class="slide-title">下一步计划</h2>
+    <div class="rule"></div>
+    <div class="two-col" style="gap:34px;">
+      <div class="col">
+        <div class="card" style="height:100%;display:flex;flex-direction:column;">
+          <div class="card-title">产品侧下一步</div>
+          <div class="next-grid">
+            <div class="next-cell">
+              <div class="nc-name">调研结论沉淀为产品需求</div>
+              <div class="nc-desc">将两店调研发现整理为结构化需求清单，纳入产品需求池，供评审与排期。</div>
+            </div>
+            <div class="next-cell">
+              <div class="nc-name">开单功能优化</div>
+              <div class="nc-desc">开单重构暂缓，优先在现有版本上优化开单流程，落地"快速消费"与 AI 语音开单等轻量改进。</div>
+            </div>
+            <div class="next-cell">
+              <div class="nc-name">首页改版 · UI 设计</div>
+              <div class="nc-desc">首页改版产品方案由 Reni 负责，待原型输出后，负责首页改版的 UI 设计稿（入口更简单、强化开单与办卡占比）。</div>
+            </div>
+            <div class="next-cell">
+              <div class="nc-name">优惠券模板化设计</div>
+              <div class="nc-desc">以"下次减 5 元"为典型场景，设计常用券模板化配置，降低店主使用门槛。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col" style="display:flex;flex-direction:column;gap:18px;">
+        <div class="card" style="flex:1;">
+          <div class="card-title">后续迭代规划（建议）</div>
+          <ul class="list">
+            <li><b>8 月 27 日前</b>：优先在当前版本上修复与优化，解决现存问题，使产品新一轮推广符合预期，稳住团队节奏。</li>
+            <li><b>9 月 · 同步推进</b>：推进 RTB 重构进度，争取上线重构版本；同时设计新老版本间数据准确转换的产品方案（主要难点集中在<b>价目表</b>与<b>会员卡</b>）。</li>
+            <li><b>10 月</b>：完成全面迭代升级。</li>
+          </ul>
+          <div class="quote-note" style="margin-top:14px;">
+            <b>节奏：</b>先稳当前版本、保证推广节奏，再同步推进重构与数据迁移方案，按 8 月 → 9 月 → 10 月稳步落地。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 12. 结束页 ============ -->
+  <section class="slide" id="s12">
+    <div class="close-mark">谢</div>
+    <div class="close-title serif">感谢聆听</div>
+    <div class="close-sub">剑琅联盟 · 试点门店调研报告 · 苏州太仓</div>
+    <div class="close-line"></div>
+    <div class="close-thanks">欢迎开放讨论与指正</div>
+  </section>
+
+</main>
+
+<!-- ===== 导航 ===== -->
+<div id="nav">
+  <button class="nav-btn" id="prevBtn" title="上一页">‹</button>
+  <div id="progressWrap"><div id="progressBar"></div></div>
+  <span id="pageInfo">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" title="下一页">›</button>
+</div>
+
+<!-- ===== 大图预览 ===== -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lbImg" src="" alt="预览">
+  <span class="lb-cap" id="lbCap"></span>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar = document.getElementById('progressBar');
+  var info = document.getElementById('pageInfo');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var cur = 0;
+
+  function fit() {
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = 'translate(' + ((window.innerWidth - 1280 * s) / 2) + 'px,' + ((window.innerHeight - 720 * s) / 2) + 'px) scale(' + s + ')';
+  }
+
+  function render() {
+    slides.forEach(function (el, i) {
+      el.classList.toggle('active', i === cur);
+    });
+    bar.style.width = ((cur + 1) / slides.length * 100) + '%';
+    info.textContent = (cur + 1) + ' / ' + slides.length;
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === slides.length - 1;
+  }
+
+  function go(n) {
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    render();
+  }
+
+  prevBtn.addEventListener('click', function () { go(cur - 1); });
+  nextBtn.addEventListener('click', function () { go(cur + 1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') { go(0); }
+    else if (e.key === 'End') { go(slides.length - 1); }
+  });
+
+  window.addEventListener('resize', fit);
+  fit();
+  render();
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lbImg');
+var lbCap = document.getElementById('lbCap');
+
+function openLightbox(el) {
+  var img = el.querySelector('img');
+  if (!img) return;
+  lbImg.src = img.src;
+  var cap = el.querySelector('.g-cap, .photo-caption');
+  lbCap.textContent = cap ? cap.textContent : '';
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  lb.classList.remove('open');
+}
+lb.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>
