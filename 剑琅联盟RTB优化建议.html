@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · RTB 优化建议</title>
+<style>
+  :root {
+    --navy: #1E3A5F;
+    --steel: #3E6B99;
+    --steel-soft: #5C82AD;
+    --blue-tint: #D7E0EA;
+    --bg: #F5F6F8;
+    --card: #FFFFFF;
+    --ink: #2B3440;
+    --ink-soft: #6B7480;
+    --ink-faint: #98A1AC;
+    --line: #E2E6EC;
+    --chip-bg: rgba(62,107,153,.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #2A3138;
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Stage ===== */
+  #stage {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px; height: 720px;
+    transform-origin: 0 0;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+
+  .view {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    padding: 46px 64px 52px;
+  }
+  .view.active { display: flex; animation: fadeIn .35s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* ===== Typography ===== */
+  .serif { font-family: Georgia, "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif; }
+
+  .brand-line {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-mark {
+    width: 40px; height: 40px; flex: none;
+    border: 1.5px solid var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 19px; font-weight: 700;
+    background: #fff;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; color: var(--ink); font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
+
+  .page-tag {
+    font-size: 11px; letter-spacing: 3px; color: var(--steel);
+    border: 1px solid var(--blue-tint);
+    background: var(--chip-bg);
+    padding: 6px 16px; border-radius: 30px;
+  }
+
+  .cap-btn {
+    font-family: inherit;
+    font-size: 12.5px; letter-spacing: 2px; color: var(--steel);
+    background: var(--card);
+    border: 1px solid var(--blue-tint);
+    padding: 9px 20px; border-radius: 30px;
+    cursor: pointer;
+    transition: border-color .25s, color .25s, box-shadow .25s;
+  }
+  .cap-btn:hover {
+    border-color: var(--steel);
+    color: var(--navy);
+    box-shadow: 0 4px 14px rgba(62,107,153,.18);
+  }
+
+  .slide-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; color: var(--steel);
+    text-transform: uppercase; font-weight: 600;
+  }
+  .slide-kicker::before {
+    content: ""; width: 24px; height: 1px; background: var(--steel);
+  }
+  .slide-title {
+    font-size: 34px; font-weight: 700; letter-spacing: 3px;
+    margin: 10px 0 0; color: var(--ink);
+  }
+  .slide-sub {
+    margin-top: 8px; font-size: 14px; color: var(--ink-soft);
+    letter-spacing: 1px;
+  }
+  .rule {
+    width: 100%; height: 1px;
+    background: var(--line);
+    margin: 20px 0 22px;
+  }
+
+  /* ===== Pain point grid ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .pp-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+  .pp-card:hover, .pp-card:focus-visible {
+    border-color: var(--steel);
+    box-shadow: 0 8px 28px rgba(62,107,153,.16);
+    transform: translateY(-2px);
+    outline: none;
+  }
+  .pp-card .pp-num {
+    position: absolute; top: 12px; right: 16px;
+    font-family: Georgia, serif;
+    font-size: 34px; font-weight: 700;
+    color: rgba(62,107,153,.16); line-height: 1;
+  }
+  .pp-card .pp-title {
+    font-size: 17px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--navy);
+    padding-right: 40px;
+  }
+  .pp-card .pp-scene {
+    margin-top: 8px;
+    font-size: 13px; color: var(--ink-soft); line-height: 1.7;
+    letter-spacing: .3px;
+  }
+  .pp-card .pp-cta {
+    margin-top: 10px;
+    font-size: 11.5px; letter-spacing: 1.5px; color: var(--steel);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pp-card .pp-cta::after { content: "→"; transition: transform .25s; }
+  .pp-card:hover .pp-cta::after { transform: translateX(3px); }
+
+  /* ===== Future outlook page ===== */
+  .future-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .future-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(62,107,153,.06);
+  }
+  .future-card .future-no {
+    position: absolute; top: 16px; right: 22px;
+    font-family: Georgia, serif;
+    font-size: 44px; font-weight: 700;
+    color: rgba(62,107,153,.12); line-height: 1;
+  }
+  .future-card .future-title {
+    font-size: 17px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--navy);
+    padding-right: 64px;
+    margin-bottom: 12px;
+  }
+  .future-card .future-desc {
+    font-size: 13px; line-height: 1.85; letter-spacing: .4px;
+    color: var(--ink-soft);
+  }
+
+  /* ===== Detail view ===== */
+  .back-bar {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 18px;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px; letter-spacing: 1px; color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color .25s, color .25s;
+  }
+  .back-btn:hover { border-color: var(--steel); color: var(--navy); }
+  .back-btn::before { content: "←"; font-size: 15px; }
+
+  .detail-num {
+    font-family: Georgia, serif;
+    font-size: 13px; letter-spacing: 3px; color: var(--steel);
+  }
+
+  .detail-pain {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 22px 28px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .detail-pain::after {
+    content: attr(data-num);
+    position: absolute; right: 24px; top: 50%;
+    transform: translateY(-50%);
+    font-family: Georgia, serif;
+    font-size: 92px; font-weight: 700; line-height: 1;
+    color: rgba(255,255,255,.08);
+  }
+  .detail-pain .dp-title {
+    font-size: 24px; font-weight: 700; letter-spacing: 2px;
+    padding-right: 90px;
+  }
+  .detail-pain .dp-scene {
+    margin-top: 10px;
+    font-size: 14px; line-height: 1.8;
+    color: rgba(255,255,255,.82);
+    max-width: 760px; letter-spacing: .5px;
+  }
+  .detail-pain .dp-label {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 3px;
+    color: #CFDFF0;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 30px;
+    padding: 4px 14px; margin-bottom: 12px;
+  }
+
+  .solutions-label {
+    margin: 22px 0 12px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; font-weight: 700; letter-spacing: 3px; color: var(--navy);
+  }
+  .solutions-label::after {
+    content: ""; height: 1px; flex: 1; background: var(--line);
+  }
+
+  .solutions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .sol-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--steel);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .sol-card .sol-no {
+    font-family: Georgia, serif;
+    font-size: 13px; letter-spacing: 2px; color: var(--steel);
+    margin-bottom: 8px;
+  }
+  .sol-card .sol-text {
+    font-size: 14px; line-height: 1.8; letter-spacing: .3px;
+    color: var(--ink);
+  }
+  .sol-card .sol-text b { color: var(--navy); }
+
+  /* ===== Footer ===== */
+  .footer-note {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11.5px; color: var(--ink-faint); letter-spacing: 1px;
+  }
+  .footer-note .fn-left { display: flex; align-items: center; gap: 8px; }
+  .footer-note .fn-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--steel); }
+
+  @media print {
+    body { background: #fff; }
+    #stage { position: static; transform: none !important; width: 100%; height: auto; box-shadow: none; border-radius: 0; }
+    .view { position: relative; display: block !important; height: auto; min-height: 720px; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<main id="stage">
+
+  <!-- ============ 视图一 · 总览 ============ -->
+  <section class="view active" id="view-overview">
+
+    <div class="brand-line">
+      <div class="brand">
+        <div class="brand-mark">剑</div>
+        <div>
+          <div class="brand-name">剑琅联盟</div>
+          <div class="brand-sub">JIANLANG ALLIANCE</div>
+        </div>
+      </div>
+      <button class="cap-btn" id="futureCapBtn" type="button">未来展望 →</button>
+    </div>
+
+    <div class="slide-kicker">RTB Optimization · User Perspective</div>
+    <h1 class="slide-title">RTB优化迭代计划简述</h1>
+    <p class="slide-sub">以门店店主 / 店员的一线视角，梳理使用痛点与改进方向</p>
+    <div class="rule"></div>
+
+    <div class="grid" id="ppGrid"></div>
+  </section>
+
+  <!-- ============ 视图二 · 痛点详情 ============ -->
+  <section class="view" id="view-detail">
+    <div class="back-bar">
+      <button class="back-btn" id="backBtn">返回痛点总览</button>
+      <span class="detail-num" id="detailNum">01</span>
+    </div>
+    <div class="detail-pain" id="detailPain">
+      <div class="dp-label">用户痛点</div>
+      <div class="dp-title" id="detailTitle"></div>
+      <div class="dp-scene" id="detailScene"></div>
+    </div>
+    <div class="solutions-label">解决方向</div>
+    <div class="solutions-grid">
+      <div class="sol-card"><div class="sol-no">方向一</div><div class="sol-text" data-sol="0"></div></div>
+      <div class="sol-card"><div class="sol-no">方向二</div><div class="sol-text" data-sol="1"></div></div>
+      <div class="sol-card"><div class="sol-no">方向三</div><div class="sol-text" data-sol="2"></div></div>
+    </div>
+    <div class="footer-note">
+      <div class="fn-left"><span class="fn-dot"></span>按 Esc 返回痛点总览</div>
+    </div>
+  </section>
+
+  <!-- ============ 视图三 · 未来展望 ============ -->
+  <section class="view" id="view-future">
+    <div class="back-bar">
+      <button class="back-btn" id="futureBackBtn" type="button">返回痛点总览</button>
+    </div>
+
+    <div class="slide-kicker">Future Outlook</div>
+    <h2 class="slide-title">未来展望</h2>
+    <p class="slide-sub">让产品更出色的延伸思考</p>
+    <div class="rule"></div>
+
+    <div class="future-grid">
+      <div class="future-card">
+        <div class="future-no">01</div>
+        <div class="future-title">店铺二维码 · 串起 B–C 联动获客</div>
+        <p class="future-desc">门店张贴专属二维码，顾客扫码进入 C 端小程序，提供排队与提前选项目功能，并定期发放优惠券——持续吸引顾客使用小程序，形成获客与到店的闭环。</p>
+      </div>
+      <div class="future-card">
+        <div class="future-no">02</div>
+        <div class="future-title">AI 生成"月度王者"骑士造型 · 激活业绩排行</div>
+        <p class="future-desc">在 RTB 业绩排行中，为月度业绩冠军员工用 AI 生成个性化骑士造型图片，可一键分享到 RTS 展示，为软件生态增加趣味性与传播点。</p>
+      </div>
+      <div class="future-card">
+        <div class="future-no">03</div>
+        <div class="future-title">趣味内容运营 · 提升打开与活跃</div>
+        <p class="future-desc">小 B 店主与店员周一至周五空闲时间多，习惯刷短视频消磨。与其让这些时间被外部平台占用，不如在 RTB 中植入趣味性内容——提升用户打开 App 的频率、增强粘性，也为剑琅联盟其他板块的推广创造更多触点。</p>
+      </div>
+      <div class="future-card">
+        <div class="future-no">04</div>
+        <div class="future-title">轻社交连接 · 为同行牵线</div>
+        <p class="future-desc">小 B 店主与店员普遍年轻、注重形象，店内空闲时间多，但线下社交机会少。引入轻量社交功能为同行建立交流与交友的连接，既填补情感与交友需求，也对产品粘性与口碑传播非常有利。</p>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <div class="fn-left"><span class="fn-dot"></span>按 Esc 返回痛点总览</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+
+  /* ===== 数据 ===== */
+  var pains = [
+    {
+      num: '01',
+      title: '服务间隙，难做精细操作',
+      scene: '顾客当面、手头正忙，开单必须快、准、稳，没有时间做复杂精细的操作。',
+      sols: [
+        '在页面中<b>减少并增大点击热区</b>，让关键操作更好点中。',
+        '<b>减少操作步骤</b>；提供各种可以<b>事后编辑修改</b>的通道，先完成开单、再补细节。',
+        '串起流程的按钮<b>尽量集中在相同区域</b>，形成肌肉记忆。'
+      ]
+    },
+    {
+      num: '02',
+      title: '信息过载，不知从何下手',
+      scene: '页面字段多、可点可编辑的入口多，打开后不知道第一步该做什么。',
+      sols: [
+        '对无法避免的复杂操作采取<b>分步骤</b>方法，减少单次信息输入量，让用户看到<b>进度</b>、对流程有心理预期。',
+        '<b>折叠或隐藏</b>非必要的次要信息，需要时再展示（展开、弹窗、toast），减少进入页面时的阅读负担。',
+        '利用<b>图形图标和色彩</b>辅助示意，避免大段纯文字；删除重复的或没有必要提示的信息。'
+      ]
+    },
+    {
+      num: '03',
+      title: '配置功能过重，超出小店能力',
+      scene: '业绩提成设置等功能文案多、逻辑绕、步骤长，超出多数小店店主的能力范围。',
+      sols: [
+        '<b>砍掉非必要的设置功能</b>，为产品做减法。',
+        '增加<b>预设模板</b>，让没有复杂配置需求的店主只需编辑少量字段即可使用。',
+        '<b>图形化 UI/UX</b>，形象化显示和操作，让功能更易理解。'
+      ]
+    },
+    {
+      num: '04',
+      title: '价目表维护缺位，开单卡壳',
+      scene: '没时间创建和维护价目表，开单时才惊觉项目或商品没录入，无法顺利开单。',
+      sols: [
+        '减少价目表中新建项的<b>必填字段</b>，UI 上<b>弱化选填字段</b>，降低录入负担。',
+        '新增<b>“快速消费”</b>功能，不关联价目表也能顺利开单，事后补录项目。',
+        '<b>简化价目表 UI</b>，采用偏向文字数据的列表设计，更贴近店主心智。'
+      ]
+    },
+    {
+      num: '05',
+      title: '单手高频操作，点击区不友好',
+      scene: '店员常单手快速操作，点击区偏小或远离手机下方拇指热区，误触率高、效率低。',
+      sols: [
+        '<b>增大主要功能的点击热区</b>，让拇指更容易命中。',
+        '不同页面的<b>主按钮尽量放在屏幕同一位置</b>，稳定操作预期。',
+        '<b>信息简化</b>：主要内容字体大、放屏幕上半区，点击区放屏幕下半区，单手顺手。'
+      ]
+    },
+    {
+      num: '06',
+      title: '商品批量录入，力不从心',
+      scene: '商品品类多的门店，逐条录入大量商品信息投入大，老板没有精力做。',
+      sols: [
+        '开发<b>扫条形码识别录入</b>功能，扫码即建商品。',
+        '<b>优化库存管理</b>，让店主更方便地将价目表商品与库存管理进行<b>关联操作</b>。',
+        '<b>接入 RTP 数据</b>，价目表、开单、流水全面关联 RTP 系统。'
+      ]
+    }
+  ];
+
+  /* ===== 渲染痛点网格 ===== */
+  var grid = document.getElementById('ppGrid');
+  pains.forEach(function (p, i) {
+    var btn = document.createElement('button');
+    btn.className = 'pp-card';
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('aria-label', '查看痛点 ' + p.num + ' 的解决方向');
+    btn.innerHTML =
+      '<span class="pp-num">' + p.num + '</span>' +
+      '<span class="pp-title">' + p.title + '</span>' +
+      '<span class="pp-scene">' + p.scene + '</span>' +
+      '<span class="pp-cta">查看解决方向</span>';
+    btn.addEventListener('click', function () { showDetail(i); });
+    grid.appendChild(btn);
+  });
+
+  /* ===== 视图切换 ===== */
+  var overview = document.getElementById('view-overview');
+  var detail = document.getElementById('view-detail');
+  var future = document.getElementById('view-future');
+  var backBtn = document.getElementById('backBtn');
+  var futureBackBtn = document.getElementById('futureBackBtn');
+  var futureCapBtn = document.getElementById('futureCapBtn');
+  var detailNum = document.getElementById('detailNum');
+  var detailPain = document.getElementById('detailPain');
+  var detailTitle = document.getElementById('detailTitle');
+  var detailScene = document.getElementById('detailScene');
+  var solTexts = Array.prototype.slice.call(document.querySelectorAll('[data-sol]'));
+  var currentIndex = 0;
+
+  function showDetail(i) {
+    currentIndex = i;
+    var p = pains[i];
+    detailNum.textContent = p.num;
+    detailPain.setAttribute('data-num', p.num);
+    detailTitle.textContent = p.title;
+    detailScene.textContent = p.scene;
+    solTexts.forEach(function (el, k) {
+      el.innerHTML = p.sols[k];
+    });
+    overview.classList.remove('active');
+    detail.classList.add('active');
+  }
+
+  function showFuture() {
+    overview.classList.remove('active');
+    detail.classList.remove('active');
+    future.classList.add('active');
+  }
+
+  function showOverview() {
+    detail.classList.remove('active');
+    future.classList.remove('active');
+    overview.classList.add('active');
+  }
+
+  backBtn.addEventListener('click', showOverview);
+  futureBackBtn.addEventListener('click', showOverview);
+  futureCapBtn.addEventListener('click', showFuture);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') showOverview();
+  });
+
+  /* ===== 舞台缩放 ===== */
+  function fit() {
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = 'translate(' + ((window.innerWidth - 1280 * s) / 2) + 'px,' + ((window.innerHeight - 720 * s) / 2) + 'px) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+
+</body>
+</html>
