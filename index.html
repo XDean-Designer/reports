@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 文档中心</title>
+<style>
+  :root {
+    --bg: #F7F7F4;
+    --card: #FFFFFF;
+    --ink: #2F353B;
+    --ink-soft: #6E7680;
+    --ink-faint: #9AA2AC;
+    --line: #E3E3DE;
+    --accent: #4A5A6A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #2A2E33;
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #stage {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px; height: 720px;
+    transform-origin: 0 0;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+
+  .page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 64px 96px 72px;
+  }
+
+  /* ===== Brand ===== */
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand-mark {
+    width: 44px; height: 44px; flex: none;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 20px; font-weight: 700;
+    background: #fff;
+  }
+  .brand-name { font-size: 17px; letter-spacing: 6px; font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--ink-faint); margin-top: 3px; }
+
+  /* ===== Header ===== */
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 4px; color: var(--accent);
+    font-weight: 600; margin-top: 48px;
+  }
+  .kicker::before {
+    content: ""; width: 26px; height: 1px; background: var(--accent);
+  }
+  .title {
+    font-size: 42px; font-weight: 700; letter-spacing: 6px;
+    margin-top: 14px;
+  }
+  .sub {
+    font-size: 15px; color: var(--ink-soft); letter-spacing: 2px;
+    margin-top: 12px;
+  }
+  .rule {
+    width: 100%; height: 1px;
+    background: var(--line);
+    margin: 32px 0 40px;
+  }
+
+  /* ===== Entry cards ===== */
+  .entries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1 1 auto;
+    align-content: center;
+  }
+  .entry {
+    position: relative;
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 38px 42px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .entry:hover {
+    border-color: var(--accent);
+    box-shadow: 0 12px 36px rgba(74,90,106,.14);
+    transform: translateY(-3px);
+  }
+  .entry .e-no {
+    position: absolute; top: 20px; right: 26px;
+    font-family: Georgia, serif;
+    font-size: 44px; font-weight: 700;
+    color: rgba(74,90,106,.12); line-height: 1;
+  }
+  .entry .e-title {
+    font-size: 24px; font-weight: 700; letter-spacing: 3px;
+    margin-bottom: 14px;
+    padding-right: 56px;
+  }
+  .entry .e-desc {
+    font-size: 14px; line-height: 1.9; letter-spacing: .4px;
+    color: var(--ink-soft);
+  }
+  .entry .e-go {
+    margin-top: 22px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; letter-spacing: 2px; color: var(--accent);
+    font-weight: 600;
+  }
+  .entry .e-go::after { content: "→"; font-size: 16px; transition: transform .3s; }
+  .entry:hover .e-go::after { transform: translateX(4px); }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 2px;
+  }
+  .footer .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); display: inline-block; margin-right: 8px; }
+
+  @media print {
+    body { background: #fff; }
+    #stage { position: static; transform: none !important; width: 100%; height: auto; box-shadow: none; border-radius: 0; }
+    .page { height: auto; min-height: 720px; }
+  }
+</style>
+</head>
+<body>
+
+<main id="stage">
+  <div class="page">
+
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Document Center</div>
+    <h1 class="title">文档中心</h1>
+    <p class="sub">请选择下方文档，开始阅读</p>
+    <div class="rule"></div>
+
+    <div class="entries">
+      <a class="entry" href="剑琅联盟调研报告.html">
+        <span class="e-no">01</span>
+        <div class="e-title">剑琅联盟调研报告</div>
+        <p class="e-desc">苏州太仓 · 试点门店实地调研。以一线声音校准产品方向：调研背景、门店走访发现、核心问题汇总、优化建议与合作情况。</p>
+        <span class="e-go">进入报告</span>
+      </a>
+      <a class="entry" href="剑琅联盟RTB优化建议.html">
+        <span class="e-no">02</span>
+        <div class="e-title">RTB优化迭代计划简述</div>
+        <p class="e-desc">以门店店主 / 店员的一线视角，梳理 RTB 使用痛点与改进方向，并附未来展望——让产品更出色的延伸思考。</p>
+        <span class="e-go">进入文档</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <div><span class="dot"></span>剑琅联盟 · 内部资料</div>
+      <div>仅供内部汇报使用</div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  function fit() {
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = 'translate(' + ((window.innerWidth - 1280 * s) / 2) + 'px,' + ((window.innerHeight - 720 * s) / 2) + 'px) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+
+</body>
+</html>
