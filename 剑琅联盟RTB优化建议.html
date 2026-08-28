@@ -209,6 +209,78 @@
     color: var(--ink-soft);
   }
 
+  /* ===== AI assistant view ===== */
+  .cap-group {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ai-hero {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 18px 26px;
+    color: #fff;
+    font-size: 15px; line-height: 1.8; letter-spacing: .5px;
+    margin-bottom: 18px;
+  }
+  .ai-hero b { color: #CFDFF0; font-weight: 700; }
+
+  .ai-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .ai-row {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+  .ai-pain {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+  }
+  .ai-pain .ai-no {
+    font-family: Georgia, serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    color: var(--steel);
+  }
+  .ai-pain .ai-pain-name {
+    font-size: 14px; font-weight: 600; letter-spacing: .5px;
+    color: var(--ink);
+  }
+  .ai-arrow {
+    text-align: center;
+    font-size: 20px; color: var(--steel);
+  }
+  .ai-sol {
+    background: var(--chip-bg);
+    border: 1px solid var(--blue-tint);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px; color: var(--ink);
+    line-height: 1.6;
+    height: 100%;
+  }
+  .ai-sol .ai-tag {
+    flex: none;
+    font-size: 10.5px; letter-spacing: 2px; font-weight: 600;
+    color: var(--steel);
+    background: #fff;
+    border: 1px solid var(--blue-tint);
+    border-radius: 4px;
+    padding: 3px 9px;
+  }
+
   /* ===== Detail view ===== */
   .back-bar {
     display: flex; align-items: center; gap: 16px;
@@ -336,7 +408,10 @@
           <div class="brand-sub">JIANLANG ALLIANCE</div>
         </div>
       </div>
-      <button class="cap-btn" id="futureCapBtn" type="button">未来展望 →</button>
+      <div class="cap-group">
+        <button class="cap-btn" id="aiCapBtn" type="button">AI 助手 →</button>
+        <button class="cap-btn" id="futureCapBtn" type="button">未来展望 →</button>
+      </div>
     </div>
 
     <div class="slide-kicker">RTB Optimization · User Perspective</div>
@@ -363,9 +438,6 @@
       <div class="sol-card"><div class="sol-no">方向一</div><div class="sol-text" data-sol="0"></div></div>
       <div class="sol-card"><div class="sol-no">方向二</div><div class="sol-text" data-sol="1"></div></div>
       <div class="sol-card"><div class="sol-no">方向三</div><div class="sol-text" data-sol="2"></div></div>
-    </div>
-    <div class="footer-note">
-      <div class="fn-left"><span class="fn-dot"></span>按 Esc 返回痛点总览</div>
     </div>
   </section>
 
@@ -402,9 +474,55 @@
         <p class="future-desc">小 B 店主与店员普遍年轻、注重形象，店内空闲时间多，但线下社交机会少。引入轻量社交功能为同行建立交流与交友的连接，既填补情感与交友需求，也对产品粘性与口碑传播非常有利。</p>
       </div>
     </div>
+  </section>
 
-    <div class="footer-note">
-      <div class="fn-left"><span class="fn-dot"></span>按 Esc 返回痛点总览</div>
+  <!-- ============ 视图四 · AI 助手 ============ -->
+  <section class="view" id="view-ai">
+    <div class="back-bar">
+      <button class="back-btn" id="aiBackBtn" type="button">返回痛点总览</button>
+      <span class="detail-num">AI</span>
+    </div>
+
+    <div class="slide-kicker">AI Assistant · Core Solution</div>
+    <h2 class="slide-title">AI 助手 · 六大痛点的系统性解法</h2>
+    <p class="slide-sub">正在开发中 · 当前迭代的核心方案</p>
+    <div class="rule"></div>
+
+    <div class="ai-hero">
+      剑琅联盟正在开发 AI 助手，以语音与智能为手段，直击小 B 门店店主 / 店员最真实的 6 类使用痛点——<b>把复杂留给 AI，把简单留给用户</b>。
+    </div>
+
+    <div class="ai-grid">
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">01</span><span class="ai-pain-name">服务间隙，难做精细操作</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>一句话语音开单，无需精细点击操作</div>
+      </div>
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">02</span><span class="ai-pain-name">信息过载，不知从何下手</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>智能引导直达目标，直接告诉用户第一步做什么</div>
+      </div>
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">03</span><span class="ai-pain-name">配置功能过重，超出小店能力</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>复杂设置（如业绩提成）由 AI 代办，店主无需理解逻辑</div>
+      </div>
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">04</span><span class="ai-pain-name">价目表维护缺位，开单卡壳</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>AI 自动补录价目表，开单不再卡壳</div>
+      </div>
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">05</span><span class="ai-pain-name">单手高频操作，点击区不友好</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>语音替代点击，单手也能高效完成操作</div>
+      </div>
+      <div class="ai-row">
+        <div class="ai-pain"><span class="ai-no">06</span><span class="ai-pain-name">商品批量录入，力不从心</span></div>
+        <div class="ai-arrow">→</div>
+        <div class="ai-sol"><span class="ai-tag">AI 方案</span>扫码 / 语音快速录入，批量建商品不费力</div>
+      </div>
     </div>
   </section>
 
@@ -498,9 +616,12 @@
   var overview = document.getElementById('view-overview');
   var detail = document.getElementById('view-detail');
   var future = document.getElementById('view-future');
+  var ai = document.getElementById('view-ai');
   var backBtn = document.getElementById('backBtn');
   var futureBackBtn = document.getElementById('futureBackBtn');
   var futureCapBtn = document.getElementById('futureCapBtn');
+  var aiBackBtn = document.getElementById('aiBackBtn');
+  var aiCapBtn = document.getElementById('aiCapBtn');
   var detailNum = document.getElementById('detailNum');
   var detailPain = document.getElementById('detailPain');
   var detailTitle = document.getElementById('detailTitle');
@@ -525,18 +646,29 @@
   function showFuture() {
     overview.classList.remove('active');
     detail.classList.remove('active');
+    ai.classList.remove('active');
     future.classList.add('active');
+  }
+
+  function showAI() {
+    overview.classList.remove('active');
+    detail.classList.remove('active');
+    future.classList.remove('active');
+    ai.classList.add('active');
   }
 
   function showOverview() {
     detail.classList.remove('active');
     future.classList.remove('active');
+    ai.classList.remove('active');
     overview.classList.add('active');
   }
 
   backBtn.addEventListener('click', showOverview);
   futureBackBtn.addEventListener('click', showOverview);
+  aiBackBtn.addEventListener('click', showOverview);
   futureCapBtn.addEventListener('click', showFuture);
+  aiCapBtn.addEventListener('click', showAI);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') showOverview();
   });
