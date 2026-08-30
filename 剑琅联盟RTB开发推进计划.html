@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · RTB 开发推进计划</title>
+<style>
+  :root {
+    --bg: #F4F6F8;
+    --card: #FFFFFF;
+    --ink: #1E2A36;
+    --ink-soft: #5A6A7A;
+    --ink-faint: #8A97A6;
+    --line: #D9E0E8;
+    --teal: #2A9D8F;
+    --teal-deep: #1F7A6F;
+    --teal-soft: rgba(42,157,143,.12);
+    --blue: #3A6EA5;
+    --blue-soft: rgba(58,110,165,.12);
+    --amber: #D4A017;
+    --amber-soft: rgba(212,160,23,.14);
+    --rose: #C75B5B;
+    --rose-soft: rgba(199,91,91,.12);
+    --violet: #6B5B95;
+    --violet-soft: rgba(107,91,149,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .serif { font-family: Georgia, "Songti SC", "STSong", "SimSun", serif; }
+
+  /* ===== Layout ===== */
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px 80px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 420px at 90% -10%, rgba(42,157,143,.18), transparent 60%),
+      radial-gradient(700px 380px at -5% 110%, rgba(58,110,165,.14), transparent 55%),
+      linear-gradient(180deg, #EEF3F6 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 72px 0 56px;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .brand-mark {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--teal);
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 20px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; color: var(--teal-deep);
+    font-weight: 700; text-transform: uppercase;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--teal); border-radius: 2px; }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700; letter-spacing: 3px;
+    margin: 14px 0 12px; line-height: 1.25;
+  }
+  .hero h1 em { font-style: normal; color: var(--teal-deep); }
+
+  .hero-desc {
+    font-size: 16px; color: var(--ink-soft); letter-spacing: 1px;
+    max-width: 640px; line-height: 1.8;
+  }
+
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 28px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; letter-spacing: 1px;
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .chip b { color: var(--ink); font-weight: 600; }
+  .chip .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* ===== Section ===== */
+  section { margin-top: 56px; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; margin-bottom: 22px;
+  }
+  .sec-title {
+    font-size: 26px; font-weight: 700; letter-spacing: 2px;
+  }
+  .sec-en {
+    font-size: 12px; letter-spacing: 2px; color: var(--ink-faint);
+  }
+
+  /* ===== Overview cards ===== */
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .ov-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ov-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .ov-card.c1::before { background: var(--teal); }
+  .ov-card.c2::before { background: var(--blue); }
+  .ov-card.c3::before { background: var(--amber); }
+  .ov-card.c4::before { background: var(--violet); }
+
+  .ov-label { font-size: 12px; letter-spacing: 2px; color: var(--ink-faint); margin-bottom: 8px; }
+  .ov-name { font-size: 17px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; }
+  .ov-status {
+    display: inline-block;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 6px;
+  }
+  .st-dev { background: var(--teal-soft); color: var(--teal-deep); }
+  .st-ready { background: var(--blue-soft); color: var(--blue); }
+  .st-plan { background: var(--amber-soft); color: #9A7400; }
+  .st-next { background: var(--violet-soft); color: var(--violet); }
+  .ov-time { font-size: 12.5px; color: var(--ink-soft); margin-top: 12px; line-height: 1.6; }
+
+  /* ===== Gantt ===== */
+  .gantt-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 24px 22px;
+    box-shadow: 0 8px 28px rgba(30,42,54,.05);
+    overflow-x: auto;
+  }
+  .gantt {
+    min-width: 780px;
+  }
+  .gantt-head {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .gantt-weeks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.15fr;
+    gap: 8px;
+  }
+  .week-label {
+    text-align: center;
+    font-size: 12px; letter-spacing: 1px;
+    color: var(--ink-soft);
+    padding: 8px 6px;
+    background: #F0F4F7;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .week-label b { display: block; color: var(--ink); font-size: 13px; margin-bottom: 2px; }
+  .week-label.now {
+    background: var(--teal-soft);
+    border-color: rgba(42,157,143,.35);
+    color: var(--teal-deep);
+  }
+  .week-label.now b { color: var(--teal-deep); }
+
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+  }
+  .row-name {
+    font-size: 13.5px; font-weight: 600; letter-spacing: .5px;
+    padding-right: 8px;
+  }
+  .row-name small {
+    display: block; font-size: 11px; font-weight: 400;
+    color: var(--ink-faint); margin-top: 3px; letter-spacing: 0;
+  }
+  .track {
+    position: relative;
+    height: 42px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.15fr;
+    gap: 8px;
+  }
+  .track-cell {
+    background: #F7FAFC;
+    border: 1px dashed #E2E8EF;
+    border-radius: 8px;
+  }
+  .bar {
+    position: absolute;
+    top: 7px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .5px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(30,42,54,.12);
+    white-space: nowrap;
+    padding: 0 10px;
+  }
+  /* track columns: week1 | week2 | week3 | sept  — each with 8px gap
+     Approximate left/width as % of track (4 columns + gaps ≈ 4*1 + 3*8px)
+     Using calc with grid-aligned percentages relative to whole track:
+     Col1: 0 ~ 22.5%, Col2: 24.5~47%, Col3: 49~71.5%, Col4: 73.5~100%
+  */
+  .bar.b1 { left: 2%; width: 45%; background: linear-gradient(90deg, #2A9D8F, #3BB5A6); }
+  .bar.b2 { left: 2%; width: 45%; background: linear-gradient(90deg, #3A6EA5, #4F85C0); }
+  .bar.b3 { left: 24.5%; width: 47%; background: linear-gradient(90deg, #D4A017, #E2B53A); color: #3D2E00; }
+  .bar.b4 { left: 49%; width: 49%; background: linear-gradient(90deg, #6B5B95, #8573B0); }
+
+  .gantt-legend {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .leg {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; color: var(--ink-soft);
+  }
+  .leg i {
+    width: 14px; height: 8px; border-radius: 3px; display: inline-block;
+  }
+
+  /* ===== Milestone banner ===== */
+  .milestone {
+    margin-top: 28px;
+    background: linear-gradient(120deg, #1F3A4D 0%, #2A5A6A 45%, #1F7A6F 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    display: flex; align-items: center; gap: 24px;
+    box-shadow: 0 12px 36px rgba(31,58,77,.25);
+  }
+  .ms-badge {
+    flex: none;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    text-align: center; line-height: 1.3;
+  }
+  .ms-title { font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .ms-desc { font-size: 14px; opacity: .88; line-height: 1.75; letter-spacing: .3px; }
+
+  /* ===== Feature details ===== */
+  .features {
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .feat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+  .feat-side {
+    border-right: 1px solid var(--line);
+    padding-right: 20px;
+  }
+  .feat-no {
+    font-family: Georgia, serif;
+    font-size: 28px; font-weight: 700;
+    color: rgba(42,157,143,.25);
+    line-height: 1; margin-bottom: 8px;
+  }
+  .feat-name { font-size: 20px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .feat-tag {
+    display: inline-block;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 6px;
+  }
+  .feat-body h4 {
+    font-size: 13px; letter-spacing: 2px; color: var(--ink-faint);
+    margin-bottom: 12px; font-weight: 600;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .step {
+    background: #F7FAFC;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .step .s-phase {
+    font-size: 11.5px; letter-spacing: 1.5px; font-weight: 700;
+    color: var(--teal-deep); margin-bottom: 6px;
+  }
+  .step .s-title { font-size: 14.5px; font-weight: 700; margin-bottom: 4px; }
+  .step .s-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+  .step.done { border-color: rgba(42,157,143,.4); background: var(--teal-soft); }
+  .step.active { border-color: rgba(58,110,165,.45); background: var(--blue-soft); }
+  .step.active .s-phase { color: var(--blue); }
+  .feat-note {
+    margin-top: 14px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.75;
+    background: #F7FAFC;
+    border-left: 3px solid var(--teal);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+  }
+  .feat-note b { color: var(--ink); }
+
+  /* ===== Flow diagram ===== */
+  .flow {
+    display: flex; align-items: stretch; gap: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .flow-item {
+    flex: 1;
+    padding: 26px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .flow-item + .flow-item {
+    border-left: 1px solid var(--line);
+  }
+  .flow-item::after {
+    content: "→";
+    position: absolute; right: -10px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 20px; height: 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-size: 11px; color: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .flow-item:last-child::after { display: none; }
+  .flow-num {
+    width: 36px; height: 36px; margin: 0 auto 12px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+  .flow-title { font-size: 16px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .flow-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
+
+  /* ===== Footer ===== */
+  .page-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12.5px; color: var(--ink-faint); letter-spacing: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .overview { grid-template-columns: 1fr 1fr; }
+    .feat { grid-template-columns: 1fr; }
+    .feat-side { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 16px; }
+    .steps { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-item + .flow-item { border-left: none; border-top: 1px solid var(--line); }
+    .flow-item::after {
+      right: 50%; top: auto; bottom: -10px;
+      transform: translateX(50%) rotate(90deg);
+    }
+  }
+  @media (max-width: 560px) {
+    .overview { grid-template-columns: 1fr; }
+    .hero { padding: 48px 0 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE · RTB</div>
+      </div>
+    </div>
+    <div class="kicker">Development Roadmap</div>
+    <h1 class="serif">RTB 开发<em>推进计划</em></h1>
+    <p class="hero-desc">以开单、提成、薪资、会员卡四大核心路径为主线，按周推进开发、提测与上线，冲刺 9 月核心功能全面优化目标。</p>
+    <div class="hero-meta">
+      <span class="chip"><span class="dot"></span><b>更新日期</b> · 2026-08-30</span>
+      <span class="chip"><b>时间窗口</b> · 本周 → 下下周 · 9 月里程碑</span>
+      <span class="chip"><b>模块</b> · 店务管理系统 RTB</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Overview -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">四大功能一览</h2>
+      <span class="sec-en">FEATURE OVERVIEW</span>
+    </div>
+    <div class="overview">
+      <div class="ov-card c1">
+        <div class="ov-label">01 · 开单</div>
+        <div class="ov-name">开单流程优化</div>
+        <span class="ov-status st-dev">本周开发中</span>
+        <div class="ov-time">8/31 提测<br>下周上线</div>
+      </div>
+      <div class="ov-card c2">
+        <div class="ov-label">02 · 提成</div>
+        <div class="ov-name">提成设置重构</div>
+        <span class="ov-status st-ready">方案已完成</span>
+        <div class="ov-time">下周一开始开发<br>下周提测并上线</div>
+      </div>
+      <div class="ov-card c3">
+        <div class="ov-label">03 · 薪资</div>
+        <div class="ov-name">员工薪资</div>
+        <span class="ov-status st-plan">下周启动</span>
+        <div class="ov-time">下周方案 + 进开发<br>下下周提测上线</div>
+      </div>
+      <div class="ov-card c4">
+        <div class="ov-label">04 · 会员卡</div>
+        <div class="ov-name">会员卡重构</div>
+        <span class="ov-status st-next">下下周启动</span>
+        <div class="ov-time">全新 UI / UX<br>纳入 9 月核心改造</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gantt -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">推进甘特图</h2>
+      <span class="sec-en">TIMELINE GANTT</span>
+    </div>
+    <div class="gantt-card">
+      <div class="gantt">
+        <div class="gantt-head">
+          <div></div>
+          <div class="gantt-weeks">
+            <div class="week-label now"><b>本周</b>～8/30</div>
+            <div class="week-label"><b>下周</b>8/31 – 9/6</div>
+            <div class="week-label"><b>下下周</b>9/7 – 9/13</div>
+            <div class="week-label"><b>9 月</b>核心改造里程碑</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">开单流程优化<small>快速消费 + 流程优化</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b1">开发中 → 8/31 提测 → 下周上线</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">提成设置重构<small>砍掉业绩设置 · 合并配置</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b2">方案完成 → 开发 / 提测 / 上线</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">员工薪资<small>产品方案 + 开发落地</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b3">方案+开发 → 提测上线</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">会员卡重构<small>全新 UI / UX</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b4">启动重构 → 9 月核心改造</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gantt-legend">
+        <span class="leg"><i style="background:#2A9D8F"></i>开单</span>
+        <span class="leg"><i style="background:#3A6EA5"></i>提成</span>
+        <span class="leg"><i style="background:#D4A017"></i>薪资</span>
+        <span class="leg"><i style="background:#6B5B95"></i>会员卡</span>
+        <span class="leg"><i style="background:#2A9D8F;opacity:.25;border:1px dashed #2A9D8F"></i>本周（当前）</span>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="ms-badge">9月<br>目标</div>
+      <div>
+        <div class="ms-title">核心功能全面优化改造</div>
+        <div class="ms-desc">预计 9 月对目标用户最常使用的核心功能完成全面优化改造，并持续对 RTB 全部功能进行迭代优化——让产品更适合小 B 店主的真实经营场景。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery rhythm -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">交付节奏</h2>
+      <span class="sec-en">DELIVERY RHYTHM</span>
+    </div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-title">方案 / 设计</div>
+        <div class="flow-desc">产品方案定稿<br>交互与逻辑对齐</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-title">开发</div>
+        <div class="flow-desc">进入研发排期<br>按周推进交付</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-title">提测</div>
+        <div class="flow-desc">质量验收<br>问题闭环</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-title">上线</div>
+        <div class="flow-desc">灰度 / 全量发布<br>试点门店可用</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature details -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">分功能推进详情</h2>
+      <span class="sec-en">FEATURE DETAILS</span>
+    </div>
+    <div class="features">
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">01</div>
+          <div class="feat-name">开单流程优化</div>
+          <span class="feat-tag st-dev">本周开发中</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step done">
+              <div class="s-phase">本周</div>
+              <div class="s-title">持续开发</div>
+              <div class="s-desc">快速消费功能 + 开单流程优化，仍在开发推进中。</div>
+            </div>
+            <div class="step active">
+              <div class="s-phase">8 月 31 日</div>
+              <div class="s-title">提测</div>
+              <div class="s-desc">下周一提交测试，进入质量验收。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">下周</div>
+              <div class="s-title">上线</div>
+              <div class="s-desc">下周完成功能上线，试点门店可用。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>范围：</b>快速消费（免填字段直接输金额开单）与开单流程体验优化，对齐一线调研验证方向。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">02</div>
+          <div class="feat-name">提成设置重构</div>
+          <span class="feat-tag st-ready">方案已完成</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step done">
+              <div class="s-phase">本周</div>
+              <div class="s-title">方案完成</div>
+              <div class="s-desc">砍掉业绩设置，在提成设置中一步完成原两步目标。</div>
+            </div>
+            <div class="step active">
+              <div class="s-phase">下周一</div>
+              <div class="s-title">进入开发</div>
+              <div class="s-desc">8/31 起正式进开发，大幅重构功能逻辑与交互。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">下周</div>
+              <div class="s-title">提测并上线</div>
+              <div class="s-desc">下周内完成提测与上线。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>改造重点：</b>合并「业绩设置 → 提成设置」两步流程，重构功能逻辑与交互设计，降低店主配置成本。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">03</div>
+          <div class="feat-name">员工薪资</div>
+          <span class="feat-tag st-plan">下周启动</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step">
+              <div class="s-phase">下周</div>
+              <div class="s-title">产品方案</div>
+              <div class="s-desc">完成「员工薪资」功能产品方案。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">下周</div>
+              <div class="s-title">进入开发</div>
+              <div class="s-desc">方案完成后同步进入开发。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">下下周</div>
+              <div class="s-title">提测并上线</div>
+              <div class="s-desc">下下周完成提测与功能上线。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>节奏：</b>下周完成产品方案并进入开发，下下周提测上线，与提成能力形成薪资管理闭环。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">04</div>
+          <div class="feat-name">会员卡重构</div>
+          <span class="feat-tag st-next">下下周启动</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step">
+              <div class="s-phase">下下周</div>
+              <div class="s-title">启动重构</div>
+              <div class="s-desc">采用全新 UI / UX，全面依据调研成果改进。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">设计方向</div>
+              <div class="s-title">适配小 B 店主</div>
+              <div class="s-desc">降低操作门槛，贴合真实经营场景。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">9 月</div>
+              <div class="s-title">纳入核心改造</div>
+              <div class="s-desc">作为 9 月核心功能全面优化的重要组成部分。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>依据：</b>太仓试点调研结论——优惠券模板化、操作做减法、适配小 B 店主能力等方向，指导会员卡全新体验设计。</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="page-footer">
+    <div>剑琅联盟 · RTB 开发推进计划 · 内部汇报</div>
+    <div>与《调研报告》《RTB 优化建议》配套使用</div>
+  </div>
+
+</div>
+
+</body>
+</html>

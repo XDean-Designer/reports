@@ -87,8 +87,8 @@
   /* ===== Entry cards ===== */
   .entries {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     flex: 1 1 auto;
     align-content: center;
   }
@@ -98,7 +98,7 @@
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 38px 42px;
+    padding: 28px 26px;
     text-decoration: none;
     color: inherit;
     transition: border-color .3s, box-shadow .3s, transform .3s;
@@ -115,12 +115,12 @@
     color: rgba(74,90,106,.12); line-height: 1;
   }
   .entry .e-title {
-    font-size: 24px; font-weight: 700; letter-spacing: 3px;
-    margin-bottom: 14px;
-    padding-right: 56px;
+    font-size: 20px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 12px;
+    padding-right: 48px;
   }
   .entry .e-desc {
-    font-size: 14px; line-height: 1.9; letter-spacing: .4px;
+    font-size: 13px; line-height: 1.8; letter-spacing: .3px;
     color: var(--ink-soft);
   }
   .entry .e-go {
@@ -177,6 +177,12 @@
         <div class="e-title">RTB优化迭代计划简述</div>
         <p class="e-desc">以门店店主 / 店员的一线视角，梳理 RTB 使用痛点与改进方向，并附未来展望——让产品更出色的延伸思考。</p>
         <span class="e-go">进入文档</span>
+      </a>
+      <a class="entry" href="剑琅联盟RTB开发推进计划.html">
+        <span class="e-no">03</span>
+        <div class="e-title">RTB开发推进计划</div>
+        <p class="e-desc">开单、提成、薪资、会员卡按周推进甘特图：本周开发 / 下周提测上线 / 下下周启动重构，冲刺 9 月核心功能全面优化。</p>
+        <span class="e-go">进入计划</span>
       </a>
     </div>
 
