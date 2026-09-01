@@ -317,6 +317,10 @@
     <a href="#c8">成本明细</a>
     <a href="#c9">上线排期</a>
     <a href="#c10">风险与应对</a>
+    <a href="#c11">项目组织与流程</a>
+    <a href="#c12">线上流程</a>
+    <a href="#c13">线下流程</a>
+    <a href="#c14">结算与合同</a>
   </div>
 </div>
 
@@ -835,6 +839,189 @@
         <div class="rk-title">多门店授权与权限管理</div>
         <div class="rk-body">应对：按门店维度管理平台授权、核销范围与员工业绩归因；建立授权到期提醒与异常核销告警。</div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 项目组织与内部流程 ============ -->
+  <section class="chapter" id="c11">
+    <div class="chapter-kicker">Chapter 11 · Organization &amp; Process</div>
+    <h2 class="chapter-title">项目组织与内部流程</h2>
+    <div class="chapter-sub">从立项、审批到责任落位，把「方案」变成可执行的项目</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">项目角色与职责分工</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>角色</th><th>主要职责</th><th>关键交付物</th></tr>
+        <tr><td><b>产品经理</b></td><td>需求梳理与流程设计、与平台侧对接确认、门店侧需求收集</td><td>PRD、核销流程设计、门店操作手册</td></tr>
+        <tr><td><b>后端开发</b></td><td>平台 API 对接、核销服务开发、自动开单与业绩归因联动</td><td>核销服务代码、接口联调、上线部署</td></tr>
+        <tr><td><b>测试工程师</b></td><td>功能测试、异常场景、幂等与并发验证、验收</td><td>测试用例、验收报告</td></tr>
+        <tr><td><b>商务 / 法务</b></td><td>平台入驻材料、ISV 签约、合同与授权协议审核、保证金缴纳</td><td>入驻资质、合同、授权协议</td></tr>
+        <tr><td><b>运营 / 客服</b></td><td>门店培训、试点跟进、上线后客服与对账支持</td><td>培训材料、FAQ、对账流程</td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub-title">内部立项与审批流程</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">立项申请</div>
+        <div class="st-body">基于本方案形成立项材料（背景、目标、路径、成本、排期），提交公司审批。由于已有专职跨职能团队，无需额外抽调人力。</div>
+      </li>
+      <li>
+        <div class="st-title">预算与合同审批</div>
+        <div class="st-body">预算（ISV 年费、等保 / 保证金为中期项）与合同（ISV 协议、平台协议）走公司标准审批流程，<b>预计 1 周内可完成</b>，不阻塞项目启动。</div>
+      </li>
+      <li>
+        <div class="st-title">责任落位与启动会</div>
+        <div class="st-body">明确各角色责任人、里程碑节点与周会机制；确定试点门店与首批上线门店名单；正式启动平台入驻与开发。</div>
+      </li>
+    </ol>
+
+    <div class="card">
+      <div class="card-title">落地全景</div>
+      <ul class="list">
+        <li><b>线上流程</b>：平台入驻 → 资质审核 → 应用创建 → 权限申请 → 接口开发 → 验收上线 → 自动对账。</li>
+        <li><b>线下流程</b>：门店材料收集 → 门店授权绑定 → 店员培训 → 试点上线 → 客服支持 → 复盘迭代。</li>
+        <li>两条流程<b>并行推进</b>，线上负责能力建设、线下负责门店落地，最终在试点门店汇合。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 12 线上流程 ============ -->
+  <section class="chapter" id="c12">
+    <div class="chapter-kicker">Chapter 12 · Online Process</div>
+    <h2 class="chapter-title">线上流程：平台入驻与技术落地</h2>
+    <div class="chapter-sub">由剑琅团队直接对接平台在线流程，自助完成入驻与开发</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">平台入驻与接口申请（线上自助）</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>步骤</th><th>抖音开放平台</th><th>美团技术服务合作中心</th></tr>
+        <tr><td><b>1. 注册认证</b></td><td>开发者平台注册 + 企业认证（免费）</td><td>注册并选择「三方服务商入驻」</td></tr>
+        <tr><td><b>2. 资质提交</b></td><td>营业执照、开发者信息、入驻函（盖章）</td><td>企业资质、开发者信息、所需接口服务</td></tr>
+        <tr><td><b>3. 应用 / 账号</b></td><td>创建生活服务商家应用，等审核</td><td>资质审核通过后签约盖章，缴纳保证金后分配账号密钥</td></tr>
+        <tr><td><b>4. 能力申请</b></td><td>申请到综解决方案：门店管理、团购核销、团购对账</td><td>申请团购核销等接口权限</td></tr>
+        <tr><td><b>5. 商家授权</b></td><td>门店在「抖音来客」授权剑琅应用，绑定 poi_id</td><td>获取授权链接，门店授权后回调绑定 appAuthToken</td></tr>
+        <tr><td><b>6. 验收上线</b></td><td>测试验收 → 应用上线（自助化流程）</td><td>安全资质审核通过后上线</td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub-title">技术落地清单</h3>
+    <div class="card">
+      <div class="card-title">开发交付项</div>
+      <ul class="list">
+        <li><b>统一核销服务</b>：封装验券、核销、撤销、状态查询接口，屏蔽美团 / 抖音协议差异。</li>
+        <li><b>自动开单联动</b>：核销成功 → 自动生成开单记录 → 关联价目表 → 员工业绩归因。</li>
+        <li><b>自动对账模块</b>：平台账单与剑琅开单自动比对，差异自动标记并提醒。</li>
+        <li><b>门店授权管理</b>：按门店维度管理平台授权、核销范围与到期提醒。</li>
+        <li><b>幂等与重试</b>：全链路幂等设计 + 异常重试与补偿，防止重复核销与状态不一致。</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title">自动对账功能设计</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>对账项</th><th>比对逻辑</th><th>异常处理</th></tr>
+        <tr><td>核销记录一致性</td><td>平台核销单 ↔ 剑琅开单逐笔比对</td><td>差异单自动标记，运营核对</td></tr>
+        <tr><td>金额一致性</td><td>券面额、实收金额比对</td><td>金额不符自动告警</td></tr>
+        <tr><td>门店归属</td><td>按门店维度汇总对账</td><td>跨店异常提示</td></tr>
+        <tr><td>撤销 / 退款同步</td><td>平台撤销记录 ↔ 剑琅冲销记录</td><td>缺失冲销自动补录</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 13 线下流程 ============ -->
+  <section class="chapter" id="c13">
+    <div class="chapter-kicker">Chapter 13 · Offline Process</div>
+    <h2 class="chapter-title">线下流程：门店接入与培训</h2>
+    <div class="chapter-sub">面向已开团的门店，完成材料收集、授权绑定、培训与试点</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">门店接入材料清单</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>材料</th><th>用途</th><th>获取方式</th></tr>
+        <tr><td>门店营业执照</td><td>平台资质核验、绑定门店主体</td><td>门店提供扫描件</td></tr>
+        <tr><td>经营者身份证</td><td>平台实名认证、授权确认</td><td>门店提供复印件</td></tr>
+        <tr><td>门店收款账户</td><td>平台结算团购款（对公或经营者账户）</td><td>门店提供账户信息</td></tr>
+        <tr><td>美团 / 抖音门店账号</td><td>完成第三方应用授权绑定</td><td>门店在来客 / 商家后台操作</td></tr>
+        <tr><td>门店基本信息</td><td>开通绑定、对账归属</td><td>剑琅运营收集</td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub-title">门店接入操作流程</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">材料收集与确认</div>
+        <div class="st-body">剑琅运营按清单收集门店材料，确认门店已在美团 / 抖音开通团购且账号可操作。</div>
+      </li>
+      <li>
+        <div class="st-title">门店授权绑定</div>
+        <div class="st-body">引导门店在「抖音来客 / 美团商家后台」完成对剑琅应用的第三方授权；剑琅后台绑定门店并配置核销规则。</div>
+      </li>
+      <li>
+        <div class="st-title">店员培训</div>
+        <div class="st-body">采用<b>远程培训</b>模式：下发视频教程与图文手册，组织线上培训会，并在试点门店安排在线答疑。</div>
+      </li>
+      <li>
+        <div class="st-title">试点上线</div>
+        <div class="st-body">选取<b>已有意向的试点门店</b>先行上线，验证「扫码 → 验券 → 核销 → 自动开单」全流程，收集反馈后优化。</div>
+      </li>
+      <li>
+        <div class="st-title">全量推广</div>
+        <div class="st-body">随 APP 大版本发布（预留应用商店审核周期）向全部目标门店开放，客服承接上线后支持。</div>
+      </li>
+    </ol>
+
+    <div class="card">
+      <div class="card-title">培训与客服支持模式</div>
+      <ul class="list">
+        <li><b>培训形式</b>：视频教程 + 图文手册 + 线上培训会（远程为主，无需驻店）。</li>
+        <li><b>客服承接</b>：由<b>剑琅自有客服团队</b>统一承接核销问题、对账问题与门店接入咨询。</li>
+        <li><b>支持渠道</b>：在线客服、服务群、FAQ 自助查询；重大对账差异由运营专项跟进。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 14 结算与合同 ============ -->
+  <section class="chapter" id="c14">
+    <div class="chapter-kicker">Chapter 14 · Settlement &amp; Contract</div>
+    <h2 class="chapter-title">资金结算与合同合规</h2>
+    <div class="chapter-sub">资金不经剑琅，平台直结门店；权责以协议明确</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">资金结算路径</h3>
+    <div class="card">
+      <div class="card-title">推荐模式：平台直结门店</div>
+      <ul class="list">
+        <li>顾客在美团 / 抖音购买的团购款由<b>平台直接结算到门店收款账户</b>，资金不经剑琅，合规风险最低。</li>
+        <li>剑琅通过核销记录与对账模块为门店提供<b>对账报表</b>，帮助门店掌握各渠道收入。</li>
+        <li>门店保留在平台后台查看原始结算明细的能力，与剑琅报表互为印证。</li>
+        <li>该模式无需剑琅持有支付 / 分账资质，也无需处理备付金与税务代扣，成本与合规负担最小。</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title">门店授权与服务协议要点</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>条款要点</th><th>约定内容</th></tr>
+        <tr><td>授权范围</td><td>授权剑琅接入美团 / 抖音团购核销、自动开单与对账能力</td></tr>
+        <tr><td>资金结算</td><td>明确团购款由平台直接结算至门店账户，剑琅不代收、不占用资金</td></tr>
+        <tr><td>数据使用</td><td>核销与经营数据仅用于剑琅功能服务与对账，不用于其他商业用途</td></tr>
+        <tr><td>平台佣金</td><td>平台佣金与达人佣金为平台经营成本，由门店承担，方案中已明示</td></tr>
+        <tr><td>责任划分</td><td>核销操作差错、异常退款按平台规则与协议约定划分责任</td></tr>
+        <tr><td>退出机制</td><td>门店可停止授权；数据导出与删除约定，保障门店权益</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">合同签署清单</div>
+      <ul class="list">
+        <li><b>平台侧</b>：抖音开放平台开发者协议 / 美团服务协议（含保证金条款）。</li>
+        <li><b>ISV 侧（阶段一）</b>：ISV 服务合同，锁定费用、SLA 与退出条款。</li>
+        <li><b>门店侧</b>：门店授权与服务协议，明确上述要点，由法务审核后门店签署。</li>
+      </ul>
     </div>
   </section>
 
