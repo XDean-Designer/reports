@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 美团/抖音团购核销接入方案</title>
+<style>
+  :root {
+    --bg: #FAF6F0;
+    --card: #FFFFFF;
+    --gold: #C6A15B;
+    --gold-deep: #A8853F;
+    --gold-line: #E5D5BC;
+    --rose: #C88B7A;
+    --ink: #3D3A36;
+    --ink-soft: #7A7268;
+    --ink-faint: #A99F92;
+    --chip-bg: rgba(198,161,91,.10);
+    --green: #5B8C5A;
+    --green-line: rgba(91,140,90,.35);
+    --green-bg: rgba(91,140,90,.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  .serif { font-family: Georgia, "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif; }
+
+  /* ===== 封面 ===== */
+  .cover {
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(198,161,91,.16), transparent 60%),
+      radial-gradient(700px 420px at -6% 108%, rgba(200,139,122,.08), transparent 55%),
+      var(--bg);
+    padding: 88px 64px 76px;
+    border-bottom: 1px solid var(--gold-line);
+    position: relative;
+  }
+  .cover-inner { max-width: 1080px; margin: 0 auto; }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 52px;
+  }
+  .brand-mark {
+    width: 48px; height: 48px; flex: none;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-deep);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 22px; font-weight: 700;
+    background: rgba(198,161,91,.08);
+  }
+  .brand-name { font-size: 19px; letter-spacing: 6px; color: var(--ink); font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--ink-faint); margin-top: 3px; }
+
+  .cover-tag {
+    display: inline-block;
+    font-size: 12px; letter-spacing: 4px; color: var(--gold-deep);
+    border: 1px solid var(--gold-line);
+    padding: 7px 18px; border-radius: 30px;
+    background: rgba(255,255,255,.6);
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 46px; font-weight: 700; letter-spacing: 4px; line-height: 1.4;
+  }
+  .cover-title em { font-style: normal; color: var(--gold-deep); }
+  .cover-desc {
+    margin-top: 18px;
+    font-size: 16px; color: var(--ink-soft); letter-spacing: 2px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    display: grid; grid-template-columns: repeat(3, 150px);
+    gap: 12px 40px;
+    font-size: 13.5px;
+  }
+  .cover-meta dt { color: var(--gold-deep); letter-spacing: 2px; font-weight: 600; font-size: 12px; }
+  .cover-meta dd { color: var(--ink); letter-spacing: 1px; margin-top: 3px; }
+
+  /* ===== 正文容器 ===== */
+  .doc { max-width: 1080px; margin: 0 auto; padding: 20px 64px 90px; }
+
+  section.chapter { margin-top: 72px; }
+  .chapter-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 4px; color: var(--gold-deep);
+    font-weight: 600;
+  }
+  .chapter-kicker::before {
+    content: ""; width: 28px; height: 1px; background: var(--gold);
+  }
+  h2.chapter-title {
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 30px; font-weight: 700; letter-spacing: 3px;
+    margin: 12px 0 0; color: var(--ink);
+  }
+  .chapter-sub { margin-top: 8px; font-size: 14px; color: var(--ink-soft); letter-spacing: 1px; }
+  .rule {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-line) 40%, transparent 100%);
+    margin: 22px 0 28px;
+  }
+
+  h3.sub-title {
+    font-size: 18px; font-weight: 700; letter-spacing: 2px;
+    color: var(--ink);
+    margin: 30px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h3.sub-title::before {
+    content: ""; width: 12px; height: 12px; flex: none;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px var(--bg);
+    background: var(--gold);
+  }
+
+  p.para { font-size: 14.5px; color: var(--ink); line-height: 1.9; margin-bottom: 14px; letter-spacing: .3px; }
+  p.para b { color: var(--gold-deep); font-weight: 600; }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 6px 24px rgba(166,138,88,.07);
+    margin-bottom: 18px;
+  }
+  .card-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15.5px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold-deep);
+    margin-bottom: 12px;
+  }
+
+  .list { list-style: none; }
+  .list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px; line-height: 1.85; color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: .3px;
+  }
+  .list li::before {
+    content: ""; position: absolute; left: 2px; top: 11px;
+    width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+  }
+  .list li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== 表格 ===== */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0 22px;
+    border: 1px solid var(--gold-line);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 6px 24px rgba(166,138,88,.06);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  th {
+    background: rgba(198,161,91,.10);
+    color: var(--gold-deep);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--gold-line);
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(229,213,188,.55);
+    color: var(--ink);
+    line-height: 1.7;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(198,161,91,.035); }
+  td .tag {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 1px;
+    border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  }
+  .tag-gold { background: rgba(198,161,91,.14); color: var(--gold-deep); border: 1px solid rgba(198,161,91,.35); }
+  .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-line); }
+  .tag-rose { background: rgba(200,139,122,.13); color: #A05F4C; border: 1px solid rgba(200,139,122,.35); }
+
+  /* ===== 推荐结论 ===== */
+  .verdict {
+    background: linear-gradient(180deg, #FFFDF9, var(--card));
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 26px 30px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .verdict::before {
+    content: "推荐";
+    position: absolute; top: -12px; left: 24px;
+    font-size: 11px; letter-spacing: 3px;
+    color: #fff; background: var(--gold);
+    padding: 3px 14px; border-radius: 20px;
+  }
+  .verdict .v-title { font-size: 17px; font-weight: 700; letter-spacing: 2px; color: var(--gold-deep); margin-bottom: 10px; }
+  .verdict .v-body { font-size: 14px; line-height: 1.9; color: var(--ink); }
+  .verdict .v-body b { color: var(--gold-deep); }
+
+  /* ===== 步骤 ===== */
+  .steps { counter-reset: step; list-style: none; }
+  .steps > li {
+    position: relative;
+    padding: 0 0 26px 52px;
+    counter-increment: step;
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--gold);
+    color: var(--gold-deep);
+    font-family: Georgia, serif;
+    font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps > li::after {
+    content: ""; position: absolute; left: 16.5px; top: 40px; bottom: 2px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold-line), transparent);
+  }
+  .steps > li:last-child::after { display: none; }
+  .steps .st-title { font-size: 15.5px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .steps .st-body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.85; }
+  .steps .st-body b { color: var(--ink); font-weight: 600; }
+  .steps .st-body .tag { margin: 0 2px; }
+
+  /* ===== 成本表 ===== */
+  .cost-amount { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: var(--gold-deep); white-space: nowrap; }
+  .cost-total td {
+    background: rgba(198,161,91,.08);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ===== 时间轴 ===== */
+  .timeline { position: relative; margin-top: 14px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 10px; bottom: 10px;
+    width: 1px; background: linear-gradient(180deg, var(--gold), var(--gold-line));
+  }
+  .tl-item { position: relative; padding-left: 42px; margin-bottom: 22px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: 3px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--card); border: 2px solid var(--gold);
+  }
+  .tl-item .tl-phase { font-size: 13px; color: var(--gold-deep); letter-spacing: 2px; font-weight: 700; }
+  .tl-item .tl-name { font-size: 15.5px; font-weight: 600; letter-spacing: 1px; margin: 3px 0; }
+  .tl-item .tl-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+
+  /* ===== 风险 ===== */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .risk-card {
+    background: var(--card);
+    border: 1px solid var(--gold-line);
+    border-top: 3px solid var(--rose);
+    border-radius: 10px;
+    padding: 18px 22px;
+  }
+  .risk-card .rk-title { font-size: 14.5px; font-weight: 700; letter-spacing: 1px; color: var(--ink); margin-bottom: 8px; }
+  .risk-card .rk-body { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+
+  /* ===== 脚注 ===== */
+  .footnote {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gold-line);
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 1px; line-height: 1.9;
+  }
+
+  /* ===== 导航 ===== */
+  #toc {
+    position: sticky; top: 0;
+    background: rgba(250,246,240,.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--gold-line);
+    padding: 12px 0;
+    z-index: 50;
+  }
+  #toc .toc-inner { max-width: 1080px; margin: 0 auto; padding: 0 64px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+  #toc .toc-label { font-size: 12px; letter-spacing: 3px; color: var(--gold-deep); font-weight: 700; }
+  #toc a {
+    font-size: 13px; color: var(--ink-soft); text-decoration: none;
+    letter-spacing: 1px; transition: color .2s;
+  }
+  #toc a:hover { color: var(--gold-deep); }
+
+  @media (max-width: 900px) {
+    .cover { padding: 60px 28px; }
+    .doc { padding: 20px 28px 60px; }
+    #toc .toc-inner { padding: 0 28px; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .cover-meta { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toc">
+  <div class="toc-inner">
+    <span class="toc-label">目录</span>
+    <a href="#c1">方案概览</a>
+    <a href="#c2">接入路径对比</a>
+    <a href="#c3">推荐路线</a>
+    <a href="#c4">路径 A · ISV 聚合</a>
+    <a href="#c5">路径 B · 抖音直连</a>
+    <a href="#c6">路径 C · 美团直连</a>
+    <a href="#c7">技术对接要点</a>
+    <a href="#c8">成本明细</a>
+    <a href="#c9">上线排期</a>
+    <a href="#c10">风险与应对</a>
+  </div>
+</div>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+    <div class="cover-tag">方案文档 · 内部评审</div>
+    <h1 class="cover-title serif">美团 · 抖音<em>团购核销</em>接入方案</h1>
+    <p class="cover-desc">面向美业小 B 门店的经营与拓客一体化 · 完整接入流程与上线成本测算</p>
+    <dl class="cover-meta">
+      <dt>产品</dt><dd>剑琅联盟 APP</dd>
+      <dt>汇报人</dt><dd>薛鼎</dd>
+      <dt>日期</dt><dd>2026 年 9 月</dd>
+    </dl>
+  </div>
+</header>
+
+<main class="doc">
+
+  <!-- ============ 01 方案概览 ============ -->
+  <section class="chapter" id="c1">
+    <div class="chapter-kicker">Chapter 01 · Overview</div>
+    <h2 class="chapter-title">方案概览</h2>
+    <div class="rule"></div>
+
+    <div class="card">
+      <div class="card-title">项目背景</div>
+      <ul class="list">
+        <li><b>产品定位</b>：剑琅联盟是面向美业管理与拓客的手机端 APP，用户以小型美发店、美容院、美甲店为主，<b>对成本高度敏感</b>。</li>
+        <li><b>需求来源</b>：门店普遍在美团 / 抖音开设团购并售卖团购券，但缺少与门店管理系统的打通——核销、记账、业绩归属仍靠人工，效率低、易错漏。</li>
+        <li><b>核心诉求</b>：在剑琅联盟中新增<b>美团与抖音团购核销功能</b>，让店员用 APP 扫码即可完成验券核销，并自动生成开单记录、关联价目表与员工业绩。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">方案目标</div>
+      <ul class="list">
+        <li><b>完整可执行</b>：给出从资质准备、平台入驻到技术对接、上线验收的全流程操作清单。</li>
+        <li><b>成本透明</b>：一次性投入、持续性成本、平台佣金分项列明，并按小规模试点与中期规模两档测算。</li>
+        <li><b>兼顾周期与成本</b>：结合「1 个月内上线」的紧迫需求与「成本敏感」约束，给出路径对比与推荐路线。</li>
+        <li><b>深度打通</b>：核销后自动生成订单 / 开单记录，关联价目表与员工业绩，形成门店经营闭环。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">已确认的前提</div>
+      <ul class="list">
+        <li>公司具备<b>企业营业执照与对公账户</b>，满足开放平台企业开发者资质要求。</li>
+        <li>拥有<b>自研后端团队</b>与<b>已有云服务器</b>，可直接部署核销对接服务。</li>
+        <li>核销场景为<b>店员用剑琅联盟 APP 扫码核销</b>（纯手机端，不依赖额外硬件）。</li>
+        <li>核销后需<b>自动开单、关联价目表与员工业绩</b>（深度打通）。</li>
+        <li>功能定位为<b>免费增值能力</b>，作为剑琅联盟的获客与粘性抓手。</li>
+        <li>现有 APP 已有会员卡 / 储值等部分券能力，但<b>无团购券核销能力</b>，需新建。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 02 接入路径对比 ============ -->
+  <section class="chapter" id="c2">
+    <div class="chapter-kicker">Chapter 02 · Path Comparison</div>
+    <h2 class="chapter-title">三条接入路径对比</h2>
+    <div class="chapter-sub">直连美团 / 直连抖音 / 第三方 ISV 聚合，三条路径完整并列，差异清晰可判</div>
+    <div class="rule"></div>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th style="width:14%;">对比维度</th>
+          <th>路径 A · 第三方 ISV 聚合</th>
+          <th>路径 B · 抖音开放平台直连</th>
+          <th>路径 C · 美团开放平台直连</th>
+        </tr>
+        <tr>
+          <td><b>对接方式</b></td>
+          <td>接入有赞、飞蛾、云飞 API 等已获平台授权的聚合服务商，复用其封装好的核销能力</td>
+          <td>在抖音开放平台创建生活服务应用，直接调用验券 / 核销 / 撤销等 OpenAPI</td>
+          <td>在美团技术服务合作中心注册服务商，申请团购核销接口权限后直连</td>
+        </tr>
+        <tr>
+          <td><b>资质门槛</b></td>
+          <td>极低，提供公司基本信息即可 <span class="tag tag-green">低</span></td>
+          <td>企业开发者认证免费，创建应用 + 申请解决方案，门槛较低 <span class="tag tag-gold">中</span></td>
+          <td>服务商入驻审核，强制 <b>二级等保认证</b>（或网络安全保险），门槛高 <span class="tag tag-rose">高</span></td>
+        </tr>
+        <tr>
+          <td><b>保证金</b></td>
+          <td>多数 ISV 免保证金</td>
+          <td>生活服务服务商 / 开发者一般无需缴纳（保证金主要面向商家经营端）</td>
+          <td>按注册资本 / 对接业务 / 安全等级评估，<b>金额通常为数万元级</b>，合作终止后无息退还</td>
+        </tr>
+        <tr>
+          <td><b>开发工作量</b></td>
+          <td>低：配置接入 + 少量二次开发（约 3-5 人天）</td>
+          <td>中：自建应用、token、验券 / 核销 / 撤销 / 对账接口（约 8-12 人天）</td>
+          <td>高：等保整改 + 服务商流程 + 接口联调（约 15-20 人天）</td>
+        </tr>
+        <tr>
+          <td><b>上线周期</b></td>
+          <td>最快，约 1-2 周 <span class="tag tag-green">快</span></td>
+          <td>约 2-4 周，1 个月内可行 <span class="tag tag-gold">中</span></td>
+          <td>等保 + 审核周期长，通常 <b>2-3 个月</b> <span class="tag tag-rose">慢</span></td>
+        </tr>
+        <tr>
+          <td><b>费用结构</b></td>
+          <td>ISV 年费 / API 调用费（行业常见 600-3000 元/店/年，或按调用量计费）+ 平台佣金</td>
+          <td>平台技术服务费（订单金额 0.6% 基础费率）+ 本地生活软件服务费（美业类目 3%-5%）</td>
+          <td>美团 API 技术服务费（按接口类型计费）+ 平台佣金（到综团购 3%-6%）</td>
+        </tr>
+        <tr>
+          <td><b>系统打通深度</b></td>
+          <td>受 ISV 开放能力限制，自动开单 / 业绩归因等深度联动取决于 ISV 接口</td>
+          <td>接口完整，可自主实现验券、核销、撤销、对账、自动开单的全链路打通 <span class="tag tag-gold">高</span></td>
+          <td>接口完整，可自主实现全链路打通 <span class="tag tag-gold">高</span></td>
+        </tr>
+        <tr>
+          <td><b>对门店的成本影响</b></td>
+          <td>平台佣金照收，另加 ISV 年费由门店或剑琅承担</td>
+          <td>仅平台佣金，无中间商费用，长期成本最低</td>
+          <td>仅平台佣金，无中间商费用</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="para">三条路径的核心差异集中在三点：<b>美团直连</b>的二级等保与数万保证金门槛导致周期与一次性成本最高；<b>抖音直连</b>门槛适中、接口完整，是自研团队在 1 个月内的可行选项；<b>ISV 聚合</b>上线最快、前置成本最低，但深度打通与长期成本受制于服务商。</p>
+  </section>
+
+  <!-- ============ 03 推荐路线 ============ -->
+  <section class="chapter" id="c3">
+    <div class="chapter-kicker">Chapter 03 · Recommended Path</div>
+    <h2 class="chapter-title">推荐路线：渐进式三步走</h2>
+    <div class="rule"></div>
+
+    <div class="verdict">
+      <div class="v-title">推荐结论</div>
+      <div class="v-body">
+        结合「<b>1 个月内上线</b>」的紧迫要求与「<b>成本敏感</b>」约束，推荐<b>渐进式接入</b>：<b>第一步</b>以 ISV 聚合快速上线验证门店需求（约 1-2 周）；<b>第二步</b>并行推进抖音开放平台直连，1 个月内交付自研核销能力；<b>第三步</b>将美团直连纳入中期规划，待二级等保认证完成后替换 ISV 美团通道，实现双平台全自研、长期成本最优。
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-phase">第一阶段 · 即刻启动（第 1-2 周）</div>
+        <div class="tl-name">ISV 聚合快速上线</div>
+        <div class="tl-desc">选用具备美团 + 抖音双平台官方授权的 ISV（如有赞 / 飞蛾 / 云飞 API 等），两周内让试点门店具备扫码核销能力；同步验证「核销 → 自动开单 → 业绩归因」的流程与门店接受度。此阶段目标：<b>先跑通、再优化</b>。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第二阶段 · 并行推进（第 2-4 周）</div>
+        <div class="tl-name">抖音开放平台自研直连</div>
+        <div class="tl-desc">后端团队同步申请抖音生活服务应用与「团购核销 + 团购对账」解决方案，开发验券 / 核销 / 撤销 / 对账接口对接与自动开单联动，目标在 1 个月节点以自研能力替换抖音侧的 ISV 通道。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第三阶段 · 中期规划（1-3 个月）</div>
+        <div class="tl-name">美团直连与双平台收口</div>
+        <div class="tl-desc">推进美团技术服务合作中心入驻、二级等保认证与保证金缴纳；认证完成后上线美团直连，替换 ISV 美团通道，最终以自研能力覆盖双平台，<b>长期费用最低、控制力最强</b>。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">推荐路线的收益</div>
+      <ul class="list">
+        <li><b>满足 1 个月上线的硬约束</b>：ISV 先行保证功能可用，自研跟进不阻塞业务。</li>
+        <li><b>成本平滑</b>：ISV 短期年费可接受，直连后逐步退出，长期边际成本趋零。</li>
+        <li><b>风险可控</b>：即使美团等保周期超出预期，门店核销能力已由 ISV 兜底，不影响业务。</li>
+        <li><b>自主可控</b>：抖音直连与美团直连均为全自研，深度打通自动开单与业绩归因。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 04 路径 A ============ -->
+  <section class="chapter" id="c4">
+    <div class="chapter-kicker">Chapter 04 · Path A</div>
+    <h2 class="chapter-title">路径 A · 第三方 ISV 聚合（快速上线）</h2>
+    <div class="chapter-sub">最快落地、前置成本最低，适合试点验证与应急兜底</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">接入流程</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">选择并核验 ISV 服务商</div>
+        <div class="st-body">优先选择<b>同时持有美团与抖音官方授权认证</b>的 ISV（如：<b>有赞</b>多平台团购统一核销、<b>飞蛾 / 云飞 API</b> 等聚合接口服务商）。在平台服务商名录中核验其授权资质，避免无资质中介。</div>
+      </li>
+      <li>
+        <div class="st-title">商务签约与费用确认</div>
+        <div class="st-body">确认<b>年费或按调用量计费</b>方式、支持的平台范围、是否含自动开单 / 对账能力、售后响应等级。费用结构需白纸黑字锁定，杜绝隐性收费。</div>
+      </li>
+      <li>
+        <div class="st-title">申请应用凭证与门店绑定</div>
+        <div class="st-body">在 ISV 控制台创建应用，获取 <b>appId / appSecret</b>；按门店维度提交美团 / 抖音门店信息，完成<b>门店授权绑定</b>（美团需在绑定后自动获取 appAuthToken）。</div>
+      </li>
+      <li>
+        <div class="st-title">二次开发与联调</div>
+        <div class="st-body">后端团队将 ISV 核销接口接入剑琅联盟：实现<b>验券 → 核销 → 自动开单 → 业绩归因</b>的主链路（约 3-5 人天），并在沙箱环境完成联调。</div>
+      </li>
+      <li>
+        <div class="st-title">试点上线与验收</div>
+        <div class="st-body">选取 1-2 家试点门店，店员用 APP 扫码核销真实团购券，验证核销正确性、开单联动与对账数据一致性后全量开放。</div>
+      </li>
+    </ol>
+
+    <h3 class="sub-title">成本概览</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>成本项</th><th>说明</th><th>金额区间（行业参考）</th></tr>
+        <tr><td>ISV 年费 / 订阅费</td><td>按门店数或按年订阅，含基础核销能力</td><td>约 600-3000 元 / 店 / 年</td></tr>
+        <tr><td>API 调用费</td><td>部分按调用量计费的服务商，超量另计</td><td>按实际调用量（通常可忽略）</td></tr>
+        <tr><td>开发人力</td><td>后端二次开发与联调（3-5 人天）</td><td>自有团队，计内部工时</td></tr>
+        <tr><td>平台佣金</td><td>美团 / 抖音对门店团购交易正常收取，ISV 不加价</td><td>美团 3%-6%；抖音 3%-5% + 达人佣金</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">优劣势</div>
+      <ul class="list">
+        <li><b>优势</b>：上线最快（1-2 周）；免等保、免保证金、免自建后端；无需处理平台复杂资质流程。</li>
+        <li><b>劣势</b>：长期存在 ISV 年费；深度打通（自动开单、业绩归因、跨店规则）受 ISV 接口能力限制；依赖第三方稳定性与资质，需持续核验。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 05 路径 B ============ -->
+  <section class="chapter" id="c5">
+    <div class="chapter-kicker">Chapter 05 · Path B</div>
+    <h2 class="chapter-title">路径 B · 抖音开放平台直连（自研）</h2>
+    <div class="chapter-sub">门槛适中、接口完整，1 个月内可实现，推荐作为自研首发平台</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">接入流程</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">开发者账号认证与身份绑定</div>
+        <div class="st-body">登录<b>抖音开放平台</b>完成企业开发者认证（免费）；在「店铺管理 → 服务应用授权」中绑定开发者身份，选择「商家自研」路径。</div>
+      </li>
+      <li>
+        <div class="st-title">创建生活服务商家应用</div>
+        <div class="st-body">在开发者平台控制台创建<b>生活服务商家应用</b>，填写应用信息并等待审核（审核时效以平台实际为准，通常 1-7 个工作日）。</div>
+      </li>
+      <li>
+        <div class="st-title">申请解决方案与接口权限</div>
+        <div class="st-body">在应用详情页申请<b>「到综（到店综合）」解决方案</b>，开通能力：<b>门店管理、团购核销、团购对账</b>；按需追加订单查询、三方码 / 预置码等能力。</div>
+      </li>
+      <li>
+        <div class="st-title">商家授权与门店绑定</div>
+        <div class="st-body">引导门店在<b>「抖音来客」</b>完成第三方应用授权，将剑琅应用与各门店（poi_id）绑定，建立应用与门店的核销权限关系。</div>
+      </li>
+      <li>
+        <div class="st-title">接口开发与联调</div>
+        <div class="st-body">按官方文档完成开发：生成 <b>client_token</b> 作为 access-token 鉴权；对接<b>验券准备、验券、撤销核销、券状态查询、批量查询、对账</b>接口；实现「核销成功 → 自动开单 → 业绩归因」联动，并按要求接入<b>信息同步接口</b>（避免平台强制退款无感知）。全部接口须走 HTTPS，请求头带 access-token 与 application/json。</div>
+      </li>
+      <li>
+        <div class="st-title">测试验收与上线</div>
+        <div class="st-body">按「解决方案开通 → 基础配置 → 验收准备 → 测试验收 → 应用上线」顺序完成，先在沙箱 / 测试门店验证，再灰度至试点门店。</div>
+      </li>
+    </ol>
+
+    <h3 class="sub-title">成本概览</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>成本项</th><th>说明</th><th>金额 / 费率</th></tr>
+        <tr><td>开发者认证与入驻</td><td>抖音开放平台企业认证、应用创建</td><td>免费</td></tr>
+        <tr><td>技术服务费</td><td>订单担保交易基础费率</td><td>订单金额的 0.6%</td></tr>
+        <tr><td>本地生活软件服务费</td><td>按商品类目收取（美业类目区间）</td><td>约 3%-5%</td></tr>
+        <tr><td>达人佣金</td><td>门店若通过达人带货需另付（营销成本，非接入成本）</td><td>美业常见 20%-35%</td></tr>
+        <tr><td>开发人力</td><td>后端自研对接（约 8-12 人天）</td><td>自有团队，计内部工时</td></tr>
+        <tr><td>服务器</td><td>复用已有云服务器，新增核销服务</td><td>边际成本低，见成本明细</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">优劣势</div>
+      <ul class="list">
+        <li><b>优势</b>：认证免费、无保证金（生活服务开发者侧）；接口完整，可自主实现全链路深度打通；长期成本最低、控制力最强。</li>
+        <li><b>劣势</b>：需投入后端开发（8-12 人天）；平台审核与验收有一定周期；需持续跟进接口规范与平台政策变化。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 06 路径 C ============ -->
+  <section class="chapter" id="c6">
+    <div class="chapter-kicker">Chapter 06 · Path C</div>
+    <h2 class="chapter-title">路径 C · 美团开放平台直连（自研）</h2>
+    <div class="chapter-sub">门槛最高、周期最长，但美团到综团购是美业门店的重要经营阵地，值得中期投入</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">接入流程</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">服务商入驻与资质审核</div>
+        <div class="st-body">在<b>美团技术服务合作中心</b>（developer.meituan.com）注册并选择「三方服务商入驻」，提交企业资质（营业执照、对公账户、开发者信息、所需接口服务），完成资质审核。</div>
+      </li>
+      <li>
+        <div class="st-title">签署服务协议并缴纳保证金</div>
+        <div class="st-body">审核通过后签署并邮寄盖章《服务协议》，平台按<b>注册资本、对接业务、安全等级</b>等评估保证金金额（通常数万元级，无违规情况合作终止后 15 个工作日内无息退还），7 个自然日内缴纳后分配开发者账号与密钥。</div>
+      </li>
+      <li>
+        <div class="st-title">安全合规材料（二级等保 / 网络安全保险）</div>
+        <div class="st-body">完成<b>《信息系统安全等级保护备案证明》二级及以上</b>认证（建议两年一检），或购买平台认可的<b>网络信息安全保险</b>；部署云安全产品（如防火墙）；提交《服务商数据交互合规化承诺书》。此环节是美团侧主要的时间与成本瓶颈。</div>
+      </li>
+      <li>
+        <div class="st-title">商家授权与门店绑定</div>
+        <div class="st-body">调用<b>获取授权链接接口</b>引导美团商家授权，绑定后自动回调获取 appAuthToken、美团门店 id 与门店名称；按业务类型配置（到综业务 businessId=5 等）。</div>
+      </li>
+      <li>
+        <div class="st-title">接口开发与联调</div>
+        <div class="st-body">对接美团团购券<b>验券、核销</b>相关 API（申请应用信息、获取接口调用凭证、绑定门店、验券 / 核销 / 撤销），按 API 计费规则关注技术服务费；实现自动开单与业绩归因联动，处理错误码与幂等。</div>
+      </li>
+      <li>
+        <div class="st-title">上线审核与验收</div>
+        <div class="st-body">上线前平台对安全资质与接口合规进行审核，通过后开放正式环境，灰度试点后全量上线。</div>
+      </li>
+    </ol>
+
+    <h3 class="sub-title">成本概览</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>成本项</th><th>说明</th><th>金额 / 费率</th></tr>
+        <tr><td>服务商保证金</td><td>按注册资本 / 业务 / 安全等级评估，可退还</td><td>通常数万元级（以平台核算为准）</td></tr>
+        <tr><td>二级等保认证</td><td>备案 + 测评 + 整改（两年一次）</td><td>约 3-8 万元 / 次（含测评与整改，以实际报价为准）</td></tr>
+        <tr><td>网络安全保险（替代方案）</td><td>平台认可的可替代等保的安全投入</td><td>约 1-3 万元 / 年</td></tr>
+        <tr><td>云安全产品</td><td>防火墙等安全组件（已有云环境）</td><td>数百-数千元 / 年</td></tr>
+        <tr><td>API 技术服务费</td><td>按接口类型与调用量计费</td><td>以《API 计费管理规则》为准</td></tr>
+        <tr><td>平台佣金</td><td>美团到综团购对门店收取</td><td>约 3%-6%</td></tr>
+        <tr><td>开发人力</td><td>后端对接 + 等保材料配合（约 15-20 人天）</td><td>自有团队，计内部工时</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">优劣势</div>
+      <ul class="list">
+        <li><b>优势</b>：接口完整、全链路自主可控；美团到综团购契合中小美业门店的搜索转化场景，长期经营价值高。</li>
+        <li><b>劣势</b>：二级等保与数万级保证金门槛导致<b>一次性成本高、周期长（通常 2-3 个月）</b>，与 1 个月内上线的目标冲突，故列为中期规划。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 07 技术对接要点 ============ -->
+  <section class="chapter" id="c7">
+    <div class="chapter-kicker">Chapter 07 · Technical Notes</div>
+    <h2 class="chapter-title">技术对接要点</h2>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">核心核销流程（店员视角）</h3>
+    <ol class="steps">
+      <li>
+        <div class="st-title">扫码 / 输入券码</div>
+        <div class="st-body">店员在剑琅联盟 APP 打开「团购核销」，扫描顾客美团 / 抖音团购券码，或手动输入券码。</div>
+      </li>
+      <li>
+        <div class="st-title">验券准备</div>
+        <div class="st-body">APP 调后端，后端向平台发起<b>验券准备 / 验券查询</b>请求，返回券状态、面额、使用次数（次卡含剩余次数）。</div>
+      </li>
+      <li>
+        <div class="st-title">确认核销</div>
+        <div class="st-body">店员核对券信息后确认，后端调用平台<b>核销接口</b>（抖音为验券接口 + 撤销核销；美团为核销 / 撤销接口），记录核销结果并做幂等与异常重试。</div>
+      </li>
+      <li>
+        <div class="st-title">自动开单</div>
+        <div class="st-body">核销成功后系统<b>自动生成开单记录</b>：金额、门店、渠道（美团 / 抖音）、券码关联价目表项目，按门店配置<b>自动归因员工与业绩</b>，店员可按需补充客户信息。</div>
+      </li>
+      <li>
+        <div class="st-title">对账与撤销</div>
+        <div class="st-body">核销记录进入日常对账；顾客退款 / 撤销核销时，后端调用平台<b>撤销核销接口</b>并同步冲销剑琅内部开单记录。建议按平台要求接入<b>订单信息同步接口</b>，避免平台强制退款而本地无感知。</div>
+      </li>
+    </ol>
+
+    <h3 class="sub-title">接口清单</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>能力</th><th>抖音开放平台</th><th>美团技术服务合作中心</th></tr>
+        <tr><td>授权与凭证</td><td>生成 client_token（access-token 鉴权）</td><td>申请应用信息、获取接口调用凭证</td></tr>
+        <tr><td>验券准备</td><td>验券准备接口（prepare）</td><td>验券 / 券状态查询</td></tr>
+        <tr><td>核销</td><td>验券接口（verify，需先 prepare）</td><td>团购核销接口</td></tr>
+        <tr><td>撤销核销</td><td>撤销核销接口（cancel）</td><td>撤销核销接口</td></tr>
+        <tr><td>状态 / 批量查询</td><td>券状态查询（get）、批量查询（query）</td><td>按文档提供的查询接口</td></tr>
+        <tr><td>对账</td><td>团购对账能力</td><td>API 计费与对账能力</td></tr>
+        <tr><td>订单同步</td><td>信息同步接口（必接）</td><td>回调通知地址设置</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">工程与安全要点</div>
+      <ul class="list">
+        <li><b>幂等</b>：核销请求需支持幂等（抖音 verify_token 幂等、美团按订单维度），防止重复核销。</li>
+        <li><b>重试与补偿</b>：平台接口异常时需重试机制；本地与平台核销状态需一致性校验，避免双方订单信息不一致。</li>
+        <li><b>密钥安全</b>：appSecret / SignKey 服务端保管，禁止下发客户端；接口走 HTTPS。</li>
+        <li><b>多门店权限</b>：按门店维度管理授权关系与核销范围，防止跨店核销或越权。</li>
+        <li><b>次卡适配</b>：抖音次卡需处理次数字段（总次数、已使用次数）与按次核销 / 撤销。</li>
+        <li><b>数据合规</b>：美团侧需提交数据交互合规承诺书并满足二级等保 / 保险要求。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 08 成本明细 ============ -->
+  <section class="chapter" id="c8">
+    <div class="chapter-kicker">Chapter 08 · Cost Breakdown</div>
+    <h2 class="chapter-title">成本明细与规模测算</h2>
+    <div class="chapter-sub">按两档规模测算：A 试点（1-10 家，日均几十单）/ B 中期（10-50 家，日均数百单）</div>
+    <div class="rule"></div>
+
+    <h3 class="sub-title">一次性投入（自研直连方案）</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>成本项</th><th>说明</th><th>A 档 · 1-10 家</th><th>B 档 · 10-50 家</th></tr>
+        <tr><td>抖音入驻认证</td><td>开发者认证、应用创建</td><td class="cost-amount">0 元</td><td class="cost-amount">0 元</td></tr>
+        <tr><td>美团服务商保证金</td><td>可退还（若走美团直连）</td><td class="cost-amount">数万元（评估）</td><td class="cost-amount">数万元（评估）</td></tr>
+        <tr><td>二级等保 / 网络安全保险</td><td>美团直连前置要求</td><td class="cost-amount">3-8 万 / 次 或 1-3 万 / 年</td><td class="cost-amount">3-8 万 / 次 或 1-3 万 / 年</td></tr>
+        <tr><td>开发人力</td><td>抖音 8-12 人天；美团 15-20 人天</td><td class="cost-amount">计内部工时</td><td class="cost-amount">计内部工时</td></tr>
+        <tr><td>服务器资源</td><td>复用现有云服务器，新增核销服务（轻量）</td><td class="cost-amount">约 0-500 元 / 月</td><td class="cost-amount">约 500-1500 元 / 月</td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub-title">持续性成本（两档对比）</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>成本项</th><th>A 档 · 1-10 家 · 日均几十单</th><th>B 档 · 10-50 家 · 日均数百单</th></tr>
+        <tr>
+          <td><b>ISV 聚合（阶段一）</b></td>
+          <td>约 600-3000 元 / 店 / 年；按 10 家计约 6,000-30,000 元 / 年</td>
+          <td>按 50 家计约 30,000-150,000 元 / 年；可协商批量折扣</td>
+        </tr>
+        <tr>
+          <td><b>抖音直连（阶段二）</b></td>
+          <td>技术服务费 0.6% + 软件服务费 3%-5%，日均几十单量级月成本数百元</td>
+          <td>日均数百单量级月成本数千元（随 GMV 线性增长）</td>
+        </tr>
+        <tr>
+          <td><b>美团直连（阶段三）</b></td>
+          <td>API 技术服务费（按调用量）+ 平台佣金 3%-6%</td>
+          <td>同上，量级随门店数与核销单量增长</td>
+        </tr>
+        <tr>
+          <td><b>平台佣金（门店承担）</b></td>
+          <td>美团 3%-6%；抖音 3%-5% + 达人佣金</td>
+          <td>同左，规模越大绝对值越高，但可通过商务政策摊薄</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">成本要点提示</div>
+      <ul class="list">
+        <li><b>平台佣金是门店经营成本，不是剑琅接入成本</b>：美团 / 抖音对门店团购交易正常抽佣，无论走哪种路径均存在，方案中如实列示以便门店预期管理。</li>
+        <li><b>最大的弹性成本是美团直连的等保与保证金</b>：是否值得投入取决于美团团购在门店营收中的占比与后续战略优先级。</li>
+        <li><b>ISV 年费随门店数线性增长</b>：门店数达到一定规模后，直连的边际成本优势将显著体现，是渐进式路线「先 ISV 后直连」的决策依据。</li>
+        <li>以上金额为<b>行业公开信息与经验区间</b>，最终以各平台当期公示的计费规则与正式报价为准。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 09 上线排期 ============ -->
+  <section class="chapter" id="c9">
+    <div class="chapter-kicker">Chapter 09 · Timeline</div>
+    <h2 class="chapter-title">上线排期（1 个月内交付核销能力）</h2>
+    <div class="rule"></div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-phase">第 1 周</div>
+        <div class="tl-name">ISV 选型与签约 + 抖音应用创建</div>
+        <div class="tl-desc">完成 ISV 资质核验与签约；同步启动抖音开放平台企业认证、创建生活服务应用、申请到综解决方案与团购核销 / 对账权限。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第 2 周</div>
+        <div class="tl-name">ISV 试点上线 + 抖音接口开发启动</div>
+        <div class="tl-desc">ISV 通道完成门店绑定与联调，1-2 家试点门店上线核销；后端同步开发抖音验券 / 核销 / 撤销接口与自动开单联动。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第 3 周</div>
+        <div class="tl-name">抖音直连联调 + 内部验收</div>
+        <div class="tl-desc">抖音侧完成商家授权、沙箱联调、核销 → 自动开单 → 业绩归因全链路验证；同步筹备美团入驻材料。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第 4 周</div>
+        <div class="tl-name">抖音直连灰度上线</div>
+        <div class="tl-desc">抖音直连通过平台验收并在试点门店灰度；ISV 通道保留兜底，评估抖音侧替换 ISV；输出美团直连的中期立项材料（等保、保证金预算）。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">关键里程碑</div>
+      <ul class="list">
+        <li><b>第 2 周末</b>：ISV 通道实现扫码核销可用（最快目标）。</li>
+        <li><b>第 4 周末</b>：抖音直连完成自研核销 + 自动开单 + 业绩归因，试点门店可用。</li>
+        <li><b>1-3 个月</b>：美团直连立项（等保 + 保证金），完成双平台自研收口。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 10 风险与应对 ============ -->
+  <section class="chapter" id="c10">
+    <div class="chapter-kicker">Chapter 10 · Risks</div>
+    <h2 class="chapter-title">风险与应对</h2>
+    <div class="rule"></div>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="rk-title">美团等保 / 保证金周期超出预期</div>
+        <div class="rk-body">应对：美团直连列为中期规划而非上线依赖；1 个月内由 ISV 通道兜底美团侧核销，业务不受阻塞，等保完成后再迁移。</div>
+      </div>
+      <div class="risk-card">
+        <div class="rk-title">ISV 资质或服务不稳定</div>
+        <div class="rk-body">应对：签约前核验平台官方授权名录；锁定服务 SLA 与退出条款；渐进式路线下直连能力作为自主替代，降低长期依赖。</div>
+      </div>
+      <div class="risk-card">
+        <div class="rk-title">平台接口 / 计费政策变动</div>
+        <div class="rk-body">应对：关注美团《API 计费管理规则》与抖音开放平台公告；预留接口适配层，将平台差异隔离在统一核销模块内。</div>
+      </div>
+      <div class="risk-card">
+        <div class="rk-title">核销状态不一致 / 重复核销</div>
+        <div class="rk-body">应对：全链路幂等设计 + 平台状态预校验 + 重试与对账机制；必要时接入订单信息同步接口，及时感知平台侧强制退款。</div>
+      </div>
+      <div class="risk-card">
+        <div class="rk-title">门店对平台佣金的敏感度</div>
+        <div class="rk-body">应对：核销功能对门店免费，作为剑琅增值能力；在方案与门店沟通中明确「平台佣金为美团 / 抖音正常经营成本」，并展示核销自动开单带来的效率与业绩数据价值。</div>
+      </div>
+      <div class="risk-card">
+        <div class="rk-title">多门店授权与权限管理</div>
+        <div class="rk-body">应对：按门店维度管理平台授权、核销范围与员工业绩归因；建立授权到期提醒与异常核销告警。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footnote">
+    说明：本方案中的保证金金额、等保费用、平台佣金与技术费率均基于美团技术服务合作中心、抖音开放平台公开文档及行业公开信息整理，为经验区间与参考值；实际金额以各平台当期公示的计费规则、评估结果与正式签约报价为准。方案执行前请以平台官方文档与商务确认为最终依据。
+  </div>
+
+</main>
+
+</body>
+</html>
