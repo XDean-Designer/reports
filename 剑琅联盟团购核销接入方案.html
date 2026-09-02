@@ -241,6 +241,28 @@
     color: var(--ink);
   }
 
+  /* ===== 暂缓横幅 ===== */
+  .shelved-banner {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(200,139,122,.10);
+    border: 1px solid rgba(200,139,122,.40);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 0 0 22px;
+    font-size: 13.5px;
+    color: #A05F4C;
+    letter-spacing: .5px;
+    line-height: 1.8;
+  }
+  .shelved-banner::before {
+    content: "暂不采用";
+    flex: none;
+    font-size: 12px; letter-spacing: 2px; font-weight: 700;
+    color: #fff; background: var(--rose);
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .shelved-banner b { color: #A05F4C; }
+
   /* ===== 时间轴 ===== */
   .timeline { position: relative; margin-top: 14px; }
   .timeline::before {
@@ -360,7 +382,7 @@
       <ul class="list">
         <li><b>完整可执行</b>：给出从资质准备、平台入驻到技术对接、上线验收的全流程操作清单。</li>
         <li><b>成本透明</b>：一次性投入、持续性成本、平台佣金分项列明，并按小规模试点与中期规模两档测算。</li>
-        <li><b>兼顾周期与成本</b>：结合「1 个月内上线」的紧迫需求与「成本敏感」约束，给出路径对比与推荐路线。</li>
+        <li><b>兼顾周期与成本</b>：结合「1-2 个月内上线」的目标与「成本敏感」约束，给出路径对比与推荐路线。</li>
         <li><b>深度打通</b>：核销后自动生成订单 / 开单记录，关联价目表与员工业绩，形成门店经营闭环。</li>
       </ul>
     </div>
@@ -389,9 +411,9 @@
       <table>
         <tr>
           <th style="width:14%;">对比维度</th>
-          <th>路径 A · 第三方 ISV 聚合</th>
-          <th>路径 B · 抖音开放平台直连</th>
-          <th>路径 C · 美团开放平台直连</th>
+          <th>路径 A · 第三方 ISV 聚合 <span class="tag tag-rose">暂缓</span></th>
+          <th>路径 B · 抖音开放平台直连 <span class="tag tag-green">先行</span></th>
+          <th>路径 C · 美团开放平台直连 <span class="tag tag-gold">跟进</span></th>
         </tr>
         <tr>
           <td><b>对接方式</b></td>
@@ -420,7 +442,7 @@
         <tr>
           <td><b>上线周期</b></td>
           <td>最快，约 1-2 周 <span class="tag tag-green">快</span></td>
-          <td>约 2-4 周，1 个月内可行 <span class="tag tag-gold">中</span></td>
+          <td>约 2-4 周，1-2 个月内可上线 <span class="tag tag-gold">中</span></td>
           <td>等保 + 审核周期长，通常 <b>2-3 个月</b> <span class="tag tag-rose">慢</span></td>
         </tr>
         <tr>
@@ -444,57 +466,61 @@
       </table>
     </div>
 
-    <p class="para">三条路径的核心差异集中在三点：<b>美团直连</b>的二级等保与数万保证金门槛导致周期与一次性成本最高；<b>抖音直连</b>门槛适中、接口完整，是自研团队在 1 个月内的可行选项；<b>ISV 聚合</b>上线最快、前置成本最低，但深度打通与长期成本受制于服务商。</p>
+    <p class="para">当前执行策略：<b>路径 B（抖音直连）先行</b>，让 APP 核销功能尽快上线；<b>路径 C（美团直连）同步启动资质准备</b>，等保与保证金通过后跟进上线；<b>路径 A（ISV 聚合）因成本较高暂不采用</b>，仅保留作应急备选参考。三条路径的核心差异集中在三点：<b>美团直连</b>的二级等保与数万保证金门槛导致周期与一次性成本最高；<b>抖音直连</b>门槛适中、接口完整，是自研团队让核销功能快速上线的首选；<b>ISV 聚合</b>上线最快、前置成本最低，但存在持续年费且深度打通受制于服务商。</p>
   </section>
 
   <!-- ============ 03 推荐路线 ============ -->
   <section class="chapter" id="c3">
     <div class="chapter-kicker">Chapter 03 · Recommended Path</div>
-    <h2 class="chapter-title">推荐路线：渐进式三步走</h2>
+    <h2 class="chapter-title">推荐路线：抖音直连先行，美团直连跟进</h2>
     <div class="rule"></div>
 
     <div class="verdict">
       <div class="v-title">推荐结论</div>
       <div class="v-body">
-        结合「<b>1 个月内上线</b>」的紧迫要求与「<b>成本敏感</b>」约束，推荐<b>渐进式接入</b>：<b>第一步</b>以 ISV 聚合快速上线验证门店需求（约 1-2 周）；<b>第二步</b>并行推进抖音开放平台直连，1 个月内交付自研核销能力；<b>第三步</b>将美团直连纳入中期规划，待二级等保认证完成后替换 ISV 美团通道，实现双平台全自研、长期成本最优。
+        结合「<b>核销功能尽快上线</b>」的目标与「<b>成本敏感</b>」约束，推荐<b>两步走</b>：<b>第一步</b>以<b>抖音开放平台直连</b>先行落地，1-2 个月内让 APP 核销功能上线；<b>第二步</b>在抖音开发推进的同时<b>即启动美团直连的资质准备</b>（二级等保、保证金），待认证通过后上线美团核销，最终以自研能力覆盖双平台、长期成本最优。<b>ISV 聚合因成本较高暂不采用</b>，仅作未来应急备选。
       </div>
     </div>
 
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-phase">第一阶段 · 即刻启动（第 1-2 周）</div>
-        <div class="tl-name">ISV 聚合快速上线</div>
-        <div class="tl-desc">选用具备美团 + 抖音双平台官方授权的 ISV（如有赞 / 飞蛾 / 云飞 API 等），两周内让试点门店具备扫码核销能力；同步验证「核销 → 自动开单 → 业绩归因」的流程与门店接受度。此阶段目标：<b>先跑通、再优化</b>。</div>
+        <div class="tl-phase">第一阶段 · 抖音直连先行（第 1-4 周）</div>
+        <div class="tl-name">抖音开放平台自研核销上线</div>
+        <div class="tl-desc">启动抖音开放平台企业认证，创建生活服务应用并申请「团购核销 + 团购对账」解决方案；开发验券 / 核销 / 撤销 / 对账接口与自动开单联动，完成商家授权、沙箱联调与测试验收，让核销功能随 APP 版本上线。</div>
       </div>
       <div class="tl-item">
-        <div class="tl-phase">第二阶段 · 并行推进（第 2-4 周）</div>
-        <div class="tl-name">抖音开放平台自研直连</div>
-        <div class="tl-desc">后端团队同步申请抖音生活服务应用与「团购核销 + 团购对账」解决方案，开发验券 / 核销 / 撤销 / 对账接口对接与自动开单联动，目标在 1 个月节点以自研能力替换抖音侧的 ISV 通道。</div>
+        <div class="tl-phase">第二阶段 · 并行推进（第 2 周起）</div>
+        <div class="tl-name">美团直连资质准备</div>
+        <div class="tl-desc">在抖音开发推进的同时启动美团技术服务合作中心入驻、<b>二级等保认证与保证金流程</b>。由于等保周期长，尽早启动可为后续上线争取时间，实现「抖音上线后美团无缝跟进」。</div>
       </div>
       <div class="tl-item">
-        <div class="tl-phase">第三阶段 · 中期规划（1-3 个月）</div>
-        <div class="tl-name">美团直连与双平台收口</div>
-        <div class="tl-desc">推进美团技术服务合作中心入驻、二级等保认证与保证金缴纳；认证完成后上线美团直连，替换 ISV 美团通道，最终以自研能力覆盖双平台，<b>长期费用最低、控制力最强</b>。</div>
+        <div class="tl-phase">第三阶段 · 等保通过后（预计 1-3 个月）</div>
+        <div class="tl-name">美团直连上线与双平台收口</div>
+        <div class="tl-desc">等保认证与保证金完成后上线美团直连，实现美团、抖音<b>双平台全自研核销</b>，长期费用最低、控制力最强。</div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-title">推荐路线的收益</div>
       <ul class="list">
-        <li><b>满足 1 个月上线的硬约束</b>：ISV 先行保证功能可用，自研跟进不阻塞业务。</li>
-        <li><b>成本平滑</b>：ISV 短期年费可接受，直连后逐步退出，长期边际成本趋零。</li>
-        <li><b>风险可控</b>：即使美团等保周期超出预期，门店核销能力已由 ISV 兜底，不影响业务。</li>
-        <li><b>自主可控</b>：抖音直连与美团直连均为全自研，深度打通自动开单与业绩归因。</li>
+        <li><b>核销功能快速上线</b>：抖音直连先行，1-2 个月交付自研核销能力，不依赖中间商。</li>
+        <li><b>成本最优</b>：跳过 ISV，无需持续年费与中间商分成，长期边际成本趋零。</li>
+        <li><b>美团早启动</b>：等保周期长，与抖音并行推进可显著缩短整体双平台收口时间。</li>
+        <li><b>自主可控</b>：双平台全自研，深度打通自动开单与业绩归因。</li>
       </ul>
     </div>
+
+    <div class="shelved-banner"><b>路径 A（ISV 聚合）</b>因成本较高<b>当前不采用</b>，仅保留作方案完整性参考；如未来抖音 / 美团直连受阻或需要快速兜底，可将其作为应急备选。</div>
   </section>
 
   <!-- ============ 04 路径 A ============ -->
   <section class="chapter" id="c4">
     <div class="chapter-kicker">Chapter 04 · Path A</div>
-    <h2 class="chapter-title">路径 A · 第三方 ISV 聚合（快速上线）</h2>
-    <div class="chapter-sub">最快落地、前置成本最低，适合试点验证与应急兜底</div>
+    <h2 class="chapter-title">路径 A · 第三方 ISV 聚合</h2>
+    <div class="chapter-sub">快速落地的备选方案，因成本较高暂不采用，以下内容保留供参考</div>
     <div class="rule"></div>
+
+    <div class="shelved-banner"><b>本路径因成本较高暂不采用</b>，以下内容仅保留作方案完整性参考；如未来抖音 / 美团直连受阻或需要快速兜底，可作为应急备选。</div>
 
     <h3 class="sub-title">接入流程</h3>
     <ol class="steps">
@@ -544,7 +570,7 @@
   <section class="chapter" id="c5">
     <div class="chapter-kicker">Chapter 05 · Path B</div>
     <h2 class="chapter-title">路径 B · 抖音开放平台直连（自研）</h2>
-    <div class="chapter-sub">门槛适中、接口完整，1 个月内可实现，推荐作为自研首发平台</div>
+    <div class="chapter-sub">门槛适中、接口完整，是核销功能上线的首选路径</div>
     <div class="rule"></div>
 
     <h3 class="sub-title">接入流程</h3>
@@ -650,7 +676,7 @@
       <div class="card-title">优劣势</div>
       <ul class="list">
         <li><b>优势</b>：接口完整、全链路自主可控；美团到综团购契合中小美业门店的搜索转化场景，长期经营价值高。</li>
-        <li><b>劣势</b>：二级等保与数万级保证金门槛导致<b>一次性成本高、周期长（通常 2-3 个月）</b>，与 1 个月内上线的目标冲突，故列为中期规划。</li>
+        <li><b>劣势</b>：二级等保与数万级保证金门槛导致<b>一次性成本高、周期长（通常 2-3 个月）</b>，故与抖音并行启动资质准备，待认证通过后上线。</li>
       </ul>
     </div>
   </section>
@@ -736,17 +762,17 @@
       <table>
         <tr><th>成本项</th><th>A 档 · 1-10 家 · 日均几十单</th><th>B 档 · 10-50 家 · 日均数百单</th></tr>
         <tr>
-          <td><b>ISV 聚合（阶段一）</b></td>
+          <td><b>ISV 聚合（暂不采用 · 参考）</b></td>
           <td>约 600-3000 元 / 店 / 年；按 10 家计约 6,000-30,000 元 / 年</td>
           <td>按 50 家计约 30,000-150,000 元 / 年；可协商批量折扣</td>
         </tr>
         <tr>
-          <td><b>抖音直连（阶段二）</b></td>
+          <td><b>抖音直连（先行）</b></td>
           <td>技术服务费 0.6% + 软件服务费 3%-5%，日均几十单量级月成本数百元</td>
           <td>日均数百单量级月成本数千元（随 GMV 线性增长）</td>
         </tr>
         <tr>
-          <td><b>美团直连（阶段三）</b></td>
+          <td><b>美团直连（跟进）</b></td>
           <td>API 技术服务费（按调用量）+ 平台佣金 3%-6%</td>
           <td>同上，量级随门店数与核销单量增长</td>
         </tr>
@@ -762,8 +788,8 @@
       <div class="card-title">成本要点提示</div>
       <ul class="list">
         <li><b>平台佣金是门店经营成本，不是剑琅接入成本</b>：美团 / 抖音对门店团购交易正常抽佣，无论走哪种路径均存在，方案中如实列示以便门店预期管理。</li>
-        <li><b>最大的弹性成本是美团直连的等保与保证金</b>：是否值得投入取决于美团团购在门店营收中的占比与后续战略优先级。</li>
-        <li><b>ISV 年费随门店数线性增长</b>：门店数达到一定规模后，直连的边际成本优势将显著体现，是渐进式路线「先 ISV 后直连」的决策依据。</li>
+        <li><b>最大的弹性成本是美团直连的等保与保证金</b>：等保（约 3-8 万 / 次或 1-3 万 / 年保险）与保证金（数万元、可退还）为一次性前置投入，与抖音开发并行启动以缩短整体周期。</li>
+        <li><b>ISV 年费随门店数线性增长且当前不采用</b>：跳过 ISV 后直连方案无持续年费与中间商分成，长期成本最优；ISV 成本仅保留作备选参考。</li>
         <li>以上金额为<b>行业公开信息与经验区间</b>，最终以各平台当期公示的计费规则与正式报价为准。</li>
       </ul>
     </div>
@@ -772,38 +798,40 @@
   <!-- ============ 09 上线排期 ============ -->
   <section class="chapter" id="c9">
     <div class="chapter-kicker">Chapter 09 · Timeline</div>
-    <h2 class="chapter-title">上线排期（1 个月内交付核销能力）</h2>
+    <h2 class="chapter-title">上线排期（1-2 个月内交付核销能力）</h2>
+    <div class="chapter-sub">抖音直连先行上线，美团直连资质准备并行推进</div>
     <div class="rule"></div>
 
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-phase">第 1 周</div>
-        <div class="tl-name">ISV 选型与签约 + 抖音应用创建</div>
-        <div class="tl-desc">完成 ISV 资质核验与签约；同步启动抖音开放平台企业认证、创建生活服务应用、申请到综解决方案与团购核销 / 对账权限。</div>
+        <div class="tl-phase">第 1-2 周</div>
+        <div class="tl-name">抖音应用创建 + 美团资质准备启动</div>
+        <div class="tl-desc">启动抖音开放平台企业认证，创建生活服务商家应用，申请到综解决方案与团购核销 / 对账权限；同步启动美团服务商入驻与二级等保认证流程（等保周期长，尽早启动）。</div>
       </div>
       <div class="tl-item">
-        <div class="tl-phase">第 2 周</div>
-        <div class="tl-name">ISV 试点上线 + 抖音接口开发启动</div>
-        <div class="tl-desc">ISV 通道完成门店绑定与联调，1-2 家试点门店上线核销；后端同步开发抖音验券 / 核销 / 撤销接口与自动开单联动。</div>
+        <div class="tl-phase">第 3-4 周</div>
+        <div class="tl-name">抖音接口开发与联调 + 美团保证金流程</div>
+        <div class="tl-desc">开发抖音验券 / 核销 / 撤销 / 对账接口与自动开单联动，完成商家授权、沙箱联调与内部验收；美团侧推进资质审核与保证金缴纳准备。</div>
       </div>
       <div class="tl-item">
-        <div class="tl-phase">第 3 周</div>
-        <div class="tl-name">抖音直连联调 + 内部验收</div>
-        <div class="tl-desc">抖音侧完成商家授权、沙箱联调、核销 → 自动开单 → 业绩归因全链路验证；同步筹备美团入驻材料。</div>
+        <div class="tl-phase">第 5-6 周</div>
+        <div class="tl-name">抖音测试验收与试点上线</div>
+        <div class="tl-desc">抖音侧完成测试验收并在试点门店灰度上线核销功能；同步推进美团等保测评与整改。</div>
       </div>
       <div class="tl-item">
-        <div class="tl-phase">第 4 周</div>
-        <div class="tl-name">抖音直连灰度上线</div>
-        <div class="tl-desc">抖音直连通过平台验收并在试点门店灰度；ISV 通道保留兜底，评估抖音侧替换 ISV；输出美团直连的中期立项材料（等保、保证金预算）。</div>
+        <div class="tl-phase">第 7-8 周</div>
+        <div class="tl-name">抖音全量推广 + 美团直连筹备</div>
+        <div class="tl-desc">抖音核销随 APP 版本向目标门店推广，运营与客服承接支持；美团侧等保 / 保证金完成后进入接口开发与联调，为双平台收口做准备。</div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-title">关键里程碑</div>
       <ul class="list">
-        <li><b>第 2 周末</b>：ISV 通道实现扫码核销可用（最快目标）。</li>
-        <li><b>第 4 周末</b>：抖音直连完成自研核销 + 自动开单 + 业绩归因，试点门店可用。</li>
-        <li><b>1-3 个月</b>：美团直连立项（等保 + 保证金），完成双平台自研收口。</li>
+        <li><b>第 4 周末</b>：抖音核销核心链路开发完成，进入测试验收。</li>
+        <li><b>第 6 周末</b>：抖音核销在试点门店可用（<b>首个上线目标</b>）。</li>
+        <li><b>第 8 周末</b>：抖音核销全量推广；美团直连进入开发阶段。</li>
+        <li><b>等保通过后</b>：美团直连上线，实现双平台全自研收口。</li>
       </ul>
     </div>
   </section>
@@ -817,11 +845,11 @@
     <div class="risk-grid">
       <div class="risk-card">
         <div class="rk-title">美团等保 / 保证金周期超出预期</div>
-        <div class="rk-body">应对：美团直连列为中期规划而非上线依赖；1 个月内由 ISV 通道兜底美团侧核销，业务不受阻塞，等保完成后再迁移。</div>
+        <div class="rk-body">应对：美团直连与抖音开发并行启动资质准备，不阻塞抖音先行上线；等保完成前抖音核销已保障门店可用，等保通过后再上线美团直连。</div>
       </div>
       <div class="risk-card">
-        <div class="rk-title">ISV 资质或服务不稳定</div>
-        <div class="rk-body">应对：签约前核验平台官方授权名录；锁定服务 SLA 与退出条款；渐进式路线下直连能力作为自主替代，降低长期依赖。</div>
+        <div class="rk-title">ISV 资质或服务不稳定（暂不采用）</div>
+        <div class="rk-body">应对：当前不采用 ISV，未形成依赖；如未来作为应急备选启用，需在签约前核验平台官方授权名录、锁定服务 SLA 与退出条款。</div>
       </div>
       <div class="risk-card">
         <div class="rk-title">平台接口 / 计费政策变动</div>
@@ -856,7 +884,7 @@
         <tr><td><b>产品经理</b></td><td>需求梳理与流程设计、与平台侧对接确认、门店侧需求收集</td><td>PRD、核销流程设计、门店操作手册</td></tr>
         <tr><td><b>后端开发</b></td><td>平台 API 对接、核销服务开发、自动开单与业绩归因联动</td><td>核销服务代码、接口联调、上线部署</td></tr>
         <tr><td><b>测试工程师</b></td><td>功能测试、异常场景、幂等与并发验证、验收</td><td>测试用例、验收报告</td></tr>
-        <tr><td><b>商务 / 法务</b></td><td>平台入驻材料、ISV 签约、合同与授权协议审核、保证金缴纳</td><td>入驻资质、合同、授权协议</td></tr>
+        <tr><td><b>商务 / 法务</b></td><td>平台入驻材料、美团等保 / 保证金流程、合同与授权协议审核</td><td>入驻资质、合同、授权协议</td></tr>
         <tr><td><b>运营 / 客服</b></td><td>门店培训、试点跟进、上线后客服与对账支持</td><td>培训材料、FAQ、对账流程</td></tr>
       </table>
     </div>
@@ -869,7 +897,7 @@
       </li>
       <li>
         <div class="st-title">预算与合同审批</div>
-        <div class="st-body">预算（ISV 年费、等保 / 保证金为中期项）与合同（ISV 协议、平台协议）走公司标准审批流程，<b>预计 1 周内可完成</b>，不阻塞项目启动。</div>
+        <div class="st-body">预算（等保 / 保证金为中期项）与合同（抖音开发者协议、美团服务协议）走公司标准审批流程，<b>预计 1 周内可完成</b>，不阻塞项目启动。</div>
       </li>
       <li>
         <div class="st-title">责任落位与启动会</div>
@@ -1019,8 +1047,8 @@
       <div class="card-title">合同签署清单</div>
       <ul class="list">
         <li><b>平台侧</b>：抖音开放平台开发者协议 / 美团服务协议（含保证金条款）。</li>
-        <li><b>ISV 侧（阶段一）</b>：ISV 服务合同，锁定费用、SLA 与退出条款。</li>
         <li><b>门店侧</b>：门店授权与服务协议，明确上述要点，由法务审核后门店签署。</li>
+        <li><b>ISV 侧（暂不签署）</b>：因当前不采用 ISV 路径，暂不签署 ISV 服务合同；如未来启用应急备选再行补充。</li>
       </ul>
     </div>
   </section>
