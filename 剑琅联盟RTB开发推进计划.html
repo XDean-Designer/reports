@@ -280,8 +280,8 @@
   .bar.b-amber  { left: 26%; width: 38%; background: linear-gradient(90deg, #D4A017, #E2B53A); color: #3D2E00; }
   .bar.b-rose   { left: 26%; width: 38%; background: linear-gradient(90deg, #C75B5B, #DD8585); }
   .bar.b-violet { left: 12%; width: 46%; background: linear-gradient(90deg, #6B5B95, #8573B0); }
-  .bar.b-eval   { left: 12%; width: 46%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
-  .bar.b-plan   { left: 10%; width: 88%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
+  .bar.b-eval   { left: 26%; width: 72%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
+  .bar.b-plan   { left: 26%; width: 72%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
 
   .gantt-legend {
     display: flex; flex-wrap: wrap; gap: 16px;
@@ -702,7 +702,7 @@
     </div>
     <div class="kicker">Development Roadmap</div>
     <h1 class="serif">RTB 开发<em>推进计划</em></h1>
-    <p class="hero-desc">以开单、提成设置、员工薪资、员工管理与核销接入为主线推进，冲刺 9 月 16 日本批次上线目标；美团核销接入与会员卡重构并行评估 / 设计，后续迭代推进。</p>
+    <p class="hero-desc">以开单、提成设置、员工薪资、员工管理与核销接入为主线推进，冲刺 9 月 16 日本批次上线目标；美团核销接入（可考虑汇付天下 ISV 聚合）与会员卡重构将于 9 月 7 日启动评估 / 设计，后续迭代推进。</p>
     <div class="hero-meta">
       <span class="chip"><span class="dot"></span><b>更新日期</b> · 2026-09-02</span>
       <span class="chip"><b>时间窗口</b> · 本周 8/31–9/6 → 9/16 上线批次</span>
@@ -748,13 +748,13 @@
         <div class="ov-label">05 · 核销</div>
         <div class="ov-name">核销接入(抖音 / 美团)</div>
         <span class="ov-status st-dev">9月3日启动接入</span>
-        <div class="ov-time">抖音：接入推进中 → <b>9/16 前完成</b><br>美团：汇付天下 ISV 聚合 · 评估中</div>
+        <div class="ov-time">抖音：接入推进中 → <b>9/16 前完成</b><br>美团：9月7日起评估汇付天下 ISV 聚合接入</div>
       </div>
       <div class="ov-card out">
         <div class="ov-label">06 · 会员卡</div>
         <div class="ov-name">会员卡重构</div>
         <span class="ov-status st-out">不在 9/16 批次</span>
-        <div class="ov-time">明日(9/3)启动方案设计<br>不纳入 9/16 上线计划 · 9 月后续推进</div>
+        <div class="ov-time">9月7日启动方案设计<br>不纳入 9/16 上线计划 · 9 月后续推进</div>
       </div>
     </div>
   </section>
@@ -818,18 +818,18 @@
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">核销接入 · 美团<small>汇付天下 ISV 聚合 · 成本 / 周期评估中</small></div>
+          <div class="row-name">核销接入 · 美团<small>9月7日起 · 汇付天下 ISV 聚合评估</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b-eval">接入成本高、周期长 · 评估中</div>
+            <div class="bar b-eval">9月7日起评估汇付天下 ISV · 成本/周期</div>
           </div>
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">会员卡重构<small>明日 9/3 启动方案设计 · 不在 9/16 批次</small></div>
+          <div class="row-name">会员卡重构<small>9月7日启动方案设计 · 不在 9/16 批次</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b-plan">方案设计启动 → 9 月持续推进(不含在 9/16 上线)</div>
+            <div class="bar b-plan">9月7日启动方案设计 → 9 月持续推进(不含在 9/16 上线)</div>
           </div>
         </div>
       </div>
@@ -848,7 +848,7 @@
       <div class="ms-badge">9/16<br>上线批次</div>
       <div>
         <div class="ms-title">9 月 16 日前 · 核心模块批次上线</div>
-        <div class="ms-desc">提成设置、员工薪资、员工管理将于 <b>9/16 前</b>完成开发、测试并正式上线；抖音核销接入同步推进，<b>预计 9/16 前完成</b>。开单流程优化因关联逻辑多而补充测试，预计 9/3 完成后尽快上线。美团核销正尝试通过汇付天下 ISV 聚合服务接入，正在评估成本与周期；会员卡重构将于明日启动方案设计，<b>不在本批次上线计划内</b>，作为 9 月后续改造持续推进。</div>
+        <div class="ms-desc">提成设置、员工薪资、员工管理将于 <b>9/16 前</b>完成开发、测试并正式上线；抖音核销接入同步推进，<b>预计 9/16 前完成</b>。开单流程优化因关联逻辑多而补充测试，预计 9/3 完成后尽快上线。美团核销将于 <b>9月7日</b>起评估汇付天下 ISV 聚合接入（成本与周期）；会员卡重构将于 <b>9月7日</b>启动方案设计，<b>不在本批次上线计划内</b>，作为 9 月后续改造持续推进。</div>
       </div>
     </div>
   </section>
@@ -1194,12 +1194,12 @@
               <div class="s-desc">完成抖音核销接入，门店开单可直接核销平台券码。</div>
             </div>
             <div class="step">
-              <div class="s-phase">评估中</div>
+              <div class="s-phase">9月7日起</div>
               <div class="s-title">美团接入方案</div>
-              <div class="s-desc">美团接入成本高、周期长；正尝试通过汇付天下 ISV 聚合服务接入，评估成本与周期。</div>
+              <div class="s-desc">美团接入成本高、周期长；9月7日起可考虑汇付天下 ISV 聚合，评估成本与周期。</div>
             </div>
           </div>
-          <div class="feat-note amber"><b>说明：</b>核销接入后门店开单场景可直接核销抖音 / 美团券码，与开单流程优化形成闭环。抖音接入推进中，预计 9/16 前完成；美团因接入成本与周期问题，正评估汇付天下 ISV 聚合接入方案。</div>
+          <div class="feat-note amber"><b>说明：</b>核销接入后门店开单场景可直接核销抖音 / 美团券码，与开单流程优化形成闭环。抖音接入推进中，预计 9/16 前完成；美团因接入成本与周期问题，将于 <b>9月7日</b>起可考虑汇付天下 ISV 聚合接入，评估成本与周期。</div>
         </div>
       </article>
 
@@ -1213,7 +1213,7 @@
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step">
-              <div class="s-phase">9/3 · 明日</div>
+              <div class="s-phase">9月7日</div>
               <div class="s-title">启动方案设计</div>
               <div class="s-desc">会员卡重构方案设计启动，与主线工作同步进行。</div>
             </div>
@@ -1228,7 +1228,7 @@
               <div class="s-desc">不纳入 9/16 上线计划，作为 9 月后续改造单独排期。</div>
             </div>
           </div>
-          <div class="feat-note gray"><b>口径调整：</b>会员卡重构不在 9/16 上线计划内。明日(9/3)启动方案设计、与主线并行推进，重构成果将作为 9 月后续改造持续迭代上线。</div>
+          <div class="feat-note gray"><b>口径调整：</b>会员卡重构不在 9/16 上线计划内。<b>9月7日</b>启动方案设计、与主线并行推进，重构成果将作为 9 月后续改造持续迭代上线。</div>
         </div>
       </article>
 
