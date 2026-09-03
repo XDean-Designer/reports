@@ -92,7 +92,7 @@
 
   .hero-desc {
     font-size: 16px; color: var(--ink-soft); letter-spacing: 1px;
-    max-width: 640px; line-height: 1.8;
+    max-width: 700px; line-height: 1.8;
   }
 
   .hero-meta {
@@ -129,7 +129,7 @@
   /* ===== Overview cards ===== */
   .overview {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
   }
   .ov-card {
@@ -147,7 +147,10 @@
   .ov-card.c1::before { background: var(--teal); }
   .ov-card.c2::before { background: var(--blue); }
   .ov-card.c3::before { background: var(--amber); }
-  .ov-card.c4::before { background: var(--violet); }
+  .ov-card.c4::before { background: var(--rose); }
+  .ov-card.c5::before { background: var(--violet); }
+  .ov-card.out { border-style: dashed; border-color: #C5CDD6; background: #FBFCFD; }
+  .ov-card.out::before { background: #9AA7B3; }
 
   .ov-label { font-size: 12px; letter-spacing: 2px; color: var(--ink-faint); margin-bottom: 8px; }
   .ov-name { font-size: 17px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; }
@@ -160,7 +163,10 @@
   .st-ready { background: var(--blue-soft); color: var(--blue); }
   .st-plan { background: var(--amber-soft); color: #9A7400; }
   .st-next { background: var(--violet-soft); color: var(--violet); }
-  .ov-time { font-size: 12.5px; color: var(--ink-soft); margin-top: 12px; line-height: 1.6; }
+  .st-test { background: var(--rose-soft); color: var(--rose); }
+  .st-out { background: #ECF0F4; color: #6B7886; border: 1px dashed #C5CDD6; }
+  .ov-time { font-size: 12.5px; color: var(--ink-soft); margin-top: 12px; line-height: 1.7; }
+  .ov-time b { color: var(--ink); }
 
   /* ===== Gantt ===== */
   .gantt-card {
@@ -201,6 +207,7 @@
     color: var(--teal-deep);
   }
   .week-label.now b { color: var(--teal-deep); }
+  .week-label .tgt { color: var(--amber); font-weight: 700; }
 
   .gantt-row {
     display: grid;
@@ -240,15 +247,14 @@
     white-space: nowrap;
     padding: 0 10px;
   }
-  /* track columns: week1 | week2 | week3 | sept  — each with 8px gap
-     Approximate left/width as % of track (4 columns + gaps ≈ 4*1 + 3*8px)
-     Using calc with grid-aligned percentages relative to whole track:
-     Col1: 0 ~ 22.5%, Col2: 24.5~47%, Col3: 49~71.5%, Col4: 73.5~100%
-  */
-  .bar.b1 { left: 2%; width: 45%; background: linear-gradient(90deg, #2A9D8F, #3BB5A6); }
-  .bar.b2 { left: 2%; width: 45%; background: linear-gradient(90deg, #3A6EA5, #4F85C0); }
-  .bar.b3 { left: 24.5%; width: 47%; background: linear-gradient(90deg, #D4A017, #E2B53A); color: #3D2E00; }
-  .bar.b4 { left: 49%; width: 49%; background: linear-gradient(90deg, #6B5B95, #8573B0); }
+  /* 各模块条形位置与配色(4 列近似边界:第1列 0~22.5%、第2列 24.5~47%、第3列 49~71.5%、第4列 73.5~100%) */
+  .bar.b-teal   { left: 2%;  width: 26%; background: linear-gradient(90deg, #2A9D8F, #3BB5A6); }
+  .bar.b-blue   { left: 26%; width: 38%; background: linear-gradient(90deg, #3A6EA5, #4F85C0); }
+  .bar.b-amber  { left: 26%; width: 38%; background: linear-gradient(90deg, #D4A017, #E2B53A); color: #3D2E00; }
+  .bar.b-rose   { left: 26%; width: 38%; background: linear-gradient(90deg, #C75B5B, #DD8585); }
+  .bar.b-violet { left: 12%; width: 46%; background: linear-gradient(90deg, #6B5B95, #8573B0); }
+  .bar.b-eval   { left: 12%; width: 46%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
+  .bar.b-plan   { left: 10%; width: 88%; background: transparent; border: 1.5px dashed #8A97A6; color: #5A6A7A; box-shadow: none; }
 
   .gantt-legend {
     display: flex; flex-wrap: wrap; gap: 16px;
@@ -285,6 +291,7 @@
   }
   .ms-title { font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
   .ms-desc { font-size: 14px; opacity: .88; line-height: 1.75; letter-spacing: .3px; }
+  .ms-desc b { color: #FFE9A8; font-weight: 600; }
 
   /* ===== Feature details ===== */
   .features {
@@ -349,6 +356,8 @@
     padding: 12px 16px;
   }
   .feat-note b { color: var(--ink); }
+  .feat-note.amber { border-left-color: var(--amber); }
+  .feat-note.gray { border-left-color: #9AA7B3; }
 
   /* ===== Flow diagram ===== */
   .flow {
@@ -432,10 +441,10 @@
     </div>
     <div class="kicker">Development Roadmap</div>
     <h1 class="serif">RTB 开发<em>推进计划</em></h1>
-    <p class="hero-desc">以开单、提成、薪资、会员卡四大核心路径为主线，按周推进开发、提测与上线，冲刺 9 月核心功能全面优化目标。</p>
+    <p class="hero-desc">以开单、提成设置、员工薪资、员工管理与核销接入为主线推进，冲刺 9 月 16 日本批次上线目标；美团核销接入与会员卡重构并行评估 / 设计，后续迭代推进。</p>
     <div class="hero-meta">
-      <span class="chip"><span class="dot"></span><b>更新日期</b> · 2026-08-30</span>
-      <span class="chip"><b>时间窗口</b> · 本周 → 下下周 · 9 月里程碑</span>
+      <span class="chip"><span class="dot"></span><b>更新日期</b> · 2026-09-02</span>
+      <span class="chip"><b>时间窗口</b> · 本周 8/31–9/6 → 9/16 上线批次</span>
       <span class="chip"><b>模块</b> · 店务管理系统 RTB</span>
     </div>
   </div>
@@ -446,33 +455,45 @@
   <!-- Overview -->
   <section>
     <div class="sec-head">
-      <h2 class="sec-title">四大功能一览</h2>
-      <span class="sec-en">FEATURE OVERVIEW</span>
+      <h2 class="sec-title">功能推进一览</h2>
+      <span class="sec-en">FEATURES OVERVIEW</span>
     </div>
     <div class="overview">
       <div class="ov-card c1">
         <div class="ov-label">01 · 开单</div>
         <div class="ov-name">开单流程优化</div>
-        <span class="ov-status st-dev">本周开发中</span>
-        <div class="ov-time">8/31 提测<br>下周上线</div>
+        <span class="ov-status st-test">测试收尾中</span>
+        <div class="ov-time">8/31 已提测 · 关联逻辑多、测试延长<br>预计 9/3 完成测试 → <b>尽快上线</b></div>
       </div>
       <div class="ov-card c2">
         <div class="ov-label">02 · 提成</div>
         <div class="ov-name">提成设置重构</div>
-        <span class="ov-status st-ready">方案已完成</span>
-        <div class="ov-time">下周一开始开发<br>下周提测并上线</div>
+        <span class="ov-status st-ready">今日评审通过</span>
+        <div class="ov-time">9/2 完成评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
       </div>
       <div class="ov-card c3">
         <div class="ov-label">03 · 薪资</div>
         <div class="ov-name">员工薪资</div>
-        <span class="ov-status st-plan">下周启动</span>
-        <div class="ov-time">下周方案 + 进开发<br>下下周提测上线</div>
+        <span class="ov-status st-ready">今日评审通过</span>
+        <div class="ov-time">与提成、员工管理同批次评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
       </div>
       <div class="ov-card c4">
-        <div class="ov-label">04 · 会员卡</div>
+        <div class="ov-label">04 · 员工</div>
+        <div class="ov-name">员工管理</div>
+        <span class="ov-status st-ready">今日评审通过</span>
+        <div class="ov-time">今日同步完成评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
+      </div>
+      <div class="ov-card c5">
+        <div class="ov-label">05 · 核销</div>
+        <div class="ov-name">核销接入(抖音 / 美团)</div>
+        <span class="ov-status st-dev">今日启动接入</span>
+        <div class="ov-time">抖音：接入推进中 → <b>9/16 前完成</b><br>美团：汇付天下 ISV 聚合 · 评估中</div>
+      </div>
+      <div class="ov-card out">
+        <div class="ov-label">06 · 会员卡</div>
         <div class="ov-name">会员卡重构</div>
-        <span class="ov-status st-next">下下周启动</span>
-        <div class="ov-time">全新 UI / UX<br>纳入 9 月核心改造</div>
+        <span class="ov-status st-out">不在 9/16 批次</span>
+        <div class="ov-time">明日(9/3)启动方案设计<br>不纳入 9/16 上线计划 · 9 月后续推进</div>
       </div>
     </div>
   </section>
@@ -488,42 +509,66 @@
         <div class="gantt-head">
           <div></div>
           <div class="gantt-weeks">
-            <div class="week-label now"><b>本周</b>～8/30</div>
-            <div class="week-label"><b>下周</b>8/31 – 9/6</div>
-            <div class="week-label"><b>下下周</b>9/7 – 9/13</div>
-            <div class="week-label"><b>9 月</b>核心改造里程碑</div>
+            <div class="week-label now"><b>本周</b>8/31 – 9/6<br><span class="tgt">今日 9/2 · 评审完成</span></div>
+            <div class="week-label"><b>下周</b>9/7 – 9/13<br><span class="tgt">下周三 9/9 进开发</span></div>
+            <div class="week-label"><b>下下周</b>9/14 – 9/20<br><span class="tgt">9/16 批次上线目标</span></div>
+            <div class="week-label"><b>9 月后续</b>9/16 之后<br>会员卡 / 美团评估跟进</div>
           </div>
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">开单流程优化<small>快速消费 + 流程优化</small></div>
+          <div class="row-name">开单流程优化<small>8/31 提测 · 快速消费 + 流程优化</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b1">开发中 → 8/31 提测 → 下周上线</div>
+            <div class="bar b-teal">测试 9/3 完成 → 尽快上线</div>
           </div>
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">提成设置重构<small>砍掉业绩设置 · 合并配置</small></div>
+          <div class="row-name">提成设置重构<small>9/2 今日评审通过 · 砍业绩设置</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b2">方案完成 → 开发 / 提测 / 上线</div>
+            <div class="bar b-blue">下周三 9/9 进开发 → 9/16 前上线</div>
           </div>
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">员工薪资<small>产品方案 + 开发落地</small></div>
+          <div class="row-name">员工薪资<small>9/2 今日评审通过 · 同批次推进</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b3">方案+开发 → 提测上线</div>
+            <div class="bar b-amber">下周三 9/9 进开发 → 9/16 前上线</div>
           </div>
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">会员卡重构<small>全新 UI / UX</small></div>
+          <div class="row-name">员工管理<small>9/2 今日评审通过 · 同批次推进</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b4">启动重构 → 9 月核心改造</div>
+            <div class="bar b-rose">下周三 9/9 进开发 → 9/16 前上线</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">核销接入 · 抖音<small>今日 9/2 启动 · 目标 9/16 前完成</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b-violet">接入推进中 → 9/16 前完成接入</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">核销接入 · 美团<small>汇付天下 ISV 聚合 · 成本 / 周期评估中</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b-eval">接入成本高、周期长 · 评估中</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">会员卡重构<small>明日 9/3 启动方案设计 · 不在 9/16 批次</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b-plan">方案设计启动 → 9 月持续推进(不含在 9/16 上线)</div>
           </div>
         </div>
       </div>
@@ -532,16 +577,17 @@
         <span class="leg"><i style="background:#2A9D8F"></i>开单</span>
         <span class="leg"><i style="background:#3A6EA5"></i>提成</span>
         <span class="leg"><i style="background:#D4A017"></i>薪资</span>
-        <span class="leg"><i style="background:#6B5B95"></i>会员卡</span>
-        <span class="leg"><i style="background:#2A9D8F;opacity:.25;border:1px dashed #2A9D8F"></i>本周（当前）</span>
+        <span class="leg"><i style="background:#C75B5B"></i>员工管理</span>
+        <span class="leg"><i style="background:#6B5B95"></i>核销 · 抖音</span>
+        <span class="leg"><i style="background:transparent;border:1.5px dashed #8A97A6"></i>评估 / 范围外(美团 · 会员卡)</span>
       </div>
     </div>
 
     <div class="milestone">
-      <div class="ms-badge">9月<br>目标</div>
+      <div class="ms-badge">9/16<br>上线批次</div>
       <div>
-        <div class="ms-title">核心功能全面优化改造</div>
-        <div class="ms-desc">预计 9 月对目标用户最常使用的核心功能完成全面优化改造，并持续对 RTB 全部功能进行迭代优化——让产品更适合小 B 店主的真实经营场景。</div>
+        <div class="ms-title">9 月 16 日前 · 核心模块批次上线</div>
+        <div class="ms-desc">提成设置、员工薪资、员工管理将于 <b>9/16 前</b>完成开发、测试并正式上线；抖音核销接入同步推进，<b>预计 9/16 前完成</b>。开单流程优化因关联逻辑多而补充测试，预计 9/3 完成后尽快上线。美团核销正尝试通过汇付天下 ISV 聚合服务接入，正在评估成本与周期；会员卡重构将于明日启动方案设计，<b>不在本批次上线计划内</b>，作为 9 月后续改造持续推进。</div>
       </div>
     </div>
   </section>
@@ -555,13 +601,13 @@
     <div class="flow">
       <div class="flow-item">
         <div class="flow-num">1</div>
-        <div class="flow-title">方案 / 设计</div>
-        <div class="flow-desc">产品方案定稿<br>交互与逻辑对齐</div>
+        <div class="flow-title">评审 / 方案</div>
+        <div class="flow-desc">方案定稿评审<br>交互与逻辑对齐</div>
       </div>
       <div class="flow-item">
         <div class="flow-num">2</div>
         <div class="flow-title">开发</div>
-        <div class="flow-desc">进入研发排期<br>按周推进交付</div>
+        <div class="flow-desc">进入研发排期<br>按批次推进交付</div>
       </div>
       <div class="flow-item">
         <div class="flow-num">3</div>
@@ -571,7 +617,7 @@
       <div class="flow-item">
         <div class="flow-num">4</div>
         <div class="flow-title">上线</div>
-        <div class="flow-desc">灰度 / 全量发布<br>试点门店可用</div>
+        <div class="flow-desc">正式发布上线<br>试点门店可用</div>
       </div>
     </div>
   </section>
@@ -588,28 +634,28 @@
         <div class="feat-side">
           <div class="feat-no">01</div>
           <div class="feat-name">开单流程优化</div>
-          <span class="feat-tag st-dev">本周开发中</span>
+          <span class="feat-tag st-test">测试收尾中</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step done">
-              <div class="s-phase">本周</div>
-              <div class="s-title">持续开发</div>
-              <div class="s-desc">快速消费功能 + 开单流程优化，仍在开发推进中。</div>
+              <div class="s-phase">8/31 · 本周一</div>
+              <div class="s-title">已提测</div>
+              <div class="s-desc">8/31 已提交测试，进入质量验收阶段。</div>
             </div>
             <div class="step active">
-              <div class="s-phase">8 月 31 日</div>
-              <div class="s-title">提测</div>
-              <div class="s-desc">下周一提交测试，进入质量验收。</div>
+              <div class="s-phase">9/2 – 9/3</div>
+              <div class="s-title">补充测试</div>
+              <div class="s-desc">开单流程逻辑关联较多，需更多测试覆盖；预计明日(9/3)完成。</div>
             </div>
             <div class="step">
-              <div class="s-phase">下周</div>
-              <div class="s-title">上线</div>
-              <div class="s-desc">下周完成功能上线，试点门店可用。</div>
+              <div class="s-phase">测试通过后</div>
+              <div class="s-title">尽快上线</div>
+              <div class="s-desc">测试通过后尽快完成功能上线，试点门店可用。</div>
             </div>
           </div>
-          <div class="feat-note"><b>范围：</b>快速消费（免填字段直接输金额开单）与开单流程体验优化，对齐一线调研验证方向。</div>
+          <div class="feat-note"><b>范围：</b>快速消费（免填字段直接输金额开单）与开单流程体验优化。因开单流程涉及的功能间逻辑关联多，本轮补充更多测试以确保稳定，预计明天完成测试后尽快上线。</div>
         </div>
       </article>
 
@@ -617,28 +663,28 @@
         <div class="feat-side">
           <div class="feat-no">02</div>
           <div class="feat-name">提成设置重构</div>
-          <span class="feat-tag st-ready">方案已完成</span>
+          <span class="feat-tag st-ready">今日评审通过</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step done">
-              <div class="s-phase">本周</div>
-              <div class="s-title">方案完成</div>
-              <div class="s-desc">砍掉业绩设置，在提成设置中一步完成原两步目标。</div>
+              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-title">评审完成</div>
+              <div class="s-desc">提成设置重构方案今日完成评审。</div>
             </div>
             <div class="step active">
-              <div class="s-phase">下周一</div>
+              <div class="s-phase">下周三 9/9</div>
               <div class="s-title">进入开发</div>
-              <div class="s-desc">8/31 起正式进开发，大幅重构功能逻辑与交互。</div>
+              <div class="s-desc">与员工薪资、员工管理同批次进入开发。</div>
             </div>
             <div class="step">
-              <div class="s-phase">下周</div>
+              <div class="s-phase">9/16 前</div>
               <div class="s-title">提测并上线</div>
-              <div class="s-desc">下周内完成提测与上线。</div>
+              <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
             </div>
           </div>
-          <div class="feat-note"><b>改造重点：</b>合并「业绩设置 → 提成设置」两步流程，重构功能逻辑与交互设计，降低店主配置成本。</div>
+          <div class="feat-note"><b>改造重点：</b>合并「业绩设置 → 提成设置」两步流程，重构功能逻辑与交互设计，降低店主配置成本。今日与员工薪资、员工管理一同完成评审，9/16 前随批次正式上线。</div>
         </div>
       </article>
 
@@ -646,57 +692,115 @@
         <div class="feat-side">
           <div class="feat-no">03</div>
           <div class="feat-name">员工薪资</div>
-          <span class="feat-tag st-plan">下周启动</span>
+          <span class="feat-tag st-ready">今日评审通过</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
-            <div class="step">
-              <div class="s-phase">下周</div>
-              <div class="s-title">产品方案</div>
-              <div class="s-desc">完成「员工薪资」功能产品方案。</div>
+            <div class="step done">
+              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-title">评审完成</div>
+              <div class="s-desc">员工薪资功能方案今日完成评审。</div>
             </div>
-            <div class="step">
-              <div class="s-phase">下周</div>
+            <div class="step active">
+              <div class="s-phase">下周三 9/9</div>
               <div class="s-title">进入开发</div>
-              <div class="s-desc">方案完成后同步进入开发。</div>
+              <div class="s-desc">与提成设置、员工管理同批次进入开发。</div>
             </div>
             <div class="step">
-              <div class="s-phase">下下周</div>
+              <div class="s-phase">9/16 前</div>
               <div class="s-title">提测并上线</div>
-              <div class="s-desc">下下周完成提测与功能上线。</div>
+              <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
             </div>
           </div>
-          <div class="feat-note"><b>节奏：</b>下周完成产品方案并进入开发，下下周提测上线，与提成能力形成薪资管理闭环。</div>
+          <div class="feat-note"><b>节奏：</b>今日完成评审，9/9 起与提成设置、员工管理同批次开发，9/16 前完成开发、测试并正式上线，与提成能力形成薪资管理闭环。</div>
         </div>
       </article>
 
       <article class="feat">
         <div class="feat-side">
           <div class="feat-no">04</div>
+          <div class="feat-name">员工管理</div>
+          <span class="feat-tag st-ready">今日评审通过</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step done">
+              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-title">评审完成</div>
+              <div class="s-desc">员工管理与提成、薪资一同完成评审。</div>
+            </div>
+            <div class="step active">
+              <div class="s-phase">下周三 9/9</div>
+              <div class="s-title">进入开发</div>
+              <div class="s-desc">随提成、薪资批次同步进入开发。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">9/16 前</div>
+              <div class="s-title">提测并上线</div>
+              <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>范围：</b>员工管理与员工薪资、提成设置于今日同步完成评审，下周三(9/9)起同批次开发，9/16 前完成开发、测试并正式上线。具体功能范围以今日评审结论为准（可后续补充）。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">05</div>
+          <div class="feat-name">核销接入</div>
+          <span class="feat-tag st-dev">今日启动接入</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step active">
+              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-title">启动接入</div>
+              <div class="s-desc">正式推进抖音、美团核销功能的接入工作。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">预计 9/16 前</div>
+              <div class="s-title">抖音接入完成</div>
+              <div class="s-desc">完成抖音核销接入，门店开单可直接核销平台券码。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">评估中</div>
+              <div class="s-title">美团接入方案</div>
+              <div class="s-desc">美团接入成本高、周期长；正尝试通过汇付天下 ISV 聚合服务接入，评估成本与周期。</div>
+            </div>
+          </div>
+          <div class="feat-note amber"><b>说明：</b>核销接入后门店开单场景可直接核销抖音 / 美团券码，与开单流程优化形成闭环。抖音接入推进中，预计 9/16 前完成；美团因接入成本与周期问题，正评估汇付天下 ISV 聚合接入方案。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">06</div>
           <div class="feat-name">会员卡重构</div>
-          <span class="feat-tag st-next">下下周启动</span>
+          <span class="feat-tag st-out">不在 9/16 批次</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step">
-              <div class="s-phase">下下周</div>
-              <div class="s-title">启动重构</div>
-              <div class="s-desc">采用全新 UI / UX，全面依据调研成果改进。</div>
+              <div class="s-phase">9/3 · 明日</div>
+              <div class="s-title">启动方案设计</div>
+              <div class="s-desc">会员卡重构方案设计启动，与主线工作同步进行。</div>
             </div>
             <div class="step">
               <div class="s-phase">设计方向</div>
               <div class="s-title">适配小 B 店主</div>
-              <div class="s-desc">降低操作门槛，贴合真实经营场景。</div>
+              <div class="s-desc">依据试点调研结论，操作做减法、券模板化，贴合真实经营场景。</div>
             </div>
             <div class="step">
-              <div class="s-phase">9 月</div>
-              <div class="s-title">纳入核心改造</div>
-              <div class="s-desc">作为 9 月核心功能全面优化的重要组成部分。</div>
+              <div class="s-phase">9 月后续</div>
+              <div class="s-title">持续推进</div>
+              <div class="s-desc">不纳入 9/16 上线计划，作为 9 月后续改造单独排期。</div>
             </div>
           </div>
-          <div class="feat-note"><b>依据：</b>太仓试点调研结论——优惠券模板化、操作做减法、适配小 B 店主能力等方向，指导会员卡全新体验设计。</div>
+          <div class="feat-note gray"><b>口径调整：</b>会员卡重构不在 9/16 上线计划内。明日(9/3)启动方案设计、与主线并行推进，重构成果将作为 9 月后续改造持续迭代上线。</div>
         </div>
       </article>
 
