@@ -44,34 +44,61 @@
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 28px 80px;
+    min-width: 0;
+    overflow-x: clip;
   }
 
   /* ===== Hero ===== */
   .hero {
     position: relative;
     overflow: hidden;
-    background:
-      radial-gradient(900px 420px at 90% -10%, rgba(42,157,143,.18), transparent 60%),
-      radial-gradient(700px 380px at -5% 110%, rgba(58,110,165,.14), transparent 55%),
-      linear-gradient(180deg, #EEF3F6 0%, var(--bg) 100%);
+    background: linear-gradient(180deg, #EEF3F6 0%, var(--bg) 100%);
     border-bottom: 1px solid var(--line);
     padding: 72px 0 56px;
   }
-  .hero-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("9.4汇报页面/军阵.png") right -78px / cover no-repeat;
+    opacity: .22;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      rgba(238,243,246,.97) 0%,
+      rgba(238,243,246,.88) 38%,
+      rgba(238,243,246,.45) 68%,
+      rgba(238,243,246,.18) 100%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
 
   .brand {
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 40px;
   }
   .brand-mark {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid var(--teal);
-    background: var(--teal-soft);
-    color: var(--teal-deep);
-    display: flex; align-items: center; justify-content: center;
-    font-family: Georgia, "Songti SC", serif;
-    font-size: 20px; font-weight: 700;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex: none;
+    box-shadow: 0 4px 14px rgba(30,42,54,.12);
+    background: transparent;
+  }
+  .brand-mark img {
+    width: 100%; height: 100%;
+    display: block;
+    object-fit: cover;
   }
   .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; }
   .brand-sub { font-size: 10px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
@@ -359,6 +386,237 @@
   .feat-note.amber { border-left-color: var(--amber); }
   .feat-note.gray { border-left-color: #9AA7B3; }
 
+  /* ===== 9.16 Showcase ===== */
+  .showcase-banner {
+    background:
+      radial-gradient(720px 280px at 92% 0%, rgba(42,157,143,.16), transparent 60%),
+      radial-gradient(520px 240px at 0% 100%, rgba(58,110,165,.10), transparent 55%),
+      var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px 34px 32px;
+    text-align: center;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 32px rgba(30,42,54,.05);
+  }
+  .showcase-banner .kicker { justify-content: center; }
+  .showcase-slogan {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin: 14px 0 12px;
+    line-height: 1.3;
+  }
+  .showcase-slogan em {
+    font-style: normal;
+    color: var(--teal-deep);
+  }
+  .showcase-lead {
+    font-size: 15px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.85;
+  }
+
+  .show-mod {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 28px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 28px rgba(30,42,54,.04);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .show-mod-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .show-mod-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--teal-deep);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .show-mod-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .show-mod-tag {
+    flex: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    border: 1px solid rgba(42,157,143,.25);
+  }
+  .show-points {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+    margin-bottom: 22px;
+  }
+  .show-points li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.7;
+    letter-spacing: .3px;
+  }
+  .show-points li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 9px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .show-points li b { color: var(--teal-deep); font-weight: 700; }
+
+  .phone-rail {
+    display: flex;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 6px 2px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    cursor: grab;
+  }
+  .phone-rail.is-dragging { cursor: grabbing; }
+  .phone-rail::-webkit-scrollbar { height: 6px; }
+  .phone-rail::-webkit-scrollbar-thumb {
+    background: #C9D3DD;
+    border-radius: 99px;
+  }
+  .phone {
+    flex: 0 0 188px;
+    width: 188px;
+    scroll-snap-align: start;
+  }
+  .phone-frame {
+    background: #FFFFFF;
+    border: 1.5px solid #D5DCE4;
+    border-radius: 28px;
+    padding: 9px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.8) inset,
+      0 10px 28px rgba(30,42,54,.08);
+  }
+  .phone-notch {
+    width: 54px;
+    height: 5px;
+    border-radius: 99px;
+    background: #E4E9EF;
+    margin: 0 auto 7px;
+  }
+  .phone-screen {
+    border-radius: 20px;
+    overflow: hidden;
+    background: #F5F7F9;
+    border: 1px solid #E8EEF3;
+    aspect-ratio: 390 / 844;
+    cursor: zoom-in;
+    position: relative;
+  }
+  .phone-screen::after {
+    content: "点击放大";
+    position: absolute;
+    left: 50%; bottom: 10px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #fff;
+    background: rgba(30,42,54,.55);
+    padding: 4px 10px;
+    border-radius: 999px;
+    opacity: 0;
+    transition: opacity .2s;
+    pointer-events: none;
+  }
+  .phone-screen:hover::after { opacity: 1; }
+  .phone-screen img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .phone-caption {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+  }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(16, 24, 32, .78);
+    backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox[hidden] { display: none !important; }
+  .lightbox-inner {
+    position: relative;
+    max-width: min(420px, 92vw);
+    max-height: 90vh;
+  }
+  .lightbox-inner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    background: #fff;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: -14px; right: -14px;
+    width: 36px; height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  }
+  .lightbox-caption {
+    margin-top: 12px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
   /* ===== Flow diagram ===== */
   .flow {
     display: flex; align-items: stretch; gap: 0;
@@ -415,6 +673,9 @@
     .feat { grid-template-columns: 1fr; }
     .feat-side { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 16px; }
     .steps { grid-template-columns: 1fr; }
+    .show-points { grid-template-columns: 1fr; }
+    .showcase-banner { padding: 28px 20px; }
+    .show-mod { padding: 22px 18px 16px; }
     .flow { flex-direction: column; }
     .flow-item + .flow-item { border-left: none; border-top: 1px solid var(--line); }
     .flow-item::after {
@@ -433,7 +694,7 @@
 <header class="hero">
   <div class="hero-inner">
     <div class="brand">
-      <div class="brand-mark">剑</div>
+      <div class="brand-mark"><img src="9.4汇报页面/Group 1597884606-2.png" alt="剑琅联盟"></div>
       <div>
         <div class="brand-name">剑琅联盟</div>
         <div class="brand-sub">JIANLANG ALLIANCE · RTB</div>
@@ -468,25 +729,25 @@
       <div class="ov-card c2">
         <div class="ov-label">02 · 提成</div>
         <div class="ov-name">提成设置重构</div>
-        <span class="ov-status st-ready">今日评审通过</span>
+        <span class="ov-status st-ready">9月2日评审通过</span>
         <div class="ov-time">9/2 完成评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
       </div>
-      <div class="ov-card c3">
-        <div class="ov-label">03 · 薪资</div>
-        <div class="ov-name">员工薪资</div>
-        <span class="ov-status st-ready">今日评审通过</span>
-        <div class="ov-time">与提成、员工管理同批次评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
-      </div>
       <div class="ov-card c4">
-        <div class="ov-label">04 · 员工</div>
+        <div class="ov-label">03 · 员工</div>
         <div class="ov-name">员工管理</div>
-        <span class="ov-status st-ready">今日评审通过</span>
-        <div class="ov-time">今日同步完成评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
+        <span class="ov-status st-ready">9月2日评审通过</span>
+        <div class="ov-time">9月2日同步完成评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
+      </div>
+      <div class="ov-card c3">
+        <div class="ov-label">04 · 薪资</div>
+        <div class="ov-name">员工薪资</div>
+        <span class="ov-status st-ready">9月2日评审通过</span>
+        <div class="ov-time">与提成、员工管理同批次评审<br>9/9(下周三)进开发 → <b>9/16 前上线</b></div>
       </div>
       <div class="ov-card c5">
         <div class="ov-label">05 · 核销</div>
         <div class="ov-name">核销接入(抖音 / 美团)</div>
-        <span class="ov-status st-dev">今日启动接入</span>
+        <span class="ov-status st-dev">9月3日启动接入</span>
         <div class="ov-time">抖音：接入推进中 → <b>9/16 前完成</b><br>美团：汇付天下 ISV 聚合 · 评估中</div>
       </div>
       <div class="ov-card out">
@@ -509,7 +770,7 @@
         <div class="gantt-head">
           <div></div>
           <div class="gantt-weeks">
-            <div class="week-label now"><b>本周</b>8/31 – 9/6<br><span class="tgt">今日 9/2 · 评审完成</span></div>
+            <div class="week-label now"><b>本周</b>8/31 – 9/6<br><span class="tgt">9月2日 · 评审完成</span></div>
             <div class="week-label"><b>下周</b>9/7 – 9/13<br><span class="tgt">下周三 9/9 进开发</span></div>
             <div class="week-label"><b>下下周</b>9/14 – 9/20<br><span class="tgt">9/16 批次上线目标</span></div>
             <div class="week-label"><b>9 月后续</b>9/16 之后<br>会员卡 / 美团评估跟进</div>
@@ -525,7 +786,7 @@
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">提成设置重构<small>9/2 今日评审通过 · 砍业绩设置</small></div>
+          <div class="row-name">提成设置重构<small>9月2日评审通过 · 砍业绩设置</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
             <div class="bar b-blue">下周三 9/9 进开发 → 9/16 前上线</div>
@@ -533,15 +794,7 @@
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">员工薪资<small>9/2 今日评审通过 · 同批次推进</small></div>
-          <div class="track">
-            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
-            <div class="bar b-amber">下周三 9/9 进开发 → 9/16 前上线</div>
-          </div>
-        </div>
-
-        <div class="gantt-row">
-          <div class="row-name">员工管理<small>9/2 今日评审通过 · 同批次推进</small></div>
+          <div class="row-name">员工管理<small>9月2日评审通过 · 同批次推进</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
             <div class="bar b-rose">下周三 9/9 进开发 → 9/16 前上线</div>
@@ -549,7 +802,15 @@
         </div>
 
         <div class="gantt-row">
-          <div class="row-name">核销接入 · 抖音<small>今日 9/2 启动 · 目标 9/16 前完成</small></div>
+          <div class="row-name">员工薪资<small>9月2日评审通过 · 同批次推进</small></div>
+          <div class="track">
+            <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
+            <div class="bar b-amber">下周三 9/9 进开发 → 9/16 前上线</div>
+          </div>
+        </div>
+
+        <div class="gantt-row">
+          <div class="row-name">核销接入 · 抖音<small>9月3日启动 · 目标 9/16 前完成</small></div>
           <div class="track">
             <div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div><div class="track-cell"></div>
             <div class="bar b-violet">接入推进中 → 9/16 前完成接入</div>
@@ -576,8 +837,8 @@
       <div class="gantt-legend">
         <span class="leg"><i style="background:#2A9D8F"></i>开单</span>
         <span class="leg"><i style="background:#3A6EA5"></i>提成</span>
-        <span class="leg"><i style="background:#D4A017"></i>薪资</span>
         <span class="leg"><i style="background:#C75B5B"></i>员工管理</span>
+        <span class="leg"><i style="background:#D4A017"></i>薪资</span>
         <span class="leg"><i style="background:#6B5B95"></i>核销 · 抖音</span>
         <span class="leg"><i style="background:transparent;border:1.5px dashed #8A97A6"></i>评估 / 范围外(美团 · 会员卡)</span>
       </div>
@@ -622,6 +883,173 @@
     </div>
   </section>
 
+  <!-- 9.16 Showcase -->
+  <section id="v916">
+    <div class="sec-head">
+      <h2 class="sec-title">9 月 16 日版本 · 新功能亮相</h2>
+      <span class="sec-en">SEP 16 RELEASE PREVIEW</span>
+    </div>
+
+    <div class="showcase-banner">
+      <div class="kicker">Sword Sharpened · Ready to Strike</div>
+      <h3 class="showcase-slogan serif">剑锋再砺 · <em>九月新章</em></h3>
+      <p class="showcase-lead">提成、员工、薪资三位一体焕新——砍繁就简、一页掌控、一眼看清。9 月 16 日，让门店管理真正「锋利」起来。</p>
+    </div>
+
+    <!-- 提成设置 -->
+    <article class="show-mod">
+      <div class="show-mod-head">
+        <div>
+          <div class="show-mod-label">01 · COMMISSION</div>
+          <div class="show-mod-title">提成设置 · 一页搞定</div>
+        </div>
+        <span class="show-mod-tag">9/16 上线</span>
+      </div>
+      <ul class="show-points">
+        <li><b>告别两步走</b>：省去「先设业绩再设提成」的繁琐，配置一步到位。</li>
+        <li><b>界面更轻、路径更短</b>：简洁美观的 UI，操作压力大幅下降。</li>
+        <li><b>方案参数一页尽览</b>：关键设置集中呈现，不用来回跳页。</li>
+        <li><b>规则项卡片组合</b>：像搭积木一样生成提成方案，形象易懂。</li>
+        <li><b>一人多方案</b>：同一员工可配置多套规则，轻松适配不同情境。</li>
+      </ul>
+      <div class="phone-rail">
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S2-提成方案列表-390x844.png" alt="提成方案列表"></div>
+          </div>
+          <div class="phone-caption">提成方案列表</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S3-编辑提成方案-390x844.png" alt="编辑提成方案"></div>
+          </div>
+          <div class="phone-caption">编辑提成方案</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/P1-分类提成规则Sheet-390x844.png" alt="分类提成规则"></div>
+          </div>
+          <div class="phone-caption">分类提成规则</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/P2-分配员工Sheet-390x844.png" alt="分配员工"></div>
+          </div>
+          <div class="phone-caption">分配员工</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 员工管理 -->
+    <article class="show-mod">
+      <div class="show-mod-head">
+        <div>
+          <div class="show-mod-label">02 · STAFF</div>
+          <div class="show-mod-title">员工管理 · 简洁大气</div>
+        </div>
+        <span class="show-mod-tag">9/16 上线</span>
+      </div>
+      <ul class="show-points">
+        <li><b>界面简洁大气</b>：信息层级清晰，一眼抓住重点。</li>
+        <li><b>拖拽排序</b>：员工与头衔列表可自由拖拽，排班更随心。</li>
+        <li><b>在岗 / 休假一键切换</b>：状态管理快人一步。</li>
+        <li><b>权限跟角色走</b>：敏感权限统一由角色控制，更合理，也简化了员工编辑。</li>
+        <li><b>详情页可直改</b>：查看员工详情时即可编辑，少一次跳转。</li>
+        <li><b>剑号与宝剑展示</b>：帅气身份标识，强化剑琅气质。</li>
+        <li><b>列表页快捷改头衔 / 角色</b>：不用进详情也能快速调整。</li>
+      </ul>
+      <div class="phone-rail">
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S5-员工列表-390x844.png" alt="员工列表"></div>
+          </div>
+          <div class="phone-caption">员工列表</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S6-头衔管理-390x844.png" alt="头衔管理"></div>
+          </div>
+          <div class="phone-caption">头衔管理</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S7-角色管理-390x844.png" alt="角色管理"></div>
+          </div>
+          <div class="phone-caption">角色管理</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S8-角色权限设置-390x844.png" alt="角色权限设置"></div>
+          </div>
+          <div class="phone-caption">角色权限设置</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S9-员工详情-390x844.png" alt="员工详情"></div>
+          </div>
+          <div class="phone-caption">员工详情</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 员工薪资 -->
+    <article class="show-mod">
+      <div class="show-mod-head">
+        <div>
+          <div class="show-mod-label">03 · PAYROLL</div>
+          <div class="show-mod-title">员工薪资 · 一目了然</div>
+        </div>
+        <span class="show-mod-tag">9/16 上线</span>
+      </div>
+      <ul class="show-points">
+        <li><b>矩阵式简洁 UI</b>：数据分类清晰，关键数字一眼可见。</li>
+        <li><b>结算日 / 发薪日自定义</b>：贴合各店真实发薪节奏。</li>
+        <li><b>全新统计逻辑</b>：分类更准、实时刷新，账目心里更有底。</li>
+        <li><b>提成可快捷改数</b>：店主 / 店长可在明细中修改提成，并标注被改订单，提醒店员线下确认。</li>
+        <li><b>明细页大幅减负</b>：信息干净清爽，全新小标签标注订单类别，定位更快。</li>
+      </ul>
+      <div class="phone-rail">
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S13-员工薪资-390x844.png" alt="员工薪资"></div>
+          </div>
+          <div class="phone-caption">员工薪资</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S14-员工薪资明细-390x844.png" alt="员工薪资明细"></div>
+          </div>
+          <div class="phone-caption">员工薪资明细</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S15-结算周期-390x844.png" alt="结算周期"></div>
+          </div>
+          <div class="phone-caption">结算周期</div>
+        </div>
+        <div class="phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><img src="9.4汇报页面/phone/S16-业绩提成明细-390x844.png" alt="业绩提成明细"></div>
+          </div>
+          <div class="phone-caption">业绩提成明细</div>
+        </div>
+      </div>
+    </article>
+  </section>
+
   <!-- Feature details -->
   <section>
     <div class="sec-head">
@@ -663,15 +1091,15 @@
         <div class="feat-side">
           <div class="feat-no">02</div>
           <div class="feat-name">提成设置重构</div>
-          <span class="feat-tag st-ready">今日评审通过</span>
+          <span class="feat-tag st-ready">9月2日评审通过</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step done">
-              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-phase">9月2日</div>
               <div class="s-title">评审完成</div>
-              <div class="s-desc">提成设置重构方案今日完成评审。</div>
+              <div class="s-desc">提成设置重构方案于9月2日完成评审。</div>
             </div>
             <div class="step active">
               <div class="s-phase">下周三 9/9</div>
@@ -684,50 +1112,21 @@
               <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
             </div>
           </div>
-          <div class="feat-note"><b>改造重点：</b>合并「业绩设置 → 提成设置」两步流程，重构功能逻辑与交互设计，降低店主配置成本。今日与员工薪资、员工管理一同完成评审，9/16 前随批次正式上线。</div>
+          <div class="feat-note"><b>改造重点：</b>砍掉「先设业绩再设提成」的两步流程；方案参数一页尽览，规则项卡片组合生成方案；支持同一员工配置多套规则。界面更轻、路径更短，9/16 前随批次正式上线。详见上方「新功能亮相」。</div>
         </div>
       </article>
 
       <article class="feat">
         <div class="feat-side">
           <div class="feat-no">03</div>
-          <div class="feat-name">员工薪资</div>
-          <span class="feat-tag st-ready">今日评审通过</span>
-        </div>
-        <div class="feat-body">
-          <h4>推进节点</h4>
-          <div class="steps">
-            <div class="step done">
-              <div class="s-phase">9/2 · 今日</div>
-              <div class="s-title">评审完成</div>
-              <div class="s-desc">员工薪资功能方案今日完成评审。</div>
-            </div>
-            <div class="step active">
-              <div class="s-phase">下周三 9/9</div>
-              <div class="s-title">进入开发</div>
-              <div class="s-desc">与提成设置、员工管理同批次进入开发。</div>
-            </div>
-            <div class="step">
-              <div class="s-phase">9/16 前</div>
-              <div class="s-title">提测并上线</div>
-              <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
-            </div>
-          </div>
-          <div class="feat-note"><b>节奏：</b>今日完成评审，9/9 起与提成设置、员工管理同批次开发，9/16 前完成开发、测试并正式上线，与提成能力形成薪资管理闭环。</div>
-        </div>
-      </article>
-
-      <article class="feat">
-        <div class="feat-side">
-          <div class="feat-no">04</div>
           <div class="feat-name">员工管理</div>
-          <span class="feat-tag st-ready">今日评审通过</span>
+          <span class="feat-tag st-ready">9月2日评审通过</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step done">
-              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-phase">9月2日</div>
               <div class="s-title">评审完成</div>
               <div class="s-desc">员工管理与提成、薪资一同完成评审。</div>
             </div>
@@ -742,7 +1141,36 @@
               <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
             </div>
           </div>
-          <div class="feat-note"><b>范围：</b>员工管理与员工薪资、提成设置于今日同步完成评审，下周三(9/9)起同批次开发，9/16 前完成开发、测试并正式上线。具体功能范围以今日评审结论为准（可后续补充）。</div>
+          <div class="feat-note"><b>改造重点：</b>简洁大气的列表与详情；拖拽排序、在岗/休假快捷切换；敏感权限完全跟随角色；详情页可直改，列表页可快捷改头衔与角色；剑号与宝剑身份展示。详见上方「新功能亮相」。</div>
+        </div>
+      </article>
+
+      <article class="feat">
+        <div class="feat-side">
+          <div class="feat-no">04</div>
+          <div class="feat-name">员工薪资</div>
+          <span class="feat-tag st-ready">9月2日评审通过</span>
+        </div>
+        <div class="feat-body">
+          <h4>推进节点</h4>
+          <div class="steps">
+            <div class="step done">
+              <div class="s-phase">9月2日</div>
+              <div class="s-title">评审完成</div>
+              <div class="s-desc">员工薪资功能方案于9月2日完成评审。</div>
+            </div>
+            <div class="step active">
+              <div class="s-phase">下周三 9/9</div>
+              <div class="s-title">进入开发</div>
+              <div class="s-desc">与提成设置、员工管理同批次进入开发。</div>
+            </div>
+            <div class="step">
+              <div class="s-phase">9/16 前</div>
+              <div class="s-title">提测并上线</div>
+              <div class="s-desc">16 日前完成开发、测试并正式上线。</div>
+            </div>
+          </div>
+          <div class="feat-note"><b>改造重点：</b>矩阵式薪资总览；结算日/发薪日可自定义；全新分类统计实时刷新；业绩提成明细支持快捷改数并标注，提醒店员线下确认；订单类别小标签快速定位。详见上方「新功能亮相」。</div>
         </div>
       </article>
 
@@ -750,13 +1178,13 @@
         <div class="feat-side">
           <div class="feat-no">05</div>
           <div class="feat-name">核销接入</div>
-          <span class="feat-tag st-dev">今日启动接入</span>
+          <span class="feat-tag st-dev">9月3日启动接入</span>
         </div>
         <div class="feat-body">
           <h4>推进节点</h4>
           <div class="steps">
             <div class="step active">
-              <div class="s-phase">9/2 · 今日</div>
+              <div class="s-phase">9月3日</div>
               <div class="s-title">启动接入</div>
               <div class="s-desc">正式推进抖音、美团核销功能的接入工作。</div>
             </div>
@@ -813,6 +1241,90 @@
   </div>
 
 </div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+  <div class="lightbox-inner">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="关闭">×</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-caption');
+  var closeBtn = document.getElementById('lightbox-close');
+
+  function openLightbox(src, title) {
+    img.src = src;
+    img.alt = title || '';
+    cap.textContent = title || '';
+    box.hidden = false;
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    box.classList.remove('open');
+    box.hidden = true;
+    img.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.phone-screen').forEach(function (screen) {
+    screen.addEventListener('click', function () {
+      var pic = screen.querySelector('img');
+      if (!pic) return;
+      var title = (screen.closest('.phone') || {}).querySelector
+        ? (screen.closest('.phone').querySelector('.phone-caption') || {}).textContent
+        : pic.alt;
+      openLightbox(pic.src, title || pic.alt);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  box.addEventListener('click', function (e) {
+    if (e.target === box) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) closeLightbox();
+  });
+
+  // Drag-to-scroll for phone rails
+  document.querySelectorAll('.phone-rail').forEach(function (rail) {
+    var isDown = false, startX = 0, scrollLeft = 0, moved = false;
+    rail.addEventListener('mousedown', function (e) {
+      isDown = true; moved = false;
+      rail.classList.add('is-dragging');
+      startX = e.pageX - rail.offsetLeft;
+      scrollLeft = rail.scrollLeft;
+    });
+    rail.addEventListener('mouseleave', function () {
+      isDown = false; rail.classList.remove('is-dragging');
+    });
+    rail.addEventListener('mouseup', function () {
+      isDown = false; rail.classList.remove('is-dragging');
+    });
+    rail.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - rail.offsetLeft;
+      var walk = (x - startX) * 1.2;
+      if (Math.abs(walk) > 4) moved = true;
+      rail.scrollLeft = scrollLeft - walk;
+    });
+    // Prevent accidental lightbox open after drag
+    rail.addEventListener('click', function (e) {
+      if (moved) {
+        e.stopPropagation();
+        e.preventDefault();
+        moved = false;
+      }
+    }, true);
+  });
+})();
+</script>
 
 </body>
 </html>
