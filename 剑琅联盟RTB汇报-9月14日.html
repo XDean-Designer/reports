@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · RTB 进展汇报 · 9 月 14 日</title>
+<style>
+  :root {
+    --navy: #17293D;
+    --navy-2: #1E3A5F;
+    --steel: #35597F;
+    --tint: #EDF2F7;
+    --bg: #F5F6F8;
+    --card: #FFFFFF;
+    --line: #DEE3E9;
+    --line-soft: #EDF0F4;
+    --ink: #22303F;
+    --ink-soft: #5F6C7B;
+    --ink-faint: #8D97A3;
+    --done: #2F7D68;
+    --done-bg: #E7F1EE;
+    --hold: #A8761B;
+    --hold-bg: #F7EFE0;
+    --plan: #6C7789;
+    --plan-bg: #EEF1F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+
+  .num { font-variant-numeric: tabular-nums; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px 72px;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: var(--navy);
+    padding: 60px 0 52px;
+  }
+  .hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.45);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #8FA9C4;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: #8FA9C4; }
+
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700; letter-spacing: 3px; color: #fff;
+    margin: 14px 0 14px; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #9EBBD8; }
+
+  .hero-desc {
+    font-size: 15px; color: rgba(255,255,255,.76);
+    max-width: 800px; letter-spacing: .6px; line-height: 1.9;
+  }
+  .hero-desc b { color: #fff; font-weight: 600; }
+
+  .hero-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-top: 30px;
+  }
+  .hc {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px;
+    padding: 15px 16px 14px;
+  }
+  .hc-label {
+    font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.52);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .hc-value {
+    font-size: 18px; font-weight: 700; letter-spacing: 1px; color: #fff;
+    line-height: 1.35;
+  }
+  .hc-note {
+    font-size: 12px; color: rgba(255,255,255,.68);
+    line-height: 1.7; margin-top: 8px;
+  }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; letter-spacing: 1px;
+    padding: 7px 15px; border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.16);
+    color: rgba(255,255,255,.72);
+  }
+  .chip b { color: #fff; font-weight: 600; }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: #9EBBD8; flex: none; }
+
+  /* ===== Section ===== */
+  section { margin-top: 50px; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  }
+  .sec-title { font-size: 23px; font-weight: 700; letter-spacing: 1.5px; color: var(--navy-2); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); white-space: nowrap; }
+
+  .lead {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.9;
+    letter-spacing: .3px; margin-bottom: 18px;
+  }
+  .lead b { color: var(--ink); font-weight: 600; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .pad { padding: 22px 24px; }
+
+  /* ===== Chain (反馈机制) ===== */
+  .chain { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: stretch; }
+  .chain-node {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .cn-idx {
+    font-size: 11px; letter-spacing: 2px; font-weight: 700;
+    color: var(--steel); display: block; margin-bottom: 6px;
+  }
+  .cn-title { font-size: 15px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); }
+  .cn-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; margin-top: 7px; }
+  .chain-arrow { position: relative; }
+  .chain-arrow::before {
+    content: ""; position: absolute; top: 50%; left: 9px; right: 12px; height: 2px;
+    background: var(--line); transform: translateY(-50%);
+  }
+  .chain-arrow::after {
+    content: ""; position: absolute; top: 50%; right: 10px;
+    width: 8px; height: 8px;
+    border-top: 2px solid var(--steel); border-right: 2px solid var(--steel);
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .split-card {
+    border-radius: 12px; padding: 16px 18px;
+    border: 1px solid var(--line);
+  }
+  .split-card.yes { background: var(--done-bg); border-color: #C7DED8; }
+  .split-card.no { background: var(--tint); border-color: #D3DEE9; }
+  .sc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .sc-tag {
+    font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700;
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .split-card.yes .sc-tag { background: #fff; color: var(--done); }
+  .split-card.no .sc-tag { background: #fff; color: var(--steel); }
+  .sc-title { font-size: 14.5px; font-weight: 700; letter-spacing: .6px; }
+  .split-card.yes .sc-title { color: #24604F; }
+  .split-card.no .sc-title { color: var(--navy-2); }
+  .sc-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+
+  /* ===== 0 BUG result ===== */
+  .result-card {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 26px; align-items: center;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 26px;
+  }
+  .rc-left { border-right: 1px solid var(--line-soft); padding-right: 20px; }
+  .rc-num-row { display: flex; align-items: baseline; gap: 8px; }
+  .rc-num {
+    font-size: 62px; font-weight: 700; line-height: 1;
+    color: var(--navy-2); letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rc-unit { font-size: 14px; font-weight: 600; color: var(--ink-soft); letter-spacing: 1px; }
+  .rc-caption { font-size: 12px; color: var(--ink-faint); letter-spacing: 1.5px; margin-top: 10px; }
+  .rc-title { font-size: 17px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); }
+  .rc-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; margin-top: 9px; letter-spacing: .3px; }
+  .rc-desc b { color: var(--ink); font-weight: 600; }
+  .rc-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 14px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: .8px;
+    color: var(--done); background: var(--done-bg);
+    border: 1px solid #C7DED8; border-radius: 999px;
+    padding: 6px 15px;
+  }
+  .rc-badge::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--done);
+  }
+
+  /* ===== Tri stats ===== */
+  .tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .tri-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px 20px;
+  }
+  .tri-label { font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); margin-bottom: 8px; }
+  .tri-value { font-size: 17px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); }
+  .tri-value.g { color: var(--done); }
+  .tri-value.h { color: var(--hold); }
+  .tri-note { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; margin-top: 8px; }
+
+  .brief {
+    margin-top: 16px;
+    background: var(--navy-2); border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 13.5px; color: rgba(255,255,255,.86); letter-spacing: .5px;
+  }
+  .brief b { color: #fff; font-weight: 600; }
+
+  /* ===== Timeline ===== */
+  .tl { display: flex; align-items: stretch; gap: 0; }
+  .tl-item {
+    flex: 1 1 0; min-width: 0;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 15px;
+    position: relative;
+  }
+  .tl-item + .tl-item { margin-left: 28px; }
+  .tl-item + .tl-item::before {
+    content: ""; position: absolute; left: -20px; top: 50%;
+    width: 12px; height: 0;
+    border-top: 2px solid var(--line);
+  }
+  .tl-item + .tl-item::after {
+    content: ""; position: absolute; left: -11px; top: 50%;
+    width: 7px; height: 7px;
+    border-top: 2px solid var(--steel); border-right: 2px solid var(--steel);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .tl-item.on { background: var(--navy-2); border-color: var(--navy-2); }
+  .tl-date { font-size: 11.5px; letter-spacing: 1px; font-weight: 700; color: var(--steel); }
+  .tl-item.on .tl-date { color: #9EBBD8; }
+  .tl-title { font-size: 14.5px; font-weight: 700; letter-spacing: .6px; color: var(--navy-2); margin-top: 5px; }
+  .tl-item.on .tl-title { color: #fff; }
+  .tl-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.7; margin-top: 6px; }
+  .tl-item.on .tl-desc { color: rgba(255,255,255,.76); }
+
+  .gain3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .gain-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 17px 19px;
+  }
+  .gain-title { font-size: 15px; font-weight: 700; letter-spacing: .6px; color: var(--navy-2); display: flex; align-items: center; gap: 9px; }
+  .gain-title::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--done); flex: none;
+  }
+  .gain-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; margin-top: 8px; }
+
+  .scope {
+    margin-top: 14px; padding: 13px 18px;
+    background: var(--tint); border: 1px solid #D3DEE9; border-radius: 12px;
+    font-size: 12.5px; color: var(--ink-soft); letter-spacing: .3px;
+  }
+  .scope b { color: var(--navy-2); font-weight: 600; }
+
+  /* ===== Screenshots ===== */
+  .shot-list { display: flex; flex-direction: column; gap: 16px; }
+  .shot {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 18px 14px;
+  }
+  .shot-img { display: block; width: 100%; max-width: 720px; height: auto; border-radius: 8px; }
+  .shot-cap { margin-top: 12px; }
+  .shot-cap-t {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: 13.5px; font-weight: 700; letter-spacing: .6px; color: var(--navy-2);
+  }
+  .shot-cap-t .s-tag {
+    font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700;
+    color: var(--steel); background: var(--tint);
+    border: 1px solid #D3DEE9; border-radius: 4px; padding: 3px 8px;
+  }
+  .shot-cap-s {
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.85;
+    margin-top: 7px; letter-spacing: .2px;
+  }
+  .shot-cap-s b { color: var(--ink); font-weight: 600; }
+  .shot-cap-s .sep { color: var(--line); padding: 0 6px; }
+
+  /* ===== Gantt ===== */
+  .gantt-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 22px 20px;
+    overflow-x: auto;
+  }
+  .gantt { min-width: 820px; }
+  .g-head { display: grid; grid-template-columns: 196px 1fr; gap: 14px; margin-bottom: 10px; }
+  .g-weeks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .week-label {
+    text-align: center; font-size: 11.5px; letter-spacing: .8px;
+    color: var(--ink-soft); padding: 9px 6px;
+    background: #F2F5F8; border: 1px solid var(--line); border-radius: 8px;
+  }
+  .week-label b { display: block; font-size: 12.5px; color: var(--ink); margin-bottom: 3px; }
+  .week-label.now { background: var(--tint); border-color: #C9D8E6; }
+  .week-label.now b { color: var(--navy-2); }
+  .week-label .tgt { display: block; margin-top: 3px; font-size: 11px; color: var(--steel); font-weight: 600; }
+
+  .g-row { display: grid; grid-template-columns: 196px 1fr; gap: 14px; align-items: center; margin-top: 11px; }
+  .row-name { font-size: 13.5px; font-weight: 600; letter-spacing: .4px; color: var(--ink); }
+  .row-name small { display: block; font-size: 11px; font-weight: 400; color: var(--ink-faint); margin-top: 3px; }
+  .track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tc {
+    grid-row: 1; height: 38px;
+    background: #F7F9FB; border: 1px dashed #E1E7ED; border-radius: 8px;
+  }
+  .bar {
+    grid-row: 1; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; padding: 0 10px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .3px;
+    white-space: nowrap; overflow: hidden;
+  }
+  .bar.b-done { background: var(--done); color: #fff; }
+  .bar.b-run { background: var(--navy-2); color: #fff; }
+  .bar.b-plan { background: transparent; border: 1.5px dashed #B6C0CC; color: var(--plan); }
+  .bar.c1 { grid-column: 1 / 2; }
+  .bar.c12 { grid-column: 1 / 3; }
+  .bar.c2 { grid-column: 2 / 3; }
+  .bar.c24 { grid-column: 2 / 5; }
+  .bar.c34 { grid-column: 3 / 5; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+    font-size: 12px; color: var(--ink-soft);
+  }
+  .legend i {
+    display: inline-block; width: 22px; height: 10px; border-radius: 3px;
+    margin-right: 7px; vertical-align: middle;
+  }
+
+  /* ===== Banner / calm ===== */
+  .banner {
+    display: grid; grid-template-columns: 150px 1fr;
+    gap: 22px; align-items: center;
+    background: var(--navy-2); border-radius: 14px;
+    padding: 22px 26px; margin-bottom: 16px;
+  }
+  .banner-badge {
+    text-align: center; color: #fff;
+    border-right: 1px solid rgba(255,255,255,.18);
+    padding-right: 18px;
+  }
+  .banner-badge .bb-date {
+    font-size: 30px; font-weight: 700; letter-spacing: 1px; line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .banner-badge .bb-cap {
+    font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.62); margin-top: 6px;
+  }
+  .banner-body { font-size: 14px; color: rgba(255,255,255,.86); line-height: 1.9; letter-spacing: .3px; }
+  .banner-body b { color: #fff; font-weight: 600; }
+
+  .calm {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--hold-bg); border: 1px solid #EBDCBB;
+    border-radius: 12px; padding: 16px 20px; margin-top: 16px;
+  }
+  .calm-mark {
+    flex: none; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--hold);
+    border-radius: 4px; padding: 4px 9px; margin-top: 2px;
+  }
+  .calm-body { font-size: 13.5px; color: #6B5210; line-height: 1.85; letter-spacing: .3px; }
+  .calm-body b { color: #4F3C0A; font-weight: 700; }
+
+  /* ===== 核销 chain ===== */
+  .chain4 { display: flex; align-items: stretch; }
+  .c4 {
+    flex: 1 1 0; min-width: 0;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 15px 16px;
+    position: relative;
+  }
+  .c4 + .c4 { margin-left: 30px; }
+  .c4 + .c4::before {
+    content: ""; position: absolute; left: -21px; top: 50%;
+    width: 13px; height: 0; border-top: 2px solid var(--line);
+  }
+  .c4 + .c4::after {
+    content: ""; position: absolute; left: -12px; top: 50%;
+    width: 7px; height: 7px;
+    border-top: 2px solid var(--steel); border-right: 2px solid var(--steel);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .c4-idx { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--steel); }
+  .c4-title { font-size: 14.5px; font-weight: 700; letter-spacing: .6px; color: var(--navy-2); margin-top: 6px; }
+  .c4-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.7; margin-top: 6px; }
+
+  .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .kv-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 17px 19px;
+  }
+  .kv-label { font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); margin-bottom: 8px; }
+  .kv-value { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); }
+  .kv-note { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; margin-top: 8px; }
+
+  /* ===== Two step ===== */
+  .two-step { display: grid; grid-template-columns: 1fr 40px 1fr; align-items: stretch; }
+  .ts-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px 20px;
+  }
+  .ts-card.next { border-color: #C9D8E6; background: var(--tint); }
+  .ts-idx { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--steel); }
+  .ts-title { font-size: 16px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); margin-top: 7px; }
+  .ts-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; margin-top: 8px; }
+  .ts-arrow { position: relative; }
+  .ts-arrow::before {
+    content: ""; position: absolute; top: 50%; left: 8px; right: 11px; height: 2px;
+    background: var(--line); transform: translateY(-50%);
+  }
+  .ts-arrow::after {
+    content: ""; position: absolute; top: 50%; right: 9px;
+    width: 8px; height: 8px;
+    border-top: 2px solid var(--steel); border-right: 2px solid var(--steel);
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  /* ===== Final ===== */
+  .final { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .final-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 19px 21px;
+    border-top: 3px solid var(--navy-2);
+  }
+  .final-label { font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); }
+  .final-title { font-size: 16px; font-weight: 700; letter-spacing: .8px; color: var(--navy-2); margin-top: 7px; }
+  .final-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; margin-top: 8px; }
+
+  /* ===== Footer ===== */
+  .page-footer {
+    margin-top: 54px; padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--ink-faint); letter-spacing: 1.5px;
+  }
+  .page-footer .dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--steel);
+    display: inline-block; margin-right: 8px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .hero-cards { grid-template-columns: 1fr 1fr; }
+    .result-card { grid-template-columns: 1fr; gap: 16px; }
+    .rc-left { border-right: none; border-bottom: 1px solid var(--line-soft); padding: 0 0 14px; }
+    .chain, .two-step { grid-template-columns: 1fr; }
+    .chain-arrow, .ts-arrow { height: 32px; }
+    .chain-arrow::before, .ts-arrow::before {
+      top: 6px; bottom: 11px; left: 50%; right: auto; width: 2px; height: auto; transform: translateX(-50%);
+    }
+    .chain-arrow::after, .ts-arrow::after {
+      top: auto; bottom: 9px; left: 50%; right: auto; transform: translateX(-50%) rotate(135deg);
+    }
+    .tri, .gain3, .final, .kv { grid-template-columns: 1fr; }
+    .tl, .chain4 { flex-direction: column; }
+    .tl-item + .tl-item, .c4 + .c4 { margin-left: 0; margin-top: 30px; }
+    .tl-item + .tl-item::before, .c4 + .c4::before {
+      left: 50%; top: -21px; width: 2px; height: 13px; border-top: none; border-left: 2px solid var(--line);
+      transform: translateX(-50%);
+    }
+    .tl-item + .tl-item::after, .c4 + .c4::after {
+      left: 50%; top: -10px; transform: translateX(-50%) rotate(135deg);
+    }
+    .banner { grid-template-columns: 1fr; gap: 14px; }
+    .banner-badge { border-right: none; border-bottom: 1px solid rgba(255,255,255,.18); padding: 0 0 12px; }
+  }
+  @media (max-width: 720px) {
+    .wrap, .hero-inner { padding-left: 18px; padding-right: 18px; }
+    .split { grid-template-columns: 1fr; }
+    .sec-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sec-en { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE · RTB</div>
+      </div>
+    </div>
+
+    <div class="kicker">Progress Review</div>
+    <h1>RTB 进展汇报 · <em>9 月 14 日</em></h1>
+    <p class="hero-desc">
+      开单流程已于 <b>9 月 7 日正式上线</b>并稳定运行，试点门店反馈良好；「0 BUG」目标基本达成。
+      提成设置、员工管理、员工薪资因涉及资金计算，<b>主动加严校验</b>，预计 <b>9 月 18 日</b>完成上线前全部工作。
+      核销接入已确定统一接入路径，<b>9 月底可上线</b>。整体节奏清晰、可控。
+    </p>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">Stability</div>
+        <div class="hc-value">0 BUG 目标<br>基本达成</div>
+        <div class="hc-note">本周期仅确认 1 个 BUG，已修复并闭环验证</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">Live</div>
+        <div class="hc-value">开单流程<br>9/7 已上线</div>
+        <div class="hc-note">运行稳定，试点门店日常在用，反馈满意</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">Release</div>
+        <div class="hc-value">本批次上线<br>9/18</div>
+        <div class="hc-note">提成 / 员工 / 薪资，主动多留两天严校验</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">Redemption</div>
+        <div class="hc-value">核销接入<br>9 月底</div>
+        <div class="hc-note">抖音与美团统一由汇付天下 ISV 接入</div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <span class="chip"><span class="dot"></span><b>汇报日期</b> · 2026-09-14</span>
+      <span class="chip"><b>上次汇报基线</b> · 2026-09-03</span>
+      <span class="chip"><b>模块</b> · 店务管理系统 RTB</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== 01 BUG 反馈 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">试点阶段 BUG 反馈<span>与「0 BUG」目标</span></h2>
+      <span class="sec-en">STABILITY &amp; BUG REVIEW</span>
+    </div>
+
+    <p class="lead">
+      试点阶段，前线（试点门店的销售与运营）会持续反馈使用中遇到的情况。每一条反馈都会经过产品侧核实：
+      确认为 BUG 的立即记录并修复；确认不是 BUG 的，转入优化调研，成为产品改进的输入。
+    </p>
+
+    <div class="chain">
+      <div class="chain-node">
+        <span class="cn-idx">STEP 01</span>
+        <div class="cn-title">前线持续反馈</div>
+        <div class="cn-desc">试点门店的销售与运营在日常使用中即时反馈，问题不过夜、信息不丢失。</div>
+      </div>
+      <div class="chain-arrow"></div>
+      <div class="chain-node">
+        <span class="cn-idx">STEP 02</span>
+        <div class="cn-title">产品侧逐条核实</div>
+        <div class="cn-desc">对每一条反馈做复现与判定，明确是功能缺陷、优化建议，还是使用方式差异。</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="split-card yes">
+        <div class="sc-head">
+          <span class="sc-tag">确认是 BUG</span>
+          <div class="sc-title">记录并立即修复</div>
+        </div>
+        <div class="sc-desc">进入缺陷跟踪，修复后做闭环验证，并同步前线与门店，确保影响面为零。</div>
+      </div>
+      <div class="split-card no">
+        <div class="sc-head">
+          <span class="sc-tag">确认不是 BUG</span>
+          <div class="sc-title">转入优化调研</div>
+        </div>
+        <div class="sc-desc">登记为优化建议，纳入优化方案调研，作为后续迭代的重要输入持续跟进。</div>
+      </div>
+    </div>
+
+    <div class="result-card" style="margin-top:16px">
+      <div class="rc-left">
+        <div class="rc-num-row">
+          <span class="rc-num">1</span>
+          <span class="rc-unit">个 BUG</span>
+        </div>
+        <div class="rc-caption">本周期确认总数</div>
+      </div>
+      <div>
+        <div class="rc-title">自「0 BUG」目标提出以来，RTB 仅确认 1 个 BUG</div>
+        <p class="rc-desc">
+          该问题出现在开单场景：<b>改价后的金额有极小概率出现 1 分钱的误差</b>。问题一经确认即完成修复，
+          并做了闭环验证，<b>不影响门店正常经营</b>，也无任何遗留线上问题。
+        </p>
+        <span class="rc-badge">RTB 基本完成「0 BUG」目标 · 仅此一处小瑕疵，且已闭环</span>
+      </div>
+    </div>
+
+    <div class="tri">
+      <div class="tri-card">
+        <div class="tri-label">确认为 BUG</div>
+        <div class="tri-value g">1 条</div>
+        <div class="tri-note">开单改价金额 1 分钱误差，已修复并闭环验证。</div>
+      </div>
+      <div class="tri-card">
+        <div class="tri-label">其余反馈</div>
+        <div class="tri-value">绝大多数为优化建议</div>
+        <div class="tri-note">并非功能缺陷，均已登记为优化输入，进入调研与排期。</div>
+      </div>
+      <div class="tri-card">
+        <div class="tri-label">疑似 BUG 的情况</div>
+        <div class="tri-value h">几乎都是操作失误</div>
+        <div class="tri-note">核实后确认为用户自身操作步骤差异，并非 BUG，已同步说明。</div>
+      </div>
+    </div>
+
+    <div class="brief">
+      <b>这些反馈正在被积极研究。</b>前线反馈已成为优化方案调研最重要的参考来源，每一项建议都有记录、有跟进、有反馈，形成稳定的闭环。
+    </div>
+  </section>
+
+  <!-- ===== 02 开单上线 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">开单流程 · 9 月 7 日已上线<span>功能运行稳定</span></h2>
+      <span class="sec-en">CHECKOUT LIVE</span>
+    </div>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-date">8/31</div>
+        <div class="tl-title">提交测试</div>
+        <div class="tl-desc">开单流程优化进入质量验收。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">9/1 – 9/6</div>
+        <div class="tl-title">补充测试</div>
+        <div class="tl-desc">关联逻辑较多，扩大测试覆盖范围。</div>
+      </div>
+      <div class="tl-item on">
+        <div class="tl-date">9/7</div>
+        <div class="tl-title">正式上线</div>
+        <div class="tl-desc">试点门店可用，进入真实经营场景。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">9/10</div>
+        <div class="tl-title">唯一 BUG 修复</div>
+        <div class="tl-desc">改价金额 1 分钱误差，已修复闭环。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">至今</div>
+        <div class="tl-title">稳定运行</div>
+        <div class="tl-desc">无新增线上故障，门店持续在用。</div>
+      </div>
+    </div>
+
+    <div class="gain3">
+      <div class="gain-card">
+        <div class="gain-title">运行稳定</div>
+        <div class="gain-desc">上线以来未出现影响门店经营的线上故障，服务持续可用。</div>
+      </div>
+      <div class="gain-card">
+        <div class="gain-title">门店日常在用</div>
+        <div class="gain-desc">试点门店已将开单用于日常经营，成为真实业务流程的一部分。</div>
+      </div>
+      <div class="gain-card">
+        <div class="gain-title">用户反馈满意</div>
+        <div class="gain-desc">店主反馈开单顺畅、能顺畅开卡扣卡，满足日常经营需求。</div>
+      </div>
+    </div>
+
+    <div class="scope">
+      <b>本批次范围：</b>快速消费（免填任何字段，直接输入金额开单记账，可备注、可事后编辑）+ 开单流程体验优化。
+    </div>
+  </section>
+
+  <!-- ===== 03 前线反馈 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">前线反馈实况<span>来自试点门店的真实声音</span></h2>
+      <span class="sec-en">VOICE FROM THE FRONTLINE</span>
+    </div>
+
+    <p class="lead">
+      以下为前线在群内提交的门店使用反馈截图（试点门店 · 运营转述店主反馈）。
+      反馈集中在<b>开单顺畅、能顺畅开卡扣卡、满意度良好</b>；同时带来若干优化建议，均已登记为后续优化输入。
+    </p>
+
+    <div class="shot-list">
+
+      <figure class="shot">
+        <img class="shot-img" src="群截图/ScreenShot_2026-09-13_195840_758.png" alt="试点门店使用反馈 01">
+        <figcaption class="shot-cap">
+          <div class="shot-cap-t">
+            <span class="s-tag">前线反馈 01</span>
+            木子造型（木子店）· 9 月 12 日
+          </div>
+          <div class="shot-cap-s">
+            <b>操作：</b>今日未发现 bug<span class="sep">|</span>
+            <b>功能：</b>暂无新功能需求<span class="sep">|</span>
+            <b>使用意愿度：</b>进店顾客 23 位（会员客户 16 位、散客 7 位），消费项目中剪发占比最大
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img class="shot-img" src="群截图/ScreenShot_2026-09-13_195914_342.png" alt="试点门店使用反馈 02">
+        <figcaption class="shot-cap">
+          <div class="shot-cap-t">
+            <span class="s-tag">前线反馈 02</span>
+            木子造型（万达店）· 9 月 12 日
+          </div>
+          <div class="shot-cap-s">
+            <b>操作：</b>门店日常在使用系统，两种开单方式下的消费提示需保持一致，已提交后台排查<span class="sep">|</span>
+            <b>功能：</b>暂无新功能添加<span class="sep">|</span>
+            <b>满意度：</b>整体满意度尚可，消费提示的优化诉求较强烈
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img class="shot-img" src="群截图/ScreenShot_2026-09-13_195934_571.png" alt="试点门店使用反馈 03">
+        <figcaption class="shot-cap">
+          <div class="shot-cap-t">
+            <span class="s-tag">前线反馈 03</span>
+            发型店铺 · 9 月 12 日
+          </div>
+          <div class="shot-cap-s">
+            <b>操作：</b>暂无发现任何 bug<span class="sep">|</span>
+            <b>满意度：</b>店主能够顺畅开单扣卡，使用比较满意<span class="sep">|</span>
+            <b>优化建议：</b>希望提供电脑端；会员扣卡完成后，在开单流水详情页直接看到消费后的会员卡剩余金额<span class="sep">|</span>
+            <b>已跟进：</b>已向店主说明此前情况属乌龙事件并做全量核查，让店主放心
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img class="shot-img" src="群截图/ScreenShot_2026-09-13_195947_426.png" alt="试点门店使用反馈 04">
+        <figcaption class="shot-cap">
+          <div class="shot-cap-t">
+            <span class="s-tag">前线反馈 04</span>
+            化妆品店铺 · 9 月 12 日
+          </div>
+          <div class="shot-cap-s">
+            <b>操作：</b>今日未发现 bug<span class="sep">|</span>
+            <b>功能：</b>暂无新功能添加<span class="sep">|</span>
+            <b>满意度：</b>该店此前未使用过系统，今天使用剑琅联盟接受度可以、满意度可以
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img class="shot-img" src="群截图/ScreenShot_2026-09-13_200025_828.png" alt="门店日报 05">
+        <figcaption class="shot-cap">
+          <div class="shot-cap-t">
+            <span class="s-tag">前线反馈 05</span>
+            门店日报 · 9 月 11 日
+          </div>
+          <div class="shot-cap-s">
+            <b>操作：</b>店主提出会员扣款后卡余额未变化的疑问<span class="sep">|</span>
+            <b>满意度：</b>店主能够顺畅开单扣卡，使用满意<span class="sep">|</span>
+            <b>已跟进：</b>次日核清为乌龙事件，并完成该店全部会员扣卡金额核查，无遗漏<span class="sep">|</span>
+            <b>优化建议：</b>店主建议增加小票机
+          </div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ===== 04 上线节奏 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">本批次上线节奏<span>9 月 18 日完成上线前全部工作</span></h2>
+      <span class="sec-en">RELEASE SCHEDULE</span>
+    </div>
+
+    <div class="banner">
+      <div class="banner-badge">
+        <div class="bb-date">9/18</div>
+        <div class="bb-cap">本批次上线</div>
+      </div>
+      <div class="banner-body">
+        提成设置重构、员工管理、员工薪资<b>不在 9 月 16 日上线</b>，预计 <b>9 月 18 日完成上线前的所有工作</b>。
+        三项功能内容量大，且均涉及资金计算，不能出一点错误，因此主动多留两天，用于全链路校验与双人核对。
+      </div>
+    </div>
+
+    <div class="gain3">
+      <div class="gain-card">
+        <div class="gain-title">提成设置重构</div>
+        <div class="gain-desc">砍掉「先设业绩再设提成」的两步流程，方案参数一页尽览，规则项卡片组合生成方案，支持同一员工配置多套规则。</div>
+      </div>
+      <div class="gain-card">
+        <div class="gain-title">员工管理</div>
+        <div class="gain-desc">列表与详情重构，拖拽排序、在岗休假快捷切换、权限跟随角色，详情页可直接编辑，操作路径更短。</div>
+      </div>
+      <div class="gain-card">
+        <div class="gain-title">员工薪资</div>
+        <div class="gain-desc">矩阵式薪资总览，结算日与发薪日可自定义，分类统计实时刷新，业绩提成明细支持快捷改数并标注。</div>
+      </div>
+    </div>
+
+    <div class="calm">
+      <span class="calm-mark">主动把控</span>
+      <div class="calm-body">
+        因三项功能均涉及资金计算，我们主动把校验做实：<b>多留两天做全链路核对与双人复核</b>。
+        这<b>仅顺延两天，后续批次与整月计划不变</b>，整体节奏仍在计划之内，并且换来的是一个上线即稳定的版本。
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 甘特图 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">推进甘特图<span>以 9 月 14 日为基准</span></h2>
+      <span class="sec-en">TIMELINE</span>
+    </div>
+
+    <div class="gantt-card">
+      <div class="gantt">
+        <div class="g-head">
+          <div></div>
+          <div class="g-weeks">
+            <div class="week-label"><b>上周</b>9/7 – 9/13<span class="tgt">9/7 开单已上线</span></div>
+            <div class="week-label now"><b>本周</b>9/14 – 9/20<span class="tgt">9/18 本批次上线</span></div>
+            <div class="week-label"><b>下周</b>9/21 – 9/27<span class="tgt">核销研发推进</span></div>
+            <div class="week-label"><b>9 月底</b>9/28 – 9/30<span class="tgt">核销上线</span></div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">开单流程优化<small>快速消费 + 流程优化</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-done c1">9/7 已上线 · 运行稳定</div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">提成设置重构<small>内容量大 · 涉及资金计算</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-run c2">9/18 完成上线前全部工作</div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">员工管理<small>同批次推进</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-run c2">9/18 完成上线前全部工作</div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">员工薪资<small>同批次推进</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-run c2">9/18 完成上线前全部工作</div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">核销接入<small>抖音 / 美团 · 汇付天下 ISV</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-run c24">9/14 可排期进开发 → 9 月底可上线</div>
+          </div>
+        </div>
+
+        <div class="g-row">
+          <div class="row-name">价目表重构 + 开单配套优化<small>9 月后续推进</small></div>
+          <div class="track">
+            <div class="tc"></div><div class="tc"></div><div class="tc"></div><div class="tc"></div>
+            <div class="bar b-plan c34">交互设计全面优化 · 9 月后续推进</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><i style="background:#2F7D68"></i>已完成并上线</span>
+        <span><i style="background:#1E3A5F"></i>本批次推进中</span>
+        <span><i style="background:transparent;border:1.5px dashed #B6C0CC"></i>后续规划</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 06 核销接入 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">核销接入<span>抖音 / 美团</span></h2>
+      <span class="sec-en">VOUCHER REDEMPTION</span>
+    </div>
+
+    <p class="lead">
+      核销接入（抖音 / 美团）已<b>全部确定由汇付天下 ISV 接入</b>。产品方案已完成，
+      覆盖从申请授权到团购核销、再到生成订单记账的全链路。
+    </p>
+
+    <div class="chain4">
+      <div class="c4">
+        <div class="c4-idx">STEP 01</div>
+        <div class="c4-title">申请授权</div>
+        <div class="c4-desc">平台授权与账号权限申请，由汇付天下 ISV 通道统一承接。</div>
+      </div>
+      <div class="c4">
+        <div class="c4-idx">STEP 02</div>
+        <div class="c4-title">团购核销</div>
+        <div class="c4-desc">门店开单时直接核销抖音 / 美团券码，验券与收款一步完成。</div>
+      </div>
+      <div class="c4">
+        <div class="c4-idx">STEP 03</div>
+        <div class="c4-title">生成订单记账</div>
+        <div class="c4-desc">核销结果自动生成订单并记账，与门店经营数据保持一致。</div>
+      </div>
+      <div class="c4">
+        <div class="c4-idx">STEP 04</div>
+        <div class="c4-title">业务闭环</div>
+        <div class="c4-desc">与开单流程打通，形成「核销 → 开单 → 记账」的完整闭环。</div>
+      </div>
+    </div>
+
+    <div class="kv">
+      <div class="kv-card">
+        <div class="kv-label">进入开发</div>
+        <div class="kv-value">预计 9 月 14 日可排期</div>
+        <div class="kv-note">产品方案与全链路设计已完成，具备进入研发排期的条件。</div>
+      </div>
+      <div class="kv-card">
+        <div class="kv-label">预计上线</div>
+        <div class="kv-value">9 月底可上线</div>
+        <div class="kv-note">按当前节奏推进，9 月底门店可用团购核销能力。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 07 后续规划 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">后续规划<span>交互设计全面优化</span></h2>
+      <span class="sec-en">WHAT'S NEXT</span>
+    </div>
+
+    <p class="lead">
+      RTB 后续将在<b>交互设计上进行全面优化</b>。下一步聚焦<b>价目表</b>，完成价目表重构后，开单流程也会做配套优化。
+    </p>
+
+    <div class="two-step">
+      <div class="ts-card">
+        <div class="ts-idx">NEXT 01</div>
+        <div class="ts-title">价目表重构</div>
+        <div class="ts-desc">以试点调研结论为依据，对价目表的信息结构与操作路径做系统重构，作为交互设计全面优化的第一步。</div>
+      </div>
+      <div class="ts-arrow"></div>
+      <div class="ts-card next">
+        <div class="ts-idx">NEXT 02</div>
+        <div class="ts-title">开单流程配套优化</div>
+        <div class="ts-desc">价目表重构完成后，开单作为最核心的功能同步做配套优化，让开单与价目表的链路更顺、更快。</div>
+      </div>
+    </div>
+
+    <div class="brief" style="margin-top:16px">
+      <b>开单是 RTB 最核心的功能。</b>唯有持续打磨优化，才能留住用户 —— 这也是后续交互设计优化的主线。
+    </div>
+  </section>
+
+  <!-- ===== 08 收尾 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">总体结论<span>稳定、可控、方向明确</span></h2>
+      <span class="sec-en">SUMMARY</span>
+    </div>
+
+    <div class="final">
+      <div class="final-card">
+        <div class="final-label">STABILITY</div>
+        <div class="final-title">稳定性已被验证</div>
+        <div class="final-desc">「0 BUG」目标基本达成，唯一问题已修复闭环；前线反馈开单顺畅、满意度良好，门店在用。</div>
+      </div>
+      <div class="final-card">
+        <div class="final-label">SCHEDULE</div>
+        <div class="final-title">节奏完全可控</div>
+        <div class="final-desc">9 月 18 日本批次上线、9 月底核销上线，两个节点清晰明确，均在计划之内。</div>
+      </div>
+      <div class="final-card">
+        <div class="final-label">DIRECTION</div>
+        <div class="final-title">方向清晰明确</div>
+        <div class="final-desc">交互设计全面优化已排上日程：价目表重构先行，开单流程配套优化紧随，形成连续的打磨路径。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-footer">
+    <div><span class="dot"></span>剑琅联盟 · RTB 进展汇报 · 2026-09-14</div>
+    <div>店务管理系统 RTB</div>
+  </div>
+
+</div>
+
+</body>
+</html>
