@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · AI 原型与设计工作的流程体系</title>
+<style>
+  :root {
+    --navy: #1E3A5F;
+    --steel: #3E6B99;
+    --steel-soft: #5C82AD;
+    --blue-tint: #D7E0EA;
+    --bg: #F5F6F8;
+    --card: #FFFFFF;
+    --ink: #2B3440;
+    --ink-soft: #6B7480;
+    --ink-faint: #98A1AC;
+    --line: #E2E6EC;
+    --line-soft: #EEF1F5;
+    --chip-bg: rgba(62,107,153,.08);
+    --amber: #B8860B;
+    --amber-tint: #F4E7C6;
+    --teal: #2A7F72;
+    --teal-tint: #D6EBE6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .serif { font-family: Georgia, "Songti SC", "STSong", "SimSun", serif; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px 72px;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #E9EEF4 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 66px 0 52px;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -120px; top: -160px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(62,107,153,.14);
+    pointer-events: none;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    right: 40px; top: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(62,107,153,.14), rgba(62,107,153,0) 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 38px; }
+  .brand-mark {
+    width: 44px; height: 44px; flex: none;
+    border: 1.5px solid var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 20px; font-weight: 700;
+    background: #fff;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; color: var(--steel);
+    font-weight: 700; text-transform: uppercase;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--steel); border-radius: 2px; }
+
+  .hero h1 {
+    font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 700; letter-spacing: 3px;
+    margin: 14px 0 14px; line-height: 1.28;
+  }
+  .hero h1 em { font-style: normal; color: var(--steel); }
+
+  .hero-desc {
+    font-size: 15.5px; color: var(--ink-soft); letter-spacing: .6px;
+    max-width: 780px; line-height: 1.9;
+  }
+  .hero-desc b { color: var(--ink); font-weight: 600; }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; letter-spacing: 1px;
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .chip b { color: var(--ink); font-weight: 600; }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--steel); flex: none; }
+
+  /* ===== Section ===== */
+  section { margin-top: 52px; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  }
+  .sec-title { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: var(--navy); }
+  .sec-title span { font-size: 13px; font-weight: 500; color: var(--ink-faint); letter-spacing: 1px; margin-left: 10px; }
+  .sec-en { font-size: 12px; letter-spacing: 2px; color: var(--ink-faint); white-space: nowrap; }
+
+  /* ===== Value cards ===== */
+  .value-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .v-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .v-card::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--steel);
+  }
+  .v-role {
+    font-size: 11px; letter-spacing: 3px; color: var(--ink-faint);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .v-title { font-size: 17px; font-weight: 700; letter-spacing: 1px; color: var(--navy); }
+  .v-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.85; margin-top: 10px; letter-spacing: .3px; }
+  .v-desc b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Flow ===== */
+  .flow-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 30px 26px 26px;
+    box-shadow: 0 8px 28px rgba(62,107,153,.06);
+    min-width: 0;
+  }
+  .flow-note {
+    font-size: 12.5px; color: var(--ink-faint); letter-spacing: .5px;
+    margin-bottom: 26px;
+  }
+
+  .flow { display: flex; align-items: stretch; min-width: 0; }
+  .flow-step {
+    flex: 1 1 0; min-width: 0;
+    background: #F7FAFC;
+    border: 1px solid var(--blue-tint);
+    border-radius: 12px;
+    padding: 16px 14px 15px;
+    position: relative;
+  }
+  .flow-step .fs-idx {
+    font-family: Georgia, serif;
+    font-size: 11px; letter-spacing: 2px; font-weight: 700;
+    color: var(--steel);
+    display: block; margin-bottom: 6px;
+  }
+  .flow-step .fs-name {
+    font-size: 15px; font-weight: 700; letter-spacing: .8px;
+    color: var(--navy); line-height: 1.45;
+  }
+  .flow-step .fs-desc {
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.75;
+    margin-top: 8px; letter-spacing: .2px;
+  }
+  .flow-step.is-key {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .flow-step.is-key .fs-idx { color: #9DBCDA; }
+  .flow-step.is-key .fs-name { color: #fff; }
+  .flow-step.is-key .fs-desc { color: rgba(255,255,255,.8); }
+
+  .flow-arrow {
+    flex: none; width: 38px;
+    position: relative;
+  }
+  .flow-arrow::before {
+    content: "";
+    position: absolute; top: 50%; left: 8px; right: 11px; height: 2px;
+    background: var(--blue-tint);
+    transform: translateY(-50%);
+  }
+  .flow-arrow::after {
+    content: "";
+    position: absolute; top: 50%; right: 9px;
+    width: 8px; height: 8px;
+    border-top: 2px solid var(--steel);
+    border-right: 2px solid var(--steel);
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  /* branch */
+  .branch-stem {
+    width: 2px; height: 30px;
+    margin: 0 auto;
+    border-left: 2px dashed var(--blue-tint);
+  }
+  .branch-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .branch-head .bh-line { flex: 1 1 auto; height: 0; border-top: 1px dashed var(--line); }
+  .branch-head .bh-text {
+    flex: none;
+    font-size: 11.5px; letter-spacing: 2px; font-weight: 600;
+    color: var(--amber);
+    background: #FBF5E6;
+    border: 1px solid var(--amber-tint);
+    border-radius: 999px;
+    padding: 5px 16px;
+    white-space: nowrap;
+  }
+  .branch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .b-node {
+    background: #FFFDF8;
+    border: 1px solid var(--amber-tint);
+    border-radius: 12px;
+    padding: 15px 15px 14px;
+    position: relative;
+  }
+  .b-node::before {
+    content: "";
+    position: absolute; top: -15px; left: 22px;
+    width: 2px; height: 14px;
+    border-left: 2px dashed var(--amber-tint);
+  }
+  .b-tag {
+    display: inline-block;
+    font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700;
+    color: var(--amber);
+    background: #FBF5E6;
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+  }
+  .b-problem {
+    font-size: 13.5px; font-weight: 700; color: #7A5B10;
+    letter-spacing: .4px; line-height: 1.5;
+  }
+  .b-fix {
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.75;
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid var(--amber-tint);
+    letter-spacing: .2px;
+  }
+  .b-fix b { color: var(--ink); font-weight: 600; }
+
+  /* ===== SOP ===== */
+  .sop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sop-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sop-card.wide { grid-column: 1 / -1; }
+  .sop-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .sop-idx {
+    flex: none;
+    font-family: Georgia, serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    color: #fff; background: var(--steel);
+    border-radius: 6px;
+    padding: 4px 9px;
+  }
+  .sop-name { font-size: 16.5px; font-weight: 700; letter-spacing: 1px; color: var(--navy); }
+  .sop-sub { font-size: 11.5px; color: var(--ink-faint); letter-spacing: 1px; margin-left: auto; white-space: nowrap; }
+
+  .sop-lead {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.8;
+    background: var(--chip-bg);
+    border: 1px solid var(--blue-tint);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    letter-spacing: .3px;
+  }
+  .sop-lead b { color: var(--navy); font-weight: 600; }
+
+  .list { list-style: none; }
+  .list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--ink-soft); line-height: 1.8;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--line-soft);
+    letter-spacing: .3px;
+  }
+  .list li:last-child { border-bottom: none; }
+  .list li .n {
+    flex: none; width: 18px;
+    font-family: Georgia, serif;
+    font-size: 12px; font-weight: 700; color: var(--steel);
+    padding-top: 1px;
+  }
+  .list li b { color: var(--ink); font-weight: 600; }
+
+  .req-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+  .req-list li { align-items: flex-start; }
+
+  /* ===== Tools ===== */
+  .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tool-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .tool-name { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--navy); }
+  .tool-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.8; margin-top: 8px; letter-spacing: .2px; }
+  .tool-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12.5px; letter-spacing: .5px;
+    color: var(--steel);
+    text-decoration: none;
+    word-break: break-all;
+    border-bottom: 1px solid var(--blue-tint);
+    padding-bottom: 2px;
+  }
+  .tool-link:hover { color: var(--navy); border-color: var(--steel); }
+
+  /* ===== Footer ===== */
+  .foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--ink-faint); letter-spacing: 1.5px;
+  }
+  .foot .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--steel); display: inline-block; margin-right: 8px; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .value-grid, .tool-grid { grid-template-columns: 1fr; }
+    .branch-grid { grid-template-columns: 1fr 1fr; }
+    .flow { flex-direction: column; gap: 0; }
+    .flow-arrow { width: 100%; height: 34px; }
+    .flow-arrow::before { top: 6px; bottom: 11px; left: 50%; right: auto; width: 2px; height: auto; transform: translateX(-50%); }
+    .flow-arrow::after { top: auto; bottom: 9px; left: 50%; right: auto; transform: translateX(-50%) rotate(135deg); }
+  }
+  @media (max-width: 760px) {
+    .wrap, .hero-inner { padding-left: 18px; padding-right: 18px; }
+    .sop-grid, .branch-grid, .req-list { grid-template-columns: 1fr; }
+    .sec-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sec-en { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Workflow System</div>
+    <h1>AI 原型与设计工作的<em>流程体系</em></h1>
+    <p class="hero-desc">
+      让产品经理在用 AI 建立原型的阶段，就完成大多数<b>常规简单页面</b>的设计工作，使这些页面<b>在原型中直接达到可上线状态</b>；
+      把设计师从重复页面中释放出来，有时间去设计打磨<b>重点页面的 UI UX</b>，以及需要更多设计量的页面与物料。
+    </p>
+
+    <div class="hero-meta">
+      <span class="chip"><span class="dot"></span>产品经理直出可上线页面</span>
+      <span class="chip"><span class="dot"></span>设计师聚焦重点页面</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 1. 体系价值 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">体系价值<span>谁被改变，改变了什么</span></h2>
+      <div class="sec-en">VALUE BY ROLE</div>
+    </div>
+
+    <div class="value-grid">
+      <div class="v-card">
+        <div class="v-role">Product Manager</div>
+        <div class="v-title">产品经理</div>
+        <p class="v-desc">
+          在原型阶段完成常规页面设计，页面交付路径变短。需求表达从「描述需求」变成 <b>「直接给出符合规范的页面」</b>，减少设计往返与口头沟通的失真。
+        </p>
+      </div>
+      <div class="v-card">
+        <div class="v-role">Designer</div>
+        <div class="v-title">设计师</div>
+        <p class="v-desc">
+          从大量重复的常规页面中解放，把时间投入到<b>重点页面的 UI UX 打磨</b>，以及需要更多设计量的页面与物料；同时通过设计需求库承接产品经理无法完成的设计。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. 主流程图 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">核心流程图<span>一条主线，四类高频问题的旁挂处理</span></h2>
+      <div class="sec-en">MAIN FLOW</div>
+    </div>
+
+    <div class="flow-card">
+      <div class="flow-note">从 AI 建原型到交付前端：主线共五步；产品经理在复核阶段遇到的具体问题走下方旁挂支线处理。</div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="fs-idx">STEP 01</span>
+          <div class="fs-name">AI 建立原型</div>
+          <div class="fs-desc">由产品经理用 AI 工具生成页面原型，常规简单页面在原型阶段成型。</div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step is-key">
+          <span class="fs-idx">STEP 02</span>
+          <div class="fs-name">按设计规范校验</div>
+          <div class="fs-desc">提供设计规范链接 + 提示词 3 要点，让 AI 检查并修改所有页面。</div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <span class="fs-idx">STEP 03</span>
+          <div class="fs-name">产品经理复核与分流</div>
+          <div class="fs-desc">确认页面清单；无法完成设计的页面导入「设计需求库」交设计师。</div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <span class="fs-idx">STEP 04</span>
+          <div class="fs-name">导出到 Figma</div>
+          <div class="fs-desc">按 6 条硬性要求，将确认清单内的页面像素级导出到目标页。</div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <span class="fs-idx">STEP 05</span>
+          <div class="fs-name">核对、修复与交付</div>
+          <div class="fs-desc">视觉核对 → 描述问题让 AI 修复 → 交付前端开发使用。</div>
+        </div>
+      </div>
+
+      <div class="branch-stem"></div>
+
+      <div class="branch-head">
+        <span class="bh-line"></span>
+        <span class="bh-text">旁挂支线 · 产品经理用 AI 修改页面时的高频问题</span>
+        <span class="bh-line"></span>
+      </div>
+
+      <div class="branch-grid">
+        <div class="b-node">
+          <span class="b-tag">问题 01</span>
+          <div class="b-problem">图标错误 / 品质过低</div>
+          <div class="b-fix">
+            借助 Figma，在已有设计稿中找到适合的图标，<b>复制它在 Figma 中的地址</b>给 AI；同时告知<b>需要替换的目标位置</b>，并要求适配<b>尺寸、字重与颜色</b>。
+          </div>
+        </div>
+        <div class="b-node">
+          <span class="b-tag">问题 02</span>
+          <div class="b-problem">字体的视觉效果不对</div>
+          <div class="b-fix">
+            找到已有的 Figma 设计稿，查看其中字体的<b>字体名、字重、行高、字距、字色</b>等参数，进行比对后，把需要的参数告诉 AI。
+          </div>
+        </div>
+        <div class="b-node">
+          <span class="b-tag">问题 03</span>
+          <div class="b-problem">跨平台字体不统一</div>
+          <div class="b-fix">
+            苹果电脑与 Windows 电脑的原型，一律要求<b>全局字体统一使用思源黑体 SC（Source Han Sans SC）</b>，两个平台不再区分字体。
+          </div>
+        </div>
+        <div class="b-node">
+          <span class="b-tag">问题 04</span>
+          <div class="b-problem">两个组件贴在一起没有间距</div>
+          <div class="b-fix">
+            查阅现有的 Figma 设计稿，找到<b>适配的间距数值</b>，把这个数字给到 AI 去调整。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. Figma 使用要点 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">产品经理使用 Figma 的要点<span>取参数、取图标、取间距的前提</span></h2>
+      <div class="sec-en">FIGMA FOR PRODUCT MANAGER</div>
+    </div>
+
+    <div class="sop-grid">
+      <div class="sop-card">
+        <div class="sop-head">
+          <span class="sop-idx">01</span>
+          <div class="sop-name">必须使用教育版</div>
+        </div>
+        <p class="sop-lead">Figma 必须是<b>教育版</b>，才能正常使用必要功能。</p>
+      </div>
+      <div class="sop-card">
+        <div class="sop-head">
+          <span class="sop-idx">02</span>
+          <div class="sop-name">复制到自己的 design 文件</div>
+        </div>
+        <p class="sop-lead">建议自己新建 design 文件，把需要查看、编辑的设计稿<b>复制进自己的 design 文件内</b>，防止毁坏参照用的设计稿文件。</p>
+      </div>
+      <div class="sop-card wide">
+        <div class="sop-head">
+          <span class="sop-idx">03</span>
+          <div class="sop-name">参数取不到时，进入开发模式查看</div>
+          <div class="sop-sub">查看距离与尺寸</div>
+        </div>
+        <p class="sop-lead">想查看的距离和尺寸参数无法获取时，可<b>进入开发模式</b>，点击或悬停鼠标在目标组件上查看。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. 可执行 SOP ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">可执行 SOP<span>照此执行的标准动作</span></h2>
+      <div class="sec-en">STANDARD OPERATION</div>
+    </div>
+
+    <div class="sop-grid">
+
+      <!-- SOP 01 -->
+      <div class="sop-card">
+        <div class="sop-head">
+          <span class="sop-idx">SOP 01</span>
+          <div class="sop-name">用 AI 修改原型</div>
+          <div class="sop-sub">提示词 3 要点</div>
+        </div>
+        <p class="sop-lead">把<b>设计规范链接</b>提供给 AI，提示词需要包含以下 3 个要点。</p>
+        <ul class="list">
+          <li><span class="n">1</span><span>检查并修改原型的<b>所有页面</b>，使它们符合该设计规范。</span></li>
+          <li><span class="n">2</span><span>不要改变原型页面的 <b>UI 结构和文案</b>。</span></li>
+          <li><span class="n">3</span><span>让 AI <b>列出所有页面</b>，将不适用于设计规范的页面<b>剔除出修改清单</b>。</span></li>
+        </ul>
+      </div>
+
+      <!-- SOP 02 -->
+      <div class="sop-card">
+        <div class="sop-head">
+          <span class="sop-idx">SOP 02</span>
+          <div class="sop-name">设计需求库</div>
+          <div class="sop-sub">设计师建库 · 产品经理提需求</div>
+        </div>
+        <p class="sop-lead">设计师新建一个 Figma 的 <b>design 文件</b>，并<b>开放编辑权限给产品经理</b>，作为设计需求的库。</p>
+        <ul class="list">
+          <li><span class="n">1</span><span>产品经理将自己<b>无法完成设计的页面</b>导入这个库。</span></li>
+          <li><span class="n">2</span><span>在库中<b>标出页面描述和具体要求</b>，交由设计师补齐设计。</span></li>
+        </ul>
+      </div>
+
+      <!-- SOP 03 -->
+      <div class="sop-card wide">
+        <div class="sop-head">
+          <span class="sop-idx">SOP 03</span>
+          <div class="sop-name">让 AI 工具把原型页面导出到 Figma</div>
+          <div class="sop-sub">6 条硬性要求</div>
+        </div>
+        <ul class="list req-list">
+          <li><span class="n">1</span><span>告知 AI 工具<b>哪些页面需要导出</b>，先确认清单。</span></li>
+          <li><span class="n">2</span><span>要求将这些页面导出到 Figma（<b>design 文件链接地址 + 页名称</b>），地址在 Figma 的「分享」中可复制。</span></li>
+          <li><span class="n">3</span><span>要求页面必须视觉上<b>百分之百还原原型页面，像素级还原</b>。</span></li>
+          <li><span class="n">4</span><span>页面画布<b>宽度锁定 390</b>、<b>高度最少 844</b>；内容区需要完整显示，画布高度可向下延伸；<b>底部 bar 在画布底部贴边</b>。</span></li>
+          <li><span class="n">5</span><span>所有图标资源必须是 <b>SVG 资源</b>；原型中如有位图，要<b>切图导出并保证清晰</b>。</span></li>
+          <li><span class="n">6</span><span>若使用的是图形图像能力偏弱的大模型（比如 DeepSeek），可使用<b>「run-to-figma」skill</b> 进行页面导出。</span></li>
+        </ul>
+      </div>
+
+      <!-- SOP 04 -->
+      <div class="sop-card wide">
+        <div class="sop-head">
+          <span class="sop-idx">SOP 04</span>
+          <div class="sop-name">交付前端前的视觉核对</div>
+          <div class="sop-sub">核对 → 修复 → 必要时求助设计师</div>
+        </div>
+        <p class="sop-lead">前端开发需要 Figma 设计稿，产品经理需要将自己负责的页面<b>导入 Figma 内</b>，方法与上一条一致，并在导出后进行以下动作。</p>
+        <ul class="list">
+          <li><span class="n">1</span><span>导出后进行<b>视觉核对</b>。</span></li>
+          <li><span class="n">2</span><span><b>描述问题让 AI 修复</b>。</span></li>
+          <li><span class="n">3</span><span>若遇到<b>无法搞定的还原问题</b>，可以<b>求助设计师</b>进行处理（需开放编辑权限给设计师）。</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 5. 前提与工具 ===== -->
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">前提与工具<span>开始之前先准备好这几样</span></h2>
+      <div class="sec-en">PREREQUISITE</div>
+    </div>
+
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-name">APP 常规页面设计规范</div>
+        <p class="tool-desc">体系的基础。将链接提供给 AI，作为「检查并修改原型页面」的唯一比对标准。</p>
+        <a class="tool-link" href="https://xdean-designer.github.io/jianlang-design-spec/" target="_blank" rel="noopener">xdean-designer.github.io/jianlang-design-spec/</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Figma 教育版</div>
+        <p class="tool-desc">产品经理侧取图标、取字体参数、取间距的工具前提，也是设计需求库与前端设计稿的承载平台。</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">run-to-figma skill</div>
+        <p class="tool-desc">面向图形图像能力偏弱的大模型（比如 DeepSeek），用于把原型页面稳定导出到 Figma 的 skill。</p>
+        <a class="tool-link" href="https://github.com/XDean-Designer/Run-to-figma" target="_blank" rel="noopener">github.com/XDean-Designer/Run-to-figma</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div><span class="dot"></span>剑琅联盟 · AI 原型与设计工作的流程体系</div>
+    <div>Prototype &amp; Design Workflow</div>
+  </div>
+
+</main>
+
+</body>
+</html>
