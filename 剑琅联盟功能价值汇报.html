@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>剑琅联盟 · 功能价值汇报 · 三大支柱论证</title>
+<title>RTB在研功能价值汇报 · 三大支柱论证</title>
 <style>
   :root {
     --navy: #17293D;
@@ -80,12 +80,6 @@
   }
   .hero h1 em { font-style: normal; color: #9EBBD8; }
 
-  .hero-desc {
-    font-size: 15px; color: rgba(255,255,255,.76);
-    max-width: 820px; letter-spacing: .6px; line-height: 1.9;
-  }
-  .hero-desc b { color: #fff; font-weight: 600; }
-
   .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
   .hc {
     background: rgba(255,255,255,.06);
@@ -96,18 +90,6 @@
   .hc-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.52); text-transform: uppercase; margin-bottom: 8px; }
   .hc-value { font-size: 18px; font-weight: 700; letter-spacing: 1px; color: #fff; line-height: 1.35; }
   .hc-note { font-size: 12px; color: rgba(255,255,255,.68); line-height: 1.7; margin-top: 8px; }
-
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12.5px; letter-spacing: 1px;
-    padding: 7px 15px; border-radius: 999px;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.16);
-    color: rgba(255,255,255,.72);
-  }
-  .chip b { color: #fff; font-weight: 600; }
-  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: #9EBBD8; flex: none; }
 
   /* ===== Section ===== */
   section { margin-top: 54px; }
@@ -122,13 +104,14 @@
     color: #fff; background: var(--navy-2);
     padding: 4px 10px; border-radius: 4px;
   }
+  .sec-no.is-new { background: var(--yj); }
   .sec-title { font-size: 23px; font-weight: 700; letter-spacing: 1.5px; color: var(--navy-2); }
   .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
   .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
 
   .sec-lead {
     font-size: 14.5px; color: var(--ink-soft); line-height: 1.95;
-    max-width: 880px; margin-bottom: 26px;
+    max-width: 920px; margin-bottom: 26px;
   }
   .sec-lead b { color: var(--ink); font-weight: 600; }
 
@@ -188,7 +171,7 @@
   table.matrix th.c-xs { color: var(--xs); }
   table.matrix th.c-yj { color: var(--yj); }
   table.matrix td {
-    padding: 9px 6px; border-bottom: 1px solid var(--line-soft);
+    padding: 7px 6px; border-bottom: 1px solid var(--line-soft);
     text-align: center; color: var(--ink-soft);
   }
   table.matrix td:first-child { text-align: left; color: var(--ink); padding-left: 2px; }
@@ -203,6 +186,11 @@
     font-size: 12px; letter-spacing: 1px; padding: 8px 6px;
   }
   table.matrix .grp td:first-child { padding-left: 2px; }
+  table.matrix .grp td .gtag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    padding: 1px 7px; border-radius: 999px; margin-left: 8px; vertical-align: 1px;
+    color: var(--yj); background: var(--yj-bg);
+  }
 
   /* ===== Module block ===== */
   .mod {
@@ -242,11 +230,9 @@
   .mod-lead b { color: var(--navy-2); font-weight: 700; }
 
   .mod-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .mod.has-shots .mod-cols { grid-template-columns: minmax(0, 1fr) 460px; }
-  /* 网格子项必须允许收缩，否则手机轨道/宽表的 min-content 会把列撑破 */
-  .mod-cols > *, .pillars > *, .hero-cards > *, .conc-grid > *, .strip > * { min-width: 0; }
+  .mod-cols > *, .pillars > *, .hero-cards > *, .conc-grid > *, .strip > *, .dstats > * { min-width: 0; }
 
-  .mod-block + .mod-block { margin-top: 18px; }
+  .mod-block + .mod-block { margin-top: 20px; }
   .mod-block h4 {
     font-size: 13px; font-weight: 700; letter-spacing: 1.2px;
     color: var(--navy-2); margin-bottom: 10px;
@@ -256,6 +242,7 @@
     content: ""; width: 3px; height: 13px; border-radius: 2px; background: var(--steel);
   }
   .mod-block h4.h-scene::before { background: var(--yj); }
+  .mod-block h4.h-data::before { background: var(--kf); }
 
   ul.mlist { list-style: none; }
   ul.mlist li {
@@ -269,6 +256,139 @@
     width: 5px; height: 5px; border-radius: 50%; background: #B9C4D0;
   }
   ul.mlist li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Feature item grid ===== */
+  ul.feat {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 10px 26px;
+  }
+  ul.feat li {
+    position: relative; padding-left: 21px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.85;
+  }
+  ul.feat li::before {
+    content: ""; position: absolute; left: 3px; top: 10px;
+    width: 6px; height: 6px; border-radius: 2px;
+    background: var(--steel); opacity: .5;
+  }
+  ul.feat li b { color: var(--ink); font-weight: 600; }
+  ul.feat li .fsrc { color: var(--ink-faint); font-size: 12.5px; }
+
+  .feat-sub {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    color: var(--ink-faint); margin: 14px 0 9px;
+  }
+
+  /* ===== Data stat cards ===== */
+  .dstats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px; margin-bottom: 16px;
+  }
+  .dstat {
+    background: #F7FAFD; border: 1px solid #E3EAF2;
+    border-radius: 10px; padding: 13px 15px 12px;
+  }
+  .dstat .dv {
+    font-size: 21px; font-weight: 700; letter-spacing: .5px;
+    color: var(--navy-2); line-height: 1.2;
+  }
+  .dstat .dv em { font-style: normal; font-size: 12.5px; font-weight: 600; margin-left: 2px; }
+  .dstat .dl { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin-top: 7px; }
+  .dstat .ds { font-size: 11px; color: var(--ink-faint); margin-top: 6px; letter-spacing: .2px; }
+
+  /* ===== Data band · 数据论证（最高内容层级） ===== */
+  .data-band {
+    position: relative;
+    margin: 24px 0 22px;
+    padding: 22px 24px 20px;
+    border-radius: 14px;
+    background: linear-gradient(146deg, #0F1E2E 0%, #1A3352 58%, #152A44 100%);
+    box-shadow: 0 20px 44px -22px rgba(11, 26, 44, .62);
+    overflow: hidden;
+  }
+  .data-band::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(115% 88% at 100% 0%, rgba(126, 178, 236, .18), transparent 58%),
+      radial-gradient(88% 78% at 0% 100%, rgba(70, 165, 138, .13), transparent 60%);
+  }
+  .data-band > * { position: relative; z-index: 1; }
+
+  .db-head {
+    display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap;
+    padding-bottom: 14px; margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+  }
+  .db-kicker {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2.2px;
+    color: #7FA8D2; text-transform: uppercase;
+  }
+  .db-title { font-size: 16px; font-weight: 700; letter-spacing: .8px; color: #fff; }
+  .db-note { font-size: 11.5px; color: rgba(176, 202, 228, .78); margin-left: auto; letter-spacing: .3px; }
+
+  .data-band .dstats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 0; margin: 0;
+  }
+  .data-band .dstat {
+    background: none; border: none; border-radius: 0;
+    padding: 2px 16px 4px 0;
+    border-right: 1px solid rgba(255, 255, 255, .11);
+  }
+  .data-band .dstat:last-child { border-right: none; padding-right: 0; }
+  .data-band .dstat.d-kf { --accent: #4FC3A1; }
+  .data-band .dstat.d-xs { --accent: #E0A93F; }
+  .data-band .dstat.d-yj { --accent: #5AA3E8; --accent-dim: rgba(90, 163, 232, .16); }
+
+  .data-band .tag {
+    display: inline-block; margin-bottom: 12px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .9px;
+    padding: 3px 9px; border-radius: 999px;
+    color: var(--accent, #7FB0DE);
+    background: var(--accent-dim, rgba(127, 176, 222, .15));
+    border: 1px solid rgba(255, 255, 255, .16);
+  }
+  .data-band .dstat.d-kf .tag { --accent-dim: rgba(79, 195, 161, .16); }
+  .data-band .dstat.d-xs .tag { --accent-dim: rgba(224, 169, 63, .16); }
+
+  .data-band .dstat .dv {
+    font-size: 40px; font-weight: 800; letter-spacing: -1.1px;
+    line-height: 1.02; color: #fff; white-space: nowrap;
+  }
+  .data-band .dstat .dv.sm { font-size: 35px; letter-spacing: -.9px; }
+  .data-band .dstat .dv em {
+    font-style: normal; font-size: 16px; font-weight: 700;
+    letter-spacing: 0; margin-left: 3px; color: var(--accent, #9DC4E8);
+  }
+  .data-band .dstat .dl {
+    font-size: 12.5px; color: rgba(203, 220, 238, .9);
+    line-height: 1.72; margin-top: 11px;
+  }
+  .data-band .dstat .ds {
+    font-size: 11px; color: rgba(150, 177, 205, .8);
+    margin-top: 7px; letter-spacing: .2px;
+  }
+
+  /* ===== Metric table ===== */
+  table.metrics { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.metrics th {
+    text-align: left; font-size: 11.5px; font-weight: 600; letter-spacing: .8px;
+    color: var(--ink-faint); padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  table.metrics td {
+    padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft); line-height: 1.75; vertical-align: top;
+  }
+  table.metrics tr:last-child td { border-bottom: none; }
+  table.metrics td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.metrics td.dir { font-weight: 700; color: var(--navy-2); white-space: nowrap; }
+  table.metrics td.pl { white-space: nowrap; }
+  .t-kf { color: var(--kf); font-weight: 700; }
+  .t-xs { color: var(--xs); font-weight: 700; }
+  .t-yj { color: var(--yj); font-weight: 700; }
 
   .scene {
     background: linear-gradient(180deg, #F7FAFD 0%, #F2F6FA 100%);
@@ -285,6 +405,7 @@
     padding: 2px 8px; border-radius: 4px; margin-right: 8px;
     vertical-align: 1px;
   }
+  .scene + .scene { margin-top: 10px; }
 
   /* ===== Phone rail ===== */
   .phone-rail {
@@ -342,25 +463,28 @@
   .strip-item.is-before { border-top: 3px solid #C3CBD4; }
   .strip-item.is-after { border-top: 3px solid var(--kf); background: #F4FAF8; }
 
-  /* ===== Calibration note ===== */
-  .calib {
-    background: #FFFBF0; border: 1px solid #F0E2C4;
-    border-radius: 12px; padding: 18px 20px; margin-top: 18px;
+  /* ===== Note strip ===== */
+  .note-strip {
+    background: #F8FAFC; border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 16px 20px; margin-top: 18px;
   }
-  .calib h4 {
-    font-size: 13.5px; font-weight: 700; letter-spacing: 1px;
-    color: #8A6412; margin-bottom: 10px;
+  .note-strip h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    color: var(--navy-2); margin-bottom: 10px;
     display: flex; align-items: center; gap: 8px;
   }
-  .calib h4::before { content: ""; width: 3px; height: 13px; border-radius: 2px; background: var(--xs); }
-  .calib p { font-size: 13px; color: #6B5A2E; line-height: 1.9; margin-bottom: 8px; }
-  .calib p:last-child { margin-bottom: 0; }
-  .calib b { color: #5A4A18; font-weight: 700; }
-  .calib code {
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 12px; background: rgba(168,118,27,.1);
-    padding: 1px 5px; border-radius: 4px;
+  .note-strip h4::before { content: ""; width: 3px; height: 13px; border-radius: 2px; background: var(--steel); }
+  .note-strip ul { list-style: none; }
+  .note-strip li {
+    position: relative; padding-left: 18px;
+    font-size: 13px; color: var(--ink-soft); line-height: 1.85; margin-bottom: 7px;
   }
+  .note-strip li:last-child { margin-bottom: 0; }
+  .note-strip li::before {
+    content: ""; position: absolute; left: 3px; top: 10px;
+    width: 5px; height: 5px; border-radius: 50%; background: #B9C4D0;
+  }
+  .note-strip li b { color: var(--ink); font-weight: 600; }
 
   /* ===== Conclusion ===== */
   .conc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
@@ -375,6 +499,21 @@
   .conc-card .cc-title { font-size: 16px; font-weight: 700; color: var(--navy-2); letter-spacing: 1px; margin-bottom: 10px; }
   .conc-card .cc-body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; }
   .conc-card .cc-body b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Reference list ===== */
+  ol.reflist { list-style: none; counter-reset: r; }
+  ol.reflist li {
+    counter-increment: r; position: relative; padding-left: 32px;
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.85; margin-bottom: 10px;
+  }
+  ol.reflist li:last-child { margin-bottom: 0; }
+  ol.reflist li::before {
+    content: "[" counter(r) "]";
+    position: absolute; left: 0; top: 0;
+    font-size: 11.5px; font-weight: 700; color: var(--ink-faint);
+  }
+  ol.reflist li b { color: var(--ink); font-weight: 600; }
+  ol.reflist li .rk { color: var(--ink-faint); font-size: 11.5px; }
 
   /* ===== Footer ===== */
   .page-footer {
@@ -411,8 +550,7 @@
   @media (max-width: 980px) {
     .hero-cards { grid-template-columns: minmax(0, 1fr); }
     .pillars { grid-template-columns: minmax(0, 1fr); }
-    .mod.has-shots .mod-cols,
-    .mod-cols { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .mod-cols { grid-template-columns: minmax(0, 1fr) !important; gap: 16px; }
   }
 
   @media (max-width: 720px) {
@@ -426,10 +564,24 @@
     .matrix-card { padding: 16px 14px 4px; overflow-x: auto; }
     table.matrix { min-width: 460px; }
     .page-footer { padding-left: 18px; padding-right: 18px; }
+    table.metrics { display: block; overflow-x: auto; white-space: nowrap; }
+    table.metrics td { white-space: normal; min-width: 150px; }
+    .data-band { margin: 18px 0 16px; padding: 18px 18px 16px; border-radius: 12px; }
+    .db-note { margin-left: 0; width: 100%; }
+    .data-band .dstat {
+      padding: 0 0 15px; margin-bottom: 15px;
+      border-right: none; border-bottom: 1px solid rgba(255, 255, 255, .11);
+    }
+    .data-band .dstat:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+    .data-band .dstat .dv { font-size: 38px; letter-spacing: -1px; }
   }
 
   @media print {
     .hero { background: #17293D !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .data-band {
+      background: #16293F !important;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
     .lb { display: none !important; }
     .mod, .pillar, .matrix-card, .conc-card { break-inside: avoid; }
   }
@@ -447,13 +599,8 @@
       </div>
     </div>
 
-    <div class="kicker">Feature Value Review</div>
-    <h1>功能价值汇报 · <em>三大支柱论证</em></h1>
-    <p class="hero-desc">
-      本材料基于《开单结账》《项目创建与管理》《提成设置》《价目分组迁移》<b>四份 PRD</b>，
-      对其中 <b>23 个功能点</b>逐一论证：它如何命中「<b>免客服 · 免销售 · 让门店业绩提升</b>」三大支柱，
-      并结合<b>美发店真实经营场景</b>说明为什么必要、好在哪。
-    </p>
+    <div class="kicker">RTB · Feature Value Review</div>
+    <h1>RTB在研功能价值汇报 · <em>三大支柱论证</em></h1>
 
     <div class="hero-cards">
       <div class="hc">
@@ -472,13 +619,6 @@
         <div class="hc-note">帮助店主多赚钱：不漏单、控毛利、拉客单，让提成花在刀刃上。</div>
       </div>
     </div>
-
-    <div class="hero-meta">
-      <span class="chip"><span class="dot"></span><b>汇报对象</b> · 管理层</span>
-      <span class="chip"><b>论证框架</b> · 免客服 / 免销售 / 让门店业绩提升</span>
-      <span class="chip"><b>覆盖范围</b> · 4 份 PRD · 23 个功能点</span>
-      <span class="chip"><b>素材来源</b> · PRD 原型界面实拍</span>
-    </div>
   </div>
 </div>
 
@@ -488,14 +628,15 @@
   <section id="intro">
     <div class="sec-head">
       <span class="sec-no">开篇</span>
-      <h2 class="sec-title">一页看懂<span>三大支柱的判断标准</span></h2>
+      <h2 class="sec-title">一页看懂<span>判断标准 · 数据口径 · 覆盖矩阵</span></h2>
       <div class="sec-en">Overview</div>
     </div>
 
     <p class="sec-lead">
-      判断一个功能值不值得做，我们不只看「有没有做完」，而是看它能不能同时回答三个问题：
+      判断一个功能值不值得做、值不值得排在前面，我们不只看「有没有做完」，而是看它能不能同时回答三个问题：
       <b>店主能不能自己用起来？同行会不会主动推荐？门店能不能因此多赚钱？</b>
-      下文每个功能都会标注它命中哪几条支柱，并给出对应的门店场景。
+      下文每个模块都会给出三段论证：<b>为什么有必要</b>（数据支撑的需求判断）、<b>为什么优先级高</b>（不做的代价与错过的窗口）、
+      <b>上线后怎么验证</b>（用哪些指标的变化证明产品方案是对的）。
     </p>
 
     <div class="pillars">
@@ -530,317 +671,282 @@
       </div>
     </div>
 
+    <div class="note-strip">
+      <h4>数据口径说明</h4>
+      <ul>
+        <li><b>外部行业数据</b>：来自平台官方披露、券商与咨询机构、公开招聘报告与主流财经媒体报道。正文中标注来源要点，完整清单见文末「参考来源」。</li>
+        <li><b>试点门店埋点数据</b>：来自试点门店在真实经营中的埋点记录，覆盖不同时间范围内的开单、开卡、充值等行为（客单数、金额、次数）。用于印证「需求是否存在」「门店真实怎么用」。</li>
+        <li><b>两者的分工</b>：行业数据解决「这件事在行业里有多大、是不是趋势」；埋点数据解决「我们的门店是不是也这样、改完有没有变好」。</li>
+        <li><b>口径提醒</b>：行业数据多为第三方测算或厂商公开案例，用于判断量级与方向，不作为精确目标值；最终验收以试点门店埋点与门店实际经营指标为准。</li>
+      </ul>
+    </div>
+
     <div class="matrix-card">
       <div class="matrix-head">
-        <h3>功能 × 三支柱 · 覆盖矩阵</h3>
-        <span>● 表示该功能明确命中此支柱</span>
+        <h3>能力 × 三支柱 · 覆盖矩阵</h3>
+        <span>● 表示该能力明确命中此支柱</span>
       </div>
       <table class="matrix">
         <thead>
           <tr>
-            <th>功能点</th>
+            <th>能力点</th>
             <th class="c-kf">免客服</th>
             <th class="c-xs">免销售</th>
             <th class="c-yj">让门店业绩提升</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="grp"><td colspan="4">第一章 · 开单结账</td></tr>
-          <tr><td>直接收款</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr class="grp"><td colspan="4">第一章 · 团购核销<span class="gtag">本期新增</span></td></tr>
+          <tr><td>双平台扫码 / 输码验券</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>手工匹配消费项 + 会话记忆</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>次卡核销（按次扣减 / 恢复）</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>核销自动开单（抖音 / 美团）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>业绩归属可选（与操作人解耦）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>消费顾客确认（散客 / 会员建档）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>核销明细 / 详情 / 1 小时撤销</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>幂等拦截 + 已退款态</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>双平台三步开通（认证→授权→绑定）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
+          <tr><td>团购设置 · 默认核销项预填</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>权限门禁与异常兜底</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
+
+          <tr class="grp"><td colspan="4">第二章 · 开单结账</td></tr>
+          <tr><td>直接收款（快捷开单）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>加购设置弹窗</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>挂单 / 取挂单</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>开单成功页</td><td class="d-kf"><span class="dotmark">●</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
           <tr><td>顾客卡片与会员权益可见</td><td class="d-kf"><span class="dotmark">●</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
 
-          <tr class="grp"><td colspan="4">第二章 · 价目表 · 项目创建与管理</td></tr>
+          <tr class="grp"><td colspan="4">第三章 · 价目表 · 项目创建与管理</td></tr>
           <tr><td>高密度信息行列表</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
           <tr><td>自定义分组 + 系统「隐藏」组</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>拖拽排序</td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>在售 / 下架 / 隐藏 三态</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>绑卡锁定 + 改价支付拦截</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>与会员卡 / 开单联结</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>主分组可改</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>变更轻提示（仅 toast）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
+          <tr><td>即时生效、不回溯已结账</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
+          <tr><td>会员卡权益锚定主分组</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
 
-          <tr class="grp"><td colspan="4">第三章 · 提成设置 · 多方案</td></tr>
+          <tr class="grp"><td colspan="4">第四章 · 提成设置 · 多方案</td></tr>
           <tr><td>多方案 + 一人多方案 + 同行取高</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>规则块化：5 项默认 + 覆盖项</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>按工位分配 + 顾客指定提成</td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-xs"><span class="dotmark">●</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>计算基数独立（原价 / 实收）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
           <tr><td>业绩只读解耦 + 流水可改留痕</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
           <tr><td>试算与「未分配」提示</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
-
-          <tr class="grp"><td colspan="4">第四章 · 价目分组迁移 · 大类 → 主分组</td></tr>
-          <tr><td>大类升级为主分组</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
-          <tr><td>提成优先级链替换「先写先赢」</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
-          <tr><td>变更护栏（仅 toast 轻提示）</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td></tr>
-          <tr><td>即时生效 + 固定 forward</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
-          <tr><td>会员卡 · 计次卡跟随分组</td><td class="is-empty"><span class="dotmark">—</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
-          <tr><td>一次性全量替换 + 可回滚</td><td class="d-kf"><span class="dotmark">●</span></td><td class="is-empty"><span class="dotmark">—</span></td><td class="d-yj"><span class="dotmark">●</span></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- ================= 第一章 ================= -->
+  <!-- ================= 第一章 · 团购核销 ================= -->
   <section id="ch1">
     <div class="sec-head">
-      <span class="sec-no">第一章</span>
-      <h2 class="sec-title">开单结账<span>门店最高频、最不能出错的动作</span></h2>
+      <span class="sec-no is-new">第一章</span>
+      <h2 class="sec-title">团购核销<span>本期唯一从 0 到 1 的新能力</span></h2>
       <div class="sec-en">Chapter 01</div>
+    </div>
+
+    <p class="sec-lead">
+      门店的客流入口正在从「路过」变成「线上先买券」。团购核销要解决的是最后一百米：
+      顾客手里已经有券了，门店能不能<b>在收银台上把这张券变成订单、流水和业绩</b>。
+      它不只是「多了一个功能」，而是把平台上的流量真正接进门店的账里——
+      这也是为什么它排在四个模块的最前面：<b>其余三个模块是把已有的做顺手，这一章是把没有的补上</b>。
+    </p>
+
+    <article class="mod">
+      <div class="mod-head">
+        <div class="mod-no">01</div>
+        <h3 class="mod-title">团购核销 · 抖音 + 美团双平台</h3>
+        <div class="pills">
+          <span class="pill p-kf">免客服</span>
+          <span class="pill p-xs">免销售</span>
+          <span class="pill p-yj">让门店业绩提升</span>
+        </div>
+      </div>
+
+      <p class="mod-lead">
+        一句话概括：<b>把平台的 GMV，变成门店的营收</b>。
+        店员用 APP 扫一次码，完成验券、核销、开单、记业绩、进流水；抖音与美团共用同一条屏幕链，只切换文案与平台标识。
+      </p>
+
+      <div class="mod-block">
+        <h4>本模块能力条目（11 项）</h4>
+        <ul class="feat">
+          <li><b>双平台扫码 / 输码验券</b>　扫码后自动识别券类型（抖音团购券 / 美团团购券 / 次卡 / 系统优惠券 / 代金券），无相机时可输码。</li>
+          <li><b>手工匹配消费项 + 会话记忆</b>　券与价目无需事先映射；验券后手工选消费项，同券名再次核销自动带出上次选择。</li>
+          <li><b>次卡核销</b>　支持平台标准次卡，独立「本次核销次数」，按次扣减；撤销时按次恢复。</li>
+          <li><b>核销自动开单</b>　核销成功即生成订单，支付方式随平台显示「抖音」或「美团」，不必再手工补录一笔。</li>
+          <li><b>业绩归属可选</b>　默认不选、可不选；不选则订单照常生成但不计业绩。操作人与业绩归属彻底解耦。</li>
+          <li><b>消费顾客确认</b>　核销前必须确认「散客 / 会员」；可在确认页直接建档会员，让公域客源沉淀进私域。</li>
+          <li><b>核销明细 / 详情 / 1 小时撤销</b>　明细按平台分 Tab，卡内展开详情；1 小时内可撤销，撤销结果统一成页。</li>
+          <li><b>幂等与退款态</b>　重复扫码走幂等弹窗、不重复开单；顾客退款后内部置「已退款」，明细列表不做无谓打扰。</li>
+          <li><b>双平台三步开通</b>　抖音与美团相互独立：店铺认证 → 平台授权 → 门店绑定，均经汇付天下 ISV 通道完成。</li>
+          <li><b>团购设置 · 默认核销项预填</b>　可按「门店 + 券」预配默认消费项，核销时自动带入；多门店按 Tab 分开管理。</li>
+          <li><b>权限门禁与异常兜底</b>　账号未开启「收银开单」权限时拦截全部核销入口；断网 / 相机无权限 / 超时 / 验券失败均有明确承接。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <div class="data-band">
+          <div class="db-head">
+            <span class="db-kicker">Data 01</span>
+            <span class="db-title">数据论证 · 为什么有必要</span>
+            <span class="db-note">外部行业数据 · 来源见文末</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-yj">
+              <div class="tag">平台客流入口</div>
+              <div class="dv">8500<em>亿元+</em></div>
+              <div class="dl">抖音生活服务 2025 年支付 GMV，同比增长 59%</div>
+              <div class="ds">抖音官方披露 / 雷峰网</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">每 100 元漏 40–50</div>
+              <div class="dv">50–60<em>%</em></div>
+              <div class="dl">抖音推送式团购核销率，而美团到店为 80–90%</div>
+              <div class="ds">中泰证券测算 / 雷峰网</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">需求已在爆发</div>
+              <div class="dv">+164<em>%</em></div>
+              <div class="dl">丽人行业（含美发）2025 年 3–8 月行业核销规模同比</div>
+              <div class="ds">抖音生活服务丽人年度峰会</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">节点峰值必须扛住</div>
+              <div class="dv sm">1.5×<em>/ +126%</em></div>
+              <div class="dl">春节前美发团购订单达去年同期 1.5 倍；「三八节」美发团购订单同比 +126%</div>
+              <div class="ds">抖音生活服务消费前瞻</div>
+            </div>
+          </div>
+        </div>
+        <ul class="mlist">
+          <li><b>团购已经是美发门店绕不开的客流入口。</b>抖音生活服务 2025 年支付 GMV 超 8500 亿元、同比增长 59%；在美发所属的丽人类目里，2025 年 3–8 月消费用户数同比增长 30%、团购消费金额增长 120%、<b>行业核销规模增长 164%</b>。<span class="src">（来源见文末 1 / 5）</span></li>
+          <li><b>但「卖出去」不等于「收进来」。</b>行业测算显示，抖音推送式团购的核销率只有 50–60%，美团到店为 80–90%——按前者的口径，<b>每 100 元 GMV 里约有 40–50 元没有走到店</b>。平台自己也已经把考核口径从 GMV 转向核销率。<b>核销，是 GMV 变成门店营收的唯一闸门。</b><span class="src">（来源见文末 2 / 3 / 4）</span></li>
+          <li><b>而门店这一端恰恰是闸门最窄的地方。</b>行业实践普遍反映：顾客持券到店后，前台要单独登录平台后台验券，再回到收银系统手工录单；高峰期一卡壳，线上买来的精准流量就白白流失。<span class="src">（来源见文末 10）</span></li>
+          <li><b>峰值到来时，核销能力就是接客能力。</b>春节前美发团购订单量达去年同期 1.5 倍以上，「三八节」美发团购订单同比 +126%——这些客流已经付过钱，店里接不住就等于把 GMV 挡在门外。剑琅目前有会员卡、储值等券能力，但没有团购核销；补上它，峰值单才进得了同一本账。<span class="src">（来源见文末 6）</span></li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <h4 class="h-data">数据论证 · 为什么优先级高</h4>
+        <ul class="mlist">
+          <li><b>需求不需要被教育，它已经每天都在发生。</b>平台侧核销规模同比 +164%，门店侧每天都在处理团购券，只是现在发生在剑琅之外。这不是「要不要做」的判断，而是「什么时候补上」的判断。</li>
+          <li><b>一次接入覆盖两个最大入口。</b>抖音与美团是到店团购的双寡头：一边是 2025 年支付 GMV 超 8500 亿元、同比增长 59%；另一边是核销率 80–90%、且美团丽人直播订单核销率超 80%。双平台同一条屏幕链，单点投入换双场景。<span class="src">（来源见文末 7）</span></li>
+          <li><b>核销能力本身就是门店的流量杠杆。</b>平台已把考核从 GMV 转向核销率，并推广「交易上翻」——到店顾客在平台完成交易，可以为门店换来额外推荐流量。<b>门店核销越快、越顺，越接得住这些流量</b>，这是一个会自我强化的循环。</li>
+          <li><b>它补的是空白，不是优化。</b>其余三个模块是「把已有的做顺手」，可以分批上线；团购核销是能力缺口的补齐，且直接决定「团购进来的客人，算不算剑琅的客人」。因此排在第一位。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <h4 class="h-scene">门店场景</h4>
+        <div class="scene">
+          <span class="scene-tag">周末高峰</span>
+          周六下午，顾客拿着抖音上买好的「烫染护三件套」到店。店员在 APP 里扫一下券码——系统自动识别是抖音团购券，
+          带出上次为这张券配好的消费项，勾上服务员工，确认核销。<b>订单当场生成、金额进门店流水、提成落到人头上</b>；
+          顾客如果是会员，顺手记进会员账下；如果还不是，确认页就能建档。
+          前台不用切后台、不用手工登记，整个过程十几秒。万一点错了，一小时内还能撤。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">门店授权</span>
+          店长第一次开通：在 APP 内完成店铺认证 → 授权抖音 / 美团账号 → 勾选要绑定的门店。
+          三步走完标签变「已开通」，回到团购设置把常用券的默认核销项配好。
+          <b>门店侧不需要联系服务商、不需要进第三方后台</b>，后续新店开张时按同样路径再绑一次即可。
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <h4>上线后 · 用哪些数据验证方案是对的</h4>
+        <table class="metrics">
+          <thead>
+            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>团购核销订单占比</td><td>核销订单 ÷ 门店总订单</td><td class="dir">↑ 从 0 起量</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>核销成功率</td><td>核销成功笔数 ÷ 发起核销笔数</td><td class="dir">↑</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>核销订单金额占比</td><td>核销订单实收 ÷ 门店总实收</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mod-block">
+        <h4>界面示意<span style="font-weight:500;letter-spacing:.3px;color:var(--ink-faint)">　共 12 屏 · 可横向拖动 · 点击放大</span></h4>
+        <div class="phone-rail">
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-12-workbench.png" alt="工作台入口"></div></div>
+            <div class="phone-caption">工作台入口</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-10-tg-set.png" alt="团购设置"></div></div>
+            <div class="phone-caption">团购设置 · 双平台</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-11-auth.png" alt="平台开通"></div></div>
+            <div class="phone-caption">抖音开通 · 三步</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-01-scan.png" alt="扫码核销"></div></div>
+            <div class="phone-caption">扫码核销</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-02-input.png" alt="输码验券"></div></div>
+            <div class="phone-caption">输码验券</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-03-result.png" alt="验券结果"></div></div>
+            <div class="phone-caption">验券结果</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-04-confirm.png" alt="核销确认"></div></div>
+            <div class="phone-caption">核销确认</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-05-pick-member.png" alt="选择顾客"></div></div>
+            <div class="phone-caption">选择消费顾客</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-06-success.png" alt="核销成功"></div></div>
+            <div class="phone-caption">核销成功 · 自动开单</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-07-orders.png" alt="核销明细"></div></div>
+            <div class="phone-caption">核销明细</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-08-detail.png" alt="订单详情"></div></div>
+            <div class="phone-caption">订单详情 · 撤销</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/tg-09-revoke.png" alt="撤销结果"></div></div>
+            <div class="phone-caption">撤销结果</div>
+          </div>
+        </div>
+        <div class="rail-hint">原型的占位首页仅为演示承载，正式入口以线上 APP 首页扫码核销为准。</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= 第二章 · 开单结账 ================= -->
+  <section id="ch2">
+    <div class="sec-head">
+      <span class="sec-no">第二章</span>
+      <h2 class="sec-title">开单结账<span>门店最高频、最不能出错的动作</span></h2>
+      <div class="sec-en">Chapter 02</div>
     </div>
 
     <p class="sec-lead">
       开单是门店一天里发生次数最多的操作，也是店员对系统的全部印象来源。
       旧流程要求「先选顾客 → 再选项目 → 配员工 → 填备注」，缺一步就开不了单；
       但门店的真实情况是：<b>新客没建档、价目表没配全、收银到一半被人叫走</b>。
-      本章 5 个功能，就是把这三种「开不了单」的场景逐一堵上。
+      这一模块要做的，是把这三种「开不了单」的场景逐一堵上，并且让店员不用培训就能上手。
     </p>
 
-    <!-- 1-1 直接收款 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">01</div>
-        <h3 class="mod-title">直接收款（快速消费）</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        不选顾客、不选项目、不做任何前置配置，<b>输入金额就能开单结算</b>。
-        这是本次开单改版里最短的一条路径，也是「快速收一笔钱」场景的兜底方案。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>旧流程必须按顺序选顾客、选项目、配员工、填备注，而门店里大量存在<b>「只想快速收一笔钱」</b>的场景：散客补差价、临时加项、熟客记账。</li>
-              <li>新客进店还没建档、价目表还没配好时，旧流程会直接卡死；直接收款把这条路彻底打通，<b>没配价目表也能开单</b>。</li>
-              <li>金额、员工、开单内容全部为选填，最短三步完成；<b>店员不需要培训、不需要翻说明书</b>，也就不会为此产生客服工单。</li>
-              <li>金额留空时按原价自动匹配会员权益（会员取最优折扣卡、散客按无卡权益），既快又不漏算优惠。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">早班散客</span>
-              早上刚开门，一位新客只想修个刘海、付 30 元就走。前台还没来得及建档、价目表里也没有这个细项。
-              店员点首页的<b>「直接收款」</b>，输 30、勾选收款人、点「去收款」→ <b>十秒完成</b>。
-              钱进了门店流水、业绩算到具体人头上，客人也满意离开——而不是让顾客站着等前台建档。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-直接收款输金额.png" alt="直接收款 · 输入金额"></div>
-              </div>
-              <div class="phone-caption">输入金额 + 选员工</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-直接收款结算.png" alt="直接收款 · 结算第二步"></div>
-              </div>
-              <div class="phone-caption">直接收款结算</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-开单结账首页.png" alt="开单结账首页入口"></div>
-              </div>
-              <div class="phone-caption">开单页置顶入口</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 1-2 加购设置弹窗 -->
-    <article class="mod has-shots">
+    <article class="mod">
       <div class="mod-head">
         <div class="mod-no">02</div>
-        <h3 class="mod-title">加购设置弹窗</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        把项目 / 产品加进购物车时，先弹窗把<b>数量、价格（元）、服务员工</b>一次设齐，点确定才入车。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>弹窗形态<b>对齐博卡等老系统的既有操作习惯</b>，老用户从旧系统迁过来不用重新学一遍，迁移成本接近零。</li>
-              <li>价格（元）可在弹窗里直接改（对焦清空、失焦还原），店员<b>不必再绕去后台改价目表</b>，临时活动价当场就能给。</li>
-              <li>服务员工就地指定，<b>提成归属当场确定</b>，不用事后补录、也不会出现「这单算谁的」的扯皮。</li>
-              <li>项目不设数量卡片、通栏展示价格；产品保留数量卡片——按真实销售形态区分，减少无意义的字段。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">烫染加项</span>
-              顾客做烫染的过程中临时想加一个头皮护理。店员点项目卡片上的加号，弹窗里把数量设为 1、
-              价格按当天的活动价改成 88、服务员工勾上「林屿森 · 大工」，点确定直接进购物车。
-              <b>全程不用退出开单去改价目表</b>，也不会漏记这个加项带来的提成。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-加购设置弹窗.png" alt="加购设置弹窗"></div>
-              </div>
-              <div class="phone-caption">数量 / 价格 / 员工</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-加购弹窗(会员).png" alt="会员加购弹窗"></div>
-              </div>
-              <div class="phone-caption">会员场景加购</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 1-3 挂单 / 取挂单 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">03</div>
-        <h3 class="mod-title">挂单 / 取挂单</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        结账到一半可以先挂起，单据进挂单池；首页与顾客页常驻<b>「取挂单(N)」</b>入口，随时接回继续结。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>美发是典型的「一人多客、过程不断被打断」场景，收银结到一半被叫走是常态，而不是例外。</li>
-              <li>旧流程挂单后常常找不到，店员只能重新开一单——<b>重开就意味着漏单或者同一笔钱录两次</b>。</li>
-              <li>挂单池 + 独立挂单列表 + 首页实时条数，找回一张单只需要一次点击，<b>不需要问客服「我刚才那个单去哪了」</b>。</li>
-              <li>挂单数量实时显示在入口上，店长一眼就知道店里还有几笔没结完的账，交接班也不会丢。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">一人多客</span>
-              店里同时服务两位客人。A 客结到一半，B 客临时要求加单。店员先把 A 的单<b>挂起</b>，
-              转去服务并结算 B；忙完回到首页看到<b>「取挂单(1)」</b>，点进去接回 A 的单继续结账。
-              两位客人的单都没丢，收银台前也不会排起队伍。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-挂单列表.png" alt="挂单列表"></div>
-              </div>
-              <div class="phone-caption">挂单池 · 取挂单</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-开单结账首页.png" alt="首页取挂单入口"></div>
-              </div>
-              <div class="phone-caption">首页「取挂单(N)」</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 1-4 开单成功页 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">04</div>
-        <h3 class="mod-title">开单成功页</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-xs">免销售</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        结账之后给出一张完整的成功页：<b>打印小票、改日期、改单号、看流水、客户签字、继续开单</b>。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>结账是交易的临门一脚，也是店员和顾客对系统的<b>信任时刻</b>。旧流程结完账什么也不给，只留一个静默的状态变化。</li>
-              <li>小票当场可打、单号当场可改、流水当场可查，出问题店员自己就能处理，<b>不需要事后找客服改数据</b>。</li>
-              <li>「改单号」「改日期」这类看似小的能力，恰好是门店最常需要补救的地方——手写单号对不上、跨零点结账要归到前一日。</li>
-              <li>一个顺畅的收尾动作会被店员记住并讲出来。<b>同行问「你们用的什么系统」时，就是一次免费的推荐</b>。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">当场对账</span>
-              顾客结完账想核对一下金额，店员在成功页点「打印小票」直接出单；发现单号写错了，
-              当页点「改单号」改掉，不用事后找人协调。顾客拿着小票离开，
-              <b>店员对这个系统的好感也留下来了</b>——下次同行聚会聊起工具时，她自然会提起。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-开单成功页.png" alt="开单成功页"></div>
-              </div>
-              <div class="phone-caption">成功页 · 小票 / 改单号</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 1-5 顾客卡片与权益 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">05</div>
-        <h3 class="mod-title">顾客卡片与会员权益可见</h3>
+        <h3 class="mod-title">开单结账</h3>
         <div class="pills">
           <span class="pill p-kf">免客服</span>
           <span class="pill p-xs">免销售</span>
@@ -849,1103 +955,482 @@
       </div>
 
       <p class="mod-lead">
-        全页统一粉白淡色卡；会员的持卡与权益改为<b>默认收起、右侧展开，一行一张卡</b>，一眼看清「还剩几次、还能打几折」。
+        一句话概括：<b>让收银台上的每一秒都值钱，而且不依赖培训</b>。
+        开单路径要短到新员工第一天就能走完，被打断时单据不会丢，收尾时该给的凭证当场就能给。
       </p>
 
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>核对权益是收银员最高频的动作之一。旧版把权益默认折叠，每次都要额外点两下，一天上百次。</li>
-              <li>顾客列表补上「男散客 / 女散客」，散客头像与性别表达清晰，<b>店员不用每次都口头问「男客女客」</b>。</li>
-              <li>移除「办卡」「更换顾客」等干扰按钮，点头像或姓名即进顾客列表，路径更短、误触更少。</li>
-              <li>权益一眼可见，店员才<b>敢主动开口介绍权益</b>；顾客感到会员是有价值的，才会续卡与转介绍。</li>
-            </ul>
-          </div>
+      <div class="mod-block">
+        <h4>本模块能力条目（5 项）</h4>
+        <ul class="feat">
+          <li><b>直接收款（快捷开单）</b>　不选顾客、不选项目、不做任何前置配置，输入金额即可结算；金额留空时按原价自动匹配最优会员权益。</li>
+          <li><b>加购设置弹窗</b>　加购时一次设齐数量、价格（元）、服务员工；价格可就地改，提成归属当场确定。</li>
+          <li><b>挂单 / 取挂单</b>　结账中断可先挂起，单据进挂单池；首页与顾客页常驻「取挂单(N)」，随时接回继续结。</li>
+          <li><b>开单成功页</b>　结账后给出完整收尾：打印小票、改日期、改单号、看流水、顾客签字、继续开单。</li>
+          <li><b>顾客卡片与会员权益可见</b>　持卡与权益默认收起、右侧展开、一行一张卡；散客按男 / 女分列，路径更短、误触更少。</li>
+        </ul>
+      </div>
 
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">权益即客单</span>
-              会员到店，店员点开顾客卡片一眼看到「剪发计次卡剩 2 次、储值卡余额 380」，
-              顺口说一句「您卡里还有两次剪发，今天用掉？」顾客当场决定加做一次护理。
-              <b>一次顺手的信息展示，直接把客单拉了起来</b>——而旧版要连点两次才能看到这些数字，店员往往就懒得看了。
+      <div class="mod-block">
+        <div class="data-band">
+          <div class="db-head">
+            <span class="db-kicker">Data 02</span>
+            <span class="db-title">数据论证 · 为什么有必要</span>
+            <span class="db-note">外部行业数据 · 来源见文末</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-kf">
+              <div class="tag">新人反复上手</div>
+              <div class="dv">41<em>%</em></div>
+              <div class="dl">美业相关行业人员年均流动率，新人反复上手是常态</div>
+              <div class="ds">行业研究报告汇编</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">培训成本反复支付</div>
+              <div class="dv">11.3<em>天</em></div>
+              <div class="dl">新员工平均熟练操作系统需 11.3 天；流程优化后单笔收银可从约 42 秒降到 14 秒</div>
+              <div class="ds">行业研究报告汇编 / 厂商实测</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">高峰排队流失</div>
+              <div class="dv">≈30<em>%</em></div>
+              <div class="dl">高峰期因排队等待造成的客户流失，可被收银流程优化显著压低</div>
+              <div class="ds">厂商公开实测案例</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">复杂流程抬高误操作</div>
+              <div class="dv">14.2<em>%</em></div>
+              <div class="dl">新员工误操作率；前置步骤越多，「开不了单」越容易变成漏单</div>
+              <div class="ds">行业研究报告汇编</div>
             </div>
           </div>
         </div>
+        <ul class="mlist">
+          <li><b>高频 × 高流动 = 学习成本会被反复支付。</b>行业报告显示，美业相关行业人员流动率约 41%，新员工平均需要 11.3 天才熟练操作系统，误操作率约 14.2%。每多一步操作、每多一个「必须先配好才能用」的前置条件，都会在每次人员更替时重新变成培训成本和客服工单——<b>这正是「免客服」支柱要消灭的成本</b>。<span class="src">（来源见文末 11）</span></li>
+          <li><b>收银台上的每一秒都会变成钱。</b>行业实测中，传统手工录单单笔收银约 42–45 秒，流程优化后可降到 14–15 秒。开单是全天最密集的动作，任何效率提升都会被高频放大。<span class="src">（来源见文末 10）</span></li>
+          <li><b>高峰流失直接对应挂单与提速。</b>实测显示，高峰期因排队造成的客户流失可减少约 30%。门店真实情况是：一人多客、结到一半被叫走——没有挂单就只能重开或手写，两条路都指向漏单与更长的队。<span class="src">（来源见文末 10）</span></li>
+          <li><b>三种「开不了单」是常态，不是例外。</b>新客没建档、价目表没配全、收银被打断——旧流程会卡住；直接收款零前置兜住前两种，挂单兜住第三种。<b>误操作率 14.2% 说明：路径越长，越容易在这些口子上漏钱。</b><span class="src">（来源见文末 11）</span></li>
+        </ul>
+      </div>
 
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c1-会员权益.png" alt="会员权益展开"></div>
-              </div>
-              <div class="phone-caption">持卡与权益可展开</div>
-            </div>
+      <div class="mod-block">
+        <h4 class="h-data">数据论证 · 为什么优先级高</h4>
+        <ul class="mlist">
+          <li><b>收益面最大、触发条件最少。</b>开单是所有门店、所有员工、每天都要做的动作，改动收益不需要任何额外前提就会发生。相比之下，其他模块的收益需要门店先把配置做对。</li>
+          <li><b>它是「免客服」能否成立的地基。</b>如果开单还要靠教，后面每一个功能都要靠教；开单先变得不需要说明书，其他模块的自助率才有意义。</li>
+          <li><b>风险最低、见效最快。</b>不涉及存量数据迁移，功能链条短，可以独立上线、独立观测，是最适合先行推进的一段。</li>
+          <li><b>行业数字化仍在渗透期，门槛就是竞争力。</b>美发门店使用管理系统的比例从 2024 年的 40.9% 升到 2025 年的 47.3%，<b>仍有超过一半门店没有系统</b>。对这批门店来说，「上手要多久」往往比「功能有多全」更决定要不要用。<span class="src">（来源见文末 11）</span></li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <h4 class="h-scene">门店场景</h4>
+        <div class="scene">
+          <span class="scene-tag">早班散客</span>
+          早上刚开门，一位新客只想修个刘海、付 30 元就走，前台还没来得及建档、价目表里也没有这个细项。
+          店员点首页的<b>「直接收款」</b>，输 30、勾选收款人、点「去收款」→ <b>十秒完成</b>。
+          钱进了门店流水、业绩算到具体人头上，客人也满意离开——而不是让顾客站着等前台建档。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">一人多客</span>
+          店里同时服务两位客人。A 客结到一半，B 客临时要求加单。店员先把 A 的单<b>挂起</b>，转去服务并结算 B；
+          忙完回到首页看到<b>「取挂单(1)」</b>，点进去接回 A 的单继续结账。两位客人的单都没丢，收银台前也不会排起队伍。
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <h4>上线后 · 用哪些数据验证方案是对的</h4>
+        <table class="metrics">
+          <thead>
+            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>门店开单量 / 客单价</td><td>统计周期内开单笔数与客均实收</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>快捷开单占比</td><td>直接收款笔数 ÷ 门店总开单</td><td class="dir">稳定使用</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>当日未取回挂单数</td><td>挂单池中当日仍未取回的单据</td><td class="dir">→ 0</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mod-block">
+        <h4>界面示意<span style="font-weight:500;letter-spacing:.3px;color:var(--ink-faint)">　共 8 屏 · 可横向拖动 · 点击放大</span></h4>
+        <div class="phone-rail">
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-开单结账首页.png" alt="开单结账首页"></div></div>
+            <div class="phone-caption">开单页 · 置顶入口</div>
           </div>
-          <div class="rail-hint">点击图片可放大查看</div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-直接收款输金额.png" alt="直接收款输入金额"></div></div>
+            <div class="phone-caption">直接收款 · 输金额</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-直接收款结算.png" alt="直接收款结算"></div></div>
+            <div class="phone-caption">直接收款结算</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-加购设置弹窗.png" alt="加购设置弹窗"></div></div>
+            <div class="phone-caption">加购 · 数量 / 价格 / 员工</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-会员开单.png" alt="会员开单持卡可见"></div></div>
+            <div class="phone-caption">会员开单 · 持卡可见</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-已选商品.png" alt="已选商品购物车"></div></div>
+            <div class="phone-caption">已选商品 · 购物车</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-挂单列表.png" alt="挂单列表"></div></div>
+            <div class="phone-caption">挂单池 · 取挂单</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c1-开单成功页.png" alt="开单成功页"></div></div>
+            <div class="phone-caption">成功页 · 小票 / 改单号</div>
+          </div>
         </div>
       </div>
     </article>
   </section>
 
-  <!-- ================= 第二章 ================= -->
-  <section id="ch2">
+  <!-- ================= 第三章 · 价目表 ================= -->
+  <section id="ch3">
     <div class="sec-head">
-      <span class="sec-no">第二章</span>
-      <h2 class="sec-title">价目表 · 项目创建与管理<span>所有收银与权益的数据源头</span></h2>
-      <div class="sec-en">Chapter 02</div>
+      <span class="sec-no">第三章</span>
+      <h2 class="sec-title">价目表 · 项目创建与管理<span>把线上老价目表用顺、用透</span></h2>
+      <div class="sec-en">Chapter 03</div>
     </div>
 
     <p class="sec-lead">
       价目表不只是一个「价格清单」。开单能不能选到这个项目、会员卡的权益能不能覆盖、折扣的适用范围有多大，
-      全部由价目表的定义决定。它是<b>收银、权益、报表三条链路共同的地基</b>——
-      地基没打好，上层每一个功能都会跟着出问题。
+      全部由它定义。它是<b>收银、权益、报表三条链路共同的价目地基</b>。
+      这一章要做的，是把线上正在用的老版价目表更新成更好用的版本：看得更快、改得更少步、分组与排序能当经营抓手。
     </p>
 
-    <!-- 2-1 高密度列表 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">01</div>
-        <h3 class="mod-title">高密度信息行列表</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        列表去掉配图堆叠与行内状态列，<b>一行就是名称、时长 / 规格、价格</b>；分组轨、添加入口、排序操作集中在一屏。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>旧价目表带图片和较多装饰元素，<b>一屏只能看几条</b>，店主改一个价格要上下滑很久才能定位。</li>
-              <li>B 端管理软件的第一性诉求是「<b>找得到、改得快</b>」，不是「好看」。信息行列表把查找和修改的成本同时压下来。</li>
-              <li>无搜索、无悬浮球：新增入口跟着当前 Tab 走，用最少的控件覆盖最高频的动作，降低学习成本。</li>
-              <li>列表底部虚线添加行 + 标题栏「+添加」，两条路径都能新增，操作习惯不同的人都能顺手。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">早上调价</span>
-              店主早上想调三个项目的价格。旧列表一屏只能看 4 条，来回滑半天还容易点错；
-              新列表一屏十几条，<b>扫一眼就能定位</b>，点开就在列表内就地展开修改、保存即生效。
-              三分钟做完原本要十分钟的事。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-项目列表.png" alt="项目列表"></div>
-              </div>
-              <div class="phone-caption">项目列表</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-产品列表.png" alt="产品列表"></div>
-              </div>
-              <div class="phone-caption">产品列表</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-就地编辑项目.png" alt="就地编辑"></div>
-              </div>
-              <div class="phone-caption">列表内就地编辑</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2-2 分组 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">02</div>
-        <h3 class="mod-title">自定义分组 + 系统「隐藏」组</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        自定义分组<b>可多归属、可空组、删组不删货</b>，一个条目能同时属于多个组；系统「隐藏」组专门收纳对顾客端不可见的项。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>旧体系只有单一「大类」，一个项目只能归到一处，<b>无法同时按「季节活动」「高毛利」「主推」等多个视角组团</b>。</li>
-              <li>旧方式删组会连带丢货，这是店主不敢动分组的最大心理障碍；新模型明确「<b>删组不删货</b>」，条目自动回到未分组状态。</li>
-              <li>允许空组存在，店主可以先建好组再慢慢往里填，不用一次想清全部结构。</li>
-              <li>分组不只是分类，更是营销抓手：分组能被提成规则整类命中，<b>把「夏季主推」组成一组就能一次性配好提成</b>。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">用分组做营销</span>
-              店主把新上的一批护理项目建成「夏季主推」组，给这个组<b>配一条更高的提成规则</b>，
-              店员推它就有额外收益；同时把仪器类项目归入「高客单」组，前台一眼看到该往哪个方向推。
-              <b>分组从「整理收纳」变成了「经营动作」</b>，客单和毛利一起往上走。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-分组管理.png" alt="分组管理"></div>
-              </div>
-              <div class="phone-caption">分组管理</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-价目表.png" alt="分组轨筛选"></div>
-              </div>
-              <div class="phone-caption">分组轨筛选</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2-3 拖拽排序 -->
-    <article class="mod has-shots">
+    <article class="mod">
       <div class="mod-head">
         <div class="mod-no">03</div>
-        <h3 class="mod-title">拖拽排序</h3>
+        <h3 class="mod-title">价目表 · 项目创建与管理</h3>
         <div class="pills">
+          <span class="pill p-kf">免客服</span>
           <span class="pill p-xs">免销售</span>
           <span class="pill p-yj">让门店业绩提升</span>
         </div>
       </div>
 
       <p class="mod-lead">
-        在售 / 下架两个桶内拖拽调整顺序并持久保存；自定义分组内也能拖。排序即推荐位。
+        一句话概括：<b>把线上老价目表做透——找得到、改得快、推得动</b>。
+        高密度列表让一屏扫到目标项，就地改价省掉跳页；自定义分组与拖拽排序，把「整理收纳」升级成「主推与营销」。
       </p>
 
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>排序是<b>无声的推荐</b>。排在前面、顾客端第一眼看到的项目，被选中的概率最高，这是最省力的营销杠杆。</li>
-              <li>旧体系不支持拖拽，想调整展示顺序只能删了重建——重建又会影响绑卡与历史数据，店主干脆不动。</li>
-              <li>在售与下架分桶排序，卖的和不卖的互不干扰，调整主推时不会把停售项的位置搞乱。</li>
-              <li>拖一下就生效、下次打开顺序还在，<b>这种即时正反馈会让店主愿意继续用，也愿意讲给同行听</b>。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">主推上首页</span>
-              门店新上一款高毛利护理。店主把它<b>拖到项目列表第一位</b>，
-              开单页和顾客端第一眼看到的就是它。不需要开会培训、不需要教话术，
-              店员按顺序推、顾客按顺序看，<b>销量自然就起来了</b>。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-拖拽排序.png" alt="拖拽排序"></div>
-              </div>
-              <div class="phone-caption">桶内拖拽排序</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2-4 三态 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">04</div>
-        <h3 class="mod-title">在售 / 下架 / 隐藏 三态可见性</h3>
-        <div class="pills">
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
+      <div class="mod-block">
+        <h4>本模块能力条目（10 项）</h4>
+        <ul class="feat">
+          <li><b>高密度信息行列表</b>　一行即名称、时长 / 规格、价格，一屏能扫到更多条目，改价就在列表内就地展开。</li>
+          <li><b>自定义分组 + 系统「隐藏」组</b>　条目可多归属、可空组、删组不删货；「隐藏」组专门收纳对顾客端不可见的项。</li>
+          <li><b>拖拽排序</b>　在售 / 下架分桶内拖拽调整顺序并持久保存。<b>排序即推荐位</b>，是最省力的营销杠杆。</li>
+          <li><b>在售 / 下架 / 隐藏 三态</b>　给出跨端可见性矩阵：下架＝顾客端 / 开单 / 权益都不可选；隐藏＝仅顾客端不可见，开单仍可选。</li>
+          <li><b>绑卡锁定 + 改价支付拦截</b>　被会员卡引用的项目锁定关键属性（名称 / 预约 / 删除）；开单中改价触发支付前确认。</li>
+          <li><b>与会员卡 / 开单联结</b>　价目表是开单选品、会员卡选权益、折扣范围的同一份数据源；权益页可直达管理并能原路返回、自动刷新。</li>
+          <li><b>主分组可改</b>　承接统计与默认筛选的主分组允许调整，正面回应前线「大类选错不能改」的老痛点。</li>
+          <li><b>变更轻提示</b>　分组允许修改，只给 toast 轻提示，不弹确认窗、不阻断日常维护。</li>
+          <li><b>即时生效、不回溯已结账</b>　分组变更即时作用于之后的单据；已结清账目不因改组被悄悄重算。</li>
+          <li><b>会员卡权益锚定主分组</b>　卡权益按主分组对齐，避免自定义组增删改名导致已售卡口径漂移。</li>
+        </ul>
       </div>
 
-      <p class="mod-lead">
-        售卖状态拆成三态，并给出跨端可见性矩阵：<b>下架</b>＝顾客端 / 开单 / 权益都不可选；<b>隐藏</b>＝仅顾客端不可见，B 端开单仍可选。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>旧体系只有「停售」一刀切。想做「内部项目不对 C 端展示」，只能删掉或另建一份，既麻烦又容易出错。</li>
-              <li>三态让店主能<b>精细控毛利</b>：引流款公开比价、利润款只对到店客介绍，价格体系不被打穿。</li>
-              <li>权益选品严格只取「<b>在售且未隐藏</b>」，避免把隐藏项写进会员卡、造成售后的承诺纠纷。</li>
-              <li>下架项仍留在价目表里可查、可恢复，历史订单与报表不会因为下架而失去上下文。</li>
-            </ul>
+      <div class="mod-block">
+        <div class="data-band">
+          <div class="db-head">
+            <span class="db-kicker">Data 03</span>
+            <span class="db-title">数据论证 · 为什么有必要</span>
+            <span class="db-note">外部行业数据 · 来源见文末</span>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">熟客专属价</span>
-              门店有一款只做熟客的「内部价护理」，不希望被全网比价。店主把它设为<b>「隐藏」</b>：
-              顾客端看不到、不会拿来比价；但店员开单时仍然能选到它。
-              <b>既守住了利润空间，也保住了灵活的成交能力</b>——这是旧「停售」做不到的。
+          <div class="dstats">
+            <div class="dstat d-xs">
+              <div class="tag">逾半门店尚无系统</div>
+              <div class="dv sm">40.9→47.3<em>%</em></div>
+              <div class="dl">美发门店使用管理系统的比例（2024 → 2025），仍有超过一半门店没有系统</div>
+              <div class="ds">行业研究报告汇编</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">改价维护提速</div>
+              <div class="dv">10→3<em>分钟</em></div>
+              <div class="dl">月初调三个项目价格：旧列表翻找 vs 高密度列表 + 就地改价</div>
+              <div class="ds">本方案门店场景测算</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">排序即推荐位</div>
+              <div class="dv">主推<em>一拖到顶</em></div>
+              <div class="dl">拖拽排序让主推项前置，分组可配差异化提成，变成最低成本的经营杠杆</div>
+              <div class="ds">本方案设计目标</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">老痛点可被消掉</div>
+              <div class="dv">工单<em>↓</em></div>
+              <div class="dl">「大类选错不能改」是前线反复反馈；主分组可改后，归类 / 改不了类类工单应下降</div>
+              <div class="ds">一线反馈 · 本方案观测口径</div>
             </div>
           </div>
         </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-空态说明.png" alt="空态说明"></div>
-              </div>
-              <div class="phone-caption">空态与可见性说明</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-新增项目.png" alt="新增项目"></div>
-              </div>
-              <div class="phone-caption">新增项目 · 售卖设置</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
+        <ul class="mlist">
+          <li><b>价目表决定三件事，任何一件出错都会向上传染。</b>开单能不能选到这个项目、会员卡权益能不能覆盖、折扣适用范围有多大——三者共用同一份数据。线上老版一屏信息密度低、改价要跳页，店主越不敢动、分类越失真，错位越容易出现。</li>
+          <li><b>维护效率本身就是经营成本。</b>场景测算里，月初调三个项目价格可从约 10 分钟压到约 3 分钟：高密度列表扫一眼定位，就地展开改完即生效。价目是每天都会碰的地基，慢一点就会被高频放大。</li>
+          <li><b>分组与排序不是「整理癖」，是营销动作。</b>把护理建成「夏季主推」组、拖到列表前排，再配更高提成，店员自然愿意推——<b>排序即推荐位，分组即经营抓手</b>，客单和毛利可以同向走。</li>
+          <li><b>一线已经先给出了反馈。</b>「大类选错不能改」不只是不方便，而是店主不敢动分组、报表维度长期失真。新的主分组可改、删组不丢货、变更只 toast，是对这个老痛点的正面回应——不是另起炉灶做跨平台搬家，而是把正在用的价目表做透。</li>
+        </ul>
       </div>
-    </article>
 
-    <!-- 2-5 绑卡锁定 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">05</div>
-        <h3 class="mod-title">绑卡锁定 + 改价支付拦截</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
+      <div class="mod-block">
+        <h4 class="h-data">数据论证 · 为什么优先级高</h4>
+        <ul class="mlist">
+          <li><b>它是收银与权益的共用地基，改一次、三条链路一起受益。</b>开单选品、卡权益、折扣范围都读价目表；列表与分组用顺了，后面模块少踩「选得到 / 选不到」的坑。</li>
+          <li><b>收益面大、不依赖额外培训。</b>高密度列表、就地改价、拖拽排序都是「打开就会」的动作，符合「免客服」——店主自己就能把价目表维护成经营工具。</li>
+          <li><b>它直接决定「该推的项目推不推得动」。</b>没有可改的分组与可拖的排序，主推只能靠口头交代；写进系统之后，提成规则才挂得住、店员才有动力推。</li>
+          <li><b>与提成规则同批对齐，避免「改了没反应」。</b>分组模型与提成命中挂在同一套结构上；价目侧先理顺，提成侧的优先级链才站得住。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <h4 class="h-scene">门店场景</h4>
+        <div class="scene">
+          <span class="scene-tag">月初调价</span>
+          店主早上想调三个项目的价格。旧列表一屏只能看几条，来回滑半天还容易点错；新列表一屏扫到目标，
+          点开就地展开修改、保存即生效。三分钟做完原本要十分钟的事。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">用分组做营销</span>
+          店主把新上的一批护理项目建成「夏季主推」组，给这个组<b>配一条更高的提成规则</b>，店员推它就有额外收益；
+          同时把仪器类项目归入「高客单」组，前台一眼看到该往哪个方向推。
+          <b>分组从「整理收纳」变成了「经营动作」</b>，客单和毛利一起往上走。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">大类选错能改</span>
+          入驻时把「儿童剪发」归错了类。旧版大类选错不能改，只能将错就错或找客服；新版主分组可改、删组不丢货，
+          店主自己改完继续营业，<b>不用为一次归类错误养一套长期失真的报表</b>。
         </div>
       </div>
 
-      <p class="mod-lead">
-        被会员卡引用的项目<b>锁定关键属性</b>（名称 / 预约 / 删除）；开单过程中改价会<b>触发支付拦截</b>确认。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>会员卡的权益建立在项目定义之上。如果价格和名称能随意改，<b>已售出的卡就会出现「承诺与实际不符」</b>，这是最容易演变成投诉的地方。</li>
-              <li>开单中改价直接支付，会让账目金额与权益扣减对不上，是资损与纠纷的高发点。</li>
-              <li>规则前置拦截，把问题挡在成交之前；同时仍保留「在售 / 下架」的可改空间，不让保护变成束缚。</li>
-              <li>把风险在系统内消化掉，门店就不需要在事后反复找客服协调对账。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">已售卡不失效</span>
-              门店卖出的会员卡承诺「剪发 10 次」。如果店员把该项目改名或改掉预约属性，旧卡立刻对不上。
-              锁定之后，店主<b>放心改价目也不用担心已售卡失效</b>；开单临时改价时会先被拦下确认，
-              避免误改之后跟顾客对着小票解释半天。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-就地编辑产品.png" alt="产品编辑与锁定"></div>
-              </div>
-              <div class="phone-caption">编辑产品 · 锁定提示</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2-6 价目联结 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">06</div>
-        <h3 class="mod-title">与会员卡 / 开单联结</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
+      <div class="mod-block">
+        <h4>上线后 · 用哪些数据验证方案是对的</h4>
+        <table class="metrics">
+          <thead>
+            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>价目改价 / 新增操作次数</td><td>统计周期内改价与新增项目 / 产品的操作次数</td><td class="dir">活跃使用</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>自定义分组使用率</td><td>使用了自定义分组的门店 ÷ 活跃门店</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>分组 / 价目类客服工单</td><td>每百店当月分组 / 归类 / 改不了类工单</td><td class="dir">↓</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <p class="mod-lead">
-        价目表是<b>开单选品、会员卡选权益、折扣适用范围</b>的共同数据源；权益页可直接「管理价目表」并原路返回。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>三处共用同一份数据，才不会出现「<b>开单能选、权益选不到</b>」这类让店员困惑的错位。</li>
-              <li>建卡选权益时发现缺项目，可以当场进价目表补货、返回后继续选，<b>不用退出重走一遍流程</b>。</li>
-              <li>返回后自动刷新并回到「全部」分组，避免因为筛选条件残留导致「刚加的项目看不见」的假故障。</li>
-              <li>数据同源意味着改一次全局生效，店主不需要在多处重复维护，也就不会因为不一致来找客服。</li>
-            </ul>
+      <div class="mod-block">
+        <h4>界面示意<span style="font-weight:500;letter-spacing:.3px;color:var(--ink-faint)">　共 10 屏 · 可横向拖动 · 点击放大</span></h4>
+        <div class="phone-rail">
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-项目列表.png" alt="项目列表"></div></div>
+            <div class="phone-caption">项目列表</div>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">办卡不中断</span>
-              店长正在给顾客办卡、挑权益，发现少了新上的护理项目。她点「管理价目表」
-              <b>当场把项目补进去，返回后权益列表已经刷新</b>，接着把卡办完。
-              顾客全程没有等待感，办卡流程一次走完——而不是让顾客坐着等店长去另一个模块折腾。
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-产品列表.png" alt="产品列表"></div></div>
+            <div class="phone-caption">产品列表</div>
           </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-新增项目.png" alt="价目表新增"></div>
-              </div>
-              <div class="phone-caption">从权益页进价目表补货</div>
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-就地编辑项目.png" alt="就地编辑项目"></div></div>
+            <div class="phone-caption">列表内就地编辑</div>
           </div>
-          <div class="rail-hint">点击图片可放大查看</div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-就地编辑产品.png" alt="就地编辑产品"></div></div>
+            <div class="phone-caption">产品编辑 · 锁定提示</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-新增项目.png" alt="新增项目"></div></div>
+            <div class="phone-caption">新增项目 · 售卖设置</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-价目表.png" alt="分组轨筛选"></div></div>
+            <div class="phone-caption">分组轨筛选 · 选中分组</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-分组管理.png" alt="分组管理"></div></div>
+            <div class="phone-caption">分组管理 · 可改</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-拖拽排序.png" alt="拖拽排序"></div></div>
+            <div class="phone-caption">桶内拖拽排序</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c2-空态说明.png" alt="空态说明"></div></div>
+            <div class="phone-caption">空态与可见性说明</div>
+          </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c4-卡分组.png" alt="卡分组"></div></div>
+            <div class="phone-caption">主分组 + 自定义分组</div>
+          </div>
         </div>
       </div>
+
     </article>
   </section>
 
-  <!-- ================= 第三章 ================= -->
-  <section id="ch3">
+  <!-- ================= 第四章 · 提成设置 ================= -->
+  <section id="ch4">
     <div class="sec-head">
-      <span class="sec-no">第三章</span>
+      <span class="sec-no">第四章</span>
       <h2 class="sec-title">提成设置 · 多方案<span>决定店员愿不愿意卖</span></h2>
-      <div class="sec-en">Chapter 03</div>
+      <div class="sec-en">Chapter 04</div>
     </div>
 
     <p class="sec-lead">
       提成是门店里最敏感的一张表。算得清，店员就敢冲；算不清，再好的功能也推不动。
       旧模型是「阶梯比例单方案 + 依赖业绩设置」，<b>配置链路长、职责混叠</b>，
       店主既表达不了「不同分类、不同支付方式、不同工位」的差异化，也说不清为什么某个店员拿的是这个数。
-      本章 6 个功能，目标是把这张表变成店主能自己配、店员能自己看懂的规则。
+      这一模块的目标，是把这张表变成店主能自己配、店员能自己看懂的规则。
     </p>
 
-    <!-- 3-1 多方案 -->
-    <article class="mod has-shots">
+    <article class="mod">
       <div class="mod-head">
-        <div class="mod-no">01</div>
-        <h3 class="mod-title">多方案 + 一人多方案 + 同行取高</h3>
-        <div class="pills">
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        一套规则就是一个「提成方案」，可命名、可复制、可整方案分配员工；<b>同一人可分配多个方案</b>，
-        同一订单行命中多方案时<b>取金额更高者</b>。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>美发店普遍存在顾问 / 技师 / 销售多岗位并存的情况，<b>一套阶梯比例根本表达不了这种差异</b>。</li>
-              <li>「一人多方案 + 取高」保证店员在任意一种合理身份下都能拿到应得的那一份，<b>规则不必写死成特例</b>。</li>
-              <li>方案整体分配员工，而不是一个人一个人地配规则，新店开业和人员变动时的维护量大幅下降。</li>
-              <li>分成说得清、算得准，<b>店长才敢排班、店员才敢冲业绩</b>——这是门店能不能跑起来的前提。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">一人两岗</span>
-              阿 Ken 既是烫染技师、又兼顾问。烫染按技师方案算 15%，按顾问方案算 8%。
-              两套方案都分配给他，系统自动取更高的那一份。他<b>不用为了算钱跟店长争论</b>，
-              店长也不用为每个人手写一套特例规则。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-提成设置.png" alt="提成设置"></div>
-              </div>
-              <div class="phone-caption">提成设置入口</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-方案列表.png" alt="方案列表"></div>
-              </div>
-              <div class="phone-caption">方案列表</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3-2 规则块化 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">02</div>
-        <h3 class="mod-title">规则块化：5 项默认 + 覆盖规则项</h3>
+        <div class="mod-no">04</div>
+        <h3 class="mod-title">提成设置 · 多方案</h3>
         <div class="pills">
           <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        方案内固定 5 项默认规则（<b>项目 / 产品 / 办卡 / 充卡 / 快捷开单</b>），需要精细化时再加覆盖规则项，
-        覆盖整类分组或指定具体项目。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>把「提成怎么算」从一堆散落配置收敛成<b>可复用的规则块</b>，一次配好、长期生效。</li>
-              <li><b>80% 的门店用 5 项默认就够了</b>，系统不逼店主一开始就做复杂配置，因此也不需要客服上门帮着配。</li>
-              <li>需要精细化时再叠加覆盖项，复杂度是按需增长的，而不是一上来就全部摊在店主面前。</li>
-              <li>快捷开单在数据上是系统覆盖项，保证<b>直接收款产生的提成也不会被漏掉</b>。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">新店开业</span>
-              门店刚开业，店主只用 5 项默认规则，就把项目、产品、办卡、充卡、直接收款的提成<b>全部配完</b>。
-              等生意复杂起来——比如要给某个高毛利项目单独加提成——再加一条覆盖规则即可，
-              <b>不需要推倒重来</b>。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-取值胶囊.png" alt="取值胶囊"></div>
-              </div>
-              <div class="phone-caption">比例 / 金额 取值</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-平均分配.png" alt="分配模式"></div>
-              </div>
-              <div class="phone-caption">分配模式设置</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3-3 按工位 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">03</div>
-        <h3 class="mod-title">按工位分配 + 顾客指定提成</h3>
-        <div class="pills">
           <span class="pill p-xs">免销售</span>
           <span class="pill p-yj">让门店业绩提升</span>
         </div>
       </div>
 
       <p class="mod-lead">
-        <b>大 / 中 / 小工各自设提成</b>，横排一行；「顾客指定」可选开启，<b>叠加在原提成之上</b>，另计一笔。
+        一句话概括：<b>让店员相信「我该拿多少，系统算得对」，让店主敢改规则</b>。
+        规则要能表达真实的分工（岗位、工位、顾客指定），也要能被看懂、被修正、被追溯。
       </p>
 
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>工位差价是美业分成的核心：同一次烫染，大工与小工承担的责任不同，<b>该拿的钱也必须不同</b>。</li>
-              <li>「顾客指定」是真实存在的激励场景——被顾客点名的技师理应额外拿钱，<b>否则没人愿意花时间做口碑</b>。</li>
-              <li>工位固定 3 个、可改名且全局同步，门店可以用自己的叫法（首席 / 高级 / 助理）配置，<b>不用迁就系统的术语</b>。</li>
-              <li>顾客指定可与任一工位叠加，规则贴近真实的协作方式，而不是强行二选一。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">点名激励</span>
-              顾客到店指定「要林老师剪」。店员在开单选人时勾上<b>「顾客指定」</b>，
-              系统在林老师的工位提成之外<b>再计一笔指定提成</b>。
-              他有动力去维护熟客关系，店主也不用额外掏钱做人工奖励——
-              <b>激励机制被写进了系统，而不是靠店长拍脑袋</b>。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-按工位分配.png" alt="按工位分配"></div>
-              </div>
-              <div class="phone-caption">3 工位横排设提成</div>
-            </div>
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-顾客指定.png" alt="顾客指定"></div>
-              </div>
-              <div class="phone-caption">顾客指定提成</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看 · 可横向拖动</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3-4 基数独立 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">04</div>
-        <h3 class="mod-title">计算基数独立：原价 / 实收由规则自定</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-        </div>
+      <div class="mod-block">
+        <h4>本模块能力条目（6 项）</h4>
+        <ul class="feat">
+          <li><b>多方案 + 一人多方案 + 同行取高</b>　一套规则就是一个提成方案，可命名、可复制、可整方案分配员工；同一订单行命中多个方案时取金额更高者。</li>
+          <li><b>规则块化：5 项默认 + 覆盖规则项</b>　项目 / 产品 / 办卡 / 充卡 / 快捷开单 5 项默认规则，需要精细化时再叠加覆盖项（可整类分组或指定项目）。</li>
+          <li><b>按工位分配 + 顾客指定提成</b>　大 / 中 / 小工各自设提成；「顾客指定」可选开启，并<b>叠加在原提成之上</b>另计一笔。</li>
+          <li><b>计算基数独立</b>　每条规则自己决定按原价还是实收计算，不再经过旧「业绩设置」，配置链路显著变短。</li>
+          <li><b>业绩只读解耦 + 流水提成可改留痕</b>　业绩按原价加总、只读、不参与提成；提成可由店主 / 合伙人 / 店长修正，且改动留痕可审计。</li>
+          <li><b>试算与「未分配」提示</b>　方案保存前可试算；列表常驻提示「还有 N 人未分配任何提成方案」。</li>
+        </ul>
       </div>
 
-      <p class="mod-lead">
-        提成基数由<b>每条规则自己决定</b>（原价或实收），<b>不再经过旧「业绩设置」</b>；旧业绩设置整体移除。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>旧模型里提成依赖「业绩设置」的产出，两套配置互相牵制，<b>改一处要先搞懂另一处</b>，极易配错。</li>
-              <li>解耦之后规则是自解释的：一条规则里就能看完<b>适用范围、计算基数、分配模式、提成取值</b>四件事。</li>
-              <li>配置链路显著变短，店主自助就能完成，<b>不必反复找客服确认「改了业绩会不会影响提成」</b>。</li>
-              <li>适用范围独立到能区分现金 / 卡付 / 团购，团购这类低毛利渠道可以单独设比例，守住利润。</li>
-            </ul>
+      <div class="mod-block">
+        <div class="data-band">
+          <div class="db-head">
+            <span class="db-kicker">Data 04</span>
+            <span class="db-title">数据论证 · 为什么有必要</span>
+            <span class="db-note">外部行业数据 · 来源见文末</span>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">经理签单</span>
-              经理签单时实收为 0，但店主希望这类单仍按原价计提。
-              旧模型下要绕到业绩设置里去调整口径；新模型里<b>直接在规则的「计算基数」选「原价」</b>就行，
-              店主自己就能改对，不用等人来教。
+          <div class="dstats">
+            <div class="dstat d-kf">
+              <div class="tag">用工高度流动</div>
+              <div class="dv">16.5<em>%</em></div>
+              <div class="dl">2025 年住宿餐饮类行业离职率，居各行业首位（整体为 14.8%）</div>
+              <div class="ds">前程无忧《2026 离职与调薪调研报告》</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">分成争议的司法成本</div>
+              <div class="dv">22<em>万元+</em></div>
+              <div class="dl">一起美业「合作分成」劳动争议中，员工主张的赔偿金额</div>
+              <div class="ds">律所公开案例</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">核算耗时</div>
+              <div class="dv">2.5<em>小时</em></div>
+              <div class="dl">行业实测：单店每日提成核算耗时，流程优化后降至 10 分钟</div>
+              <div class="ds">厂商公开实测案例</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">规则说不清就流失</div>
+              <div class="dv">41<em>%</em></div>
+              <div class="dl">美业相关行业人员流动率；提成规则表达不清、算不明白，是流失与争议的高发诱因</div>
+              <div class="ds">行业研究报告汇编</div>
             </div>
           </div>
         </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-提成设置.png" alt="提成设置"></div>
-              </div>
-              <div class="phone-caption">规则自解释</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
+        <ul class="mlist">
+          <li><b>提成决定「店员愿不愿意卖」。</b>美业的用工结构普遍是技师、顾问、销售多岗位并存，还有大工 / 中工 / 小工的工位差价与顾客指定。一套阶梯比例根本表达不了这种差异——而表达不了的结果，就是算不清，算不清就变成争议。</li>
+          <li><b>争议是有司法成本的。</b>前程无忧《2026 离职与调薪调研报告》显示，2025 年住宿餐饮类行业离职率 16.5%、居各行业首位；美业常见的「合作分成」模式一旦进入仲裁，单案索赔可达 22 万余元，法院在裁判提示中明确要求用人单位<b>保留完整的合作记录与分成结算单</b>。提成能不能「说得清、算得准、改得动、留得下痕」，已经不只是效率问题。<span class="src">（来源见文末 8 / 9）</span></li>
+          <li><b>人工核算的时间成本同样可观。</b>行业实测中，单店每日提成核算从 2.5 小时降到 10 分钟。这笔时间在多数门店里由店长或店主本人承担，且集中在发薪前后的几天。<span class="src">（来源见文末 10）</span></li>
+          <li><b>流动率高，规则必须让新人一进店就挂得上、算得清。</b>美业相关行业人员流动率约 41%。新人入职忘了分配方案、规则改了「没反应」、发薪日为一笔提成争论——这三件事最容易积累怨气。多方案 +「未分配」提示 + 流水可改留痕，就是把私下协调变成系统内可审计的动作。<span class="src">（来源见文末 11）</span></li>
+        </ul>
       </div>
-    </article>
 
-    <!-- 3-5 业绩解耦 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">05</div>
-        <h3 class="mod-title">业绩只读解耦 + 流水提成可改留痕</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
+      <div class="mod-block">
+        <h4 class="h-data">数据论证 · 为什么优先级高</h4>
+        <ul class="mlist">
+          <li><b>它与价目分组结构同批对齐，避免「改了没反应」。</b>提成命中规则挂在分组上；价目侧分组理顺、提成侧优先级链一起上，店主才不会先经历一次「规则改了还是没反应」——那是最伤信任的一种体验。</li>
+          <li><b>敏感度最高，错一次的成本远高于其他模块。</b>工资是门店里唯一会被逐笔核对的数字。其他模块出问题影响效率，提成出问题影响的是店员对门店的信任，而信任的修复成本更高。</li>
+          <li><b>它直接影响留存与招人成本。</b>分成说不清是技师流失的直接原因之一；行业离职率已经在 16.5% 的高位，而招人与培养一个新技师的成本，远高于把规则一次配清楚。</li>
+          <li><b>它是「让门店业绩提升」的最后一环。</b>前面几个模块把单收进来、把项目理顺，最终要靠提成把「该推的项目推得动」——按工位、按顾客指定的差异化规则，才是把激励写进系统而不是靠店长拍脑袋。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
+        <h4 class="h-scene">门店场景</h4>
+        <div class="scene">
+          <span class="scene-tag">一人两岗</span>
+          阿 Ken 既是烫染技师、又兼顾问。烫染按技师方案算 15%，按顾问方案算 8%。两套方案都分配给他，系统自动取更高的那一份。
+          他<b>不用为了算钱跟店长争论</b>，店长也不用为每个人手写一套特例规则。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">点名激励</span>
+          顾客到店指定「要林老师剪」。店员在开单选人时勾上<b>「顾客指定」</b>，系统在林老师的工位提成之外<b>再计一笔指定提成</b>。
+          他有动力维护熟客关系，店主也不用额外掏钱做人工奖励——<b>激励机制被写进了系统</b>。
+        </div>
+        <div class="scene">
+          <span class="scene-tag">发薪日前一天</span>
+          店长发现某单的提成取错了规则。她在流水详情里<b>直接改数并留痕</b>。店员看到修改记录，明白是规则问题而非有人动手脚，
+          <b>不再追问</b>；店长也不用写微信去找客服，当晚就能把工资算清。
         </div>
       </div>
 
-      <p class="mod-lead">
-        业绩按原价加总、<b>只读、不参与提成</b>；流水里的提成可由店主 / 合伙人 / 店长<b>修正，且改动留痕可审计</b>。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>把「算业绩」和「算钱」分开，口径不再互相污染，<b>店员对数字的质疑会大幅减少</b>。</li>
-              <li>出错时有人能改——而不是只能找研发改数据库；改动有日志，<b>权责清晰、可追溯</b>。</li>
-              <li>发薪日不再因为一笔提成争论半天，<b>店主不必把客服当成仲裁者</b>。</li>
-              <li>权限分层明确：店长可改提成但不能改配置，店员全程只读——管得住也放得开。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">发薪日前一天</span>
-              发薪前一天，店长发现某单的提成取错了规则。她在流水详情里<b>直接改数并留痕</b>。
-              店员看到修改记录，明白是规则问题而非有人动手脚，<b>不再追问</b>；
-              店长也不用写微信去找客服，当晚就能把工资算清。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-方案列表.png" alt="关联页面"></div>
-              </div>
-              <div class="phone-caption">流水与薪资口径对齐</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3-6 试算与未分配 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">06</div>
-        <h3 class="mod-title">试算与「未分配」提示</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-        </div>
+      <div class="mod-block">
+        <h4>上线后 · 用哪些数据验证方案是对的</h4>
+        <table class="metrics">
+          <thead>
+            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>未分配方案人数</td><td>未分配任何提成方案的员工数</td><td class="dir">→ 0</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>提成人工修正率</td><td>人工改过的流水 ÷ 提成流水</td><td class="dir">↓ 且全程留痕</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>多方案 / 工位规则使用率</td><td>使用了一人多方案或工位提成的门店占比</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <p class="mod-lead">
-        方案保存前可<b>试算</b>；列表常驻提示「<b>还有 N 人未分配任何提成方案</b>」。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>提成配置最怕「配完了不知道对不对」。<b>试算把结果提前摆出来</b>，店主有确定感，敢往下走。</li>
-              <li>「未分配」提示堵住了最常见的漏配：<b>新员工入职后忘了分配方案，直到发薪才发现</b>。</li>
-              <li>提示而非报错、不阻断操作，店主自己看到就能补齐，<b>不需要打电话问客服「为什么有人没提成」</b>。</li>
-              <li>帮助弹窗把「一个人挂几个方案，钱怎么算」一次讲清，减少反复确认的沟通成本。</li>
-            </ul>
+      <div class="mod-block">
+        <h4>界面示意<span style="font-weight:500;letter-spacing:.3px;color:var(--ink-faint)">　共 7 屏 · 可横向拖动 · 点击放大</span></h4>
+        <div class="phone-rail">
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-提成设置.png" alt="方案列表"></div></div>
+            <div class="phone-caption">方案列表</div>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">新人入职</span>
-              店里新招两名技师。店长配完方案后，列表立刻提示「<b>还有 2 人未分配</b>」，
-              她当场把两人补上。到发薪日，<b>不会出现「有人整月没拿到提成」的尴尬场面</b>——
-              这本是门店最容易积累怨气的环节。
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-方案列表.png" alt="编辑方案规则卡"></div></div>
+            <div class="phone-caption">编辑方案 · 规则卡</div>
           </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c3-试算帮助.png" alt="试算与帮助"></div>
-              </div>
-              <div class="phone-caption">试算 / 帮助说明</div>
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-取值胶囊.png" alt="取值胶囊"></div></div>
+            <div class="phone-caption">比例 / 金额 取值</div>
           </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-  </section>
-
-  <!-- ================= 第四章 ================= -->
-  <section id="ch4">
-    <div class="sec-head">
-      <span class="sec-no">第四章</span>
-      <h2 class="sec-title">价目分组迁移 · 大类 → 主分组<span>唯一带存量数据迁移的一章</span></h2>
-      <div class="sec-en">Chapter 04</div>
-    </div>
-
-    <p class="sec-lead">
-      前三章的功能是「加上去」，这一章是「换地基」。
-      分组模型要从线上的「大类」迁到新模型的「主分组 + 自定义分组」，
-      涉及<b>存量数据、提成命中规则、会员卡权益</b>三处联动。
-      如果只是把新原型直接上线，付出的代价会是报表失去维度、提成算不出来、门店账目悄悄变化——
-      所以这一章的重点不是「做得更快」，而是「<b>迁得干净、算得住、可回滚</b>」。
-    </p>
-
-    <!-- 4-1 主分组 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">01</div>
-        <h3 class="mod-title">大类升级为主分组</h3>
-        <div class="pills">
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        大类升级为「<b>主分组</b>」——必选、1:1、<b>可改</b>，用于统计 / 导入导出 / 默认筛选；
-        另可自由添加<b>自定义分组</b>（多归属）做营销。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>如果直接按原型上线，存量的分类字段会全部塌缩进「其他 / 产品」，<b>经营报表与导入导出将彻底失去维度</b>。</li>
-              <li>主分组承担「必选归属」的统计职责，自定义分组承担「灵活运营」的营销职责，<b>两种职责分工不打架</b>。</li>
-              <li>线上「分组选择」经确认就是大类的另一个叫法、同一份数据，因此迁移是干净的 <b>1:1 映射，不需要合并两套分组</b>。</li>
-              <li>一线反馈的「大类选错不能改」这一老问题，随主分组「<b>可改</b>」直接解决，不再需要线下协调。</li>
-            </ul>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-平均分配.png" alt="分配模式"></div></div>
+            <div class="phone-caption">分配模式设置</div>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">月度经营分析</span>
-              门店月度复盘要看「烫染 / 剪发 / 护理」各贡献了多少营收。
-              主分组保证每条项目都有唯一归属，<b>报表维度不会崩</b>；
-              同时店主又能自由加「夏季主推」这类自定义组来做营销组团。
-              <b>统计的稳定性和运营的灵活性，第一次同时拿到</b>。
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-按工位分配.png" alt="按工位分配"></div></div>
+            <div class="phone-caption">3 工位横排设提成</div>
           </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c4-卡分组.png" alt="分组"></div>
-              </div>
-              <div class="phone-caption">主分组 + 自定义分组</div>
-            </div>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-顾客指定.png" alt="顾客指定"></div></div>
+            <div class="phone-caption">顾客指定提成</div>
           </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4-2 优先级链 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">02</div>
-        <h3 class="mod-title">提成优先级链替换「先写先赢」</h3>
-        <div class="pills">
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        命中规则改为显式优先级链：<b>具体项目 / 产品 &gt; 分组 &gt; 默认卡</b>，同层取高，并列时按规则项顺序。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>实测证明原实现是「<b>先写先赢</b>」：两条覆盖规则谁写在前面谁生效，<b>与费率高低无关</b>。店主改了费率却「没反应」，问题就出在这。</li>
-              <li>更隐蔽的风险是：删除分组后，指向它的规则会<b>静默不命中、金额悄悄回落到默认卡</b>，全程没有任何提示。</li>
-              <li>连带的问题是原文档写的「单独加的规则项更优先」在实测中<b>并不成立</b>，属于文档与实现矛盾，需要一并校准。</li>
-              <li>显式优先级链让结果<b>可预测、可解释</b>——这是提成能不能被店员信任的前提；钱算得明白，人才留得住。</li>
-            </ul>
+          <div class="phone">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen"><img src="价值汇报图/c3-试算帮助.png" alt="提成怎么设钱怎么算"></div></div>
+            <div class="phone-caption">帮助 · 提成怎么设、钱怎么算</div>
           </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">费率真的生效</span>
-              店主给「深层补水护理」单独设了 20%，又给「护理」分组设了 5%。
-              旧逻辑下谁先写谁生效，可能只按 5% 发；<b>新逻辑下具体项目优先，20% 一定生效</b>。
-              店员的钱不再被无声吞掉，店主也终于敢相信「我改的规则真的算数」。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c4-覆盖规则.png" alt="覆盖规则项"></div>
-              </div>
-              <div class="phone-caption">覆盖规则项</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <div class="calib">
-      <h4>口径校准 · 需要与文档同步修正的一处</h4>
-      <p>
-        现有帮助弹窗与文档中写的「<b>好几张卡都管到同一个项目 → 挑钱多的那张算</b>」「<b>单独加的规则项更优先</b>」，
-        与实测结果不一致。实测中「取高」只存在于<b>跨方案层</b>（<code>calcStaffTrial</code>），
-        覆盖规则之间实际是<b>按书写顺序先命中先生效</b>。
-      </p>
-      <p>
-        本方案的显式优先级链正是为了修正这一点：<b>同层取高</b>、跨层按优先级，实现与文案一致后，
-        店主才不会碰到「改了没反应」的困惑。此处属文档口径需要回修的项，不在本汇报中直接改动 PRD。
-      </p>
-    </div>
-
-    <!-- 4-3 变更护栏 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">03</div>
-        <h3 class="mod-title">变更护栏：仅 toast 轻提示</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        分组<b>允许修改</b>，仅用一条 toast 轻提示，<b>不弹确认窗、不阻断操作</b>。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>归属从「改起来很麻烦」变成「点两下」，如果再加一层确认弹窗，日常维护会被反复打扰。</li>
-              <li>轻提示既告知了变更的影响，又<b>保留了操作的流畅度</b>，是告知与效率之间的合理平衡。</li>
-              <li>不做强制拦截，意味着系统信任操作者；出问题时有留痕与监控兜底，而不是靠拦截预防。</li>
-              <li>店主改完就走、不需要理解一整套影响说明，<b>自然不会为此产生客服咨询</b>。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">随手纠错</span>
-              店主发现一个新项目归错了组，直接改掉，看到一条 toast 提示，
-              手上其他操作完全没被打断。对比旧体系「选错就不能改」，这是体验上最直观的一次升级。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-分组管理.png" alt="分组管理"></div>
-              </div>
-              <div class="phone-caption">分组可改 · 轻提示</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4-4 即时生效 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">04</div>
-        <h3 class="mod-title">即时生效 + 固定 forward</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        分组变更<b>不弹窗、即时生效、固定 forward</b>：分界时刻之后按新分组算，仅一条 toast 告知。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>归属变更与「方案规则改动」是两件事，<b>不该复用「本期全部重算 / 从现在起用新方案」那两枚按钮</b>——那是给方案规则改动用的。</li>
-              <li>分界记录保证<b>历史账目不被追溯改写</b>，财务口径稳定，已结清的提成不会因为一次分组调整而全部变化。</li>
-              <li>全程无需人工重算，店主改完即生效，<b>不会产生「改完要不要通知谁重算」的客服工单</b>。</li>
-              <li>变更后系统提示受影响范围并附监控，把「悄悄改钱」变成「明着改、留记录」。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">月中调组</span>
-              月中店主调整了分组归属。上半月的提成按原分组已经结清、<b>不会被动重算</b>；
-              下半月自动按新分组执行。店主不必找人手工核对两个月的数据，
-              也<b>不会因为调整分组而让已经发出去的工资对不上账</b>。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c4-重算弹窗.png" alt="重算弹窗"></div>
-              </div>
-              <div class="phone-caption">方案规则改动才走重算</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4-5 计次卡 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">05</div>
-        <h3 class="mod-title">会员卡 · 计次卡跟随分组</h3>
-        <div class="pills">
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        会员卡与计次卡的权益同样按「<b>大类 → 分组</b>」对齐，并且<b>刻意不引用自定义分组</b>，保证语义零漂移。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>卡权益建立在项目归属之上。如果两边分组口径不一致，就会出现「<b>卡里承诺的项目在新分组下找不到</b>」的严重问题。</li>
-              <li>不引用自定义分组是<b>刻意设计</b>：自定义分组可随时增删改名，一旦被卡引用，任何调整都会连带影响已售卡。</li>
-              <li>实时跟随的连带影响必须一并处理并<b>明确告知商户</b>，把可能的口径变化提前暴露，避免事后纠纷。</li>
-              <li>卡是门店最重要的预收资产，权益口径稳定，店主才敢放心卖卡、顾客才敢放心买卡。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">已售卡对得上</span>
-              门店卖出的会员卡承诺「护理类 10 次」。如果把「护理」拆成两个自定义组，
-              旧卡的适用范围就会变得含糊、顾客到店可能用不了。
-              <b>锚定在主分组上就不会漂移</b>，已售出的卡始终对得上，
-              门店不用为了历史卡去做额外的解释和补偿。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c4-卡分组.png" alt="卡分组"></div>
-              </div>
-              <div class="phone-caption">卡权益分组对齐</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4-6 全量替换 -->
-    <article class="mod has-shots">
-      <div class="mod-head">
-        <div class="mod-no">06</div>
-        <h3 class="mod-title">一次性全量替换 + 可回滚</h3>
-        <div class="pills">
-          <span class="pill p-kf">免客服</span>
-          <span class="pill p-yj">让门店业绩提升</span>
-        </div>
-      </div>
-
-      <p class="mod-lead">
-        迁移采用<b>一次性全量替换</b>，配套幂等、可回滚的迁移步骤与<b>回滚包</b>；上线前 dry-run 必须全绿。
-      </p>
-
-      <div class="mod-cols">
-        <div>
-          <div class="mod-block">
-            <h4>为什么必要</h4>
-            <ul class="mlist">
-              <li>存量数据迁移最怕「迁一半、状态不明」。一次性全量 + 回滚包<b>把风险关在可控范围内</b>。</li>
-              <li>上线前体检必须全绿、上线后有核对与监控，并预设明确的<b>回滚触发线</b>——不是靠临场判断。</li>
-              <li>迁移步骤幂等可重跑，失败后重试不会造成数据重复或错乱，运维成本大幅降低。</li>
-              <li>店主与一线<b>不需要参与逐条搬运</b>，上线当天照常营业，不产生任何额外的客服支持需求。</li>
-            </ul>
-          </div>
-
-          <div class="mod-block">
-            <h4 class="h-scene">美发店场景</h4>
-            <div class="scene">
-              <span class="scene-tag">上线当天照常营业</span>
-              迁移上线当天，门店<b>不需要做任何整理动作</b>——不用停业、不用导表、不用逐条确认归类。
-              即使出现异常，也能按预案回滚到迁移前的状态，<b>不影响当天的收银和排班</b>。
-              对门店来说，这是一次「无感」的底层升级。
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="phone-rail">
-            <div class="phone">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen"><img src="价值汇报图/c2-价目表.png" alt="价目表"></div>
-              </div>
-              <div class="phone-caption">迁移后价目表照常可用</div>
-            </div>
-          </div>
-          <div class="rail-hint">点击图片可放大查看</div>
         </div>
       </div>
     </article>
@@ -1960,8 +1445,9 @@
     </div>
 
     <p class="sec-lead">
-      23 个功能点分布在四条链路上，但指向同一件事：
-      <b>让店主不用学、不用求人、不用怕算错，就能把门店的每一笔钱收好、分好、赚好。</b>
+      32 个能力点分布在四个模块里，但指向同一件事：
+      <b>让平台买来的客流接得住、让收银台上的每一笔钱收得准、让价目与分组用得顺、让每一分提成分得清。</b>
+      这些能力都已在<b>开发中 · 即将上线</b>——不是推倒重来，而是把已有链路做透、做稳，持续精益求精。
     </p>
 
     <div class="conc-grid">
@@ -1969,8 +1455,8 @@
         <div class="cc-no">免客服 · 自助可用</div>
         <div class="cc-title">配置链路短到能一次看懂</div>
         <div class="cc-body">
-          直接收款让新客与空价目表都能开单；5 项默认规则让新店一次配完提成；
-          试算与「未分配」提示把错误提前暴露；迁移由系统完成，门店无需参与。
+          团购核销让券到店即变订单；直接收款让新客与空价目表都能开单；5 项默认规则让新店一次配完提成；
+          试算与「未分配」提示把错误提前暴露；价目表就地改价、分组可改，店主自己就能维护。
           <b>这些设计共同把「需要客服」的场景压缩到最少。</b>
         </div>
       </div>
@@ -1979,7 +1465,7 @@
         <div class="cc-no">免销售 · 口碑自传播</div>
         <div class="cc-title">好用的细节会被讲出去</div>
         <div class="cc-body">
-          拖拽排序让主推一拖就上首页，开单成功页让小票与单号当场可改，
+          团购核销让门店接得住平台的核销流量；拖拽排序让主推一拖就上首页；开单成功页让小票与单号当场可改；
           顾客卡片把权益变成客单。
           <b>店员觉得顺手、顾客觉得专业，同行自然会来问「你们用的什么系统」。</b>
         </div>
@@ -1989,8 +1475,8 @@
         <div class="cc-no">让门店业绩提升</div>
         <div class="cc-title">该收的钱不漏、该发的钱不冤</div>
         <div class="cc-body">
-          挂单池堵住漏单；三态可见性守住毛利；分组变成营销抓手；
-          优先级链让改过的费率真正生效，顾客指定让口碑有人愿意做。
+          团购核销把平台的 GMV 变成门店的营收与流水；挂单池堵住漏单；三态可见性守住毛利；
+          分组变成营销抓手；优先级链让改过的费率真正生效。
           <b>每一条都直接落在店主的账上。</b>
         </div>
       </div>
@@ -1998,37 +1484,21 @@
 
     <div class="matrix-card">
       <div class="matrix-head">
-        <h3>一页结论 · 现状 → 上线后</h3>
-        <span>按门店实际感受描述</span>
+        <h3>一页结论 · 上线后能力</h3>
+        <span>精益求精：把已在路上的能力做透、做稳</span>
       </div>
       <div class="strip">
-        <div class="strip-item is-before">
-          <div class="si-label">Before · 现状</div>
-          <div class="si-text">
-            新客没建档<b>开不了单</b>；收银被打断<b>只能重开</b>；价目表一屏看不了几条、改价要滑很久；
-            分组<b>删了会丢货</b>；提成改了费率<b>「没反应」</b>；发薪日靠对账争论；迁移<b>要人工逐条搬</b>。
-          </div>
-        </div>
         <div class="strip-item is-after">
-          <div class="si-label">After · 上线后</div>
+          <div class="si-label">上线后 · 店主感受</div>
           <div class="si-text">
-            输金额就能收款；挂单随时接回；一屏扫到目标项目、就地改价；
-            分组可多归属、<b>删组不丢货</b>；优先级链让<b>规则改了真的生效</b>；
-            提成可修正且留痕；迁移一次性完成且可回滚。
+            扫一次码完成验券、核销、开单、记业绩；输金额就能收款；挂单随时接回；一屏扫到目标项目、就地改价；
+            分组可多归属、<b>删组不丢货</b>；主推可拖到前排；优先级链让<b>规则改了真的生效</b>；提成可修正且留痕。
           </div>
         </div>
       </div>
     </div>
 
     <div class="conc-grid" style="margin-top:18px">
-      <div class="conc-card">
-        <div class="cc-no">下一步 · 建议</div>
-        <div class="cc-title">先落地、再回修口径</div>
-        <div class="cc-body">
-          开单结账与价目表两条链路可先行推进；提成设置建议在优先级链修正后一并上线，
-          避免店主再次碰到「改了没反应」；迁移按一次性全量 + 回滚包执行，上线前 dry-run 全绿为硬门槛。
-        </div>
-      </div>
       <div class="conc-card">
         <div class="cc-no">待确认 · 口径</div>
         <div class="cc-title">帮助文案需要同步回修</div>
@@ -2038,13 +1508,31 @@
         </div>
       </div>
     </div>
+
+    <div class="note-strip">
+      <h4>参考来源</h4>
+      <ol class="reflist">
+        <li>抖音生活服务《2025 抖音生活服务这一年》社会价值总结（2025-12-30）：2025 年总交易额同比增长 <b>59%</b>，动销门店累计 1519.8 万，新增入驻商家 399 万。<span class="rk">观察者网 / 腾讯新闻转载</span></li>
+        <li>雷峰网《抖音生服换挡时刻：GMV 超 8500 亿》：2025 年抖音生活服务支付 GMV 超 <b>8500 亿元</b>，整体核销率约 <b>50%</b>。<span class="rk">独家报道</span></li>
+        <li>雷峰网《美团到店「反围剿」：从组织变革，到核销暗战》：美团到店核销率 <b>80%–90%</b>；抖音综合核销率约 50%。</li>
+        <li>中泰证券测算（转引自虎嗅《抖音本地生活，卡在了哪一环？》）：推送式团购核销率 <b>50%–60%</b>，搜索模式 90% 以上。</li>
+        <li>抖音生活服务丽人年度峰会（2025-09-30）：2025 年 3–8 月丽人行业消费用户数 <b>+30%</b>、团购消费金额 <b>+120%</b>、行业核销规模 <b>+164%</b>、新增经营商家 +45%。<span class="rk">中国日报网转载</span></li>
+        <li>抖音生活服务春节 /「三八节」消费前瞻数据（2025-01 / 2025-03）：春节前美发团购订单量达去年同期 <b>1.5 倍以上</b>；「三八节」美发团购订单同比 <b>+126%</b>。</li>
+        <li>美团《2023 年美容美体行业发展报告》（转引自每日经济新闻）：美容美体行业市场规模超 <b>4000 亿元</b>；美团丽人直播订单核销率超 <b>80%</b>。</li>
+        <li>前程无忧《2026 离职与调薪调研报告》（2026-01）：2025 年员工整体离职率 <b>14.8%</b>，住宿餐饮类 <b>16.5%</b>，居各行业首位。</li>
+        <li>美业用工公开司法案例：济南市槐荫区人民法院「学徒」工资争议案、广东国晖律师事务所公开的「合作分成」劳动争议案（索赔 <b>22 万余元</b>，法院提示保留分成结算单等证据）。</li>
+        <li>门店管理软件厂商公开实测与案例（乔拓云、纳客、茂日、美盈易、开沿科技等）：传统模式下财务月底逐笔对账约需 <b>2–3 天</b>；单笔收银耗时 <b>42→14 秒</b>、高峰期排队流失可减少约 30%；提成核算 <b>2.5 小时 → 10 分钟</b>。<span class="rk">厂商口径，用于判断量级与方向</span></li>
+        <li>美发 / 美容美发管理系统行业研究报告汇编（2024–2026，含艾瑞咨询、前瞻产业研究院等被引数据）：美发门店系统渗透率 <b>40.9%（2024）→ 47.3%（2025）</b>；未实现多平台数据整合的门店会员月活度平均低 <b>22.7%</b>；新员工平均需 <b>11.3 天</b>熟练操作、误操作率约 <b>14.2%</b>；行业人员流动率约 <b>41%</b>。<span class="rk">报告汇编转述，非原始报告直接核验</span></li>
+        <li>美业「会员卡 + 储值 + 复购」三轨经营模型实务总结（开沿科技）：常见踩坑为「POS 和会员卡系统对不上，差额没人查」。<span class="rk">行业实践口径</span></li>
+      </ol>
+    </div>
   </section>
 
 </div>
 
 <div class="page-footer">
-  <div>剑琅联盟 · 功能价值汇报 · 内部资料</div>
-  <div>依据《开单结账》《项目创建与管理》《提成设置》《价目分组迁移》四份 PRD 整理</div>
+  <div>剑琅联盟 · RTB在研功能价值汇报 · 内部资料</div>
+  <div>依据《团购核销》《开单结账》《项目创建与管理》《提成设置》等 PRD 整理</div>
 </div>
 
 <div class="lb" id="lb">
