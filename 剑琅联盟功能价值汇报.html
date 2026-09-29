@@ -243,6 +243,7 @@
   }
   .mod-block h4.h-scene::before { background: var(--yj); }
   .mod-block h4.h-data::before { background: var(--kf); }
+  .mod-block h4.h-pilot::before { background: #1E8C7A; }
 
   ul.mlist { list-style: none; }
   ul.mlist li {
@@ -389,6 +390,26 @@
   .t-kf { color: var(--kf); font-weight: 700; }
   .t-xs { color: var(--xs); font-weight: 700; }
   .t-yj { color: var(--yj); font-weight: 700; }
+
+  /* 当前基线列（埋点实测） */
+  table.metrics td.base {
+    color: var(--navy-2); font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  table.metrics th.h-base { color: var(--kf); }
+  table.metrics td.base .bna { color: var(--ink-faint); font-weight: 500; }
+
+  /* 试点门店埋点 band：与「外部行业数据」band 区分色系 */
+  .data-band.is-pilot {
+    background: linear-gradient(146deg, #0D222C 0%, #163A47 58%, #112C37 100%);
+    box-shadow: 0 20px 44px -22px rgba(9, 34, 42, .62);
+  }
+  .data-band.is-pilot .db-kicker { color: #6FC3B5; }
+  .data-band.is-pilot .db-note { color: rgba(166, 214, 208, .8); }
+  .data-band.is-pilot .dstat.d-kf { --accent: #4FC3A1; }
+  .data-band.is-pilot .dstat.d-xs { --accent: #E0A93F; }
+  .data-band.is-pilot .dstat.d-yj { --accent: #5AA3E8; }
+  .data-band .dstat .dv.sm2 { font-size: 27px; letter-spacing: -.4px; }
 
   .scene {
     background: linear-gradient(180deg, #F7FAFD 0%, #F2F6FA 100%);
@@ -674,11 +695,52 @@
     <div class="note-strip">
       <h4>数据口径说明</h4>
       <ul>
-        <li><b>外部行业数据</b>：来自平台官方披露、券商与咨询机构、公开招聘报告与主流财经媒体报道。正文中标注来源要点，完整清单见文末「参考来源」。</li>
-        <li><b>试点门店埋点数据</b>：来自试点门店在真实经营中的埋点记录，覆盖不同时间范围内的开单、开卡、充值等行为（客单数、金额、次数）。用于印证「需求是否存在」「门店真实怎么用」。</li>
-        <li><b>两者的分工</b>：行业数据解决「这件事在行业里有多大、是不是趋势」；埋点数据解决「我们的门店是不是也这样、改完有没有变好」。</li>
-        <li><b>口径提醒</b>：行业数据多为第三方测算或厂商公开案例，用于判断量级与方向，不作为精确目标值；最终验收以试点门店埋点与门店实际经营指标为准。</li>
+        <li><b>外部行业数据</b>：来自平台官方披露、券商与咨询机构、公开招聘报告与主流财经媒体报道。正文中标注来源要点，完整清单见文末「参考来源」。用于判断量级与方向，不作为精确目标值。</li>
+        <li><b>试点门店埋点数据</b>：来自 298 项下 <b>19 家圈选门店</b>真实经营中产生的行为埋点与经营记录，分三条链路：<b>App 行为</b>（会话、模块渗透、路径与留存，窗口「近 7 天」）、<b>路径审计</b>（客户端路径信号，快照窗口 2026-07-14～09-29）、<b>经营数据</b>（收银与卡务，窗口「近 30 天」、仅已开单）。</li>
+        <li><b>两个窗口不混用</b>：行为类指标是「近 7 天」，经营类指标是「近 30 天」，路径审计是全量快照窗口。三者长度不同，只在同一链路内做比较，<b>不跨链路相除</b>。每个数字下方均标注其所属窗口与出处。</li>
+        <li><b>数据脱敏</b>：门店经营金额（营收、客单、余额等绝对金额）不进入本材料，只保留<b>比率、占比、人次、次数与涨幅</b>——这些已足够支撑方向判断。</li>
+        <li><b>两者的分工</b>：行业数据解决「这件事在行业里有多大、是不是趋势」；埋点数据解决「我们的门店是不是也这样、改完有没有变好」。最终验收以试点门店埋点与门店实际经营指标为准。</li>
       </ul>
+    </div>
+
+    <p class="sec-lead" style="margin-top:28px">
+      下面这几组数字不是行业测算，而是<b>我们自己的门店在真实经营里跑出来的</b>。
+      后文每一章都会在行业数据之外，再配一条「试点门店埋点数据」，用来回答行业数据回答不了的那个问题：
+      <b>我们的门店，是不是也这样？改完有没有变好？</b>
+    </p>
+
+    <div class="data-band is-pilot">
+      <div class="db-head">
+        <span class="db-kicker">Pilot Data</span>
+        <span class="db-title">试点门店基线 · 我们自己的门店现在是什么样</span>
+        <span class="db-note">298 圈选门店 · 19 家</span>
+      </div>
+      <div class="dstats">
+        <div class="dstat d-kf">
+          <div class="tag">门店活跃</div>
+          <div class="dv">17<em>/ 19</em></div>
+          <div class="dl">近 30 天内有收银或有登录的圈选门店数</div>
+          <div class="ds">经营看板 · 近 30 天（8/30–9/28）</div>
+        </div>
+        <div class="dstat d-yj">
+          <div class="tag">业绩在涨</div>
+          <div class="dv">+190<em>%</em></div>
+          <div class="dl">现金业绩较「上一段同样长度的时间」的涨幅；劳动业绩 +120%、卡金 +347%</div>
+          <div class="ds">经营看板 · 近 30 天</div>
+        </div>
+        <div class="dstat d-yj">
+          <div class="tag">到店与项目</div>
+          <div class="dv">2,062<em>人次</em></div>
+          <div class="dl">客·日较上一段 +64%；同期项目数 2,388，+80%</div>
+          <div class="ds">经营看板 · 近 30 天</div>
+        </div>
+        <div class="dstat d-kf">
+          <div class="tag">会员基础</div>
+          <div class="dv">57.2<em>%</em></div>
+          <div class="dl">老客人次占全部到店人次；窗口内新增会员 3,392</div>
+          <div class="ds">经营看板 · 近 30 天</div>
+        </div>
+      </div>
     </div>
 
     <div class="matrix-card">
@@ -831,6 +893,42 @@
       </div>
 
       <div class="mod-block">
+        <h4 class="h-pilot">试点门店埋点数据 · 券今天到底记在哪本账上</h4>
+        <div class="data-band is-pilot">
+          <div class="db-head">
+            <span class="db-kicker">Pilot Data 01</span>
+            <span class="db-title">埋点侧现状 · 券确实在剑琅的账外完成</span>
+            <span class="db-note">试点门店埋点 · 该能力尚未上线</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-kf">
+              <div class="tag">核销链路基线</div>
+              <div class="dv">0</div>
+              <div class="dl">门店账内的平台券核销订单与流水基线为 0——本期能力从 0 到 1，验收看的是「开始出现」</div>
+              <div class="ds">试点门店埋点 · 能力未上线</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">线上与店内分账</div>
+              <div class="dv sm2">两套账</div>
+              <div class="dl">看板口径明确：网上已付款订单是另一套账，不与店内收银加总；总览已不再展示线上列</div>
+              <div class="ds">经营看板 · 口径说明 §4</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">门店侧无入口</div>
+              <div class="dv sm2">无核销会话</div>
+              <div class="dl">19 家圈选门店的 App 行为中，不存在「扫码 / 验券 / 核销」类会话</div>
+              <div class="ds">用户行为 · 近 7 天（9/22–9/28）</div>
+            </div>
+          </div>
+        </div>
+        <ul class="mlist">
+          <li><b>最硬的缺口证据，写在看板自己的口径里。</b>经营看板把「网上已付款订单」明确划为另一套账、<b>绝不与店内收银加总</b>，总览甚至已不再展示线上列——这不是我们的推测，而是数据侧对「券在账外」的正式承认。</li>
+          <li><b>越是 0 到 1 的能力，越该占确定性最高的位置。</b>其余三个模块是把已有链路做顺手，上线后提升的是存量效率；团购核销补的是「已经付过钱的客流进不进得来」。没有它，前面三项做得再好也接不住这部分客人。</li>
+          <li><b>因此本模块的验收口径与后三章不同：</b>不设「改善幅度」目标，只设「从 0 起量」——上线后第一个要看的，就是核销订单与流水是否开始出现在同一本账里。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
         <h4 class="h-data">数据论证 · 为什么优先级高</h4>
         <ul class="mlist">
           <li><b>需求不需要被教育，它已经每天都在发生。</b>平台侧核销规模同比 +164%，门店侧每天都在处理团购券，只是现在发生在剑琅之外。这不是「要不要做」的判断，而是「什么时候补上」的判断。</li>
@@ -861,11 +959,11 @@
         <h4>上线后 · 用哪些数据验证方案是对的</h4>
         <table class="metrics">
           <thead>
-            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+            <tr><th>验证指标</th><th>口径</th><th class="h-base">当前基线</th><th>期望方向</th><th>对应支柱</th></tr>
           </thead>
           <tbody>
-            <tr><td>团购核销订单占比</td><td>核销订单 ÷ 门店总订单</td><td class="dir">↑ 从 0 起量</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
-            <tr><td>核销订单金额占比</td><td>核销订单实收 ÷ 门店总实收</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>团购核销订单占比</td><td>核销订单 ÷ 门店总订单</td><td class="base">0<span class="bna">（能力未上线，账内无核销记录）</span></td><td class="dir">↑ 从 0 起量</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>核销订单金额占比</td><td>核销订单实收 ÷ 门店总实收</td><td class="base">0<span class="bna">（能力未上线）</span></td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1012,6 +1110,49 @@
       </div>
 
       <div class="mod-block">
+        <h4 class="h-pilot">试点门店埋点数据 · 我们的店员卡在哪一步</h4>
+        <div class="data-band is-pilot">
+          <div class="db-head">
+            <span class="db-kicker">Pilot Data 02</span>
+            <span class="db-title">埋点实测 · 摩擦不在流程里，在「进得去」这一层</span>
+            <span class="db-note">试点门店埋点 · 近 7 天 + 快照</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-kf">
+              <div class="tag">最大步间流失</div>
+              <div class="dv">↓41<em>%</em></div>
+              <div class="dl">「打开 → 开单」的次数转化：378 次会话仅 224 次进入开单，后续各步流失均 ≤ 10%</div>
+              <div class="ds">用户行为 · 近 7 天（9/22–9/28）</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">开单走完率</div>
+              <div class="dv">77.3<em>%</em></div>
+              <div class="dl">路径审计：开单完成 2,043 次、未完成 600 次；提交成功 897 次、到成功页 1,146 次</div>
+              <div class="ds">路径审计 · 快照 7/14–9/29</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">用了就离不开</div>
+              <div class="dv">81<em>% D7</em></div>
+              <div class="dl">开单功能 7 日打开留存（D3 同为 81%），与预约 79%、客户管理 79% 同处第一梯队，且是功能打开次数 Top1</div>
+              <div class="ds">用户行为 · 功能留存</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">收银链路渗透</div>
+              <div class="dv">59<em>%</em></div>
+              <div class="dl">224 / 378 会话进入开单收银；同期预约 84%、首页 83%、会员/客户 83%</div>
+              <div class="ds">用户行为 · 近 7 天</div>
+            </div>
+          </div>
+        </div>
+        <ul class="mlist">
+          <li><b>摩擦集中在「打开 → 开单」这一步，而不是流程内部。</b>378 次会话里只有 224 次真正进入开单，流失 41%；而一旦进去，选项目 ↓10%、下一步 ↓1%、结账 ↓0%、确认支付 ↓0%、开单成功 ↓7%。<b>后续几乎不丢人，说明问题不在「会不会用」，而在「进不进得去、看不看得懂」</b>——这正是「免客服」要解决的那一层。</li>
+          <li><b>走进去的人基本都能走完。</b>路径审计侧开单完成 2,043 次、未完成 600 次，走完率约 77.3%；四成左右的未完成，与行为侧 41% 的入口流失相互印证：<b>真正被卡住的是入口，而不是结账本身。</b></li>
+          <li><b>开单是「一旦用起来就离不开」的功能。</b>D7 留存 81%，与预约（79%）、客户管理（79%）同处第一梯队，且是功能打开次数 Top1。留存已经证明价值，接下来要做的只是把入口摩擦磨平。</li>
+          <li><b>仍有约四成会话不碰开单。</b>收银链路渗透 59%，低于预约（84%）、首页（83%）与会员/客户（83%）——说明还有相当一部分门店行为停留在「看」和「约」，没有走到「收」。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
         <h4 class="h-data">数据论证 · 为什么优先级高</h4>
         <ul class="mlist">
           <li><b>收益面最大、触发条件最少。</b>开单是所有门店、所有员工、每天都要做的动作，改动收益不需要任何额外前提就会发生。相比之下，其他模块的收益需要门店先把配置做对。</li>
@@ -1040,11 +1181,12 @@
         <h4>上线后 · 用哪些数据验证方案是对的</h4>
         <table class="metrics">
           <thead>
-            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+            <tr><th>验证指标</th><th>口径</th><th class="h-base">当前基线</th><th>期望方向</th><th>对应支柱</th></tr>
           </thead>
           <tbody>
-            <tr><td>门店开单量 / 客单价</td><td>统计周期内开单笔数与客均实收</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
-            <tr><td>快捷开单占比</td><td>直接收款笔数 ÷ 门店总开单</td><td class="dir">稳定使用</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>门店开单量 / 客单价</td><td>统计周期内开单笔数与客均实收</td><td class="base">开单完成 83%<span class="bna">（核心路径转化率）</span></td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>快捷开单占比</td><td>直接收款笔数 ÷ 门店总开单</td><td class="base">0<span class="bna">（直接收款未上线）</span></td><td class="dir">稳定使用</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>打开 → 开单 入口转化</td><td>进入开单的会话数 ÷ 打开 App 的会话数</td><td class="base">41%<span class="bna">（当前最大步间流失）</span></td><td class="dir">↑ 收窄流失</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1178,6 +1320,49 @@
       </div>
 
       <div class="mod-block">
+        <h4 class="h-pilot">试点门店埋点数据 · 店主到底多久进一次价目表</h4>
+        <div class="data-band is-pilot">
+          <div class="db-head">
+            <span class="db-kicker">Pilot Data 03</span>
+            <span class="db-title">埋点实测 · 低频维护，却是高频依赖</span>
+            <span class="db-note">试点门店埋点 · 近 7 天 + 近 30 天</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-xs">
+              <div class="tag">价目表模块渗透</div>
+              <div class="dv">12<em>%</em></div>
+              <div class="dl">44 / 378 会话进入价目表；同期开单收银 59%、预约 84%、首页 83%</div>
+              <div class="ds">用户行为 · 近 7 天（9/22–9/28）</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">依赖度 ÷ 维护度</div>
+              <div class="dv sm2">≈ 5 倍</div>
+              <div class="dl">开单收银渗透 59% ÷ 价目表渗透 12%——对它是高频依赖，对店主却是低频动作</div>
+              <div class="ds">本方案据看板渗透数据测算</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">项目结构高度集中</div>
+              <div class="dv">87.1<em>%</em></div>
+              <div class="dl">样本店项目明细中男士洗剪吹占 344 / 395 行；烫染类合计仅十余行，结构偏低价高频</div>
+              <div class="ds">经营看板 · 逐店详情 · 近 30 天</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">低频模块组</div>
+              <div class="dv">12<em>/ 3 / 2%</em></div>
+              <div class="dl">价目表 12%、业绩查看 3%、商城经营 2%——价目表已是这三个低频模块中最高的一个</div>
+              <div class="ds">用户行为 · 近 7 天</div>
+            </div>
+          </div>
+        </div>
+        <ul class="mlist">
+          <li><b>这是本报告最直接的一条改版依据：价目表是「低频维护、高频依赖」。</b>近 7 天只有 12% 的会话进入价目表，而开单收银渗透 59%——<b>依赖度约为维护度的 5 倍</b>。店主一个月可能只进价目表几次，但每一次开单都在读它。</li>
+          <li><b>越低频的动作，越要求「一次就对」。</b>高频动作的摩擦可以靠熟练度摊薄，低频动作不行——每一次进去都必须立刻定位、改完即走。这正是高密度列表与就地改价的价值所在，也是「免客服」在价目表上的具体落点。</li>
+          <li><b>结构越偏，分组与主推位的杠杆越大。</b>样本店项目明细中男士洗剪吹占 87.1%，烫染类合计仅十余行。结构如此偏低价高频时，能靠分组与拖拽排序把高毛利项「顶上来」，排序就真的等于推荐位。</li>
+          <li><b>店主已经在试图维护它。</b>价目表 12% 的渗透，在价目表（12%）、业绩查看（3%）、商城经营（2%）这三个低频模块里是最高的。这份使用意愿已经存在，把它做顺是保住意愿成本最低的方式。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
         <h4 class="h-data">数据论证 · 为什么优先级高</h4>
         <ul class="mlist">
           <li><b>它是收银与权益的共用地基，改一次、三条链路一起受益。</b>开单选品、卡权益、折扣范围都读价目表；列表与分组用顺了，后面模块少踩「选得到 / 选不到」的坑。</li>
@@ -1211,11 +1396,11 @@
         <h4>上线后 · 用哪些数据验证方案是对的</h4>
         <table class="metrics">
           <thead>
-            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+            <tr><th>验证指标</th><th>口径</th><th class="h-base">当前基线</th><th>期望方向</th><th>对应支柱</th></tr>
           </thead>
           <tbody>
-            <tr><td>价目改价 / 新增操作次数</td><td>统计周期内改价与新增项目 / 产品的操作次数</td><td class="dir">活跃使用</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
-            <tr><td>自定义分组使用率</td><td>使用了自定义分组的门店 ÷ 活跃门店</td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
+            <tr><td>价目改价 / 新增操作次数</td><td>统计周期内改价与新增项目 / 产品的操作次数</td><td class="base">价目表渗透 12%<span class="bna">（44 / 378 会话）</span></td><td class="dir">活跃使用</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>自定义分组使用率</td><td>使用了自定义分组的门店 ÷ 活跃门店</td><td class="base">0<span class="bna">（自定义分组为新增能力）</span></td><td class="dir">↑</td><td class="pl"><span class="t-yj">业绩提升</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1355,6 +1540,49 @@
       </div>
 
       <div class="mod-block">
+        <h4 class="h-pilot">试点门店埋点数据 · 同一家店里，提成比率差了多少</h4>
+        <div class="data-band is-pilot">
+          <div class="db-head">
+            <span class="db-kicker">Pilot Data 04</span>
+            <span class="db-title">埋点实测 · 单方案表达不了真实分工</span>
+            <span class="db-note">试点门店埋点 · 近 30 天 + 近 7 天</span>
+          </div>
+          <div class="dstats">
+            <div class="dstat d-yj">
+              <div class="tag">同店内提成比率差</div>
+              <div class="dv">≈ 11<em>倍</em></div>
+              <div class="dl">样本店 4 名成员的劳动提成占其劳动业绩：38.2% / 27.3% / 6.1% / 3.4%，最高与最低差约 11 倍</div>
+              <div class="ds">经营看板 · 逐店详情 · 近 30 天</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">渗透最低，留存最高</div>
+              <div class="dv">3<em>% · D7 81%</em></div>
+              <div class="dl">业绩查看模块渗透仅 12 / 378 会话；但 D3/D7 留存 78% / 81%，与开单、预约同处第一梯队</div>
+              <div class="ds">用户行为 · 近 7 天 + 功能留存</div>
+            </div>
+            <div class="dstat d-kf">
+              <div class="tag">六类场景中最小</div>
+              <div class="dv">68<em>次</em></div>
+              <div class="dl">路径审计快照内业绩查看场景次数；同期开单 2,243、预约 2,097、客户管理 842、店务管理 325</div>
+              <div class="ds">路径审计 · 快照 7/14–9/29</div>
+            </div>
+            <div class="dstat d-yj">
+              <div class="tag">提成与摊分不同源</div>
+              <div class="dv sm2">不能对账</div>
+              <div class="dl">看板口径明确：「提成是系统里记的劳动提成合计，跟摊分不是一回事，不要拿提成去对店营业额」</div>
+              <div class="ds">经营看板 · 口径说明 §6</div>
+            </div>
+          </div>
+        </div>
+        <ul class="mlist">
+          <li><b>同一家店里，成员的提成比率相差约 11 倍。</b>样本店 4 名成员的劳动提成占其劳动业绩分别为 38.2%、27.3%、6.1%、3.4%。这个差距不是算错，而是真实分工差异（店长 / 大工 / 中工 / 助理）的投射——<b>它直接证明「一套阶梯比例」无法表达门店现实</b>，单方案模型必然会算错一部分人。</li>
+          <li><b>业绩查看是「渗透最低、留存最高」的模块。</b>渗透仅 3%（12 / 378），但 D3/D7 留存 78% / 81%，与开单、预约同处第一梯队。低渗透 + 高留存说明它的使用者是少数（多为店主 / 店长），而这些人一旦用起来就持续依赖。</li>
+          <li><b>但当前路径显然不够顺手。</b>路径审计快照内业绩查看场景仅 68 次，是六类场景中最小的一个——同期开单 2,243 次、预约 2,097 次。金额相关的查看需求真实存在，只是没有被自然地引到这条路线上。</li>
+          <li><b>连看板自己都提醒「不要拿提成去对营业额」。</b>口径说明 §6 明确区分了「系统记的劳动提成」与「按服务人摊分的业绩」。当内部口径都需要专门写一段来澄清时，<b>正说明「我该拿多少」这件事必须被系统说清楚</b>——这正是多方案与覆盖规则要解决的问题。</li>
+        </ul>
+      </div>
+
+      <div class="mod-block">
         <h4 class="h-data">数据论证 · 为什么优先级高</h4>
         <ul class="mlist">
           <li><b>它与价目分组结构同批对齐，避免「改了没反应」。</b>提成命中规则挂在分组上；价目侧分组理顺、提成侧优先级链一起上，店主才不会先经历一次「规则改了还是没反应」——那是最伤信任的一种体验。</li>
@@ -1387,11 +1615,12 @@
         <h4>上线后 · 用哪些数据验证方案是对的</h4>
         <table class="metrics">
           <thead>
-            <tr><th>验证指标</th><th>口径</th><th>期望方向</th><th>对应支柱</th></tr>
+            <tr><th>验证指标</th><th>口径</th><th class="h-base">当前基线</th><th>期望方向</th><th>对应支柱</th></tr>
           </thead>
           <tbody>
-            <tr><td>未分配方案人数</td><td>未分配任何提成方案的员工数</td><td class="dir">→ 0</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
-            <tr><td>提成人工修正率</td><td>人工改过的流水 ÷ 提成流水</td><td class="dir">↓ 且全程留痕</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>未分配方案人数</td><td>未分配任何提成方案的员工数</td><td class="base">0<span class="bna">（现为单一方案；多方案上线后须持续保持为 0）</span></td><td class="dir">→ 0</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>提成人工修正率</td><td>人工改过的流水 ÷ 提成流水</td><td class="base">不可观测<span class="bna">（当前无流水级修正入口）</span></td><td class="dir">↓ 且全程留痕</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
+            <tr><td>业绩查看渗透 / D7 留存</td><td>进入业绩查看的会话占比；打开后第 7 天继续使用</td><td class="base">3% / 81%<span class="bna">（低渗透、高留存）</span></td><td class="dir">↑ 渗透</td><td class="pl"><span class="t-kf">免客服</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1522,6 +1751,7 @@
         <li>美业「会员卡 + 储值 + 复购」三轨经营模型实务总结（开沿科技）：常见踩坑为「POS 和会员卡系统对不上，差额没人查」。<span class="rk">行业实践口径</span></li>
         <li>Food &amp; Drink Resources《Increase Restaurant Profits With Menu Engineering》：菜单工程（项目分类、排序与主推位优化）首年利润可抬约 <b>8%–12%</b>；行业综述常见区间亦有 10%–15%。<span class="rk">餐饮菜单工程行业研究，类比论证价目表优化价值</span></li>
         <li>Duchnicky, R. L., &amp; Kolers, P. A.（1983）. <i>Readability of Text Scrolled on Visual Display Terminals as a Function of Window Size</i>. <i>Human Factors</i>, 25(6)：同等理解水平下，更高字符密度文本阅读速度可比低密度快约 <b>30%</b>。<span class="rk">人因实验，类比论证高密度列表扫价目的效率</span></li>
+        <li><b>试点门店埋点看板</b>（298 Cohort 行为下钻 · DA，内网访问）：<b>用户行为</b>取近 7 天（2026-09-22～09-28）、<b>路径审计</b>取快照窗口 2026-07-14～09-29（可信步占比 19.7%）、<b>经营数据</b>取近 30 天（2026-08-30～09-28，仅已开单，19 家圈选门店）。<b>本报告只引用其比率、占比、人次与次数，门店绝对金额不入材料</b>；具体口径定义见该看板「口径说明」。<span class="rk">内部数据源 · 本报告各章「试点门店埋点数据」部分</span></li>
       </ol>
     </div>
   </section>
