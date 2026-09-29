@@ -87,7 +87,7 @@
   /* ===== Entry cards ===== */
   .entries {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 13px;
     flex: 1 1 auto;
     align-content: center;
@@ -99,7 +99,7 @@
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 18px 20px 16px;
+    padding: 16px 16px 14px;
     text-decoration: none;
     color: inherit;
     transition: border-color .3s, box-shadow .3s, transform .3s;
@@ -110,20 +110,20 @@
     transform: translateY(-3px);
   }
   .entry .e-no {
-    position: absolute; top: 14px; right: 18px;
+    position: absolute; top: 12px; right: 14px;
     font-family: Georgia, serif;
-    font-size: 30px; font-weight: 700;
+    font-size: 24px; font-weight: 700;
     color: rgba(74,90,106,.12); line-height: 1;
   }
   .entry .e-title {
-    font-size: 16.5px; font-weight: 700; letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    padding-right: 40px;
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    margin-bottom: 7px;
+    padding-right: 34px;
     line-height: 1.4;
-    min-height: 2.8em;
+    min-height: 2.9em;
   }
   .entry .e-desc {
-    font-size: 12.5px; line-height: 1.65; letter-spacing: .3px;
+    font-size: 12px; line-height: 1.62; letter-spacing: .2px;
     color: var(--ink-soft);
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -132,9 +132,9 @@
   }
   .entry .e-go {
     margin-top: auto;
-    padding-top: 14px;
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12.5px; letter-spacing: 2px; color: var(--accent);
+    padding-top: 12px;
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12px; letter-spacing: 1.6px; color: var(--accent);
     font-weight: 600;
   }
   .entry .e-go::after { content: "→"; font-size: 16px; transition: transform .3s; }
@@ -221,6 +221,12 @@
         <div class="e-title">功能价值汇报 · 三大支柱论证</div>
         <p class="e-desc">基于四份 PRD：免客服、免销售、让门店业绩提升的逐功能论证。</p>
         <span class="e-go">进入汇报</span>
+      </a>
+      <a class="entry" href="剑琅联盟产品日报.html">
+        <span class="e-no">09</span>
+        <div class="e-title">产品日报 · 日常工作汇报</div>
+        <p class="e-desc">每天下班前提交给产品负责人：今日完成、风险阻塞、明日计划与需协调支持。</p>
+        <span class="e-go">进入日报</span>
       </a>
     </div>
 

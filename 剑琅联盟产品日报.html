@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品日报 · 剑琅联盟</title>
+<style>
+  :root {
+    --navy: #17293D;
+    --navy-2: #1E3A5F;
+    --steel: #35597F;
+    --tint: #EDF2F7;
+    --bg: #F5F6F8;
+    --card: #FFFFFF;
+    --line: #DEE3E9;
+    --line-soft: #EDF0F4;
+    --ink: #22303F;
+    --ink-soft: #5F6C7B;
+    --ink-faint: #8D97A3;
+
+    --done: #2C5C93;
+    --done-bg: #E7EEF7;
+    --risk: #A8761B;
+    --risk-bg: #F7EFE0;
+    --next: #2F7D68;
+    --next-bg: #E7F1EE;
+    --ask:  #6E4B8E;
+    --ask-bg: #F0EAF6;
+
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  .num { font-variant-numeric: tabular-nums; }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 28px 72px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero { background: var(--navy); padding: 52px 0 46px; }
+  .hero-inner { max-width: 1000px; margin: 0 auto; padding: 0 28px; }
+
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.45);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #8FA9C4;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: #8FA9C4; }
+
+  .hero h1 {
+    font-size: clamp(27px, 4vw, 38px);
+    font-weight: 700; letter-spacing: 4px; color: #fff;
+    margin: 13px 0 12px; line-height: 1.3;
+  }
+  .hero-sub {
+    font-size: 14px; color: rgba(255,255,255,.7); letter-spacing: 1.5px;
+  }
+  .hero-sub b { color: #fff; font-weight: 600; }
+
+  .hero-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; margin-top: 28px; }
+  .hc {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 11px;
+    padding: 14px 16px 13px;
+  }
+  .hc-label { font-size: 10.5px; letter-spacing: 1.6px; color: rgba(255,255,255,.52); margin-bottom: 7px; }
+  .hc-value { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; letter-spacing: .5px; }
+  .hc-value em { font-style: normal; font-size: 12.5px; font-weight: 600; color: #9EBBD8; margin-left: 3px; letter-spacing: 0; }
+  .hc-note { font-size: 11.5px; color: rgba(255,255,255,.6); line-height: 1.6; margin-top: 6px; }
+
+  /* ===== Date rail ===== */
+  .date-rail {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 20px 0 0;
+  }
+  .date-rail .dr-label {
+    font-size: 11.5px; letter-spacing: 1.6px; color: var(--ink-faint);
+    text-transform: uppercase; font-weight: 700; margin-right: 4px;
+  }
+  .dr {
+    display: inline-flex; align-items: baseline; gap: 5px;
+    font-size: 13px; font-weight: 700; letter-spacing: .5px;
+    padding: 5px 12px; border-radius: 999px;
+    background: #fff; border: 1px solid var(--line);
+    color: var(--ink-soft); text-decoration: none;
+    font-variant-numeric: tabular-nums;
+    transition: border-color .25s, color .25s, box-shadow .25s;
+  }
+  .dr em { font-style: normal; font-size: 11px; font-weight: 500; color: var(--ink-faint); }
+  .dr:hover { border-color: var(--steel); color: var(--navy-2); }
+  .dr.is-active {
+    background: var(--navy-2); border-color: var(--navy-2); color: #fff;
+    box-shadow: 0 6px 18px -8px rgba(30,58,95,.5);
+  }
+  .dr.is-active em { color: rgba(255,255,255,.65); }
+
+  /* ===== Day card ===== */
+  .day {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 30px 34px 32px;
+    margin-top: 22px;
+    box-shadow: 0 14px 40px -30px rgba(23,41,61,.4);
+  }
+
+  .day-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--line);
+  }
+  .day-date {
+    font-size: 25px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--navy-2); font-variant-numeric: tabular-nums;
+  }
+  .day-week { font-size: 13px; color: var(--ink-faint); letter-spacing: 1px; }
+  .day-badge {
+    margin-left: auto;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.4px;
+    color: #fff; background: var(--steel);
+    padding: 4px 11px; border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Glance row */
+  .glance {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin: 18px 0 4px;
+  }
+  .gl {
+    padding: 2px 18px 2px 0; border-right: 1px solid var(--line-soft);
+  }
+  .gl:last-child { border-right: none; padding-right: 0; }
+  .gl-k { font-size: 11px; letter-spacing: 1.2px; color: var(--ink-faint); margin-bottom: 4px; }
+  .gl-v {
+    font-size: 24px; font-weight: 800; letter-spacing: -.4px; line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .gl-v em { font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: 0; margin-left: 2px; color: var(--ink-faint); }
+  .gl-v.c-done { color: var(--done); }
+  .gl-v.c-risk { color: var(--risk); }
+  .gl-v.c-next { color: var(--next); }
+  .gl-v.c-ask  { color: var(--ask); }
+
+  /* ===== Block ===== */
+  .blk { margin-top: 30px; }
+  .blk-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .blk-no {
+    width: 22px; height: 22px; flex: none; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .blk-title { font-size: 16px; font-weight: 700; letter-spacing: 1.2px; }
+  .blk-count {
+    margin-left: auto; font-size: 11.5px; color: var(--ink-faint);
+    letter-spacing: .5px; font-variant-numeric: tabular-nums;
+  }
+  .blk.is-done .blk-no { background: var(--done); }
+  .blk.is-done .blk-title { color: var(--done); }
+  .blk.is-risk .blk-no { background: var(--risk); }
+  .blk.is-risk .blk-title { color: var(--risk); }
+  .blk.is-next .blk-no { background: var(--next); }
+  .blk.is-next .blk-title { color: var(--next); }
+  .blk.is-ask  .blk-no { background: var(--ask); }
+  .blk.is-ask  .blk-title { color: var(--ask); }
+
+  /* Work item */
+  .item { padding: 16px 0 18px; border-top: 1px solid var(--line-soft); }
+  .item:first-of-type { border-top: none; padding-top: 2px; }
+  .item-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .i-no {
+    font-size: 12px; font-weight: 700; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums; letter-spacing: .5px;
+  }
+  .i-title { font-size: 15.5px; font-weight: 700; letter-spacing: .6px; color: var(--ink); }
+  .i-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .8px;
+    padding: 2px 8px; border-radius: 999px;
+    color: var(--done); background: var(--done-bg);
+    border: 1px solid rgba(44,92,147,.16);
+  }
+
+  /* Field list */
+  .fields { display: grid; gap: 7px; }
+  .fd { display: grid; grid-template-columns: 88px 1fr; gap: 12px; align-items: baseline; }
+  .fd-k { font-size: 12.5px; color: var(--ink-faint); letter-spacing: .4px; }
+  .fd-v { font-size: 13.5px; color: var(--ink-soft); line-height: 1.78; }
+  .fd-v b { color: var(--ink); font-weight: 600; }
+  .fd-v .hl { color: var(--navy-2); font-weight: 700; }
+
+  /* Reason list */
+  .reasons { list-style: none; display: grid; gap: 8px; margin-top: 3px; }
+  .reasons li {
+    position: relative; padding-left: 26px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.78;
+  }
+  .reasons li::before {
+    content: attr(data-n);
+    position: absolute; left: 0; top: 1px;
+    width: 17px; height: 17px; border-radius: 50%;
+    background: var(--tint); color: var(--steel);
+    font-size: 10.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .reasons li b { color: var(--ink); font-weight: 600; }
+
+  /* Quote */
+  .quote {
+    margin-top: 12px;
+    background: #F8FAFC;
+    border-left: 3px solid var(--steel);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 13.5px; color: var(--ink); line-height: 1.8;
+  }
+  .quote .q-k {
+    display: block; font-size: 11px; letter-spacing: 1.2px;
+    color: var(--ink-faint); font-weight: 700; margin-bottom: 5px;
+  }
+  .quote b { color: var(--navy-2); }
+
+  /* Insight callout */
+  .insight {
+    margin-top: 14px;
+    background: linear-gradient(140deg, #F2F7F5 0%, #EDF4F1 100%);
+    border: 1px solid rgba(47,125,104,.2);
+    border-radius: 10px;
+    padding: 15px 18px 16px;
+  }
+  .insight-k {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--next); text-transform: uppercase; margin-bottom: 9px;
+  }
+  .insight-k::before { content: ""; width: 14px; height: 2px; background: var(--next); }
+  .insight p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.85; }
+  .insight p + p { margin-top: 8px; }
+  .insight b { color: var(--ink); font-weight: 600; }
+  .insight .em { color: var(--next); font-weight: 700; }
+
+  /* Simple numbered / plain list inside blocks */
+  .plist { list-style: none; display: grid; gap: 10px; }
+  .plist li {
+    position: relative; padding-left: 27px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+  }
+  .plist li::before {
+    content: attr(data-n);
+    position: absolute; left: 0; top: 2px;
+    font-size: 12px; font-weight: 700; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .plist li b { color: var(--ink); font-weight: 600; }
+  .plist li .lbl {
+    display: inline-block; font-weight: 700;
+    padding: 0 0; margin-right: 4px;
+  }
+  .blk.is-risk .plist li .lbl { color: var(--risk); }
+  .blk.is-ask  .plist li .lbl { color: var(--ask); }
+
+  /* ===== Task & deliverable ===== */
+  .blk.is-task .blk-no { background: var(--navy-2); }
+  .blk.is-task .blk-title { color: var(--navy-2); }
+
+  .task-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .tg { background: #F8FAFC; border: 1px solid var(--line-soft); border-radius: 10px; padding: 14px 16px 15px; }
+  .tg-k { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: var(--steel); margin-bottom: 8px; }
+  .tg-v { font-size: 13.5px; color: var(--ink-soft); line-height: 1.82; }
+  .tg-v b { color: var(--ink); font-weight: 600; }
+  .tg-v .hl { color: var(--navy-2); font-weight: 700; }
+  .tg-v + .tg-v { margin-top: 8px; }
+
+  .deliv { border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; background: #fff; }
+  .deliv + .deliv { margin-top: 12px; }
+  .deliv.is-pending { background: #FAFBFC; border-style: dashed; }
+  .dlv-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 13px; }
+  .dlv-no { font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; color: #fff; background: var(--steel); padding: 3px 9px; border-radius: 4px; }
+  .dlv-title { font-size: 15px; font-weight: 700; letter-spacing: .5px; }
+  .dlv-due {
+    margin-left: auto; font-size: 11.5px; font-weight: 700; letter-spacing: .8px;
+    color: var(--next); background: var(--next-bg);
+    padding: 3px 10px; border-radius: 999px; font-variant-numeric: tabular-nums;
+  }
+  .deliv.is-pending .dlv-due { color: var(--risk); background: var(--risk-bg); }
+  .chain-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .8px;
+    color: var(--done); background: var(--done-bg);
+    padding: 2px 9px; border-radius: 999px; margin-left: 6px;
+    border: 1px solid rgba(44,92,147,.16);
+  }
+
+  .oneline { background: linear-gradient(140deg, #F6F9FC 0%, #EEF4FA 100%); border: 1px solid rgba(53,89,127,.2); border-radius: 10px; padding: 14px 16px 15px; margin-bottom: 15px; }
+  .oneline-k { font-size: 10.5px; font-weight: 700; letter-spacing: 1.4px; color: var(--steel); margin-bottom: 7px; }
+  .oneline p { font-size: 13.5px; line-height: 1.88; color: var(--ink); }
+  .oneline b { color: var(--navy-2); font-weight: 700; }
+
+  .psteps { display: grid; gap: 10px; }
+  .ps { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 12px; align-items: start; }
+  .ps-k { font-size: 11.5px; font-weight: 700; letter-spacing: 1px; color: #fff; background: var(--navy-2); padding: 3px 0; border-radius: 4px; text-align: center; }
+  .ps-q .ps-k { background: var(--risk); }
+  .ps-h .ps-k { background: var(--steel); }
+  .ps-m .ps-k { background: var(--done); }
+  .ps-v .ps-k { background: var(--next); }
+  .ps-t { font-size: 13.5px; color: var(--ink-soft); line-height: 1.82; }
+  .ps-t b { color: var(--ink); font-weight: 600; }
+  .ps-t ul { list-style: none; display: grid; gap: 6px; }
+  .ps-t li { position: relative; padding-left: 15px; }
+  .ps-t li::before { content: ""; position: absolute; left: 2px; top: .68em; width: 4px; height: 4px; border-radius: 50%; background: var(--ink-faint); }
+  .ps-t .num2 { font-variant-numeric: tabular-nums; color: var(--navy-2); font-weight: 700; }
+
+  /* ===== Maintainer note ===== */
+  .maint {
+    margin-top: 22px;
+    background: #fff; border: 1px dashed var(--line);
+    border-radius: 12px; padding: 4px 22px;
+  }
+  .maint summary {
+    cursor: pointer; list-style: none;
+    padding: 16px 0; font-size: 13.5px; font-weight: 700;
+    color: var(--steel); letter-spacing: .8px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .maint summary::-webkit-details-marker { display: none; }
+  .maint summary::before {
+    content: "＋"; font-size: 15px; color: var(--steel); font-weight: 700;
+    transition: transform .25s;
+  }
+  .maint[open] summary::before { content: "－"; }
+  .maint-body { padding: 0 0 20px; }
+  .maint-body h5 {
+    font-size: 12.5px; font-weight: 700; color: var(--ink);
+    letter-spacing: .6px; margin: 14px 0 8px;
+  }
+  .maint-body h5:first-child { margin-top: 4px; }
+  .maint-body p, .maint-body li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.8;
+  }
+  .maint-body ol { list-style: none; counter-reset: m; display: grid; gap: 7px; }
+  .maint-body ol li { position: relative; padding-left: 24px; counter-increment: m; }
+  .maint-body ol li::before {
+    content: counter(m) "."; position: absolute; left: 0;
+    font-weight: 700; color: var(--steel); font-variant-numeric: tabular-nums;
+  }
+  .maint-body code {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 12px; background: var(--tint); color: var(--navy-2);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .maint-body b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Footer ===== */
+  .page-footer {
+    max-width: 1000px; margin: 34px auto 0; padding: 0 28px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: .8px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 820px) {
+    .hero { padding: 40px 0 34px; }
+    .hero-cards { grid-template-columns: repeat(2, 1fr); }
+    .wrap { padding: 0 18px 56px; }
+    .day { padding: 22px 18px 24px; border-radius: 12px; }
+    .glance { grid-template-columns: repeat(2, 1fr); gap: 14px 0; }
+    .gl { padding-right: 14px; }
+    .gl:nth-child(2) { border-right: none; }
+    .day-date { font-size: 21px; }
+    .day-badge { margin-left: 0; }
+    .fd { grid-template-columns: 1fr; gap: 2px; }
+    .fd-k { font-weight: 600; color: var(--ink-faint); }
+    .task-grid { grid-template-columns: 1fr; }
+    .deliv { padding: 16px 16px 18px; }
+    .ps { grid-template-columns: 1fr; gap: 4px; }
+    .ps-k { justify-self: start; padding: 2px 10px; text-align: left; }
+    .dlv-due { margin-left: 0; }
+    .page-footer { padding: 0 18px; }
+  }
+  @media (max-width: 360px) {
+    .hero-cards { grid-template-columns: 1fr; }
+    .glance { grid-template-columns: 1fr; }
+    .gl { border-right: none; padding-right: 0; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .hero { background: #fff; color: var(--ink); padding: 0 0 20px; }
+    .hero h1, .brand-name { color: var(--navy); }
+    .hero-sub { color: var(--ink-soft); }
+    .brand-mark { border-color: var(--steel); color: var(--steel); }
+    .kicker { color: var(--steel); }
+    .hc { background: #fff; border-color: var(--line); }
+    .hc-label, .hc-note { color: var(--ink-faint); }
+    .hc-value { color: var(--navy-2); }
+    .hc-value em { color: var(--ink-faint); }
+    .day { box-shadow: none; }
+    .maint { display: none; }
+    .date-rail { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Daily Product Report</div>
+    <h1>产品日报</h1>
+    <p class="hero-sub">提交对象 · <b>产品负责人</b>　｜　更新至 2026-09-29（第 1 天）</p>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">最新更新</div>
+        <div class="hc-value num">09-29<em>周二</em></div>
+        <div class="hc-note">下班前提交</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">累计</div>
+        <div class="hc-value num">1<em>天</em></div>
+        <div class="hc-note">本文档第 1 天</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">今日完成</div>
+        <div class="hc-value num">3<em>项</em></div>
+        <div class="hc-note">回访 / 原型 / 教学视频</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">任务截止</div>
+        <div class="hc-value num">2<em>项</em></div>
+        <div class="hc-note">今晚 17:00 · 明晚 17:00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <nav class="date-rail">
+    <span class="dr-label">日期</span>
+    <a class="dr is-active" href="#d20260929">09-29 <em>周二</em></a>
+  </nav>
+
+  <!-- ===================== 2026-09-29 ===================== -->
+  <article class="day" id="d20260929">
+    <div class="day-head">
+      <div class="day-date">2026-09-29</div>
+      <div class="day-week">星期二</div>
+      <div class="day-badge">第 1 天</div>
+    </div>
+
+    <div class="glance">
+      <div class="gl">
+        <div class="gl-k">今日完成</div>
+        <div class="gl-v c-done num">3<em>项</em></div>
+      </div>
+      <div class="gl">
+        <div class="gl-k">风险与阻塞</div>
+        <div class="gl-v c-risk num">4<em>条</em></div>
+      </div>
+      <div class="gl">
+        <div class="gl-k">明日计划</div>
+        <div class="gl-v c-next num">4<em>项</em></div>
+      </div>
+      <div class="gl">
+        <div class="gl-k">需协调支持</div>
+        <div class="gl-v c-ask num">2<em>项</em></div>
+      </div>
+    </div>
+
+    <!-- 一、今日完成 -->
+    <section class="blk is-done">
+      <div class="blk-head">
+        <span class="blk-no">一</span>
+        <span class="blk-title">今日完成</span>
+        <span class="blk-count">3 项</span>
+      </div>
+
+      <!-- 01 回访 -->
+      <div class="item">
+        <div class="item-head">
+          <span class="i-no">01</span>
+          <span class="i-title">已购未开单门店 · 电话回访</span>
+          <span class="i-tag">客户回访</span>
+        </div>
+
+        <div class="fields">
+          <div class="fd">
+            <div class="fd-k">协同前置</div>
+            <div class="fd-v">已请销售 <b>James</b> 提前与门店老板打招呼，再行电话联系，避免冷启动打扰。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">进度</div>
+            <div class="fd-v">已购但未开单门店共 <span class="hl">6 家</span>，今日完成回访 <span class="hl">1 家</span>（1 / 6）。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">回访对象</div>
+            <div class="fd-v"><b>美时美刻皮肤管理中心</b>（老板）</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">门店现状</div>
+            <div class="fd-v">店内目前<b>没有使用任何 SaaS 系统</b>。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">反馈 · 肯定</div>
+            <div class="fd-v">系统<b>功能齐全</b>。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">反馈 · 保留</div>
+            <div class="fd-v">但<b>很多功能她日常用不到</b>。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">不用的原因</div>
+            <div class="fd-v">
+              <ul class="reasons">
+                <li data-n="1"><b>没有吸引她的抓手</b> —— 缺少能打动她的功能。</li>
+                <li data-n="2"><b>习惯手写记账</b> —— 店内各类计算偏灵活、没有明确固定的规则，手写对她来说更灵活。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote">
+          <span class="q-k">问：如果使用 SaaS 软件，会看中什么？</span>
+          「如果能<b>有效拓客</b>，那么我会考虑使用。」
+        </div>
+
+        <div class="insight">
+          <div class="insight-k">洞察</div>
+          <p>「功能齐全」没有成为她留下的理由，<b>「能有效拓客」才是她唯一主动说出的价值锚点</b>。也就是说，在当前阶段，功能完备度不构成使用理由——能被感知到的<b>增量客流</b>才是。</p>
+          <p>更值得注意的是第二条原因。「手写更灵活」的潜台词是：<b>她店里的算法本身没有固定规则</b>。用一套要求「先把规则想清楚」的刚性配置去替换手写，等于要求她放弃灵活性，这是反向的。</p>
+          <p>方向应当是<span class="em">把灵活留下来，同时把账记清楚</span>——这与在研能力已经对齐：价目表主分组可改、列表内就地改价；提成支持多方案，并允许流水级修正且全程留痕。本条的问答可作为后续原型评审的一手依据。</p>
+        </div>
+      </div>
+
+      <!-- 02 流水订单模块 -->
+      <div class="item">
+        <div class="item-head">
+          <span class="i-no">02</span>
+          <span class="i-title">流水订单模块 · 交互原型收尾</span>
+          <span class="i-tag">原型设计</span>
+        </div>
+        <div class="fields">
+          <div class="fd">
+            <div class="fd-k">进展</div>
+            <div class="fd-v">交互原型已进入<b>收尾阶段</b>，主流程与关键状态已完整。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">下一步</div>
+            <div class="fd-v"><b>明日可评审</b>。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 教学视频 -->
+      <div class="item">
+        <div class="item-head">
+          <span class="i-no">03</span>
+          <span class="i-title">开单功能教学视频 · 制作中</span>
+          <span class="i-tag">内容建设</span>
+        </div>
+        <div class="fields">
+          <div class="fd">
+            <div class="fd-k">定位</div>
+            <div class="fd-v">作为<b>「免客服」的兜底方案</b>——当自助上手仍存疑问时，由视频承接，减少客服介入。</div>
+          </div>
+          <div class="fd">
+            <div class="fd-k">进展</div>
+            <div class="fd-v">今日继续制作。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 二、任务承诺与交付 -->
+    <section class="blk is-task">
+      <div class="blk-head">
+        <span class="blk-no">二</span>
+        <span class="blk-title">任务承诺与交付</span>
+        <span class="blk-count">行动 1 项 · 交付 2 项</span>
+      </div>
+
+      <div class="task-grid">
+        <div class="tg">
+          <div class="tg-k">行动 · ACTION</div>
+          <div class="tg-v">针对<b>未使用系统的门店逐一调研</b>，查明不使用原因；必要时前往<b>太仓门店实地观察</b>。</div>
+          <div class="tg-v">口径说明：本批回访对象为<b>「已购未开单」6 家</b>（日报口径）；任务书口径为<b>「未使用」8 家</b>，其中含非本批门店，<span class="hl">待核名单后并入</span>，两者不混计。</div>
+        </div>
+        <div class="tg">
+          <div class="tg-k">交付 · DELIVERABLE</div>
+          <div class="tg-v">在两个时间点前，各提交一份基于<b>「免客服 / 免销售」或「帮门店赚钱」</b>链路的改进方案。每条方案需用<b>一句话</b>写明：<b>问题 + 假设 + 方法 + 验证逻辑</b>。</div>
+          <div class="tg-v">截止：<span class="hl">今天 17:00</span>（第 1 份）· <span class="hl">明天 17:00</span>（第 2 份）。</div>
+        </div>
+      </div>
+
+      <!-- 交付 01 -->
+      <div class="deliv">
+        <div class="dlv-head">
+          <span class="dlv-no">交付 01</span>
+          <span class="dlv-title">让门店看见「新客是系统带来的」</span>
+          <span class="chain-tag">锚定 · 帮门店赚钱</span>
+          <span class="dlv-due">今天 17:00</span>
+        </div>
+
+        <div class="oneline">
+          <div class="oneline-k">一句话描述 · 问题 + 假设 + 方法 + 验证逻辑</div>
+          <p>
+            <b>问题</b>：已购未开单门店反馈「功能齐全但日常用不到」，唯一主动提出的诉求是有效拓客；
+            <b>假设</b>：门店不用系统的真实原因不是功能缺失，而是「用了也看不到生意变化」，若让新客来源变得可见，使用动机就会从「替代手写」转为「带来生意」；
+            <b>方法</b>：把团购核销与会员建档串成一条「线上新客台账」——核销即自动开单、核销时可当场建档会员、复购可追踪；
+            <b>验证</b>：上线后该批门店核销订单占比自 0 起量、核销带入的新增会员数大于 0，且原「未首单」门店出现首单。
+          </p>
+        </div>
+
+        <div class="psteps">
+          <div class="ps ps-q">
+            <div class="ps-k">问题</div>
+            <div class="ps-t">
+              <ul>
+                <li>样本（美时美刻皮肤管理中心）：肯定系统<b>功能齐全</b>，但「很多功能日常用不到」。</li>
+                <li>不使用的两条原因：<b>① 没有吸引她的抓手</b>；<b>② 习惯手写</b>——店内计算偏灵活、无固定规则，手写更灵活。</li>
+                <li>唯一主动说出的价值锚点：<b>「如果能有效拓客，我会考虑使用」</b>。</li>
+                <li>数据侧佐证：该店在经营看板仍为<b>「未首单」</b>；19 家圈选门店的团购核销订单基线为 <span class="num2">0</span>（能力未上线）；看板口径明确「网上已付款订单是另一套账，绝不与店内收银加总」——<b>线上客流今天完全在剑琅账外</b>。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="ps ps-h">
+            <div class="ps-k">假设</div>
+            <div class="ps-t">
+              <ul>
+                <li><b>主因判断</b>：门店不用系统不是因为功能不够，而是因为<b>用了也看不到生意变化</b>——功能的价值与店主的收益之间缺少一条可见的因果链。</li>
+                <li><b>推论</b>：若把「系统带来了新客」变成门店能自己看见的结果，使用动机就会自然迁移，不需要靠说服。</li>
+                <li><b>对第 2 条原因的正面回应</b>：她习惯手写，是因为<b>手写容忍灵活</b>。因此方案不能要求她「先把规则想清楚」，而要允许边用边调。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="ps ps-m">
+            <div class="ps-k">方法</div>
+            <div class="ps-t">
+              <ul>
+                <li><b>主线 · 串成一条「线上新客台账」</b>：团购核销 → 核销自动开单 → 核销时确认散客 / 会员并<b>可当场建档</b> → 门店可查「线上券带来的新客与复购」。即：<b>把平台买来的客，变成门店自己的会员</b>。</li>
+                <li><b>配套 · 降低上手门槛</b>（回应「手写更灵活」）：价目表主分组可改、删组不丢货、列表内就地改价；提成支持多方案与覆盖规则，并允许流水级修正且留痕。</li>
+                <li><b>呈现</b>：在门店可见处只给两个数——<b>核销订单占比</b>与<b>核销带入的新增会员数</b>。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="ps ps-v">
+            <div class="ps-k">验证</div>
+            <div class="ps-t">
+              <ul>
+                <li><b>主验证</b>：该批未使用门店的<b>「未首单 → 有首单」转化</b>（经营看板健康状态）。</li>
+                <li><b>过程指标</b>：核销订单占比 / 核销订单金额占比<b>自 0 起量</b>；核销带入的新增会员数<b>大于 0</b>。</li>
+                <li><b>反向证伪</b>：若核销占比已起量、门店仍不使用，说明「可见的生意结果」还不足以驱动使用，<b>假设需修正</b>——届时改锚定「免客服」链路（问题转为上手与配置成本）。</li>
+                <li><b>主观验证</b>：回访确认门店是否主动提及「新客」，并表现出继续使用的意愿。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 交付 02 -->
+      <div class="deliv is-pending">
+        <div class="dlv-head">
+          <span class="dlv-no">交付 02</span>
+          <span class="dlv-title">待剩余门店回访样本补足后产出</span>
+          <span class="chain-tag">锚定 · 视回访结论</span>
+          <span class="dlv-due">明天 17:00</span>
+        </div>
+        <div class="ps-t">
+          <ul>
+            <li><b>当前状态</b>：待产出。第 2 份方案需建立在多店样本之上，目前回访仅完成 1 / 6。</li>
+            <li><b>候选锚定链路</b>：若回访结论集中在「看不到生意变化」，延续<b>帮门店赚钱</b>并深化；若集中在「不会用 / 配不明白」，转向<b>免客服</b>；若集中在「没人愿意用」，转向<b>免销售</b>。</li>
+            <li><b>前置依赖</b>：需在今天至明天上午补足回访样本；若电话回访不足以得出结论，安排<b>太仓门店实地观察</b>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 三、风险与阻塞 -->
+    <section class="blk is-risk">
+      <div class="blk-head">
+        <span class="blk-no">三</span>
+        <span class="blk-title">风险与阻塞</span>
+        <span class="blk-count">4 条</span>
+      </div>
+      <ul class="plist">
+        <li data-n="1"><b>回访进度偏慢。</b>6 家仅触达 1 家。回访节奏依赖销售 James 的「先打招呼」环节，受销售侧配合程度影响，不是我能单独推动的。</li>
+        <li data-n="2"><b>首个样本的结论与当前产品叙事存在张力。</b>「功能齐全但用不到」+「只认拓客」这两点同时出现，意味着即便剩余 5 家回访完成，也可能得到同一类结论——若不在拓客上给出答案，回访结果很难转化为开单。</li>
+        <li data-n="3"><b>流水订单模块明日即评审。</b>原型收尾后直接进入评审，若评审触及口径或字段变更，可能反向影响后续排期。</li>
+        <li data-n="4"><b>双硬截止与样本量之间的矛盾。</b>今天 17:00 与明天 17:00 两份方案为硬截止，但回访仅完成 1 / 6。今天这份只能建立在<b>单一门店样本</b>上；明天那份要有足够依据，必须在今天至明天上午补足回访，时间窗口很紧。若需太仓实地观察，另需占用约半天。</li>
+      </ul>
+    </section>
+
+    <!-- 四、明日计划 -->
+    <section class="blk is-next">
+      <div class="blk-head">
+        <span class="blk-no">四</span>
+        <span class="blk-title">明日计划</span>
+        <span class="blk-count">4 项</span>
+      </div>
+      <ul class="plist">
+        <li data-n="1">参加<b>流水订单模块交互原型评审</b>。</li>
+        <li data-n="2">继续推进剩余 <b>5 家</b>已购未开单门店的回访（需 James 先行打招呼）。</li>
+        <li data-n="3">继续制作<b>开单功能教学视频</b>。</li>
+        <li data-n="4">在 <b>17:00 前提交第 2 份改进方案</b>（视回访结论锚定免客服 / 免销售链路）；若电话回访样本不足，安排<b>太仓门店实地观察</b>。</li>
+      </ul>
+    </section>
+
+    <!-- 五、需协调支持 -->
+    <section class="blk is-ask">
+      <div class="blk-head">
+        <span class="blk-no">五</span>
+        <span class="blk-title">需协调支持</span>
+        <span class="blk-count">2 项</span>
+      </div>
+      <ul class="plist">
+        <li data-n="1"><span class="lbl">销售 James ·</span>协助<b>在今天至明天上午</b>排期剩余 5 家门店的「先打招呼」环节，并同步各店合适的联系时间窗。因明天 17:00 有方案交付，回访窗口需要前置。</li>
+        <li data-n="2"><span class="lbl">产品负责人 ·</span>就交付 01 的两点给出判断：<b>①</b> 「把线上新客变成门店可见的台账」这条方向是否成立；<b>②</b> 若无效应转向「免客服」链路，是否需要提前占用明天的一段评审时间。这决定了我后续 5 家回访的问法与话术。</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ===================== 维护说明 ===================== -->
+  <details class="maint">
+    <summary>维护说明 · 如何新增一天 / 待核对项</summary>
+    <div class="maint-body">
+      <h5>新增一天的步骤</h5>
+      <ol>
+        <li>复制上方整段 <code>&lt;article class="day"&gt; … &lt;/article&gt;</code>，粘贴到 <b>日期导航之后、现有那天之前</b>（最新的一天永远在最上面）。</li>
+        <li>改三处：<code>id="d20260930"</code>、<code>.day-date</code> 与 <code>.day-week</code>、<code>.day-badge</code> 里的「第 N 天」。</li>
+        <li>在 <code>.date-rail</code> 里加一个 <code>&lt;a class="dr" href="#d20260930"&gt;</code>，并把 <code>is-active</code> 从旧的那天移到新的这天。</li>
+        <li>更新顶部 Hero 的「最新更新」「累计 N 天」以及四个计数卡。</li>
+      </ol>
+
+      <h5>撰写约定</h5>
+      <p>五段结构固定为：<b>今日完成 / 任务承诺与交付 / 风险与阻塞 / 明日计划 / 需协调支持</b>。当天某段为空时，保留标题并写「无」，不要删段——便于负责人逐日对比。</p>
+      <p>「任务承诺与交付」区块由任务书直接生成：<b>行动</b>写调研范围与实地安排，<b>交付</b>写方案与截止时间；每份方案用一句话写明「问题 + 假设 + 方法 + 验证逻辑」，再在下方拆成四段展开。<b>交付完成后把 <code>is-pending</code> 去掉</b>，并回填实际结论。</p>
+
+      <h5>待你核对项（第 1 天）</h5>
+      <ol>
+        <li>今日完成的 3 条来自你的原始记录，未经改动。</li>
+        <li><b>「任务承诺与交付」区块里的方案内容是我基于美时美刻单一门店样本推导的</b>，方向与措辞请按你的判断修改——尤其是「验证逻辑」中「反向证伪」那一条。</li>
+        <li><b>「风险与阻塞」「明日计划」「需协调支持」三段是我推导的</b>，请按实际确认。</li>
+        <li>门店数量口径：日报按 <b>6 家（已购未开单）</b>；任务书的 8 家（未使用）含非本批门店，已在区块内标注待核名单，<b>拿到名单后请补进「行动」</b>。</li>
+      </ol>
+    </div>
+  </details>
+
+</div>
+
+<div class="page-footer">
+  <div>剑琅联盟 · 产品日报 · 内部资料</div>
+  <div>每天下班前提交 · 提交对象 产品负责人</div>
+</div>
+
+</body>
+</html>
