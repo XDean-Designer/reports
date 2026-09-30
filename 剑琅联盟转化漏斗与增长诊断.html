@@ -249,7 +249,6 @@
     vertical-align: top; line-height: 1.75;
   }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr.is-todo td { background: #FAFBFA; color: var(--ink-faint); }
   td.c-name { font-weight: 700; color: var(--pine-2); font-size: 14px; }
   td.c-name .idx {
     display: block; font-size: 10.5px; font-weight: 700;
@@ -264,7 +263,8 @@
   .tag.t-sand { color: var(--sand); background: var(--sand-bg); }
   .tag.t-amber { color: var(--amber); background: var(--amber-bg); }
   .tag.t-sage { color: var(--sage); background: #E7F1EE; }
-  .tag.t-todo { color: var(--ink-faint); background: #F1F4F2; }
+  .tag.t-pine { color: #17453A; background: #DCE9E3; }
+  .tag.t-mist { color: #5D6B63; background: #EDF1EE; }
 
   .finding {
     margin-top: 16px; padding: 18px 20px;
@@ -549,7 +549,6 @@
         <li><b>开店资料不在手边。</b>营业执照、门头照、结算账户这类资料需要现翻现拍，流程一旦中断，大概率不会再回来续上。</li>
         <li><b>开店之后能得到什么不明确。</b>店主知道「要开店」，但不知道开完之后系统能帮店里做什么，缺少把流程走完的理由。</li>
         <li><b>审核等待期没有反馈。</b>提交后进入审核，等待过程中缺少进度与提醒，最初那点热度自然消退。</li>
-        <li><b>涉及资金与授权，信任门槛高。</b>绑定结算账户属于敏感操作，店主本能谨慎，倾向于「回头再说」。</li>
         <li><b>登录的人未必是决策的人。</b>到店指导时往往由店员或销售代为登录，「完成登录」并不等于店主本人参与过开店。</li>
       </ol>
       <p class="q-sum">
@@ -568,13 +567,14 @@
       <ol class="q-list">
         <li><b>缺少能赚钱的价值抓手。</b>本次门店回访的核心结论：不是功能不够，而是没有被感知到的收入增量。</li>
         <li><b>开单前的配置成本高。</b>要先把项目、价目表、员工与提成配好，才能顺畅开单，而 2 人小店没有人力来做这件事。</li>
-        <li><b>旧数据搬不进来。</b>老系统的会员数据只能手动录入，会员卡没录完，就索性先不开始用（精剪坊）。</li>
+        <li><b>旧数据搬不进来。</b>老系统的会员数据只能手动录入，会员卡没录完，就索性先不开始用（精剪坊、芳香世家）。</li>
+        <li><b>在等销售承诺的未上线功能。</b>销售提及的「新版 RTS 拓客功能」尚未上线，门店选择等它出来再一起用（瑞雪理容院、西子说美甲美睫）。</li>
         <li><b>缺少触发场景。</b>开店完成后如果当天没有真实客人，就不会打开系统，缺少「第一次开单」的引导。</li>
         <li><b>使用习惯的阻力。</b>手写记账更灵活、不习惯手机记账、总会忘记用（美时美刻、梵诗）。</li>
       </ol>
       <p class="q-sum">
-        小结：这是<b>流失率最高、也最值得投入</b>的一环（72.6%）。它同时包含「动力问题」（没有赚钱抓手）
-        与「门槛问题」（配置成本、数据迁移），需要分开解——详见第三章的一手回访证据。
+        小结：这是<b>流失率最高、也最值得投入</b>的一环（72.6%）。它同时包含「动力问题」（没有赚钱抓手）、
+        「门槛问题」（配置成本、数据迁移）与「承诺问题」（在等销售承诺的未上线功能），需要分开解——详见第三章的一手回访证据。
       </p>
     </div>
 
@@ -586,7 +586,6 @@
         <span class="q-seg">开卡·会员开卡 39 → 订阅 18　流失 <b>21</b> / 53.8%</span>
       </div>
       <ol class="q-list">
-        <li><b>试用期已经够用。</b>记账、开单等基础能力在试用阶段就能跑通，没有形成「必须付费」的压力点。</li>
         <li><b>付费后的增量算不出来。</b>订阅权益的边界不清晰，店主无法判断「多花的这笔钱能换回什么」。</li>
         <li><b>门店规模与订阅模式不匹配。</b>2 人小店的现金流习惯是一次性投入，对持续订阅天然敏感。</li>
         <li><b>决策人不是使用者。</b>被动购买的门店（如亲戚推荐），实际使用者没有付费决定权，也没有动力推动续订。</li>
@@ -602,13 +601,13 @@
   <section id="interview">
     <div class="sec-head">
       <span class="sec-no">03</span>
-      <h2 class="sec-title">问题三深挖 · 门店电话回访<span>7 家已购未开单门店 · 已完成 3 家</span></h2>
+      <h2 class="sec-title">问题三深挖 · 门店电话回访<span>7 家已购门店 · 低开单归因 · 已全部回访</span></h2>
       <span class="sec-en">Store Interviews</span>
     </div>
 
     <p class="sec-lead">
-      为验证问题 3 的真实成因，对已购买但尚未开单的门店做了逐一电话回访。
-      下表共 7 家，已回访 3 家，其余 4 家待补充。
+      为验证问题 3 的真实成因，对已购买但开单量偏低的门店做了逐一电话回访。
+      下表 7 家已全部完成回访，诊断归类按<b>卡点性质</b>划分。
     </p>
 
     <div class="tbl-wrap">
@@ -644,33 +643,33 @@
             <td>拓客；对升单话术有兴趣（弱证据）</td>
             <td><span class="tag t-sage">无自主需求</span></td>
           </tr>
-          <tr class="is-todo">
-            <td class="c-name"><span class="idx">04</span>待补充</td>
-            <td class="c-size">—</td>
-            <td>—</td>
-            <td>—</td>
-            <td><span class="tag t-todo">待回访</span></td>
+          <tr>
+            <td class="c-name"><span class="idx">04</span>芳香世家</td>
+            <td class="c-size">2 人</td>
+            <td>不愿迁移存量会员数据；生意以老客为主，抖音团购新客尚未沉淀为注册会员</td>
+            <td>以新会员切入、逐步过渡；已完全掌握基本功能</td>
+            <td><span class="tag t-amber">迁移成本卡点</span></td>
           </tr>
-          <tr class="is-todo">
-            <td class="c-name"><span class="idx">05</span>待补充</td>
+          <tr>
+            <td class="c-name"><span class="idx">05</span>瑞雪理容院</td>
             <td class="c-size">—</td>
-            <td>—</td>
-            <td>—</td>
-            <td><span class="tag t-todo">待回访</span></td>
+            <td>在等销售提及的「新版 RTS 拓客功能」上线后再用；老板配合度低，获取信息较少</td>
+            <td>拓客（新版 RTS）</td>
+            <td><span class="tag t-pine">观望新版功能</span></td>
           </tr>
-          <tr class="is-todo">
-            <td class="c-name"><span class="idx">06</span>待补充</td>
+          <tr>
+            <td class="c-name"><span class="idx">06</span>西子说美甲美睫</td>
             <td class="c-size">—</td>
-            <td>—</td>
-            <td>—</td>
-            <td><span class="tag t-todo">待回访</span></td>
+            <td>仍在用博卡；在等销售提及的「新版 RTS 拓客功能」</td>
+            <td>拓客（新版 RTS）</td>
+            <td><span class="tag t-pine">观望新版功能</span></td>
           </tr>
-          <tr class="is-todo">
-            <td class="c-name"><span class="idx">07</span>待补充</td>
+          <tr>
+            <td class="c-name"><span class="idx">07</span>海之馨工作室</td>
             <td class="c-size">—</td>
-            <td>—</td>
-            <td>—</td>
-            <td><span class="tag t-todo">待回访</span></td>
+            <td>购买仅 5 天且赶上假期，尚未安排时间熟悉；试用后较满意</td>
+            <td>计划节后正式使用</td>
+            <td><span class="tag t-mist">上手期 · 时间未到</span></td>
           </tr>
         </tbody>
       </table>
@@ -679,9 +678,15 @@
     <div class="finding">
       <h4>跨样本结论</h4>
       <ul>
-        <li>已回访 3 家中，<b>2 家为 2 人小店</b>（美时美刻、梵诗），人力本身不足以支撑系统配置与数据录入。</li>
-        <li>3 家主动说出的诉求——<b>拓客、抖音团购核销、升单话术</b>——全部指向「帮我赚钱」，没有一家提到流程效率。</li>
-        <li>因此问题 3 的根因不是功能缺失，而是<b>缺少能吸引他们的价值抓手</b>；
+        <li>7 家中有 <b>4 家（过半）</b>主动说出的诉求指向<b>拓客 / 引流</b>——美时美刻、梵诗、瑞雪理容院、西子说美甲美睫；
+            没有一家把「流程效率」列为诉求。</li>
+        <li>其中瑞雪理容院、西子说美甲美睫 <b>2 家明确在等销售提及的「新版 RTS 拓客功能」</b>，因此至今没有投入使用。
+            <b>销售承诺的未上线功能，直接把门店的使用时点推到了未来</b>——这是承诺管理问题，不是产品功能问题。</li>
+        <li>另有 <b>2 家卡在存量会员数据迁移</b>（精剪坊、芳香世家）。芳香世家已给出可复制的过渡路径：
+            新会员先用剑琅联盟管理，老会员逐步切换，从而绕开一次性迁移的阻力。</li>
+        <li>7 家中仅 <b>1 家（海之馨工作室）</b>属于购买时间过短、尚未安排上手，
+            说明该门店的开单量会随时间自然增长，不是产品问题。</li>
+        <li>因此问题 3 的根因不是功能缺失，而是<b>缺少能吸引他们的价值抓手</b>——尤其集中在「拓客」这一项；
             需要有能帮门店赚钱的功能点，才能激发他们用系统开单的动力。</li>
       </ul>
     </div>
@@ -756,8 +761,10 @@
     </div>
 
     <p class="closing">
-      两条方案都落在同一条链路上：<b>让门店在一次开单里多赚一点、少亏一点</b>。
-      这正对应回访中三家门店共同的诉求方向——先给出可感知的赚钱抓手，再谈开单与订阅。
+      两条方案都落在「帮门店赚钱」同一条链路上：<b>让门店在一次开单里多赚一点、少亏一点</b>，
+      先在<b>复购</b>与<b>毛利</b>两个环节把「赚钱」变成开单时就能看到的东西。
+      需要说明的是，回访中 4 家门店明确提出的诉求其实是<b>拓客 / 引流</b>，目前尚无对应方案，
+      这一块是后续需要优先补齐的方向。
     </p>
   </section>
 
