@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 转化漏斗与增长诊断</title>
+<style>
+  :root {
+    --pine: #1A3D34;
+    --pine-2: #234D42;
+    --sage: #3D6B5C;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --amber: #C48A2A;
+    --amber-bg: #F8F0E0;
+    --bg: #F4F6F4;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --line-soft: #E8EEEA;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px 72px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(176, 141, 87, .18), transparent 55%),
+      linear-gradient(145deg, #14352E 0%, #1A3D34 48%, #1F4A3E 100%);
+    padding: 56px 0 48px;
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #A8C4B6;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--sand); }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700; letter-spacing: 3px; color: #fff;
+    margin: 14px 0 12px; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #D4C4A0; }
+  .hero-lead {
+    font-size: 14.5px; color: rgba(255,255,255,.72); line-height: 1.85;
+    max-width: 780px; letter-spacing: .3px;
+  }
+  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .hc {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px; padding: 16px 18px 15px;
+  }
+  .hc-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.52); text-transform: uppercase; margin-bottom: 8px; }
+  .hc-value { font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #fff; line-height: 1.35; }
+  .hc-note { font-size: 12px; color: rgba(255,255,255,.68); line-height: 1.7; margin-top: 8px; }
+
+  /* ===== Section shell ===== */
+  section { margin-top: 48px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #fff; background: var(--pine-2);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; color: var(--pine-2); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-lead {
+    font-size: 14.5px; color: var(--ink-soft); line-height: 1.9;
+    max-width: 920px; margin-bottom: 22px;
+  }
+  .sec-lead b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Funnel ===== */
+  .funnel-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px 20px;
+    overflow-x: auto;
+  }
+  .fn {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr) 74px 66px 72px 272px;
+    column-gap: 16px;
+    row-gap: 11px;
+    align-items: center;
+    min-width: 780px;
+  }
+  .fn-h {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--ink-faint); text-transform: uppercase;
+    padding-bottom: 5px; border-bottom: 1px solid var(--line);
+  }
+  .fn-r { text-align: right; }
+
+  /* 每一格显式定位到固定列，避免空单元格导致错位 */
+  .fn-h.h-name  { grid-column: 1; }
+  .fn-h.h-bar   { grid-column: 2; }
+  .fn-h.h-val   { grid-column: 3; }
+  .fn-h.h-delta { grid-column: 4; }
+  .fn-h.h-rate  { grid-column: 5; }
+  .fn-h.h-note  { grid-column: 6; }
+
+  .fn-name  { grid-column: 1; }
+  .fn-track { grid-column: 2; }
+  .fn-num   { grid-column: 3; }
+  .fn-num.c-delta { grid-column: 4; }
+  .fn-num.c-rate  { grid-column: 5; }
+  .fn-note  { grid-column: 6; }
+
+  .fn-name { font-size: 13.5px; font-weight: 600; color: var(--ink); letter-spacing: .3px; }
+  .fn-name.is-q::before {
+    content: ""; display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--sand); margin-right: 7px;
+    vertical-align: 2px;
+  }
+
+  .fn-track {
+    height: 30px; border-radius: 5px;
+    background: #F1F4F2;
+    overflow: hidden;
+  }
+  .fn-bar {
+    height: 100%; border-radius: 5px;
+    background: linear-gradient(90deg, var(--pine-2) 0%, var(--sage) 100%);
+  }
+  .fn-bar.is-empty {
+    width: 100%; box-sizing: border-box;
+    border: 1px dashed rgba(176,141,87,.62);
+    border-radius: 5px;
+    background: repeating-linear-gradient(115deg, rgba(176,141,87,.16) 0 8px, transparent 8px 16px);
+  }
+
+  .fn-num {
+    font-size: 14.5px; font-weight: 700; color: var(--pine-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .fn-num.is-dim { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); }
+  .fn-num.is-loss { color: var(--amber); }
+  .fn-num.is-zero { color: var(--ink-faint); font-weight: 600; }
+
+  .fn-note {
+    font-size: 12.5px; line-height: 1.6; letter-spacing: .2px;
+    color: #6B5426;
+    background: var(--sand-bg);
+    border-left: 3px solid var(--sand);
+    border-radius: 0 8px 8px 0;
+    padding: 9px 12px;
+  }
+  .fn-note b { font-weight: 700; color: #4E3C19; }
+
+  .funnel-foot {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+
+  /* ===== Question blocks ===== */
+  .q {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px 20px; margin-bottom: 14px;
+  }
+  .q-head {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+    padding-bottom: 13px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .q-no {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--sand); background: var(--sand-bg);
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .q-title { font-size: 17px; font-weight: 700; letter-spacing: .6px; color: var(--pine-2); }
+  .q-seg {
+    margin-left: auto; font-size: 12px; letter-spacing: .3px;
+    color: var(--ink-faint); font-variant-numeric: tabular-nums;
+  }
+  .q-seg b { color: var(--amber); font-weight: 700; }
+  .q-list { list-style: none; display: grid; gap: 10px; }
+  .q-list li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.85;
+    padding-left: 22px; position: relative;
+  }
+  .q-list li::before {
+    counter-increment: qi; content: counter(qi);
+    position: absolute; left: 0; top: 3px;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: #E7F1EE; color: var(--sage);
+    font-size: 9.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .q-list { counter-reset: qi; }
+  .q-list li b { color: var(--ink); font-weight: 600; }
+  .q-sum {
+    margin-top: 15px; padding: 13px 16px;
+    background: #F3F7F4; border-radius: 10px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.85;
+  }
+  .q-sum b { color: var(--pine-2); font-weight: 700; }
+
+  /* ===== Table ===== */
+  .tbl-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 860px; }
+  thead th {
+    background: #F3F7F4;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--pine-2); text-align: left;
+    padding: 13px 16px; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    font-size: 13.5px; color: var(--ink-soft);
+    padding: 15px 16px; border-bottom: 1px solid var(--line-soft);
+    vertical-align: top; line-height: 1.75;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.is-todo td { background: #FAFBFA; color: var(--ink-faint); }
+  td.c-name { font-weight: 700; color: var(--pine-2); font-size: 14px; }
+  td.c-name .idx {
+    display: block; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 1.5px; color: var(--ink-faint); margin-bottom: 4px;
+  }
+  td.c-size { white-space: nowrap; font-weight: 600; color: var(--ink); }
+  .tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700;
+    letter-spacing: .5px; padding: 3px 10px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tag.t-sand { color: var(--sand); background: var(--sand-bg); }
+  .tag.t-amber { color: var(--amber); background: var(--amber-bg); }
+  .tag.t-sage { color: var(--sage); background: #E7F1EE; }
+  .tag.t-todo { color: var(--ink-faint); background: #F1F4F2; }
+
+  .finding {
+    margin-top: 16px; padding: 18px 20px;
+    background: linear-gradient(135deg, #14352E 0%, #1A3D34 55%, #234D42 100%);
+    border-radius: 12px;
+    font-size: 13.5px; line-height: 1.9; color: rgba(255,255,255,.78);
+  }
+  .finding h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: #D4C4A0; margin-bottom: 10px;
+  }
+  .finding ul { list-style: none; display: grid; gap: 8px; }
+  .finding li { padding-left: 16px; position: relative; }
+  .finding li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--sand);
+  }
+  .finding b { color: #fff; font-weight: 600; }
+
+  /* ===== Solutions ===== */
+  .sol-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .sol {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+  }
+  .sol::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--amber);
+  }
+  .sol-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .sol-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .sol-name { font-size: 16px; font-weight: 700; letter-spacing: .8px; color: var(--pine-2); }
+  .sol-sub {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--amber); margin-bottom: 12px;
+  }
+  .sol-desc { list-style: none; display: grid; gap: 9px; }
+  .sol-desc li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 18px; position: relative;
+  }
+  .sol-desc li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  .sol-desc li b { color: var(--ink); font-weight: 600; }
+
+  .map-wrap {
+    margin-top: 16px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; overflow-x: auto;
+  }
+  .map-wrap table { min-width: 620px; }
+  .map-wrap td { border-bottom: 1px solid var(--line-soft); }
+  .map-wrap tbody tr:last-child td { border-bottom: none; }
+
+  .closing {
+    margin-top: 16px; padding: 18px 20px;
+    background: #F3F7F4; border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.9;
+  }
+  .closing b { color: var(--pine-2); font-weight: 700; }
+
+  /* ===== Footer ===== */
+  .foot {
+    margin-top: 52px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 1.2px;
+  }
+  .foot .dot {
+    display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--sand); margin-right: 8px; vertical-align: 1px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero-cards, .sol-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 0 34px; }
+    .wrap { padding: 0 20px 56px; }
+    .hero-inner { padding: 0 20px; }
+  }
+  @media (max-width: 720px) {
+    .sec-en { display: none; }
+    .funnel-wrap { padding: 18px 16px 16px; }
+    .fn {
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      column-gap: 18px; row-gap: 6px; min-width: 0;
+    }
+    .fn-h { display: none; }
+    .fn-name  { grid-column: 1 / -1; }
+    .fn-track { grid-column: 1 / -1; height: 26px; }
+    .fn-num   { grid-column: auto; text-align: left; font-size: 13.5px; }
+    .fn-num.c-delta { grid-column: auto; }
+    .fn-num.c-rate  { grid-column: auto; }
+    .fn-note  { grid-column: 1 / -1; margin-top: 8px; }
+    .fn-name + .fn-track { margin-bottom: 3px; }
+    /* 数字前内联表头文字，替代被隐藏的列头 */
+    .fn-num::before { font-size: 11px; font-weight: 500; color: var(--ink-faint); }
+    .fn-num::before { content: "转化量 "; }
+    .fn-num.c-delta::before { content: "环比 "; }
+    .fn-num.c-rate::before  { content: "流失率 "; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Funnel Diagnosis</div>
+    <h1>转化漏斗与<em>增长诊断</em></h1>
+    <p class="hero-lead">
+      从触达受众到最终订阅，剑琅联盟目前共 <b>9 级转化</b>。本报告先还原整条漏斗的转化量与逐级流失，
+      再把问题钉在流失最集中的三个环节上，用电话回访的一手信息解释「不开单」，最后给出两条对应解决方案。
+    </p>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">整体转化</div>
+        <div class="hc-value num">324 → 18</div>
+        <div class="hc-note">注册到订阅，整体转化约 5.6%</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">单环节最大流失</div>
+        <div class="hc-value num">152 人</div>
+        <div class="hc-note">开店·登录完成 320 → 开店·进首页 168</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">流失率最高环节</div>
+        <div class="hc-value num">72.6%</div>
+        <div class="hc-note">开店·进首页 168 → 开单 46</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 01 漏斗 ============ -->
+  <section id="funnel">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">转化漏斗全貌<span>9 级转化 × 逐级流失 × 4 处问题标注</span></h2>
+      <span class="sec-en">Conversion Funnel</span>
+    </div>
+
+    <p class="sec-lead">
+      条形长度代表该环节的转化量，自上而下即用户旅程。图中 4 处问题标注，全部落在<b>流失最集中</b>的环节：
+      开店·进首页流失 <b>152 人</b>（绝对值最大）、开单环节流失 <b>122 人</b>（流失率 72.6%，最高）、
+      订阅环节流失 <b>21 人</b>（53.8%）。
+    </p>
+
+    <div class="funnel-wrap">
+      <div class="fn">
+        <!-- 表头 -->
+        <div class="fn-h h-name">环节</div>
+        <div class="fn-h h-bar">转化量</div>
+        <div class="fn-h h-val fn-r">数值</div>
+        <div class="fn-h h-delta fn-r">环比</div>
+        <div class="fn-h h-rate fn-r">流失率</div>
+        <div class="fn-h h-note">问题标注</div>
+
+        <!-- 触达 -->
+        <div class="fn-name is-q">触达</div>
+        <div class="fn-track"><div class="fn-bar is-empty"></div></div>
+        <div class="fn-num fn-r is-dim">未采集</div>
+        <div class="fn-num c-delta fn-r is-dim">—</div>
+        <div class="fn-num c-rate fn-r is-dim">—</div>
+        <div class="fn-note"><b>触达有哪些渠道？流量空间？买量成本？</b></div>
+
+        <!-- 下载 / 安装 -->
+        <div class="fn-name">下载 / 安装</div>
+        <div class="fn-track"><div class="fn-bar" style="width:58.6%"></div></div>
+        <div class="fn-num fn-r">190</div>
+        <div class="fn-num c-delta fn-r is-dim">—</div>
+        <div class="fn-num c-rate fn-r is-dim">—</div>
+
+        <!-- 注册 -->
+        <div class="fn-name">注册</div>
+        <div class="fn-track"><div class="fn-bar" style="width:100%"></div></div>
+        <div class="fn-num fn-r">324</div>
+        <div class="fn-num c-delta fn-r is-dim">+134</div>
+        <div class="fn-num c-rate fn-r is-dim">—</div>
+
+        <!-- 开店 · 登录完成 -->
+        <div class="fn-name">开店 · 登录完成</div>
+        <div class="fn-track"><div class="fn-bar" style="width:98.8%"></div></div>
+        <div class="fn-num fn-r">320</div>
+        <div class="fn-num c-delta fn-r is-loss">−4</div>
+        <div class="fn-num c-rate fn-r is-dim">1.2%</div>
+
+        <!-- 开店 · 进首页 -->
+        <div class="fn-name is-q">开店 · 进首页</div>
+        <div class="fn-track"><div class="fn-bar" style="width:51.9%"></div></div>
+        <div class="fn-num fn-r">168</div>
+        <div class="fn-num c-delta fn-r is-loss">−152</div>
+        <div class="fn-num c-rate fn-r is-loss">47.5%</div>
+        <div class="fn-note"><b>登录了为什么不完成开店？</b></div>
+
+        <!-- 开单 -->
+        <div class="fn-name is-q">开单</div>
+        <div class="fn-track"><div class="fn-bar" style="width:14.2%"></div></div>
+        <div class="fn-num fn-r">46</div>
+        <div class="fn-num c-delta fn-r is-loss">−122</div>
+        <div class="fn-num c-rate fn-r is-loss">72.6%</div>
+        <div class="fn-note"><b>开店成功了为什么不开单？</b></div>
+
+        <!-- 开卡 · 卡模板 -->
+        <div class="fn-name">开卡 · 卡模板</div>
+        <div class="fn-track"><div class="fn-bar" style="width:14.2%"></div></div>
+        <div class="fn-num fn-r">46</div>
+        <div class="fn-num c-delta fn-r is-zero">0</div>
+        <div class="fn-num c-rate fn-r is-dim">0%</div>
+
+        <!-- 开卡 · 会员开卡 -->
+        <div class="fn-name">开卡 · 会员开卡</div>
+        <div class="fn-track"><div class="fn-bar" style="width:12.0%"></div></div>
+        <div class="fn-num fn-r">39</div>
+        <div class="fn-num c-delta fn-r is-loss">−7</div>
+        <div class="fn-num c-rate fn-r is-dim">15.2%</div>
+
+        <!-- 订阅 -->
+        <div class="fn-name is-q">订阅</div>
+        <div class="fn-track"><div class="fn-bar" style="width:5.6%"></div></div>
+        <div class="fn-num fn-r">18</div>
+        <div class="fn-num c-delta fn-r is-loss">−21</div>
+        <div class="fn-num c-rate fn-r is-loss">53.8%</div>
+        <div class="fn-note"><b>开单 / 开卡了为什么不订阅？</b></div>
+      </div>
+
+      <div class="funnel-foot">
+        标注说明：<b>●</b> 表示该环节挂有问题标注。「环比」为该环节相对上一环节的转化量变化；
+        「流失率」以相邻上一环节的转化量为基数。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 问题拆解 ============ -->
+  <section id="issues">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">三个卡点的问题拆解<span>按正常逻辑与行业常见情况推演</span></h2>
+      <span class="sec-en">Drop-off Analysis</span>
+    </div>
+
+    <p class="sec-lead">
+      问题 1（触达的渠道、流量空间与买量成本）属于投放与渠道议题，此处不展开。
+      下面拆解图中另外三处标注——它们分别对应漏斗上三段流失最集中的环节。
+    </p>
+
+    <!-- Q2 -->
+    <div class="q">
+      <div class="q-head">
+        <span class="q-no">问题 2</span>
+        <h3 class="q-title">登录了为什么不完成开店？</h3>
+        <span class="q-seg">开店·登录完成 320 → 开店·进首页 168　流失 <b>152</b> / 47.5%</span>
+      </div>
+      <ol class="q-list">
+        <li><b>开店资料不在手边。</b>营业执照、门头照、结算账户这类资料需要现翻现拍，流程一旦中断，大概率不会再回来续上。</li>
+        <li><b>开店之后能得到什么不明确。</b>店主知道「要开店」，但不知道开完之后系统能帮店里做什么，缺少把流程走完的理由。</li>
+        <li><b>审核等待期没有反馈。</b>提交后进入审核，等待过程中缺少进度与提醒，最初那点热度自然消退。</li>
+        <li><b>涉及资金与授权，信任门槛高。</b>绑定结算账户属于敏感操作，店主本能谨慎，倾向于「回头再说」。</li>
+        <li><b>登录的人未必是决策的人。</b>到店指导时往往由店员或销售代为登录，「完成登录」并不等于店主本人参与过开店。</li>
+      </ol>
+      <p class="q-sum">
+        小结：这一环流失的是<b>已经完成登录的人</b>，与「想不想用」基本无关，本质是流程门槛——
+        它更接近「免客服」链路上的问题，要解决的是让开店流程一次走完。
+      </p>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q">
+      <div class="q-head">
+        <span class="q-no">问题 3</span>
+        <h3 class="q-title">开店成功了为什么不开单？</h3>
+        <span class="q-seg">开店·进首页 168 → 开单 46　流失 <b>122</b> / 72.6%</span>
+      </div>
+      <ol class="q-list">
+        <li><b>缺少能赚钱的价值抓手。</b>本次门店回访的核心结论：不是功能不够，而是没有被感知到的收入增量。</li>
+        <li><b>开单前的配置成本高。</b>要先把项目、价目表、员工与提成配好，才能顺畅开单，而 2 人小店没有人力来做这件事。</li>
+        <li><b>旧数据搬不进来。</b>老系统的会员数据只能手动录入，会员卡没录完，就索性先不开始用（精剪坊）。</li>
+        <li><b>缺少触发场景。</b>开店完成后如果当天没有真实客人，就不会打开系统，缺少「第一次开单」的引导。</li>
+        <li><b>使用习惯的阻力。</b>手写记账更灵活、不习惯手机记账、总会忘记用（美时美刻、梵诗）。</li>
+      </ol>
+      <p class="q-sum">
+        小结：这是<b>流失率最高、也最值得投入</b>的一环（72.6%）。它同时包含「动力问题」（没有赚钱抓手）
+        与「门槛问题」（配置成本、数据迁移），需要分开解——详见第三章的一手回访证据。
+      </p>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q">
+      <div class="q-head">
+        <span class="q-no">问题 4</span>
+        <h3 class="q-title">开单 / 开卡了为什么不订阅？</h3>
+        <span class="q-seg">开卡·会员开卡 39 → 订阅 18　流失 <b>21</b> / 53.8%</span>
+      </div>
+      <ol class="q-list">
+        <li><b>试用期已经够用。</b>记账、开单等基础能力在试用阶段就能跑通，没有形成「必须付费」的压力点。</li>
+        <li><b>付费后的增量算不出来。</b>订阅权益的边界不清晰，店主无法判断「多花的这笔钱能换回什么」。</li>
+        <li><b>门店规模与订阅模式不匹配。</b>2 人小店的现金流习惯是一次性投入，对持续订阅天然敏感。</li>
+        <li><b>决策人不是使用者。</b>被动购买的门店（如亲戚推荐），实际使用者没有付费决定权，也没有动力推动续订。</li>
+        <li><b>刚跑通流程，仍在观望。</b>开单数据尚未形成稳定的经营积累，倾向「先看看有没有效果再说」。</li>
+      </ol>
+      <p class="q-sum">
+        小结：最后一环流失的恰恰是<b>已经把系统用起来的人</b>——问题不在于能不能上手，而在于价值还没有被确认。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 03 回访 ============ -->
+  <section id="interview">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">问题三深挖 · 门店电话回访<span>7 家已购未开单门店 · 已完成 3 家</span></h2>
+      <span class="sec-en">Store Interviews</span>
+    </div>
+
+    <p class="sec-lead">
+      为验证问题 3 的真实成因，对已购买但尚未开单的门店做了逐一电话回访。
+      下表共 7 家，已回访 3 家，其余 4 家待补充。
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>门店</th>
+            <th>门店规模</th>
+            <th>未开单主因</th>
+            <th>主动诉求 · 最看重</th>
+            <th>诊断归类</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name"><span class="idx">01</span>美时美刻皮肤管理中心</td>
+            <td class="c-size">2 人</td>
+            <td>功能齐全但日常用不到；习惯手写记账，店内无固定流程约束</td>
+            <td>有效拓客</td>
+            <td><span class="tag t-sand">价值感知缺失</span></td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">02</span>精剪坊形象工作室</td>
+            <td class="c-size">3 人</td>
+            <td>老系统会员数据无法快速迁移，只能手动录入，会员卡未录完即未投用</td>
+            <td>抖音团购核销；最看重会员卡功能</td>
+            <td><span class="tag t-amber">迁移成本卡点</span></td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">03</span>梵诗专业设计烫染</td>
+            <td class="c-size">2 人</td>
+            <td>亲戚推荐购买、无自主购买意愿；不习惯手机记账、总会忘记用</td>
+            <td>拓客；对升单话术有兴趣（弱证据）</td>
+            <td><span class="tag t-sage">无自主需求</span></td>
+          </tr>
+          <tr class="is-todo">
+            <td class="c-name"><span class="idx">04</span>待补充</td>
+            <td class="c-size">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="tag t-todo">待回访</span></td>
+          </tr>
+          <tr class="is-todo">
+            <td class="c-name"><span class="idx">05</span>待补充</td>
+            <td class="c-size">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="tag t-todo">待回访</span></td>
+          </tr>
+          <tr class="is-todo">
+            <td class="c-name"><span class="idx">06</span>待补充</td>
+            <td class="c-size">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="tag t-todo">待回访</span></td>
+          </tr>
+          <tr class="is-todo">
+            <td class="c-name"><span class="idx">07</span>待补充</td>
+            <td class="c-size">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="tag t-todo">待回访</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="finding">
+      <h4>跨样本结论</h4>
+      <ul>
+        <li>已回访 3 家中，<b>2 家为 2 人小店</b>（美时美刻、梵诗），人力本身不足以支撑系统配置与数据录入。</li>
+        <li>3 家主动说出的诉求——<b>拓客、抖音团购核销、升单话术</b>——全部指向「帮我赚钱」，没有一家提到流程效率。</li>
+        <li>因此问题 3 的根因不是功能缺失，而是<b>缺少能吸引他们的价值抓手</b>；
+            需要有能帮门店赚钱的功能点，才能激发他们用系统开单的动力。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 04 方案 ============ -->
+  <section id="solutions">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">解决方案<span>「帮门店赚钱」链路上的两个初步方案</span></h2>
+      <span class="sec-en">Proposed Solutions</span>
+    </div>
+
+    <p class="sec-lead">
+      针对问题 3 与问题 4 的共同根因，从「帮门店赚钱」这条链路切入，先落两个投入小、感知直接的方案。
+    </p>
+
+    <div class="sol-grid">
+      <div class="sol">
+        <div class="sol-top">
+          <span class="sol-no">方案 04</span>
+          <span class="sol-name">会员卡余额预警</span>
+        </div>
+        <div class="sol-sub">结算页 · 帮门店多赚一次</div>
+        <ul class="sol-desc">
+          <li>在会员开单结账的<b>结算页</b>，自动校验该会员的卡内余额（储值、计次）与卡有效期。</li>
+          <li>余额或有效期不足时，在结算页提示商家，由商家主动询问会员是否需要充卡。</li>
+          <li>价值：把一次普通开单变成一次<b>复购与充卡的机会</b>，让门店当场看到收入增量。</li>
+        </ul>
+      </div>
+
+      <div class="sol">
+        <div class="sol-top">
+          <span class="sol-no">方案 05</span>
+          <span class="sol-name">项目成本 · 亏本单预警</span>
+        </div>
+        <div class="sol-sub">价目表 / 订单页 · 守住毛利</div>
+        <ul class="sol-desc">
+          <li>价目表的项目与产品新增一个<b>选填字段「成本」</b>，是否启用可由商家自行配置。</li>
+          <li>商家录入成本后，在<b>开单改价</b>时显示成本值作为参考，避免改价改到亏本。</li>
+          <li>在<b>订单页标注亏本订单</b>，让商家直观看到哪些单子没赚钱。</li>
+          <li>价值：让商家感到「系统在帮我看住钱」，属于高感知的赚钱类功能。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="map-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>解决方案</th>
+            <th>作用环节</th>
+            <th>回应问题</th>
+            <th>价值归属</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">会员卡余额预警</td>
+            <td>开卡 · 会员开卡 → 开单 → 订阅</td>
+            <td>问题 3 / 问题 4</td>
+            <td>帮门店赚钱</td>
+          </tr>
+          <tr>
+            <td class="c-name">项目成本 · 亏本单预警</td>
+            <td>开单（改价）→ 订单管理</td>
+            <td>问题 3</td>
+            <td>帮门店赚钱</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="closing">
+      两条方案都落在同一条链路上：<b>让门店在一次开单里多赚一点、少亏一点</b>。
+      这正对应回访中三家门店共同的诉求方向——先给出可感知的赚钱抓手，再谈开单与订阅。
+    </p>
+  </section>
+
+  <div class="foot">
+    <div><span class="dot"></span>剑琅联盟 · 内部资料</div>
+    <div>转化漏斗与增长诊断 · 2026-09-30</div>
+  </div>
+
+</main>
+
+</body>
+</html>
