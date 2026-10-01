@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 开店分流与承接方案</title>
+<style>
+  :root {
+    --pine: #1A3D34;
+    --pine-2: #234D42;
+    --sage: #3D6B5C;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --amber: #C48A2A;
+    --amber-bg: #F8F0E0;
+    --bg: #F4F6F4;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --line-soft: #E8EEEA;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px 72px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(176, 141, 87, .18), transparent 55%),
+      linear-gradient(145deg, #14352E 0%, #1A3D34 48%, #1F4A3E 100%);
+    padding: 56px 0 48px;
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #A8C4B6;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--sand); }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700; letter-spacing: 3px; color: #fff;
+    margin: 14px 0 12px; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #D4C4A0; }
+  .hero-lead {
+    font-size: 14.5px; color: rgba(255,255,255,.72); line-height: 1.85;
+    max-width: 780px; letter-spacing: .3px;
+  }
+  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .hc {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px; padding: 16px 18px 15px;
+  }
+  .hc-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.52); text-transform: uppercase; margin-bottom: 8px; }
+  .hc-value { font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #fff; line-height: 1.35; }
+  .hc-note { font-size: 12px; color: rgba(255,255,255,.68); line-height: 1.7; margin-top: 8px; }
+
+  /* ===== Section shell ===== */
+  section { margin-top: 48px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #fff; background: var(--pine-2);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; color: var(--pine-2); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-lead {
+    font-size: 14.5px; color: var(--ink-soft); line-height: 1.9;
+    max-width: 920px; margin-bottom: 22px;
+  }
+  .sec-lead b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Generic card ===== */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px 20px;
+  }
+  .card + .card { margin-top: 14px; }
+  .card-title {
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    color: var(--pine-2); margin-bottom: 12px;
+  }
+  .card-title small {
+    display: inline-block; margin-left: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    color: var(--sand);
+  }
+  p.body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; }
+  p.body + p.body { margin-top: 10px; }
+  p.body b { color: var(--ink); font-weight: 600; }
+
+  ul.list { list-style: none; display: grid; gap: 9px; }
+  ul.list li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 18px; position: relative;
+  }
+  ul.list li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  ul.list li b { color: var(--ink); font-weight: 600; }
+  ul.list li .em { color: var(--pine-2); font-weight: 600; }
+
+  ol.steps { list-style: none; counter-reset: si; display: grid; gap: 10px; }
+  ol.steps li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 26px; position: relative;
+  }
+  ol.steps li::before {
+    counter-increment: si; content: counter(si);
+    position: absolute; left: 0; top: 3px;
+    width: 17px; height: 17px; border-radius: 50%;
+    background: #E7F1EE; color: var(--sage);
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Table ===== */
+  .tbl-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 880px; }
+  thead th {
+    background: #F3F7F4;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--pine-2); text-align: left;
+    padding: 13px 16px; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    font-size: 13.5px; color: var(--ink-soft);
+    padding: 15px 16px; border-bottom: 1px solid var(--line-soft);
+    vertical-align: top; line-height: 1.75;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.c-name { font-weight: 700; color: var(--pine-2); font-size: 14px; }
+  td.c-name .idx {
+    display: block; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 1.5px; color: var(--ink-faint); margin-bottom: 4px;
+  }
+  td.c-key { font-weight: 600; color: var(--ink); }
+  td.c-center { text-align: center; }
+  .tbl-note {
+    margin-top: 12px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+
+  /* ===== Tags ===== */
+  .tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700;
+    letter-spacing: .5px; padding: 3px 10px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tag.t-sand { color: var(--sand); background: var(--sand-bg); }
+  .tag.t-amber { color: var(--amber); background: var(--amber-bg); }
+  .tag.t-sage { color: var(--sage); background: #E7F1EE; }
+  .tag.t-pine { color: #17453A; background: #DCE9E3; }
+  .tag.t-mist { color: #5D6B63; background: #EDF1EE; }
+  .tag.t-ok { color: #1F6B4F; background: #DFF0E7; }
+  .tag.t-gap { color: #A8331F; background: #F8E3DE; }
+
+  /* ===== Callout ===== */
+  .note {
+    background: var(--sand-bg);
+    border-left: 3px solid var(--sand);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 13.5px; color: #6B5426; line-height: 1.85;
+  }
+  .note + .note { margin-top: 12px; }
+  .note b { color: #4E3C19; font-weight: 700; }
+  .note.amber { background: var(--amber-bg); border-left-color: var(--amber); color: #7A5715; }
+  .note.amber b { color: #6B4A0F; }
+  .note.sage { background: #F3F7F4; border-left-color: var(--sage); color: var(--ink-soft); }
+  .note.sage b { color: var(--pine-2); }
+
+  /* ===== Finding (dark) ===== */
+  .finding {
+    margin-top: 16px; padding: 18px 20px;
+    background: linear-gradient(135deg, #14352E 0%, #1A3D34 55%, #234D42 100%);
+    border-radius: 12px;
+    font-size: 13.5px; line-height: 1.9; color: rgba(255,255,255,.78);
+  }
+  .finding h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: #D4C4A0; margin-bottom: 10px;
+  }
+  .finding ul { list-style: none; display: grid; gap: 8px; }
+  .finding li { padding-left: 16px; position: relative; }
+  .finding li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--sand);
+  }
+  .finding b { color: #fff; font-weight: 600; }
+
+  /* ===== Cause grid (01) ===== */
+  .cause-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .cause {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+  }
+  .cause::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--line);
+  }
+  .cause.is-old::before { background: #B9C6C0; }
+  .cause.is-new::before { background: var(--sand); }
+  .cause.is-new { border-color: rgba(176,141,87,.5); }
+  .cause-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .cause-name { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--pine-2); }
+  .cause-sub { font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; color: var(--ink-faint); margin-bottom: 10px; }
+  .cause.is-new .cause-sub { color: var(--sand); }
+
+  /* ===== Principles (02) ===== */
+  .prin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .prin {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+  }
+  .prin-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 9px; border-radius: 4px;
+    display: inline-block; margin-bottom: 12px;
+  }
+  .prin-name { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--pine-2); margin-bottom: 8px; }
+  .prin-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  .prin-desc b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Choice cards (03) ===== */
+  .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .choice {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+    position: relative; overflow: hidden;
+  }
+  .choice::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .choice.c-rts::after { background: var(--sand); }
+  .choice.c-rtp::after { background: var(--amber); }
+  .choice.c-rtb::after { background: var(--sage); }
+  .choice-code {
+    font-size: 18px; font-weight: 700; letter-spacing: 2px;
+    color: var(--pine-2); line-height: 1;
+  }
+  .choice-code small {
+    display: block; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.4px; color: var(--ink-faint);
+    margin-top: 5px; text-transform: uppercase;
+  }
+  .choice-persona {
+    margin-top: 14px; padding-top: 13px;
+    border-top: 1px dashed var(--line);
+    font-size: 14.5px; font-weight: 700; color: var(--ink); letter-spacing: .5px;
+  }
+  .choice-q { font-size: 12.5px; color: var(--ink-faint); margin-top: 6px; line-height: 1.7; }
+  .choice-value {
+    margin-top: 12px; font-size: 13px; color: var(--ink-soft); line-height: 1.75;
+  }
+  .choice-value b { color: var(--pine-2); font-weight: 600; }
+
+  /* ===== Route matrix (05) ===== */
+  .route-from {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  .route-arrow {
+    font-size: 13px; font-weight: 700; color: var(--sand);
+    letter-spacing: 1px;
+  }
+
+  /* ===== Metric (06) ===== */
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .metric {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px 16px;
+  }
+  .metric-lv {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.8px;
+    color: var(--sand); margin-bottom: 8px;
+  }
+  .metric-name { font-size: 15.5px; font-weight: 700; color: var(--pine-2); margin-bottom: 10px; letter-spacing: .5px; }
+  .metric ul { list-style: none; display: grid; gap: 7px; }
+  .metric li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.7;
+    padding-left: 14px; position: relative;
+  }
+  .metric li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--sage);
+  }
+  .metric li b { color: var(--ink); font-weight: 600; }
+
+  .assume-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: #fff; background: var(--amber);
+    padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== Risk (07) ===== */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .risk {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+  }
+  .risk::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--amber);
+  }
+  .risk-name { font-size: 15px; font-weight: 700; color: var(--pine-2); margin-bottom: 9px; letter-spacing: .5px; }
+  .risk-row { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  .risk-row + .risk-row { margin-top: 8px; }
+  .risk-row .k {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; color: var(--ink-faint); margin-right: 7px;
+  }
+  .risk-row b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Phase (08) ===== */
+  .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .phase {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+    position: relative; overflow: hidden;
+  }
+  .phase::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .phase.p0::after { background: var(--pine-2); }
+  .phase.p1::after { background: var(--sand); }
+  .phase.p2::after { background: #B9C6C0; }
+  .phase-no {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 2px;
+    color: var(--ink-faint); margin-bottom: 6px;
+  }
+  .phase-name { font-size: 16px; font-weight: 700; color: var(--pine-2); margin-bottom: 10px; letter-spacing: .5px; }
+  .phase ul { list-style: none; display: grid; gap: 8px; }
+  .phase li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.75;
+    padding-left: 15px; position: relative;
+  }
+  .phase li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  .phase li b { color: var(--ink); font-weight: 600; }
+  .phase-dep {
+    margin-top: 13px; padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 12px; color: var(--ink-faint); line-height: 1.7;
+  }
+
+  /* ===== Open items ===== */
+  .open-list { list-style: none; display: grid; gap: 0; }
+  .open-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+  }
+  .open-list li:last-child { border-bottom: none; }
+  .open-list li .n {
+    flex: none; font-size: 11.5px; font-weight: 700; letter-spacing: 1px;
+    color: var(--sand); padding-top: 3px;
+  }
+  .open-list li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Footer ===== */
+  .foot {
+    margin-top: 52px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 1.2px;
+  }
+  .foot .dot {
+    display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--sand); margin-right: 8px; vertical-align: 1px;
+  }
+
+  /* ===== Wireframe (mono / grayscale) ===== */
+  .wf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .wf {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+  }
+  .wf-cap {
+    font-size: 14.5px; font-weight: 700; color: var(--pine-2);
+    letter-spacing: .5px; margin-bottom: 5px;
+  }
+  .wf-sub {
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .wf-stage { display: flex; justify-content: center; }
+
+  /* phone frame */
+  .phone {
+    width: 100%; max-width: 262px;
+    background: #fff;
+    border: 2px solid #9E9E9E;
+    border-radius: 24px;
+    padding: 9px 9px 12px;
+  }
+  .phone-notch {
+    width: 48px; height: 4px; border-radius: 2px;
+    background: #C4C4C4; margin: 0 auto 9px;
+  }
+  .screen {
+    border: 1px solid #D6D6D6;
+    border-radius: 14px;
+    background: #FCFCFC;
+    padding: 12px 11px;
+    display: flex; flex-direction: column; gap: 9px;
+    min-height: 416px;
+  }
+  .scr-top {
+    font-size: 10px; letter-spacing: .5px; color: #9E9E9E;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 7px; border-bottom: 1px solid #E8E8E8;
+  }
+  .scr-h { font-size: 12.5px; font-weight: 700; color: #424242; line-height: 1.5; }
+  .scr-p { font-size: 10px; color: #8A8A8A; line-height: 1.5; }
+
+  /* mono cards inside screen */
+  .m-card {
+    border: 1px dashed #BDBDBD; border-radius: 9px;
+    background: #fff; padding: 9px 10px;
+  }
+  .m-card.is-sel { border: 1.5px solid #616161; background: #F0F0F0; }
+  .m-code { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #424242; }
+  .m-code span {
+    font-size: 9.5px; font-weight: 500; color: #9E9E9E;
+    margin-left: 5px; letter-spacing: 0;
+  }
+  .m-persona { font-size: 11.5px; font-weight: 700; color: #3A3A3A; margin-top: 5px; }
+  .m-val { font-size: 9.5px; color: #8A8A8A; margin-top: 3px; line-height: 1.5; }
+
+  /* skeleton bars */
+  .m-sk { height: 7px; border-radius: 3px; background: #E4E4E4; }
+  .m-sk.w35 { width: 35%; }
+  .m-sk.w50 { width: 50%; }
+  .m-sk.w70 { width: 70%; }
+  .m-sk.w100 { width: 100%; }
+  .m-sk.tall { height: 32px; border-radius: 7px; }
+
+  .m-btn {
+    border-radius: 8px; background: #616161; color: #fff;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    text-align: center; padding: 8px 6px;
+  }
+  .m-btn.ghost {
+    background: #fff; color: #616161;
+    border: 1px dashed #BDBDBD; font-weight: 500;
+  }
+  /* 底部 TAB 条（真实 5 个：首页 / 客户 / AI助手 / 小店 / 获客） */
+  .m-tabbar {
+    display: flex; margin-top: auto;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 7px; gap: 2px;
+  }
+  .m-tab-item {
+    flex: 1; text-align: center;
+    font-size: 8.5px; color: #ADADAD; line-height: 1.2;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .m-tab-item .ti {
+    width: 13px; height: 13px; border-radius: 4px;
+    border: 1px solid #C4C4C4; background: #F4F4F4;
+  }
+  .m-tab-item.on { color: #3A3A3A; font-weight: 700; }
+  .m-tab-item.on .ti {
+    border: 1.5px solid #616161; background: #E4E4E4;
+  }
+  .m-tabbar-hint {
+    font-size: 9px; color: #9E9E9E; text-align: center;
+    padding-bottom: 2px;
+  }
+  .m-row { display: flex; gap: 6px; align-items: center; }
+  .m-banner {
+    border-radius: 9px; background: #F0F0F0;
+    border: 1px solid #D6D6D6;
+    padding: 8px 10px;
+    font-size: 10px; color: #4A4A4A; line-height: 1.5;
+  }
+  .m-toast {
+    border-radius: 9px; background: #fff;
+    border: 1.5px solid #616161;
+    padding: 9px 10px; text-align: center;
+    font-size: 10.5px; font-weight: 700; color: #3A3A3A;
+  }
+  .m-toast small { display: block; font-size: 9px; font-weight: 500; color: #8A8A8A; margin-top: 3px; }
+
+  .wf-note {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px dashed #E0E0E0;
+    font-size: 12px; color: var(--ink-faint); line-height: 1.75;
+  }
+  .wf-note b { color: var(--ink-soft); font-weight: 600; }
+
+  /* 4-step strip */
+  .wf-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-top: 4px;
+  }
+  .wf-step {
+    background: #FCFCFC; border: 1px solid #E0E0E0;
+    border-radius: 12px; padding: 14px 13px 12px;
+  }
+  .wf-step-no {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+    color: #9E9E9E; margin-bottom: 7px;
+  }
+  .wf-step-name { font-size: 13px; font-weight: 700; color: #424242; margin-bottom: 9px; }
+  .wf-step .screen { min-height: 158px; gap: 7px; border-radius: 10px; padding: 10px 9px; }
+  .wf-step-desc {
+    font-size: 11.5px; color: var(--ink-faint);
+    line-height: 1.65; margin-top: 10px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero-cards, .cause-grid, .prin-grid, .choice-grid,
+    .metric-grid, .risk-grid, .phase-grid,
+    .wf-grid { grid-template-columns: 1fr; }
+    .wf-strip { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 40px 0 34px; }
+    .wrap { padding: 0 20px 56px; }
+    .hero-inner { padding: 0 20px; }
+  }
+  @media (max-width: 720px) {
+    .sec-en { display: none; }
+    .sec-title { font-size: 19px; }
+    .sec-title span { display: block; margin-left: 0; margin-top: 4px; }
+  }
+  @media (max-width: 560px) {
+    .wf-strip { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Guest Journey Design</div>
+    <h1>开店分流与<em>承接方案</em></h1>
+    <p class="hero-lead">
+      一家服务出色的门店，不会站在门口等顾客自己找路。顾客一进门，先有人迎、再有人问需要什么、
+      然后被带到合适的位子、全程有人照应、临走还惦记着下次。
+      <b>我们的新用户，此刻正站在门口没人招呼</b>——他明明是被 <b>RTS「获客」</b>或 <b>RTP「小店」</b>吸引进来的，
+      却被直接领进了 <b>RTB「首页」</b>的房间；而他要找的东西，就在底部 TAB 的第 4、第 5 个按钮里。
+      本方案要做的，就是把这套接待动线补上。
+    </p>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">主战场 · 待解决</div>
+        <div class="hc-value num">320 → 168</div>
+        <div class="hc-note">开店·登录完成 → 开店·进首页，流失 152 人 / 47.5%</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">方案主线</div>
+        <div class="hc-value">分流 · 承接 · 转化</div>
+        <div class="hc-note">先问需再引路；先服务好目标版块，再谈连带推荐</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">衡量目标</div>
+        <div class="hc-value">留存与订阅</div>
+        <div class="hc-note">次日留存 / 7 日留存 / 订阅率，基准值见第 07 章（假设待替换）</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 01 ============ -->
+  <section id="problem">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">问题的另一面<span>152 人流失里，有一条还没被算进去的成因</span></h2>
+      <span class="sec-en">Problem Restated</span>
+    </div>
+
+    <p class="sec-lead">
+      《转化漏斗与增长诊断》已经为「开店·登录完成 320 → 进首页 168」这一段给出三条归因：
+      开店流程中断后难以续上、开店后能得到什么不明确、登录的人未必是决策的人。
+      这三条侧重不同——<b>流程体验、价值认知与角色错位</b>。
+      但还有一条成因，此前没有被单独提出来：<b>用户想去的房间，和我们领他进的房间，不是同一间。</b>
+    </p>
+
+    <div class="cause-grid">
+      <div class="cause is-old">
+        <div class="cause-top"><span class="cause-name">已有归因 · 三条</span></div>
+        <div class="cause-sub">共性：开店流程本身</div>
+        <ul class="list">
+          <li>开店流程中断后难以续上，多数不会回来补完</li>
+          <li>开店之后能得到什么不明确，缺少走完的理由</li>
+          <li>登录的人未必是决策的人</li>
+        </ul>
+        <div class="note sage" style="margin-top:14px;">
+          这三条都落在<b>开店流程本身</b>：把流程门槛降下来、把开完之后的价值说清楚，属于「免客服」链路。
+        </div>
+      </div>
+
+      <div class="cause is-new">
+        <div class="cause-top"><span class="cause-name">本次新增</span></div>
+        <div class="cause-sub">共性：版块错配</div>
+        <ul class="list">
+          <li>用户是被 <b>RTS</b>（用户侧名称<b>「获客」</b>）或 <b>RTP</b>（用户侧名称<b>「小店」</b>）的卖点吸引，才下载注册并开始开店</li>
+          <li>但开店完成后<b>一律落到 RTB</b>（用户侧就是 APP <b>「首页」</b>，也是 APP 的主体），并只在首页上做用户引导</li>
+          <li>RTS 与 RTP <b>本来就是底部 TAB 的第 5 个和第 4 个按钮</b>（共 5 个：首页、客户、AI助手、小店、获客）——<span class="em">用户并非到不了，而是没人告诉他要去、也没人带他过去</span></li>
+          <li>对一个刚进店、还分不清方向的新用户，最右侧这两个 TAB 很难被主动发现；操作与使用就此中止</li>
+          <li>中止后没有第二次机会，最终表现为这一段流失</li>
+        </ul>
+        <div class="note" style="margin-top:14px;">
+          这条指向完全不同的解法：<b>先分流，再引导</b>。降门槛解决不了它——门再宽，走错房间还是要退出来。
+          好在解法很<b>轻</b>：不需要新建任何入口，只需把落点改对、把人带过去、把目标 TAB 高亮。
+        </div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h4>为什么这条成因站得住</h4>
+      <ul>
+        <li>销售在推广时，<b>并不是只用 RTB 的说法打动门店</b>。门店回访已经显示：7 家中有 <b>4 家</b>主动说出的诉求指向<b>拓客 / 引流</b>，其中 <b>2 家</b>明确表示在等销售提到的「新版 RTS 拓客功能」上线后再用。</li>
+        <li>既然「拓客」能成为被说服下单的理由，那么它同样能成为<b>下载注册的理由</b>——这部分用户带着 RTS 的预期进来，却在 RTB（首页）里被引导，预期与所见不一致。</li>
+        <li>RTP 一侧同理可推导：以「绑定供应商卖货」为卖点进来的用户，同样不会在首页的引导里找到他要的东西。</li>
+        <li>因此这条成因不需要额外假设——<b>它只是把已经在回访中被验证的「拉力来自赚钱类功能」，向前推到了注册与开店这一步</b>。</li>
+        <li>一个旁证：RTS 与 RTP 分别位于底部 TAB 的第 5 位和第 4 位，<b>是新用户视线最不容易扫到的位置</b>；而 RTB 是 APP 主体、默认落点。这个结构本身就在放大错配。</li>
+      </ul>
+    </div>
+
+    <div class="note amber" style="margin-top:16px;">
+      <b>归因边界：</b>版块错配<b>不是</b>这 152 人流失的全部原因，它与已有三条<b>并行存在</b>。
+      本方案只负责其中这一条，不替代降门槛的工作。
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section id="analogy">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">门店类比<span>一次成功的接待，长什么样</span></h2>
+      <span class="sec-en">The Service Analogy</span>
+    </div>
+
+    <p class="sec-lead">
+      脱下产品视角，用一家服务出色的门店来看这件事。顾客进门到成为老客，中间有七个动作，
+      每一步都在解决「他现在不确定」的那件事。<b>产品要补的，就是把这七步翻译成软件里的动作。</b>
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">门店接待动线</th>
+            <th style="width:230px;">顾客此刻的心里话</th>
+            <th style="width:250px;">对应产品动线</th>
+            <th>现状</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 01</span>迎宾</td>
+            <td>「我进来了，有人吗？」</td>
+            <td>开店完成后的<b>主动问需</b>，不让用户自己找路</td>
+            <td><span class="tag t-gap">缺失</span>　开店完成后直接落到 RTB（首页）</td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 02</span>问需</td>
+            <td>「我是来干这个的，你们能帮上吗？」</td>
+            <td><b>分流</b>：确认真实意图，而不是替他决定</td>
+            <td><span class="tag t-gap">缺失</span>　一律按 RTB 引导</td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 03</span>引座</td>
+            <td>「那我去哪儿坐？」</td>
+            <td>把人<b>带到目标版块</b>（跳转到对应 TAB 并高亮），而不是留在首页</td>
+            <td><span class="tag t-gap">缺失</span>　RTS / RTP 虽是底部 TAB 第 5 / 第 4 个，但无引导指路</td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 04</span>服务中</td>
+            <td>「接下来做什么？有人教我吗？」</td>
+            <td><b>承接</b>：版块内新手引导 + 完成第一个价值动作</td>
+            <td><span class="tag t-amber">不齐</span>　RTB 较完整；RTP 有指引页；<b>RTS 无引导</b></td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 05</span>连带推荐</td>
+            <td>「这个好像也不错，但我先把眼前的事办完。」</td>
+            <td><b>交叉转化</b>：先服务好当下需求，再引到其他版块</td>
+            <td><span class="tag t-gap">缺失</span>　无时机与频次设计</td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 06</span>办卡</td>
+            <td>「值不值？下次还来吗？」</td>
+            <td><b>订阅转化</b>与黏性</td>
+            <td><span class="tag t-amber">已有</span>　订阅链路存在，但价值确认不足</td>
+          </tr>
+          <tr>
+            <td class="c-name"><span class="idx">STEP 07</span>回访</td>
+            <td>「他们还记得我吗？」</td>
+            <td><b>留存运营</b>与召回</td>
+            <td><span class="tag t-amber">待补</span>　本方案只给方向</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-note">
+      <b>术语对照：</b>RTB 即 APP「首页」（APP 主体）；RTS 即「获客」（底部 TAB 第 5 个）；RTP 即「小店」（底部 TAB 第 4 个）。
+      底部共 5 个 TAB：首页、客户、AI助手、小店、获客。以上为内部代号，用户侧看不到 RTB / RTS / RTP 这类称呼。
+      <br>现状列中「缺失 / 不齐」的判断依据：RTB 已有较完整新手引导；RTP 首页有详细新手指引页（可点击进入），首次进入 RTP 也会引导查看；RTS 目前没有新手引导，且「发布活动」在未配置价目表时无法完成。
+    </div>
+
+    <div class="prin-grid">
+      <div class="prin">
+        <div class="prin-no">R1</div>
+        <div class="prin-name">先问需，再引路</div>
+        <div class="prin-desc">不预设用户要什么。<b>让他自己说</b>——这既是分流的依据，也是「被服务感」的第一步。</div>
+      </div>
+      <div class="prin">
+        <div class="prin-no">R2</div>
+        <div class="prin-name">先服务好目标版块</div>
+        <div class="prin-desc">转化必须建立在<b>第一次正反馈之后</b>。顾客还没坐下就推销别的，只会让人扭头走。</div>
+      </div>
+      <div class="prin">
+        <div class="prin-no">R3</div>
+        <div class="prin-name">全程有人跟</div>
+        <div class="prin-desc">每一步都要给出<b>明确的下一步</b>和<b>即时反馈</b>，不让用户停在「然后呢」。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section id="triage">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">分流 · 迎宾与问需<span>把「你今天是来做什么的」问清楚</span></h2>
+      <span class="sec-en">Triage</span>
+    </div>
+
+    <p class="sec-lead">
+      分流的动作要发生在<b>用户落到首页之前</b>，而不是进了首页以后再补救——
+      一旦用户已经在 RTB 里看到一排与预期无关的功能，这次接待就已经失败了。
+    </p>
+
+    <div class="card">
+      <div class="card-title">版块与底部 TAB 的对应关系<small>分流选项必须说用户听得懂的名字</small></div>
+      <p class="body">
+        RTB / RTS / RTP 是项目组内部叫法，<b>用户在界面上看不到这三个词</b>。分流页、引导页与所有用户可见文案，
+        一律使用真实名称；三个版块中，有两个本身就是底部 TAB：
+      </p>
+      <div class="tbl-wrap" style="border:none; border-radius:0; margin-top:14px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px;">内部代号</th>
+              <th style="width:150px;">用户看到的名称</th>
+              <th style="width:190px;">在 APP 中的位置</th>
+              <th>分流选项文案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">RTS</td>
+              <td class="c-name" style="font-size:15px;">获客</td>
+              <td>底部 TAB 第 <b>5</b> 个</td>
+              <td>想拉新客的老板</td>
+            </tr>
+            <tr>
+              <td class="c-key">RTP</td>
+              <td class="c-name" style="font-size:15px;">小店</td>
+              <td>底部 TAB 第 <b>4</b> 个</td>
+              <td>想找好货的老板</td>
+            </tr>
+            <tr>
+              <td class="c-key">RTB</td>
+              <td class="c-name" style="font-size:15px;">首页</td>
+              <td>APP 主体，底部 TAB 第 <b>1</b> 个</td>
+              <td>先把店管起来的老板</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note">
+        底部 TAB 共 5 个，依次为：<b>首页、客户、AI助手、小店、获客</b>。「客户」与「AI 助手」不在本方案范围内。
+      </div>
+      <div class="note amber" style="margin-top:14px;">
+        <b>这个结构本身就放大了错配：</b>获客与小店分别是第 5、第 4 个 TAB，
+        是新用户视线最不容易扫到的位置；而首页是默认落点。用户不是到不了，是没人指给他看。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">触发时机<small>开店完成，即将落到首页</small></div>
+      <p class="body">
+        用户走完开店流程、提交完成，在落到首页的<b>第一步</b>插入一次轻量问需。
+        这是用户注意力最集中的时点，也是<b>唯一一次能在「他还没看到首页」之前问清意图</b>的机会——
+        一旦落到首页，这次接待的基调就已经定下，再想纠正就要用户自己付出成本。
+      </p>
+      <div class="note sage" style="margin-top:14px;">
+        <b>为什么不用弹窗强制：</b>这一环本来就有「流程中断」「登录者非决策人」等门槛问题。
+        分流页必须<b>轻、可跳过</b>，不能成为新的流失点。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">一次三选一<small>用户听得懂的名字 + 人话画像 + 一句预期价值</small></div>
+      <p class="body">
+        问句用店主的语言，不用产品术语。用户选完之后，系统<b>直接把他跳转到对应 TAB 并高亮该 TAB</b>，
+        让「我在哪、该去哪儿」一次说清。
+      </p>
+
+      <div class="choice-grid" style="margin-top:16px;">
+        <div class="choice c-rts">
+          <div class="choice-code">获客<small>底部 TAB · 会带你过去</small></div>
+          <div class="choice-persona">想拉新客的老板</div>
+          <div class="choice-q">「店里客人不够，得想办法让人知道我这儿。」</div>
+          <div class="choice-value">预期价值：<b>把活动发出去，让附近的人看到</b></div>
+        </div>
+        <div class="choice c-rtp">
+          <div class="choice-code">小店<small>底部 TAB · 会带你过去</small></div>
+          <div class="choice-persona">想找好货的老板</div>
+          <div class="choice-q">「手上没什么好产品，想找靠谱的货源来卖。」</div>
+          <div class="choice-value">预期价值：<b>关联供应商，把货摆上架</b></div>
+        </div>
+        <div class="choice c-rtb">
+          <div class="choice-code">首页<small>留在这一页就行</small></div>
+          <div class="choice-persona">先把店管起来的老板</div>
+          <div class="choice-q">「账乱、卡乱、员工提成算不清，想有个系统管起来。」</div>
+          <div class="choice-value">预期价值：<b>开第一单，把生意记清楚</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">为什么让用户自己选<small>而不是系统自动判定</small></div>
+      <ul class="list">
+        <li><b>现状缺少可靠的判定依据。</b>系统目前没有可用于推断「这个用户是被哪个卖点吸引」的字段，自动判定等于替用户猜——猜错一次，用户就直接流失，且我们不知道他为什么走。</li>
+        <li><b>主动选择本身就是被服务的体验。</b>「请问您今天想做什么」比「我们猜您想做这个」更像一家好门店。</li>
+        <li><b>自选能沉淀出真实的分流分布。</b>三类各占多少，是后续排期与资源配置的一手依据；自动判定只会把这个信息藏进模型里。</li>
+        <li><b>用户比我们更清楚自己的诉求。</b>回访里 4 家主动说出的诉求都是拓客——他们从来不是不知道该要什么，是我们没问。</li>
+      </ul>
+      <div class="note" style="margin-top:14px;">
+        <b>后续可选增强：</b>若将来能拿到来源渠道 / 销售归属等字段，
+        可在自选页面上做<b>预选中</b>（用户仍可改），把双方优势叠加。当前按「不可得」设计。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">兜底与「可改」<small>顾客说「随便看看」，也不能晾着</small></div>
+      <ul class="list">
+        <li><b>不选 / 跳过：</b>落到首页（现有默认路径，不改变风险）。<b>不需要额外造回流入口</b>——获客与小店本来就是底部 TAB，用户随时能点过去；我们要做的是让它们在承接流程里被<b>指出来</b>。</li>
+        <li><b>选错怎么办：</b>不必为「改选」单独设计一个切换面板。底部 TAB 本身就是自由切换的入口——
+            对应门店场景里「顾客随时可以说我想换个位子」。<span class="em">分流只决定「第一次落到哪」</span>，不锁死任何东西。</li>
+        <li><b>偏好可留存：</b>把用户的选择记下来，作为后续<b>推荐优先级与引导顺序</b>的依据（例如优先推荐他会感兴趣的那条交叉转化路径），但不影响他自由使用底部 TAB。</li>
+        <li><b>不重复打扰：</b>同一用户不反复弹分流页；跳过后只做轻提示，不弹窗。</li>
+      </ul>
+      <div class="note sage" style="margin-top:14px;">
+        <b>为什么不做切换面板：</b>版块之间本来就没有墙。多造一个「切换」控件，
+        反而会让用户以为<b>不切换就到不了别的版块</b>，与本方案想传达的「这三块是一套系统」正好相反。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section id="reception">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">承接 · 引座与服务中<span>把人送到位子，还得有人照应</span></h2>
+      <span class="sec-en">Reception</span>
+    </div>
+
+    <p class="sec-lead">
+      分流只是把人领对了门。如果进门之后无人照应，用户照样会走——而且这次流失得更冤：
+      <b>他明明来对了地方。</b>承接环节的目标只有一个：让用户在目标版块里，<b>完成一个他自己认可的价值动作</b>。
+    </p>
+
+    <div class="card">
+      <div class="card-title">三版块承接现状<small>先看清哪间房是空的</small></div>
+      <div class="tbl-wrap" style="border:none; border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px;">目标版块</th>
+              <th style="width:220px;">第一个价值动作</th>
+              <th style="width:220px;">前置条件</th>
+              <th>现状</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">RTB · 首页<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想管店的老板</span></td>
+              <td>开第一单</td>
+              <td>项目 / 价目表、员工与提成的基本配置</td>
+              <td><span class="tag t-ok">较完整</span>　已有较为完整的新手引导流程</td>
+            </tr>
+            <tr>
+              <td class="c-name">RTP · 小店<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想找货的老板</span></td>
+              <td><b>关联第一个供应商</b></td>
+              <td>供应商接入 / 商品上架</td>
+              <td><span class="tag t-ok">已有</span>　首页有详细新手指引页（可点击进入），首次进入也会引导查看</td>
+            </tr>
+            <tr>
+              <td class="c-name">RTS · 获客<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想拉新客的老板</span></td>
+              <td>发布第一个活动</td>
+              <td><b>RTB 价目表中必须有项目或产品</b></td>
+              <td><span class="tag t-gap">存在死结</span>　目前无新手引导；用户会自然点「发布活动」，但未配价目表则发不出去</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">RTS「获客」的死结<small>最该补，也最容易补错</small></div>
+      <p class="body">
+        这是整个方案中最硬的一处矛盾，必须单独说明：
+      </p>
+      <div class="note amber" style="margin-top:12px;">
+        <b>死结链条：</b>发布活动 ← 需要价目表里有项目或产品 ← 价目表只在 RTB「首页」里配置 ←
+        但用户此刻在 RTS「获客」，且<b>对首页本来就没兴趣</b>（他正是因此才被分流到获客的）。
+      </div>
+      <p class="body" style="margin-top:14px;">
+        如果按现有逻辑要求用户切回首页去配价目表，等于<b>把刚领到座位上的顾客，又请回门口重新排队</b>——
+        他大概率不会回来。这正是「版块错配」的第二重伤害：错配不仅让他一开始站错了地方，
+        还会在他终于走到对的地方之后，<b>再把他支回原来那个错的地方</b>。
+      </p>
+      <div class="note sage" style="margin-top:14px;">
+        <b>解法 · 最小化配置：</b>把「配置一个项目」这件事<b>嵌进获客的承接流程里就地完成</b>，
+        而不是要求用户切回首页。用户只需要在引导中建 <b>1 个项目</b>（或产品），即可完成第一个活动的发布。
+        <br><br>
+        心态说明：这是「<b>帮顾客把手续办了</b>」，不是「让顾客自己去别的窗口」。
+        价目表的完整配置仍然留在首页——那属于后续的深化，不该挡在第一个价值动作前面。
+      </div>
+      <div class="note" style="margin-top:12px;">
+        <b>口径边界：</b>最小化配置只解决「发布活动」这一个动作的前置条件，
+        不改变 RTB 中价目表本身的完整逻辑与数据结构，也不替代首页的配置流程。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">承接四步 · 三版块统一模板<small>照着同一套话术结构接待每一位客人</small></div>
+      <p class="body">
+        三版块的承接必须<b>结构一致、只是内容不同</b>。用户从任一版块进入，感受到的接待方式都该是同一套——
+        这也是让 RTS 从「无引导」快速追平 RTB / RTP 的最低成本路径。
+      </p>
+      <ol class="steps" style="margin-top:14px;">
+        <li><b>欢迎与定位。</b>告诉用户「你现在在哪、这里是干什么的、能帮你解决什么」——用他自己的话复述他刚才的选择，让他确认「选对了」。</li>
+        <li><b>完成第一个价值动作。</b>给出这一个动作，且只给一个。<b>获客是发布第一个活动、小店是关联第一个供应商、首页是开第一单</b>。前置条件在流程内就地补齐（含获客的最小化配置）。</li>
+        <li><b>即时反馈与庆祝。</b>动作完成后立刻给出明确结果反馈——对应「服务中随时回应」。让第一次成功<b>被看见</b>，而不是悄无声息地结束。</li>
+        <li><b>下一步指引。</b>明确告诉他「明天该做什么」，并顺带指出<b>底部 TAB 还能去哪儿</b>，把这次成功接续成习惯。</li>
+      </ol>
+      <div class="note sage" style="margin-top:14px;">
+        <b>与 R3 的对应：</b>第 03、04 步就是「全程有人跟」的落点。
+        用户每一次做完动作都要有回应，「然后呢」这个问题必须在界面上被回答。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 分流页方案示意 ============ -->
+  <section id="wireframe">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">分流页方案示意<span>单色线框 · 只表达结构与信息层级</span></h2>
+      <span class="sec-en">Wireframes</span>
+    </div>
+
+    <p class="sec-lead">
+      以下为<b>灰阶线框示意</b>，用于说清分流与承接的<b>信息层级和动线</b>，<b>不是视觉稿</b>——
+      配色、图标、插画与动效以最终设计稿为准。手机框内的文字即为建议文案，
+      <b>一律使用用户视角的真实名称（首页 / 小店 / 获客）</b>，供对齐口径使用。
+    </p>
+
+    <div class="wf-grid">
+      <!-- W1 -->
+      <div class="wf">
+        <div class="wf-cap">① 分流页主态 · 三选一</div>
+        <div class="wf-sub">开店完成后的第一步。问句用店主的语言，每个选项都交代「什么人 + 能得到什么」。</div>
+        <div class="wf-stage">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="screen">
+              <div class="scr-top"><span>开店完成</span><span>1 / 1</span></div>
+              <div class="scr-h">今天最想先解决哪件事？</div>
+              <div class="scr-p">选一个，我们直接带你过去</div>
+
+              <div class="m-card">
+                <div class="m-code">获客<span>会带你过去</span></div>
+                <div class="m-persona">想拉新客的老板</div>
+                <div class="m-val">把活动发出去，让附近的人看到</div>
+              </div>
+              <div class="m-card">
+                <div class="m-code">小店<span>会带你过去</span></div>
+                <div class="m-persona">想找好货的老板</div>
+                <div class="m-val">关联供应商，把货摆上架</div>
+              </div>
+              <div class="m-card">
+                <div class="m-code">首页<span>就在这一页</span></div>
+                <div class="m-persona">先把店管起来的老板</div>
+                <div class="m-val">开第一单，把生意记清楚</div>
+              </div>
+
+              <div class="m-btn ghost" style="margin-top:auto;">先随便看看</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">
+          <b>设计要点：</b>三张卡<b>平权、无默认高亮</b>，避免诱导；「先随便看看」等权重可见。
+          选项名用<b>「获客 / 小店 / 首页」</b>，绝不出现代号。
+        </div>
+      </div>
+
+      <!-- W2 -->
+      <div class="wf">
+        <div class="wf-cap">② 兜底态 · 跳过或未选择</div>
+        <div class="wf-sub">跳过时落到首页（现有默认路径）。获客与小店本来就是底部 TAB，不需要额外造入口。</div>
+        <div class="wf-stage">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="screen">
+              <div class="scr-top"><span>首页</span><span>跳过分流</span></div>
+
+              <div class="m-sk tall"></div>
+              <div class="m-sk w70"></div>
+              <div class="m-sk w100"></div>
+              <div class="m-sk w50"></div>
+
+              <div class="m-tabbar-hint">想去哪儿就点哪个</div>
+              <div class="m-tabbar">
+                <div class="m-tab-item on"><span class="ti"></span>首页</div>
+                <div class="m-tab-item"><span class="ti"></span>客户</div>
+                <div class="m-tab-item"><span class="ti"></span>AI助手</div>
+                <div class="m-tab-item"><span class="ti"></span>小店</div>
+                <div class="m-tab-item"><span class="ti"></span>获客</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">
+          <b>设计要点：</b>跳过<b>不额外加门槛</b>，仍能自由使用底部 TAB。此处只需轻提示一次，
+          不做常驻「回流入口」控件——TAB 本身就在，重复造入口反而显得版块之间是隔开的。
+        </div>
+      </div>
+
+      <!-- W3 -->
+      <div class="wf">
+        <div class="wf-cap">③ 选中后落地 · 跳转并高亮目标 TAB</div>
+        <div class="wf-sub">选中即跳转到对应 TAB，并高亮该 TAB。落地先复述用户的选择让他确认「选对了」，然后只给一个动作。</div>
+        <div class="wf-stage">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="screen">
+              <div class="scr-top"><span>获客</span><span>已为你跳转</span></div>
+
+              <div class="m-banner">你来对地方了 —— 这里是帮你拉新客的</div>
+
+              <div class="scr-h">第一步：发布你的第一个活动</div>
+              <div class="m-card">
+                <div class="m-persona">还没有可选的价目</div>
+                <div class="m-val">没关系，就在这儿建一个，不用切回首页</div>
+              </div>
+              <div class="m-btn">发布第一个活动</div>
+
+              <div class="m-tabbar">
+                <div class="m-tab-item"><span class="ti"></span>首页</div>
+                <div class="m-tab-item"><span class="ti"></span>客户</div>
+                <div class="m-tab-item"><span class="ti"></span>AI助手</div>
+                <div class="m-tab-item"><span class="ti"></span>小店</div>
+                <div class="m-tab-item on"><span class="ti"></span>获客</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">
+          <b>设计要点：</b>高亮目标 TAB，让用户<b>建立「这个功能住在哪个 TAB」的认知</b>——
+          这是他自己日后找回功能的前提。定位文案复述他的选择，不复述代号。
+        </div>
+      </div>
+
+      <!-- W4 -->
+      <div class="wf">
+        <div class="wf-cap">④ 最小化配置 · 就地建项目</div>
+        <div class="wf-sub">发布活动需要价目表里有项目，而价目表在首页。这一步把手续就地办完，不要求用户切回首页。</div>
+        <div class="wf-stage">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="screen">
+              <div class="scr-top"><span>发布活动</span><span>1 / 2</span></div>
+
+              <div class="scr-h">先加一个要推的项目</div>
+              <div class="scr-p">发布活动需要至少一个项目，加完就能继续</div>
+
+              <div class="m-card">
+                <div class="m-code">项目名称</div>
+                <div class="m-sk w70" style="margin-top:6px;"></div>
+              </div>
+              <div class="m-card">
+                <div class="m-code">价格</div>
+                <div class="m-sk w50" style="margin-top:6px;"></div>
+              </div>
+
+              <div class="m-btn" style="margin-top:auto;">添加并继续发布</div>
+              <div class="m-tabbar-hint">完整价目表之后可在「首页」慢慢配</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">
+          <b>设计要点：</b>只收<b>最少必要字段</b>（名称 + 价格），其余留到首页深化；
+          文案明确告诉用户<b>「不用切回首页」</b>，把这处最容易流失的地方说清楚。
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">⑤ 承接四步模板<small>三版块共用同一套结构，只是内容不同</small></div>
+      <div class="wf-strip">
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 01</div>
+          <div class="wf-step-name">欢迎与定位</div>
+          <div class="screen">
+            <div class="m-banner">这里是「获客」<br>帮你拉新客的</div>
+            <div class="m-sk w70"></div>
+            <div class="m-sk w100"></div>
+            <div class="m-tabbar">
+              <div class="m-tab-item"><span class="ti"></span>首页</div>
+              <div class="m-tab-item"><span class="ti"></span>客户</div>
+              <div class="m-tab-item on"><span class="ti"></span>获客</div>
+            </div>
+          </div>
+          <div class="wf-step-desc">复述他的选择并高亮所在 TAB，让人确认「选对了、也知道自己在哪」。</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 02</div>
+          <div class="wf-step-name">第一个价值动作</div>
+          <div class="screen">
+            <div class="scr-p">只给一个动作</div>
+            <div class="m-sk tall"></div>
+            <div class="m-btn">发布第一个活动</div>
+          </div>
+          <div class="wf-step-desc">前置条件在流程内就地补齐（含获客侧的最小化配置）。</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 03</div>
+          <div class="wf-step-name">即时反馈与庆祝</div>
+          <div class="screen">
+            <div class="m-toast">活动已发布<small>附近的人现在可以看到了</small></div>
+            <div class="m-sk w100"></div>
+            <div class="m-sk w50"></div>
+          </div>
+          <div class="wf-step-desc">让第一次成功被看见，而不是悄无声息地结束。</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 04</div>
+          <div class="wf-step-name">下一步指引</div>
+          <div class="screen">
+            <div class="scr-p">明天可以做</div>
+            <div class="m-card">
+              <div class="m-persona">看看谁看了你的活动</div>
+            </div>
+            <div class="m-tabbar">
+              <div class="m-tab-item"><span class="ti"></span>首页</div>
+              <div class="m-tab-item"><span class="ti"></span>客户</div>
+              <div class="m-tab-item on"><span class="ti"></span>获客</div>
+            </div>
+          </div>
+          <div class="wf-step-desc">明确告诉他明天做什么，并顺带指出底部 TAB 还能去哪儿。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note sage" style="margin-top:16px;">
+      <b>关于线框图的范围：</b>以上五张只覆盖<b>分流与承接</b>这两段动线，不含视觉稿、交互动效与异常态。
+      第 06 章的交叉转化（连带推荐）时机与频控，待承接四步跑通后再出对应的入口示意。
+    </div>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section id="conversion">
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2 class="sec-title">转化 · 连带推荐<span>先服务好，再顺带一句</span></h2>
+      <span class="sec-en">Cross-sell</span>
+    </div>
+
+    <p class="sec-lead">
+      这是「让用户完全理解并使用整个系统、形成黏性」的关键一步，也是最容易做坏的一步。
+      门店里成功的连带推荐，从来不是顾客一进门就推，而是<b>在当下需求被满足之后</b>，顺着需求自然带出来的一句。
+    </p>
+
+    <div class="card">
+      <div class="card-title">时机设计<small>什么时候可以开口</small></div>
+      <ul class="list">
+        <li><b>时机 A · 第一个价值动作完成的那一刻。</b>这是意愿最强、注意力最集中的时刻，也是「顺带一句」最自然的落点（紧接承接四步的第 03 步）。</li>
+        <li><b>时机 B · 第一个结果出现的那一刻。</b>活动带来第一个到店客、核销带来第一个新会员、接上第一个供应商——结果出现时，用户才会真正在意「接下来呢」。</li>
+        <li><b>底线约束 ·</b>新用户首次进入后的前 N 分钟内，<b>不弹任何跨版块推荐</b>。顾客刚坐下就推销，只会让人扭头走（对应 R2）。</li>
+        <li><b>频次约束 ·</b>一次只推<b>一个</b>方向；推荐过且被忽略的，进入冷却期，不重复打扰。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">六条转化路径<small>每条都要有「为什么这时该推」的理由</small></div>
+      <div class="tbl-wrap" style="border:none; border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:130px;">路径</th>
+              <th style="width:230px;">触发点</th>
+              <th style="width:250px;">用户此时的心理</th>
+              <th>推荐话术方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="route-from">从 RTS「获客」</div><div class="route-arrow">→ RTB「首页」</div></td>
+              <td>活动带来第一个到店 / 报名用户</td>
+              <td>「人来了，可我该怎么接住？怎么记下来？」</td>
+              <td>新客要沉淀——顺势引导<b>开单并建档</b>，把这次到店变成门店的资产</td>
+            </tr>
+            <tr>
+              <td><div class="route-from">从 RTS「获客」</div><div class="route-arrow">→ RTP「小店」</div></td>
+              <td>发布活动时选择「活动内容 / 商品」</td>
+              <td>「活动得拿出点东西，我手上有什么？」</td>
+              <td>活动需要货支撑——引导<b>关联供应商或上架商品</b>，让活动有东西可卖</td>
+            </tr>
+            <tr>
+              <td><div class="route-from">从 RTP「小店」</div><div class="route-arrow">→ RTB「首页」</div></td>
+              <td>第一笔分销 / 带货成交</td>
+              <td>「货卖出去了，账和会员得记下来。」</td>
+              <td>成交要留痕——引导<b>开单与会员建档</b>，把交易变成可复购的客户</td>
+            </tr>
+            <tr>
+              <td><div class="route-from">从 RTP「小店」</div><div class="route-arrow">→ RTS「获客」</div></td>
+              <td>供应商 / 商品已就位，但无人问津</td>
+              <td>「有货了，可是没人知道。」</td>
+              <td>有货要有人买——引导<b>发活动把货推出去</b>，把货源转成客流</td>
+            </tr>
+            <tr>
+              <td><div class="route-from">从 RTB「首页」</div><div class="route-arrow">→ RTS「获客」</div></td>
+              <td>完成第一单之后</td>
+              <td>「店管起来了，但新客从哪来？」</td>
+              <td><b>回访中最强的一条需求</b>：4 家门店主动诉求都是拓客——引导用<b>活动拉新</b></td>
+            </tr>
+            <tr>
+              <td><div class="route-from">从 RTB「首页」</div><div class="route-arrow">→ RTP「小店」</div></td>
+              <td>价目表配置完成之后</td>
+              <td>「项目有了，产品这块能不能也补上？」</td>
+              <td>有项目可带货——引导<b>找货源或把自有产品分销出去</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h4>路径背后的统一逻辑</h4>
+      <ul>
+        <li>六条路径都在回答<b>同一个句式</b>：「你刚做成了这件事，接下来会缺另一件事」——
+            推荐不是加功能，是<b>补上他自己马上会遇到的缺口</b>。</li>
+        <li>因此<b>每条路径都必须在目标版块真的产生了结果之后才触发</b>，否则这句话就是硬推销，用户感受不到「缺」。</li>
+        <li>RTS「获客」→ RTP「小店」、RTP「小店」→ RTS「获客」这两条是<b>供需互推</b>：有客的缺货、有货的缺客，是三类用户里最容易被说服的一对。</li>
+        <li>RTB「首页」→ RTS「获客」的优先级最高——它直接对应回访中已被验证的<b>最强需求</b>，也是最可能把「已购未开单」门店重新激活的一条路径。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section id="metrics">
+    <div class="sec-head">
+      <span class="sec-no">07</span>
+      <h2 class="sec-title">指标体系<span>什么样的接待，算成功</span></h2>
+      <span class="sec-en">Metrics</span>
+    </div>
+
+    <p class="sec-lead">
+      接待有没有做好，不能只看「有没有分流」——那只证明动作发生了。
+      要一路看到<b>用户有没有被服务到位</b>，最终落到留存与订阅。
+    </p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="metric-lv">L1 · 分流是否发生</div>
+        <div class="metric-name">迎宾与问需</div>
+        <ul>
+          <li>分流页<b>到达率</b>（开店完成用户中真正看到分流页的比例）</li>
+          <li>分流页<b>选择率 / 跳过率</b></li>
+          <li>三类选择的<b>分布占比</b>——直接反映用户真实诉求结构</li>
+          <li>选择后<b>成功进入目标版块</b>的比例</li>
+        </ul>
+      </div>
+      <div class="metric">
+        <div class="metric-lv">L2 · 承接是否有效</div>
+        <div class="metric-name">引座与服务中</div>
+        <ul>
+          <li>目标版块<b>第一个价值动作完成率</b>（核心指标）</li>
+          <li>从进入版块到完成动作的<b>耗时</b></li>
+          <li><b>次日留存 / 7 日留存</b>（按分流后的三类用户分别看）</li>
+          <li>承接流程<b>各步的跳出位置</b>——看接待断在哪一步</li>
+        </ul>
+      </div>
+      <div class="metric">
+        <div class="metric-lv">L3 · 转化是否发生</div>
+        <div class="metric-name">连带推荐</div>
+        <ul>
+          <li>跨版块推荐<b>触达率</b></li>
+          <li>跨版块的<b>首个动作完成率</b>（不只看点击）</li>
+          <li>使用版块数达到 <b>2 个及以上</b>的用户占比</li>
+          <li><b>订阅率</b>——三类用户分别的订阅转化</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">主战场指标<small>与本方案直接对应的那一段</small></div>
+      <p class="body">
+        本方案的主战场是漏斗中的 <b>「开店·登录完成 320 → 开店·进首页 168」</b>，
+        当前流失 <b>152 人 / 47.5%</b>。分流上线后，这一段应拆成两支分别观测：
+        <b>分流组</b>（看到并完成选择的用户）与<b>对照组</b>（按原有路径直接进 RTB 的用户）。
+      </p>
+      <div class="note sage" style="margin-top:14px;">
+        <b>为什么必须拆组：</b>版块错配只解释这 152 人中的一部分。
+        不拆组就无法判断降幅是分流带来的，还是同期降门槛改动带来的。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">目标基准值<small>待用真实数据替换</small></div>
+      <span class="assume-badge">以下均为行业经验参考区间 · 非剑琅联盟实测值 · 标注为假设</span>
+      <div class="tbl-wrap" style="border:none; border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:290px;">指标</th>
+              <th style="width:170px;">参考区间（假设）</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">目标版块第一个价值动作完成率</td>
+              <td class="num">50% – 60%</td>
+              <td>承接是否有效的<strong>第一指标</strong>。低于此区间说明接待没做到位，应先补承接而非推转化</td>
+            </tr>
+            <tr>
+              <td class="c-key">次日留存（新注册口径）</td>
+              <td class="num">35% – 45%</td>
+              <td>衡量「第二天还愿意回来」，直接对应承接第 04 步「下一步指引」是否有效</td>
+            </tr>
+            <tr>
+              <td class="c-key">7 日留存</td>
+              <td class="num">20% – 30%</td>
+              <td>衡量是否形成使用习惯；分流与承接同时生效才可能进入此区间</td>
+            </tr>
+            <tr>
+              <td class="c-key">跨版块转化率（使用 ≥ 2 个版块）</td>
+              <td class="num">15% – 25%</td>
+              <td>连带推荐是否自然、是否被接受的直接体现</td>
+            </tr>
+            <tr>
+              <td class="c-key">订阅率</td>
+              <td class="num">8% – 12%</td>
+              <td>当前漏斗整体注册→订阅约 <strong>5.6%</strong>；本方案期望通过提升使用深度带动订阅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note amber" style="margin-top:14px;">
+        <b>使用说明：</b>上表数字为行业经验参考区间，<b>不是剑琅联盟的实测值与承诺值</b>，
+        仅用于设定初始目标与判断量级。拿到各指标的真实现状值后，<b>必须整表替换</b>。
+      </div>
+    </div>
+
+    <div class="finding">
+      <h4>怎么证明这个方案真的有效 · 反向证伪</h4>
+      <ul>
+        <li><b>如果方案有效：</b>分流组中 RTS / RTP 两类用户的<b>目标版块第一个价值动作完成率</b>，应显著高于对照组中同类用户的水平（对照组里这些人只能在 RTB 里被引导）。</li>
+        <li><b>如果方案无效：</b>分流组的完成率与对照组<b>没有显著差异</b>——那就说明版块错配并不是这 152 人流失的主因，本方案的前提被证伪，应转向已有的三条归因去解决。</li>
+        <li>这个证伪条件必须在上线前写死，否则事后总能找到理由说方案有效。</li>
+        <li><b>建议方式：</b>小流量实验，分流组与对照组并行跑够样本量再判断，不做全量上线后拍脑袋比较。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 08 ============ -->
+  <section id="risks">
+    <div class="sec-head">
+      <span class="sec-no">08</span>
+      <h2 class="sec-title">风险与前提<span>先把可能翻车的地方说清楚</span></h2>
+      <span class="sec-en">Risks &amp; Assumptions</span>
+    </div>
+
+    <div class="risk-grid">
+      <div class="risk">
+        <div class="risk-name">用户自选，可能选错</div>
+        <div class="risk-row"><span class="k">风险</span>用户不清楚自己要什么，或按字面理解选错了版块，进去之后依然不匹配。</div>
+        <div class="risk-row"><span class="k">应对</span>选项<b>用店主的话说</b>，不用产品术语；分流只决定第一次落到哪，<b>底部 TAB 始终可自由切换</b>，不锁死；定位步主动复述他的选择让他确认（对应承接第 01 步）。</div>
+      </div>
+
+      <div class="risk">
+        <div class="risk-name">把客人带进了空房间</div>
+        <div class="risk-row"><span class="k">风险</span>RTS「获客」目前<b>没有新手引导</b>、且发布活动存在前置死结。若先上分流而不补承接，等于把用户领进一间没收拾好的房间，流失会比现在更难看。</div>
+        <div class="risk-row"><span class="k">应对</span><b>先补齐承接，再放量分流</b>。获客的引导与最小化配置是本方案的硬前提，不能与分流拆成两件事。</div>
+      </div>
+
+      <div class="risk">
+        <div class="risk-name">连带推荐变成打扰</div>
+        <div class="risk-row"><span class="k">风险</span>过早、过密、过多的跨版块推荐会让用户反感，反而损伤留存。</div>
+        <div class="risk-row"><span class="k">应对</span>时机 A / B 之外不触发；一次只推一个方向；设置频次上限与冷却期；新用户前 N 分钟静默（对应 R2）。</div>
+      </div>
+
+      <div class="risk">
+        <div class="risk-name">分流页本身成为新的流失点</div>
+        <div class="risk-row"><span class="k">风险</span>这一环本来就有「流程中断」「登录者非决策人」等门槛问题，多一步交互就多一分流失。</div>
+        <div class="risk-row"><span class="k">应对</span>分流页<b>轻、可跳过</b>；跳过后落到首页（现有默认路径），不额外加门槛；底部 5 个 TAB 本来就常驻，跨版块没有墙。</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">待确认前提<small>以下为撰写时尚未取得、需业务侧确认的信息</small></div>
+      <p class="body">
+        本方案按<b>策略层</b>撰写，以下信息未纳入本文档，且方案中相关表述均已按「不确定」处理。
+        这些信息确认后，会直接影响第 03、04 章的可执行细节：
+      </p>
+      <div class="note sage" style="margin-top:12px;">
+        <b>已确认（原第 01 条，现已移入正文）：</b>RTB 的入口就是 APP 的<b>首页</b>，也是 APP 的主体；
+        RTS 名为<b>「获客」</b>，入口在底部 TAB 第 <b>5</b> 个按钮；RTP 名为<b>「小店」</b>，位于底部 TAB 第 <b>4</b> 个。
+        底部共 5 个 TAB，依次为：<b>首页、客户、AI助手、小店、获客</b>。详见第 03 章。
+      </div>
+      <ul class="open-list" style="margin-top:14px;">
+        <li><span class="n">01</span><span>RTB「首页」现有新手引导的<b>完整步骤清单</b>（几步、能否跳过、有无完成度）——本方案要求三版块承接结构一致，需要知道对齐的目标长什么样。</span></li>
+        <li><span class="n">02</span><span>RTP「小店」首页新手指引页的<b>具体内容与文案</b>，以及首次进入的引导形式（弹窗 / 高亮 / 浮层）。</span></li>
+        <li><span class="n">03</span><span>RTS「获客」已上线 / 未上线功能范围，以及「发布活动」的<b>字段与校验逻辑</b>——「最小化配置」需要按真实校验规则设计。</span></li>
+        <li><span class="n">04</span><span><b>埋点能力</b>：能否按版块拆分留存，能否埋「分流选择」「第一个价值动作完成」等事件，有无现成字段命名规范。</span></li>
+        <li><span class="n">05</span><span>次日留存、7 日留存、订阅率的<b>现状实测值</b>——用于替换第 07 章的假设区间。</span></li>
+        <li><span class="n">06</span><span>电话调研中「被 RTS 吸引」的<b>原始记录与原话</b>，以及 RTP 侧是否存在对应样本——用于把第 01 章的推论升级为一手证据。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 09 ============ -->
+  <section id="rollout">
+    <div class="sec-head">
+      <span class="sec-no">09</span>
+      <h2 class="sec-title">落地分期<span>优先级与依赖关系</span></h2>
+      <span class="sec-en">Rollout</span>
+    </div>
+
+    <p class="sec-lead">
+      按<b>策略层</b>要求，此处只给优先级、内容与依赖关系，不给具体日期与人力排期。
+    </p>
+
+    <div class="phase-grid">
+      <div class="phase p0">
+        <div class="phase-no">P0 · 必须先做</div>
+        <div class="phase-name">分流入口 + 承接对齐</div>
+        <ul>
+          <li>开店完成后插入<b>分流问需页</b>（轻量、可跳过、可改）</li>
+          <li><b>RTS 补新手引导</b>，结构对齐 RTB / RTP</li>
+          <li>RTS <b>最小化配置</b>：发布活动前就地建项目，解开死结</li>
+          <li>三版块统一<b>承接四步模板</b>与第一个价值动作定义</li>
+        </ul>
+        <div class="phase-dep">
+          <b>依赖：</b>RTS 承接能力必须先补齐，否则分流不可放量（见第 08 章风险 2）
+        </div>
+      </div>
+
+      <div class="phase p1">
+        <div class="phase-no">P1 · 承接见效后</div>
+        <div class="phase-name">交叉转化时机与频控</div>
+        <ul>
+          <li>落地时机 A / B 的触发逻辑</li>
+          <li>六条转化路径按优先级逐步接入</li>
+          <li>频次上限、冷却期、一次只推一个方向的约束</li>
+          <li>优先接入 <b>RTB → RTS</b>（回访验证的最强需求）</li>
+        </ul>
+        <div class="phase-dep">
+          <b>依赖：</b>目标版块第一个价值动作完成率达到参考区间后再开，否则连带推荐缺乏触发基础
+        </div>
+      </div>
+
+      <div class="phase p2">
+        <div class="phase-no">P2 · 长期</div>
+        <div class="phase-name">留存运营与召回</div>
+        <ul>
+          <li>承接第 04 步「下一步指引」的持续化运营</li>
+          <li>对已流失用户按<b>版块偏好</b>做定向召回</li>
+          <li>版块分布数据沉淀，反哺产品排期与资源配置</li>
+        </ul>
+        <div class="phase-dep">
+          <b>依赖：</b>L1 分流分布数据积累完整；召回需与现有销售 / 客服链路配合
+        </div>
+      </div>
+    </div>
+
+    <div class="note sage" style="margin-top:16px;">
+      <b>与既有文档的关系：</b>本文档承接《转化漏斗与增长诊断》的「问题 2」，
+      为其补入一条新成因（版块错配）与对应解法；<b>不替代</b>原有的降门槛工作，
+      也不改变该文档中问题 3 / 问题 4 的结论。RTS 补引导所涉及的研发排期，
+      需并入《RTB 开发推进计划》统一评估。
+    </div>
+  </section>
+
+  <div class="foot">
+    <div><span class="dot"></span>剑琅联盟 · 内部资料</div>
+    <div>开店分流与承接方案 · 2026-10-01</div>
+  </div>
+
+</main>
+
+</body>
+</html>
