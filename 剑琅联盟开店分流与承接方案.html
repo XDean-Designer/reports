@@ -561,12 +561,122 @@
     line-height: 1.65; margin-top: 10px;
   }
 
+  /* ===== 真实截图（现状实拍） ===== */
+  .shot-rail {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .shot { display: flex; flex-direction: column; min-width: 0; }
+  .shot-frame {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 7px;
+    box-shadow: 0 10px 26px rgba(26,61,52,.09);
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .shot:hover .shot-frame {
+    border-color: var(--sage);
+    box-shadow: 0 14px 34px rgba(26,61,52,.17);
+    transform: translateY(-3px);
+  }
+  .shot-screen {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #F5F7F9;
+    aspect-ratio: 1080 / 1848;
+    cursor: zoom-in;
+  }
+  .shot-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .shot-screen::after {
+    content: "点击放大";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 18px 8px 7px;
+    font-size: 10.5px; letter-spacing: 1px; text-align: center; color: #fff;
+    background: linear-gradient(to top, rgba(18,32,27,.66), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .shot:hover .shot-screen::after { opacity: 1; }
+
+  /* 截图内的标注框 */
+  .mk {
+    position: absolute;
+    border: 2px solid #D93A4E;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.88), 0 0 12px rgba(217,58,78,.4);
+    pointer-events: none;
+  }
+  .mk-lb {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #D93A4E; color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: .5px;
+    padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.24);
+  }
+  .mk-lb.is-below { transform: translate(-50%, 0); }
+  .mk-lb.is-left { transform: translate(-100%, -50%); }
+
+  .shot-cap { margin-top: 11px; }
+  .shot-cap-t { font-size: 12.5px; font-weight: 700; color: var(--ink); letter-spacing: .3px; }
+  .shot-cap-d { font-size: 11px; color: var(--ink-faint); line-height: 1.6; margin-top: 4px; }
+  .shot-badge {
+    display: inline-block; margin-top: 7px;
+    font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .shot-badge.is-gap { color: #B3313F; background: #FBEAEC; }
+  .shot-badge.is-ok { color: var(--sage); background: #E7F0EC; }
+
+  /* 截图对照（现状 vs 判断） */
+  .shot-2up {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 18px; margin-top: 18px;
+  }
+  .shot-2up .shot-frame { padding: 8px; }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(14,22,19,.82);
+    backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox[hidden] { display: none !important; }
+  .lightbox-inner { position: relative; max-width: min(430px, 92vw); max-height: 92vh; }
+  .lightbox-inner img {
+    display: block; width: 100%; height: auto; max-height: 86vh;
+    object-fit: contain; border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4); background: #fff;
+  }
+  .lightbox-cap {
+    margin-top: 12px; text-align: center;
+    font-size: 12.5px; letter-spacing: .5px; color: rgba(255,255,255,.82);
+  }
+  .lightbox-close {
+    position: absolute; top: -42px; right: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: none; cursor: pointer;
+    background: rgba(255,255,255,.16); color: #fff;
+    font-size: 19px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,.3); }
+
   /* ===== Responsive ===== */
   @media (max-width: 900px) {
     .hero-cards, .cause-grid, .prin-grid, .choice-grid,
     .metric-grid, .risk-grid, .phase-grid,
     .wf-grid { grid-template-columns: 1fr; }
     .wf-strip { grid-template-columns: repeat(2, 1fr); }
+    .shot-rail { grid-template-columns: repeat(3, 1fr); }
     .hero { padding: 40px 0 34px; }
     .wrap { padding: 0 20px 56px; }
     .hero-inner { padding: 0 20px; }
@@ -575,14 +685,20 @@
     .sec-en { display: none; }
     .sec-title { font-size: 19px; }
     .sec-title span { display: block; margin-left: 0; margin-top: 4px; }
+    .shot-rail { grid-template-columns: repeat(2, 1fr); }
+    .shot-2up { grid-template-columns: 1fr; }
+    .mk-lb { font-size: 9px; padding: 1px 5px; }
   }
   @media (max-width: 560px) {
     .wf-strip { grid-template-columns: 1fr; }
+    .shot-rail { grid-template-columns: 1fr; }
   }
   @media print {
     body { background: #fff; }
     .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     section { break-inside: avoid; }
+    .shot-screen::after { display: none; }
+    .lightbox { display: none !important; }
   }
 </style>
 </head>
@@ -622,7 +738,7 @@
       <div class="hc">
         <div class="hc-label">衡量目标</div>
         <div class="hc-value">留存与订阅</div>
-        <div class="hc-note">次日留存 / 7 日留存 / 订阅率，基准值见第 07 章（假设待替换）</div>
+        <div class="hc-note">次日留存 / 7 日留存 / 订阅率，基准值见第 08 章（假设待替换）</div>
       </div>
     </div>
   </div>
@@ -691,12 +807,131 @@
       <b>归因边界：</b>版块错配<b>不是</b>这 152 人流失的全部原因，它与已有三条<b>并行存在</b>。
       本方案只负责其中这一条，不替代降门槛的工作。
     </div>
+
+    <div class="note sage" style="margin-top:14px;">
+      <b>可以直接核对：</b>第 02 章附上了线上 App 的<b>真实截图</b>，把本章的三条判断
+      （落点错、位置边缘、无人指路）逐张对照出来——不依赖任何假设。
+    </div>
   </section>
 
-  <!-- ============ 02 ============ -->
-  <section id="analogy">
+  <!-- ============ 02 现状实拍 ============ -->
+  <section id="asbuilt">
     <div class="sec-head">
       <span class="sec-no">02</span>
+      <h2 class="sec-title">现状实拍<span>用户今天真正走的，是这样一条动线</span></h2>
+      <span class="sec-en">As-Built</span>
+    </div>
+
+    <p class="sec-lead">
+      第 01 章的判断不是推测。下面 5 张是线上 App 的<b>真实截图</b>，
+      按用户实际会遇到的顺序排列——它们把「版块错配」从一个观点，变成了可以逐张核对的事实。
+      手机框内为原始界面（已裁去系统状态栏），红框为本文档所加标注，<b>点击任意一张可放大</b>。
+    </p>
+
+    <div class="shot-rail">
+      <!-- ① 首页 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="分流承接图/01-首页.jpg" alt="App 首页（RTB）">
+            <div class="mk" style="left:80.2%; top:90.4%; width:19.6%; height:9.4%;"></div>
+            <div class="mk-lb is-left" style="left:78.5%; top:95.1%;">获客 · 第 5 个 TAB</div>
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">① 首页（RTB）</div>
+          <div class="shot-cap-d">开店完成后<b>所有人一律落到这里</b>。APP 主体，功能密集。</div>
+          <span class="shot-badge is-gap">默认落点</span>
+        </div>
+      </div>
+
+      <!-- ② 小店 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="分流承接图/02-小店.jpg" alt="小店页面（RTP）">
+            <div class="mk" style="left:75.5%; top:1.4%; width:23.5%; height:6.2%;"></div>
+            <div class="mk-lb is-left" style="left:73.8%; top:4.5%;">「新手指南」入口</div>
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">② 小店（RTP）</div>
+          <div class="shot-cap-d">右上角有<b>显著的「新手指南」入口</b>，点击即进入引导页。</div>
+          <span class="shot-badge is-ok">已有承接</span>
+        </div>
+      </div>
+
+      <!-- ③ 小店新手指南 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="分流承接图/03-小店新手指南.jpg" alt="小店新手指南引导页">
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">③ 小店 · 新手指南页</div>
+          <div class="shot-cap-d">分步骤、配说明的完整引导页，<b>是一套已经被验证的承接模板</b>。</div>
+          <span class="shot-badge is-ok">可复用</span>
+        </div>
+      </div>
+
+      <!-- ④ 获客 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="分流承接图/04-获客.jpg" alt="获客页面（RTS）">
+            <div class="mk" style="left:80.2%; top:90.4%; width:19.6%; height:9.4%;"></div>
+            <div class="mk-lb is-left" style="left:78.5%; top:95.1%;">用户想看的是这里</div>
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">④ 获客（RTS）</div>
+          <div class="shot-cap-d">以「发布活动」为核心的营销页。<b>没有新手引导</b>，进来靠用户自己猜。</div>
+          <span class="shot-badge is-gap">有入口 · 无承接</span>
+        </div>
+      </div>
+
+      <!-- ⑤ 发布活动空态 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="分流承接图/05-发布活动空态.jpg" alt="发布活动页面的空态">
+            <div class="mk" style="left:6%; top:20%; width:88%; height:45%;"></div>
+            <div class="mk-lb" style="left:50%; top:19%;">空态：无项目可选</div>
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">⑤ 发布活动 · 空态</div>
+          <div class="shot-cap-d">点进「发布活动」后触达的死结现场：<b>价目表未配置，活动发不出去</b>。</div>
+          <span class="shot-badge is-gap">死结现场</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding" style="margin-top:22px;">
+      <h4>这 5 张图说明了什么</h4>
+      <ul>
+        <li><b>① 与 ④ 并排，就是「版块错配」本身。</b>两张图的视觉密度差一眼可见：用户冲着「获客」来，
+            落到的却是「首页」。他要的那个 TAB，在最右边——<b>第 5 个</b>。</li>
+        <li><b>② ③ 与 ④ 对比，说明问题不在「做不出来」。</b>小店已经有一套完整的新手指南页，
+            说明这套承接模式在自家产品里<b>已经被做出来了、也被验证过了</b>；缺的只是把它搬到获客。</li>
+        <li><b>⑤ 是整份方案里最硬的一处证据。</b>「发布活动」点进去是空的——这不是体验粗糙，
+            而是<b>一个必然失败的动线</b>：活动需要项目，项目配在首页，而用户此刻在获客。</li>
+        <li>因此第 01 章的三条判断——<b>落点错、位置边缘、无人指路</b>——在这 5 张图上都可以直接指认，
+            不需要额外假设。</li>
+      </ul>
+    </div>
+
+    <div class="note amber" style="margin-top:16px;">
+      <b>读图提示：</b>红框只标出与本方案直接相关的要素（第 5 个 TAB、新手指南入口、空态区域），
+      不代表界面上只有这些问题；界面的整体视觉与信息架构评价不在本文档范围内。
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section id="analogy">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
       <h2 class="sec-title">门店类比<span>一次成功的接待，长什么样</span></h2>
       <span class="sec-en">The Service Analogy</span>
     </div>
@@ -787,10 +1022,10 @@
     </div>
   </section>
 
-  <!-- ============ 03 ============ -->
+  <!-- ============ 04 ============ -->
   <section id="triage">
     <div class="sec-head">
-      <span class="sec-no">03</span>
+      <span class="sec-no">04</span>
       <h2 class="sec-title">分流 · 迎宾与问需<span>把「你今天是来做什么的」问清楚</span></h2>
       <span class="sec-en">Triage</span>
     </div>
@@ -844,6 +1079,36 @@
       <div class="note amber" style="margin-top:14px;">
         <b>这个结构本身就放大了错配：</b>获客与小店分别是第 5、第 4 个 TAB，
         是新用户视线最不容易扫到的位置；而首页是默认落点。用户不是到不了，是没人指给他看。
+      </div>
+
+      <div class="shot-2up" style="grid-template-columns:172px 1fr; align-items:start; margin-top:18px;">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/01-首页.jpg" alt="App 首页与底部 TAB 位置">
+              <div class="mk" style="left:80.2%; top:90.4%; width:19.6%; height:9.4%;"></div>
+              <div class="mk-lb is-left" style="left:78.5%; top:95.1%;">获客在这里</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">实拍 · 首页底部 TAB</div>
+            <div class="shot-cap-d">获客是第 5 个，贴着屏幕最右侧边缘。</div>
+          </div>
+        </div>
+        <div style="padding-top:4px;">
+          <p class="body">
+            这张实拍解释了为什么「分流」不能只靠界面本身：<b>用户被告知的目标版块，藏在视线最边缘的位置。</b>
+          </p>
+          <ul class="list" style="margin-top:12px;">
+            <li>底部 5 个 TAB 中，「小店」与「获客」排在最右两格，<b>新用户扫视时最不容易停留</b>。</li>
+            <li>而开店完成后，用户<b>默认落在第 1 个 TAB「首页」</b>——一个内容最满、最容易被当成"目的地"的页面。</li>
+            <li>于是形成一个很自然的误会：<b>用户以为首页就是全部</b>，不会再去确认第 5 个 TAB 里有什么。</li>
+          </ul>
+          <div class="note sage" style="margin-top:14px;">
+            所以分流页要做的，不是「把获客做得更显眼」，而是在用户落到首页之前，
+            <b>先告诉他还有别的地方可去，并且替他记下选择</b>——这正是本方案第 06 章示意的那一步。
+          </div>
+        </div>
       </div>
     </div>
 
@@ -919,10 +1184,10 @@
     </div>
   </section>
 
-  <!-- ============ 04 ============ -->
+  <!-- ============ 05 ============ -->
   <section id="reception">
     <div class="sec-head">
-      <span class="sec-no">04</span>
+      <span class="sec-no">05</span>
       <h2 class="sec-title">承接 · 引座与服务中<span>把人送到位子，还得有人照应</span></h2>
       <span class="sec-en">Reception</span>
     </div>
@@ -966,6 +1231,10 @@
           </tbody>
         </table>
       </div>
+      <div class="tbl-note">
+        <b>对照实拍（第 02 章）：</b>图 ②③ 是小店已有的「新手指南」页——分步骤、配说明，是一套完整承接；
+        图 ④ 是获客的现状，页面上没有任何引导入口。<b>差距不在能力，而在有没有把这套模板搬过去。</b>
+      </div>
     </div>
 
     <div class="card">
@@ -996,11 +1265,70 @@
     </div>
 
     <div class="card">
+      <div class="card-title">空态设计主张<small>图 ⑤ 拍到的那个空白页，本身就是承接位</small></div>
+
+      <div class="shot-2up" style="margin-top:6px;">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/05-发布活动空态.jpg" alt="发布活动页面的空态">
+              <div class="mk" style="left:6%; top:20%; width:88%; height:45%;"></div>
+              <div class="mk-lb" style="left:50%; top:19%;">现状：什么都没有</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">现状 · 点进「发布活动」</div>
+            <div class="shot-cap-d">价目表未配置时，这里是一片空白。用户唯一能得到的信号是「我卡住了」。</div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/03-小店新手指南.jpg" alt="小店新手指南页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">参照 · 小店的「新手指南」页</div>
+            <div class="shot-cap-d">同样的「用户还不会用」情境，小店给的是分步骤引导，而不是一个空白页。</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:20px;">
+        这两张图放在一起，问题就清楚了：<b>空态不是「没有数据」，而是一个还没被设计的承接位。</b>
+        用户点进「发布活动」的那一刻，是他整个获客流程里<b>意愿最强、也最容易失望</b>的一刻——
+        我们却给了他一个空白页。
+      </p>
+
+      <div class="note sage" style="margin-top:14px;">
+        <b>主张：空态页不该是终点，而应该是引导的第一步。</b>
+        <ul class="list" style="margin-top:10px;">
+          <li><b>不要只说「暂无」。</b>「暂无可选项目」是一句终止语。应换成<b>「还差一步，就能发布活动」</b>——把空白解释成一个可完成的进度。</li>
+          <li><b>就地给出那一步。</b>空态页面上直接放「添加一个项目」的入口与表单，即前面所说的<b>最小化配置</b>。用户不需要切回首页。</li>
+          <li><b>说清为什么要这一步。</b>一句话交代「活动需要至少一个项目」，让用户理解这不是系统出错，而是发布活动的必要准备。</li>
+          <li><b>补完即接续原动作。</b>项目建好后<b>自动回到发布活动</b>，并保留已填内容，不让用户重新走一遍。</li>
+        </ul>
+      </div>
+
+      <div class="note amber" style="margin-top:12px;">
+        <b>为什么这一条值得单独写：</b>最小化配置解决的是「能力有没有」，空态设计解决的是「用户会不会用」。
+        只有能力、没有空态引导，用户依然会在这一页停住——他只是少了一个「那就现在办吧」的理由。
+      </div>
+    </div>
+
+    <div class="card">
       <div class="card-title">承接四步 · 三版块统一模板<small>照着同一套话术结构接待每一位客人</small></div>
       <p class="body">
-        三版块的承接必须<b>结构一致、只是内容不同</b>。用户从任一版块进入，感受到的接待方式都该是同一套——
-        这也是让 RTS 从「无引导」快速追平 RTB / RTP 的最低成本路径。
+        三版块的承接必须<b>结构一致、只是内容不同</b>。用户从任一版块进入，感受到的接待方式都该是同一套。
       </p>
+      <div class="note sage" style="margin-top:12px;">
+        <b>不必从零设计：</b>小店已经有一套跑通的「新手指南」页（第 02 章图 ③）——
+        分步骤、配说明、可从右上角随时进入。获客需要做的是<b>把同一套模式搬过来、替换内容</b>，
+        而不是重新发明一遍。
+        <br><br>
+        这是让获客从「无引导」快速追平的最低成本路径：<b>模板在自家产品里已经有了，缺的只是移植。</b>
+        同理，首页现有的新手引导也可作为结构参照——三者对齐后，用户从任一版块进入都会得到一致的接待。
+      </div>
       <ol class="steps" style="margin-top:14px;">
         <li><b>欢迎与定位。</b>告诉用户「你现在在哪、这里是干什么的、能帮你解决什么」——用他自己的话复述他刚才的选择，让他确认「选对了」。</li>
         <li><b>完成第一个价值动作。</b>给出这一个动作，且只给一个。<b>获客是发布第一个活动、小店是关联第一个供应商、首页是开第一单</b>。前置条件在流程内就地补齐（含获客的最小化配置）。</li>
@@ -1014,10 +1342,10 @@
     </div>
   </section>
 
-  <!-- ============ 05 分流页方案示意 ============ -->
+  <!-- ============ 06 分流页方案示意 ============ -->
   <section id="wireframe">
     <div class="sec-head">
-      <span class="sec-no">05</span>
+      <span class="sec-no">06</span>
       <h2 class="sec-title">分流页方案示意<span>单色线框 · 只表达结构与信息层级</span></h2>
       <span class="sec-en">Wireframes</span>
     </div>
@@ -1227,14 +1555,14 @@
 
     <div class="note sage" style="margin-top:16px;">
       <b>关于线框图的范围：</b>以上五张只覆盖<b>分流与承接</b>这两段动线，不含视觉稿、交互动效与异常态。
-      第 06 章的交叉转化（连带推荐）时机与频控，待承接四步跑通后再出对应的入口示意。
+      第 07 章的交叉转化（连带推荐）时机与频控，待承接四步跑通后再出对应的入口示意。
     </div>
   </section>
 
-  <!-- ============ 06 ============ -->
+  <!-- ============ 07 ============ -->
   <section id="conversion">
     <div class="sec-head">
-      <span class="sec-no">06</span>
+      <span class="sec-no">07</span>
       <h2 class="sec-title">转化 · 连带推荐<span>先服务好，再顺带一句</span></h2>
       <span class="sec-en">Cross-sell</span>
     </div>
@@ -1320,10 +1648,10 @@
     </div>
   </section>
 
-  <!-- ============ 07 ============ -->
+  <!-- ============ 08 ============ -->
   <section id="metrics">
     <div class="sec-head">
-      <span class="sec-no">07</span>
+      <span class="sec-no">08</span>
       <h2 class="sec-title">指标体系<span>什么样的接待，算成功</span></h2>
       <span class="sec-en">Metrics</span>
     </div>
@@ -1437,10 +1765,10 @@
     </div>
   </section>
 
-  <!-- ============ 08 ============ -->
+  <!-- ============ 09 ============ -->
   <section id="risks">
     <div class="sec-head">
-      <span class="sec-no">08</span>
+      <span class="sec-no">09</span>
       <h2 class="sec-title">风险与前提<span>先把可能翻车的地方说清楚</span></h2>
       <span class="sec-en">Risks &amp; Assumptions</span>
     </div>
@@ -1480,23 +1808,23 @@
       <div class="note sage" style="margin-top:12px;">
         <b>已确认（原第 01 条，现已移入正文）：</b>RTB 的入口就是 APP 的<b>首页</b>，也是 APP 的主体；
         RTS 名为<b>「获客」</b>，入口在底部 TAB 第 <b>5</b> 个按钮；RTP 名为<b>「小店」</b>，位于底部 TAB 第 <b>4</b> 个。
-        底部共 5 个 TAB，依次为：<b>首页、客户、AI助手、小店、获客</b>。详见第 03 章。
+        底部共 5 个 TAB，依次为：<b>首页、客户、AI助手、小店、获客</b>。详见第 04 章。
       </div>
       <ul class="open-list" style="margin-top:14px;">
         <li><span class="n">01</span><span>RTB「首页」现有新手引导的<b>完整步骤清单</b>（几步、能否跳过、有无完成度）——本方案要求三版块承接结构一致，需要知道对齐的目标长什么样。</span></li>
         <li><span class="n">02</span><span>RTP「小店」首页新手指引页的<b>具体内容与文案</b>，以及首次进入的引导形式（弹窗 / 高亮 / 浮层）。</span></li>
         <li><span class="n">03</span><span>RTS「获客」已上线 / 未上线功能范围，以及「发布活动」的<b>字段与校验逻辑</b>——「最小化配置」需要按真实校验规则设计。</span></li>
         <li><span class="n">04</span><span><b>埋点能力</b>：能否按版块拆分留存，能否埋「分流选择」「第一个价值动作完成」等事件，有无现成字段命名规范。</span></li>
-        <li><span class="n">05</span><span>次日留存、7 日留存、订阅率的<b>现状实测值</b>——用于替换第 07 章的假设区间。</span></li>
+        <li><span class="n">05</span><span>次日留存、7 日留存、订阅率的<b>现状实测值</b>——用于替换第 08 章的假设区间。</span></li>
         <li><span class="n">06</span><span>电话调研中「被 RTS 吸引」的<b>原始记录与原话</b>，以及 RTP 侧是否存在对应样本——用于把第 01 章的推论升级为一手证据。</span></li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ 09 ============ -->
+  <!-- ============ 10 ============ -->
   <section id="rollout">
     <div class="sec-head">
-      <span class="sec-no">09</span>
+      <span class="sec-no">10</span>
       <h2 class="sec-title">落地分期<span>优先级与依赖关系</span></h2>
       <span class="sec-en">Rollout</span>
     </div>
@@ -1516,7 +1844,7 @@
           <li>三版块统一<b>承接四步模板</b>与第一个价值动作定义</li>
         </ul>
         <div class="phase-dep">
-          <b>依赖：</b>RTS 承接能力必须先补齐，否则分流不可放量（见第 08 章风险 2）
+          <b>依赖：</b>RTS 承接能力必须先补齐，否则分流不可放量（见第 09 章风险 2）
         </div>
       </div>
 
@@ -1562,6 +1890,62 @@
   </div>
 
 </main>
+
+<!-- 截图放大 -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭">×</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-cap" id="lightbox-cap"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('lightbox');
+  var pic = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-cap');
+  var closeBtn = document.getElementById('lightbox-close');
+  if (!box || !pic || !closeBtn) return;
+
+  function open(src, title) {
+    pic.src = src;
+    pic.alt = title || '';
+    cap.textContent = title || '';
+    box.hidden = false;
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    box.classList.remove('open');
+    box.hidden = true;
+    pic.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.shot-screen').forEach(function (screen) {
+    screen.addEventListener('click', function () {
+      var img = screen.querySelector('img');
+      if (!img) return;
+      var shot = screen.closest('.shot');
+      var t = '', d = '';
+      if (shot) {
+        var tn = shot.querySelector('.shot-cap-t');
+        var dn = shot.querySelector('.shot-cap-d');
+        t = tn ? tn.textContent : '';
+        d = dn ? dn.textContent : '';
+      }
+      open(img.getAttribute('src'), (t || img.alt) + (d ? ' · ' + d : ''));
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) close();
+  });
+})();
+</script>
 
 </body>
 </html>
