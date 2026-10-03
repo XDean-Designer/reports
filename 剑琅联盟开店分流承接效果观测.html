@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 开店分流承接效果观测</title>
+<style>
+  :root {
+    --pine: #1A3D34;
+    --pine-2: #234D42;
+    --sage: #3D6B5C;
+    --sage-bg: #EAF1ED;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --amber: #C48A2A;
+    --amber-bg: #F8F0E0;
+    --red: #A8331F;
+    --red-bg: #FBEAEC;
+    --grey-bg: #F1F4F2;
+    --bg: #F4F6F4;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --line-soft: #E8EEEA;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px 56px; min-width: 0; }
+
+  /* ===== Hero（压缩高度）===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(176, 141, 87, .18), transparent 55%),
+      linear-gradient(145deg, #14352E 0%, #1A3D34 48%, #1F4A3E 100%);
+    padding: 32px 0 28px;
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .brand-mark {
+    width: 36px; height: 36px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 16px; font-weight: 700;
+  }
+  .brand-name { font-size: 15px; letter-spacing: 4px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 9.5px; letter-spacing: 2px; color: rgba(255,255,255,.5); }
+  .kicker {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 2.4px; font-weight: 700;
+    text-transform: uppercase; color: #A8C4B6;
+  }
+  .kicker::before { content: ""; width: 18px; height: 2px; background: var(--sand); }
+  .hero h1 {
+    font-size: clamp(23px, 2.9vw, 30px);
+    font-weight: 700; letter-spacing: 2px; color: #fff;
+    margin-bottom: 20px; line-height: 1.35;
+  }
+  .hero h1 em { font-style: normal; color: #D4C4A0; }
+  .hero-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; }
+  .hc {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 11px; padding: 13px 15px 12px;
+  }
+  .hc-label { font-size: 10px; letter-spacing: 1.4px; color: rgba(255,255,255,.5); text-transform: uppercase; margin-bottom: 6px; }
+  .hc-value { font-size: 18px; font-weight: 700; color: #fff; line-height: 1.25; }
+  .hc-value small { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,.6); margin-left: 2px; }
+  .hc-note { font-size: 11px; color: rgba(255,255,255,.62); line-height: 1.55; margin-top: 5px; }
+
+  /* ===== Notice（一行）===== */
+  .notice-strip {
+    background: var(--sand-bg);
+    border-top: 1px solid #E8DCC4; border-bottom: 1px solid #E8DCC4;
+    color: #6B5426; font-size: 12px; padding: 8px 0;
+  }
+  .notice-strip .wrap { padding-bottom: 0; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .notice-strip .nt {
+    flex: none; font-size: 9.5px; font-weight: 700; letter-spacing: 1.2px;
+    background: var(--sand); color: #fff; border-radius: 3px; padding: 2px 6px;
+  }
+  .notice-strip b { font-weight: 700; color: #4E3C19; }
+
+  /* ===== Tabs ===== */
+  .tabbar {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(244,246,244,.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .tabbar .wrap { padding-bottom: 0; }
+  .tabs { display: flex; gap: 3px; overflow-x: auto; }
+  .tab {
+    appearance: none; border: none; background: none; cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .5px;
+    color: var(--ink-faint); padding: 12px 14px 10px;
+    border-bottom: 2.5px solid transparent; white-space: nowrap;
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--pine-2); }
+  .tab.is-on { color: var(--pine-2); border-bottom-color: var(--sand); }
+  .tab i { font-style: normal; font-size: 9.5px; font-weight: 700; letter-spacing: 1px; color: var(--ink-faint); margin-right: 5px; }
+  .tab.is-on i { color: var(--sand); }
+
+  .tabpanel { display: none; }
+  .tabpanel.is-on { display: block; }
+
+  /* ===== Section ===== */
+  section { margin-top: 22px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px;
+    padding-bottom: 9px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.6px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .sec-title { font-size: 18px; font-weight: 700; letter-spacing: 1px; color: var(--pine-2); }
+  .sec-title span { font-size: 12px; font-weight: 500; color: var(--ink-faint); letter-spacing: .5px; margin-left: 8px; }
+  .sec-en { margin-left: auto; font-size: 11px; letter-spacing: 1.8px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-lead { font-size: 13px; color: var(--ink-soft); line-height: 1.75; max-width: 900px; margin-bottom: 14px; }
+  .sec-lead b { color: var(--ink); }
+
+  /* ===== Card ===== */
+  .card {
+    position: relative;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px 15px; margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 14px; font-weight: 700; letter-spacing: .6px; color: var(--pine-2);
+    padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--line-soft);
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .card-title small { font-size: 11.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .3px; }
+  .card-title .thr-tag {
+    margin-left: auto; font-size: 9.5px; font-weight: 700; letter-spacing: 1.1px;
+    color: #6B5426; background: var(--sand-bg); border: 1px solid #E8DCC4;
+    border-radius: 3px; padding: 2px 6px;
+  }
+  .card-title .calc-tag {
+    margin-left: auto; font-size: 9.5px; font-weight: 700; letter-spacing: 1.1px;
+    color: var(--ink-faint); background: var(--grey-bg); border: 1px solid var(--line);
+    border-radius: 3px; padding: 2px 6px;
+  }
+  .body { font-size: 13px; color: var(--ink-soft); line-height: 1.75; }
+  .body b { color: var(--ink); }
+
+  /* ===== 三档判定 ===== */
+  .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tier { border-radius: 11px; padding: 13px 15px 12px; border: 1px solid; }
+  .tier.t-ok { background: var(--sage-bg); border-color: #C9DCD3; }
+  .tier.t-mid { background: var(--grey-bg); border-color: var(--line); }
+  .tier.t-bad { background: var(--red-bg); border-color: #F0D3D6; }
+  .tier-hd { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+  .tier-ic {
+    width: 20px; height: 20px; flex: none; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff;
+  }
+  .t-ok .tier-ic { background: var(--sage); }
+  .t-mid .tier-ic { background: #A7B2AC; }
+  .t-bad .tier-ic { background: var(--red); }
+  .tier-name { font-size: 13px; font-weight: 700; letter-spacing: .4px; }
+  .t-ok .tier-name { color: #2C5E4C; }
+  .t-mid .tier-name { color: var(--ink-soft); }
+  .t-bad .tier-name { color: var(--red); }
+  .tier-body { font-size: 12px; line-height: 1.65; color: var(--ink-soft); }
+  .tier-body b { color: var(--ink); }
+
+  /* ===== 流程链（条件 → 判定 → 行动）===== */
+  .flow { display: flex; flex-direction: column; gap: 7px; }
+  .flow-row {
+    display: grid; grid-template-columns: 1.35fr 22px 0.85fr 22px 1.2fr;
+    gap: 6px; align-items: center;
+    padding: 9px 11px; border-radius: 9px;
+    background: #FAFBFA; border: 1px solid var(--line-soft);
+  }
+  .flow-row.is-ok { background: rgba(234,241,237,.55); border-color: #C9DCD3; }
+  .flow-row.is-no { background: rgba(251,234,236,.5); border-color: #F0D3D6; }
+  .flow-cond { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .flow-cond b { color: var(--ink); font-weight: 700; }
+  .flow-arrow { text-align: center; color: var(--ink-faint); font-size: 13px; }
+  .flow-verdict { font-size: 12.5px; font-weight: 700; }
+  .is-ok .flow-verdict { color: #2C5E4C; }
+  .is-no .flow-verdict { color: var(--red); }
+  .flow-row:not(.is-ok):not(.is-no) .flow-verdict { color: var(--ink-soft); }
+  .flow-act { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .flow-act b { color: var(--ink); font-weight: 700; }
+
+  /* ===== 规则行（指标目标值判定）===== */
+  .rule { display: grid; grid-template-columns: 1.15fr 0.62fr 1.15fr 1.15fr; gap: 0; }
+  .rule-hd { padding: 8px 11px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: var(--ink-faint); background: #F7FAF8; border-bottom: 1px solid var(--line); }
+  .rule-hd.h-ok { color: #2C5E4C; background: var(--sage-bg); }
+  .rule-hd.h-no { color: var(--red); background: var(--red-bg); }
+  .rule-r { padding: 10px 11px; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; line-height: 1.55; }
+  .rule > div:nth-last-child(-n+4) { border-bottom: none; }
+  .rule-name { font-weight: 700; color: var(--ink); }
+  .rule-name span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-faint); margin-top: 2px; line-height: 1.45; }
+  .rule-thr { font-weight: 700; color: var(--pine-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rule-thr em { display: block; font-style: normal; font-size: 10px; font-weight: 600; color: var(--sand); margin-top: 2px; }
+  .rule-ok { background: rgba(234,241,237,.4); color: #2F4F44; }
+  .rule-no { background: rgba(251,234,236,.35); color: #7A3122; }
+  .rule-ok b, .rule-no b { font-weight: 700; color: var(--ink); }
+  /* L3 无达标/未达标分支，用中性底色，避免被读成败 */
+  .rule-note { background: #FAFBFA; color: var(--ink-soft); }
+  .rule-note b { font-weight: 700; color: var(--ink); }
+
+  /* ===== 目标矩阵 ===== */
+  .tgt { display: grid; grid-template-columns: 0.72fr 2fr 1fr; }
+  .tgt-hd {
+    padding: 8px 11px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px;
+    color: var(--ink-faint); background: #F7FAF8; border-bottom: 1px solid var(--line);
+  }
+  .tgt-c {
+    padding: 11px; font-size: 12.5px; line-height: 1.6;
+    color: var(--ink-soft); border-bottom: 1px solid var(--line-soft);
+  }
+  .tgt > div:nth-last-child(-n+3) { border-bottom: none; }
+  .tgt-lv b { font-size: 13px; font-weight: 700; color: var(--pine-2); margin-right: 4px; }
+  .tgt-lv span { display: block; font-size: 10.5px; color: var(--ink-faint); margin-top: 2px; }
+  .tgt-val b { color: var(--ink); font-weight: 700; }
+  .tgt-cmp { color: var(--pine-2); font-weight: 600; }
+  .tgt-cmp span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-faint); margin-top: 3px; }
+
+  /* ===== 折叠 ===== */
+  details.fold { margin-top: 10px; }
+  details.fold > summary {
+    list-style: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .4px; color: var(--ink-faint);
+    transition: color .2s;
+  }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary::before { content: "▸"; font-size: 10px; color: var(--sand); }
+  details.fold[open] > summary::before { content: "▾"; }
+  details.fold > summary:hover { color: var(--pine-2); }
+  details.fold .fold-body {
+    margin-top: 9px; padding: 11px 14px;
+    background: #FAFBFA; border-left: 2px solid var(--line);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px; line-height: 1.75; color: var(--ink-soft);
+  }
+  details.fold .fold-body b { color: var(--ink); }
+
+  /* ===== Insight（压缩）===== */
+  .insight {
+    background: var(--sand-bg); border-left: 3px solid var(--sand);
+    border-radius: 0 9px 9px 0; padding: 11px 15px 10px; margin-top: 12px;
+  }
+  .insight-h { font-size: 11.5px; font-weight: 700; letter-spacing: .7px; color: #7A5F2E; margin-bottom: 4px; }
+  .insight p { font-size: 12.5px; color: #5C4A24; line-height: 1.7; }
+  .insight b { color: #6B5526; }
+  .insight.is-red { background: var(--red-bg); border-left-color: var(--red); }
+  .insight.is-red .insight-h { color: var(--red); }
+  .insight.is-red p { color: #7A3122; }
+  .insight.is-red b { color: var(--red); }
+  .insight.is-sage { background: var(--sage-bg); border-left-color: var(--sage); }
+  .insight.is-sage .insight-h { color: #2C5E4C; }
+  .insight.is-sage p { color: #2F4F44; }
+  .insight.is-sage b { color: #2C5E4C; }
+
+  /* ===== 触点/步骤卡（压缩）===== */
+  .step-flow { display: grid; gap: 9px; }
+  .step-cell { background: #FAFBFA; border: 1px solid var(--line-soft); border-radius: 10px; padding: 11px 13px 10px; }
+  .step-no { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; color: var(--sand); }
+  .step-name { font-size: 13px; font-weight: 700; color: var(--pine-2); margin-top: 3px; }
+  .step-desc { font-size: 11.5px; color: var(--ink-soft); line-height: 1.55; margin-top: 5px; }
+  .step-watch { font-size: 10.5px; color: #6B5426; margin-top: 7px; padding-top: 7px; border-top: 1px dashed rgba(0,0,0,.07); line-height: 1.5; }
+
+  /* ===== 标签组 ===== */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 11px; font-weight: 600; letter-spacing: .2px;
+    background: var(--grey-bg); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 11px; color: var(--ink-soft);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  .chip.is-core { background: var(--sage-bg); border-color: #C9DCD3; color: #2C5E4C; }
+
+  /* ===== 紧凑规格行 ===== */
+  .spec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .spec-i { background: #FAFBFA; border: 1px solid var(--line-soft); border-radius: 10px; padding: 12px 14px 11px; }
+  .spec-lb { font-size: 11px; color: var(--ink-faint); letter-spacing: .4px; }
+  .spec-v { font-size: 17px; font-weight: 700; color: var(--pine-2); line-height: 1.3; margin-top: 4px; }
+  .spec-v small { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); margin-left: 4px; }
+  .spec-n { font-size: 11px; color: var(--ink-soft); line-height: 1.5; margin-top: 5px; }
+
+  /* ===== 条形 ===== */
+  .bars { display: flex; flex-direction: column; gap: 8px; }
+  .bar-row { display: grid; grid-template-columns: 168px 1fr 96px; gap: 11px; align-items: center; }
+  .bar-lb { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .bar-lb span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-faint); }
+  .bar-track { position: relative; height: 20px; border-radius: 5px; background: #EFF3F1; overflow: hidden; }
+  .bar-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 5px; background: linear-gradient(90deg, #3D6B5C, #4F8A6E); }
+  .bar-fill.is-red { background: linear-gradient(90deg, #A8331F, #C0563F); }
+  .bar-fill.is-sage { background: linear-gradient(90deg, #3D6B5C, #4F8A6E); }
+  .bar-val { font-size: 13px; font-weight: 700; color: var(--pine-2); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar-val small { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-faint); }
+
+  /* ===== 点阵（小样本粒度可视化）===== */
+  .sub-grid { display: flex; flex-direction: column; gap: 8px; }
+  .sub-row {
+    display: grid; grid-template-columns: 76px 1fr 62px 88px;
+    gap: 11px; align-items: center;
+    padding: 8px 11px; border-radius: 9px;
+    background: #FAFBFA; border: 1px solid var(--line-soft);
+  }
+  .sub-lb { font-size: 12px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .sub-dots { display: flex; gap: 5px; }
+  .sub-dot {
+    width: 17px; height: 17px; border-radius: 4px;
+    background: #EFF3F1; border: 1px solid var(--line);
+  }
+  .sub-dot.is-on { background: var(--sage); border-color: var(--sage); }
+  .sub-rate { font-size: 13.5px; font-weight: 700; color: var(--pine-2); text-align: right; }
+  .sub-tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .4px;
+    border-radius: 4px; padding: 3px 7px; text-align: center; white-space: nowrap;
+  }
+  .sub-tag.is-bad { background: var(--red-bg); color: var(--red); }
+  .sub-tag.is-ok { background: var(--amber-bg); color: #96661A; }
+  .sub-tag.is-warn { background: var(--sage-bg); color: #2C5E4C; }
+  .sub-axis {
+    margin-top: 10px; padding: 8px 12px;
+    background: var(--grey-bg); border-radius: 7px;
+    font-size: 11.5px; color: var(--ink-soft); line-height: 1.55;
+  }
+  .sub-axis b { color: var(--red); font-weight: 700; }
+
+
+  /* ===== QA（压缩：一行核心答法 + 折叠详情）===== */
+  .qa { background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 12px 15px 11px; margin-bottom: 8px; }
+  .qa-q { display: flex; gap: 9px; align-items: baseline; }
+  .qa-no {
+    flex: none; font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    background: var(--pine-2); color: #fff; border-radius: 4px; padding: 2px 6px;
+  }
+  .qa-t { font-size: 13.5px; font-weight: 700; color: var(--pine-2); letter-spacing: .3px; line-height: 1.5; }
+  .qa-core {
+    margin-top: 7px; padding-left: 2px;
+    font-size: 12.5px; line-height: 1.7; color: var(--ink-soft);
+  }
+  .qa-core b { color: var(--ink); font-weight: 700; }
+  .qa-core em { font-style: normal; color: var(--red); font-weight: 700; }
+  .qa-detail { display: grid; gap: 8px; margin-top: 4px; }
+  .qa-do, .qa-dont {
+    border-radius: 0 8px 8px 0; padding: 10px 13px 9px;
+    font-size: 12px; line-height: 1.7;
+  }
+  .qa-do { background: var(--sage-bg); border-left: 2.5px solid var(--sage); color: #2F4F44; }
+  .qa-dont { background: var(--red-bg); border-left: 2.5px solid var(--red); color: #7A3122; }
+  .qa-lb { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+  .qa-do .qa-lb { color: #2C5E4C; }
+  .qa-dont .qa-lb { color: var(--red); }
+  .qa-do b, .qa-dont b { font-weight: 700; }
+  .qa-do b { color: #2C5E4C; }
+  .qa-dont b { color: var(--red); }
+
+  /* ===== 脚 ===== */
+  .foot {
+    max-width: 1080px; margin: 32px auto 0; padding: 16px 28px 0;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    font-size: 11px; color: var(--ink-faint); letter-spacing: .5px;
+  }
+  .foot .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sand); display: inline-block; margin-right: 7px; }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 980px) {
+    .hero-cards { grid-template-columns: repeat(2, 1fr); }
+    .tier-grid { grid-template-columns: 1fr; }
+    .spec { grid-template-columns: repeat(2, 1fr); }
+    .rule { grid-template-columns: 1fr; }
+    .rule-hd { display: none; }
+    .rule-r { padding: 7px 11px; }
+    .tgt { grid-template-columns: 1fr; }
+    .tgt-hd { display: none; }
+    .tgt-c { padding: 7px 11px; }
+    .tgt-c[data-lb]::before {
+      content: attr(data-lb); display: block;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 1px;
+      color: var(--ink-faint); margin-bottom: 2px;
+    }
+    .rule-r[data-lb]::before {
+      content: attr(data-lb); display: block;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 1px;
+      color: var(--ink-faint); margin-bottom: 2px;
+    }
+    .rule-ok[data-lb]::before { color: #2C5E4C; }
+    .rule-no[data-lb]::before { color: var(--red); }
+    .rule-note[data-lb]::before { color: var(--ink-faint); }
+    .rule-r { padding: 7px 11px; }
+    .rule-r[data-lb]::before {
+      content: attr(data-lb); display: block;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 1px;
+      color: var(--ink-faint); margin-bottom: 2px;
+    }
+    .rule-ok[data-lb]::before { color: #2C5E4C; }
+    .rule-no[data-lb]::before { color: var(--red); }
+    .flow-row { grid-template-columns: 1fr; gap: 3px; }
+    .flow-arrow { display: none; }
+  }
+  @media (max-width: 680px) {
+    .wrap, .hero-inner { padding-left: 16px; padding-right: 16px; }
+    .hero-cards, .spec { grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 120px 1fr 76px; gap: 8px; }
+    .step-flow { grid-template-columns: 1fr !important; }
+    .sub-row { grid-template-columns: 68px 1fr 56px; gap: 8px; }
+    .sub-tag { display: none; }
+    .sub-dot { width: 14px; height: 14px; }
+    .card { padding: 14px 13px 13px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .tabbar { position: static; }
+    .tabpanel { display: block !important; }
+    details.fold { display: block; }
+    details.fold > summary { display: none; }
+    details.fold > .fold-body { display: block !important; }
+    .card, .qa { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+      <span class="kicker">Effect &amp; Targets</span>
+    </div>
+
+    <h1>开店分流承接 · <em>效果目标与观测</em></h1>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">试点规模</div>
+        <div class="hc-value num">10 <small>家</small></div>
+        <div class="hc-note">单批 · 同店前后对比 · 4 周</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">既定归因</div>
+        <div class="hc-value">版块错配</div>
+        <div class="hc-note">会上已确认，本页不再论证</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">效果目标</div>
+        <div class="hc-value num">12 <small>项</small></div>
+        <div class="hc-note">L1 分流 · L2 承接 · L3 转化</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">放量验证</div>
+        <div class="hc-value num">334 <small>家</small></div>
+        <div class="hc-note">给出幅度结论所需规模</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="notice-strip">
+  <div class="wrap">
+    <span class="nt">阅读须知</span>
+    <span>本页是<b>效果目标与观测方案</b>，不是结果看板。出现的数值均为<b>目标值或测算值</b>，不代表已发生的业务结果。</span>
+  </div>
+</div>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="tab is-on" data-tab="overview" role="tab" aria-selected="true">效果目标与判定</button>
+      <button class="tab" data-tab="l1" role="tab" aria-selected="false"><i>L1</i>分流</button>
+      <button class="tab" data-tab="l2" role="tab" aria-selected="false"><i>L2</i>承接</button>
+      <button class="tab" data-tab="l3" role="tab" aria-selected="false"><i>L3</i>转化</button>
+      <button class="tab" data-tab="scale" role="tab" aria-selected="false">放量路径</button>
+      <button class="tab" data-tab="qa" role="tab" aria-selected="false">答辩预案</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ==================================================================== -->
+<!-- 00 假设与判定规则 -->
+<!-- ==================================================================== -->
+<div class="tabpanel is-on" id="panel-overview">
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">前提与效果目标<span>归因已定，直接看效果</span></h2>
+      <span class="sec-en">Premise &amp; Targets</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">前提：版块错配已作为既定归因<span class="thr-tag">会上确认</span></div>
+      <p class="body" style="margin-bottom:12px;">
+        本次要解决的问题：<b>152 名已登录用户未完成开店</b>。其后开店完成一律落到 RTB「首页」，
+        而 RTS「获客」与 RTP「小店」位于底部 TAB 第 5、第 4 个。<b>版块错配已作为既定归因确认，本页不再论证</b>，
+        直接按它检验方案效果。
+      </p>
+      <div class="step-flow" style="grid-template-columns:repeat(4,1fr);">
+        <div class="step-cell">
+          <div class="step-no">动作 A</div>
+          <div class="step-name">价值预告</div>
+          <div class="step-desc">开店流程中给出走完的理由</div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">动作 B</div>
+          <div class="step-name">分流页</div>
+          <div class="step-desc">完成开店那一刻承接三个选项</div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">动作 C</div>
+          <div class="step-name">落点与高亮</div>
+          <div class="step-desc">把人送到目标版块并提示到位</div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">动作 D</div>
+          <div class="step-name">承接四步</div>
+          <div class="step-desc">让第一个价值动作真正完成</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">效果目标<span>两把尺子：目标值 · 前后对比</span><span class="thr-tag">目标值</span></div>
+      <div class="tgt">
+        <div class="tgt-hd">层级</div>
+        <div class="tgt-hd">效果目标值</div>
+        <div class="tgt-hd">前后对比口径</div>
+
+        <div class="tgt-c tgt-lv"><b>L1</b> 分流<span>动作是否发生</span></div>
+        <div class="tgt-c tgt-val" data-lb="效果目标值">到达率 ≥ 85% · 选择率 ≥ 70% · 落点成功率 ≥ 95%</div>
+        <div class="tgt-c tgt-cmp" data-lb="前后对比口径">基期 → 试点期<span>同店对比</span></div>
+
+        <div class="tgt-c tgt-lv"><b>L2</b> 承接<span>效果主指标</span></div>
+        <div class="tgt-c tgt-val" data-lb="效果目标值"><b>首个价值动作完成率 ≥ 50%</b><br>次日留存 ≥ 35% · 7 日留存 ≥ 20%</div>
+        <div class="tgt-c tgt-cmp" data-lb="前后对比口径">基期完成率 → 试点期<span>看提升幅度</span></div>
+
+        <div class="tgt-c tgt-lv"><b>L3</b> 转化<span>观察项</span></div>
+        <div class="tgt-c tgt-val" data-lb="效果目标值">使用 ≥ 2 版块 ≥ 15% · 订阅率 ≥ 8%</div>
+        <div class="tgt-c tgt-cmp" data-lb="前后对比口径">仅记录<span>本期不作判定</span></div>
+      </div>
+
+      <div class="insight is-sage" style="margin-top:12px;">
+        <div class="insight-h">效果怎么算成立</div>
+        <p><b>两层都正向才算有效果：</b>先看目标值有没有达到，再看相比基期提升了多少。同一批 10 家店自己比自己，因此不需要对照组——基期数据在试点前从现有漏斗与埋点取出。</p>
+      </div>
+
+      <details class="fold">
+        <summary>口径说明</summary>
+        <div class="fold-body">
+          <b>基期窗口：</b>试点上线前 4 周，口径与试点期完全一致（同为门店级去重）。<br>
+          <b>对比方式：</b>同一批 10 家门店自己比自己，用于排除门店结构与区域差异；它给出的是<b>效果幅度</b>，不是统计显著性判定。显著性结论由放量后的 334 家实验给出。
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">效果判定与行动<span>达标怎么走，没达标怎么走</span></h2>
+      <span class="sec-en">Verdict &amp; Actions</span>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier t-ok">
+        <div class="tier-hd"><span class="tier-ic">✓</span><span class="tier-name">达标</span></div>
+        <div class="tier-body"><b>达到目标值</b>，且相比基期有提升 → <b>效果成立</b></div>
+      </div>
+      <div class="tier t-mid">
+        <div class="tier-hd"><span class="tier-ic">!</span><span class="tier-name">部分达标</span></div>
+        <div class="tier-body">部分达标、部分偏低 → <b>定向修卡点后复测</b></div>
+      </div>
+      <div class="tier t-bad">
+        <div class="tier-hd"><span class="tier-ic">×</span><span class="tier-name">未达标</span></div>
+        <div class="tier-body"><b>低于目标值且无提升</b> → 定位阻塞点，修复再测</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="card-title">判定路径<span>三种结果对应的下一步</span><span class="thr-tag">上线前写死</span></div>
+
+      <div class="flow">
+        <div class="flow-row is-ok">
+          <div class="flow-cond"><b>L1 三项达标</b><br>且 <b>L2 完成率 ≥ 50%</b></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-verdict">✓ 效果成立</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-act"><b>推广至下一批门店</b>，进入放量验证</div>
+        </div>
+
+        <div class="flow-row">
+          <div class="flow-cond"><b>L1 达标</b><br>但 <b>L2 完成率 40–50%</b></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-verdict">! 部分达标</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-act">按分步跳出<b>定位阻塞步，修完复测</b></div>
+        </div>
+
+        <div class="flow-row is-no">
+          <div class="flow-cond"><b>L1 任一项未达标</b><br>或 <b>L2 完成率 &lt; 40%</b></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-verdict">× 未达标</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-act">触点或承接<b>执行有阻塞 → 修复后复测</b></div>
+        </div>
+      </div>
+
+      <details class="fold">
+        <summary>判定线与两处补充说明</summary>
+        <div class="fold-body">
+          <b>判定线在试点开始前锁定、期间不调整</b>——结果出来后再定标准，任何结果都能被解释成有效。<br><br>
+          <b>补充一：</b>L2 的 40% 下限与 40–50% 中间带属本页拟定，<b>须经业务确认后写死</b>；其余目标值来自方案第 06 章基准区间。
+          <b>补充二：</b>三种结果的行动都指向<b>执行层</b>——归因既已确定，未达标要定位的是「哪一步没做到位」，不需要重新论证方向。
+        </div>
+      </details>
+    </div>
+  </section>
+</div>
+
+
+
+<!-- ==================================================================== -->
+<!-- L1 分流 -->
+<!-- ==================================================================== -->
+<div class="tabpanel" id="panel-l1">
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">分流是否发生<span>门有没有人迎、需求有没有问清</span></h2>
+      <span class="sec-en">Triage</span>
+    </div>
+
+    <p class="sec-lead">
+      四项<b>过程指标</b>，10 家门店即可判定，并可与基期同店对比看提升。
+    </p>
+
+    <div class="card">
+      <div class="card-title">L1 目标值与判定规则<span class="thr-tag">目标值</span></div>
+      <div class="rule">
+        <div class="rule-hd">指标</div>
+        <div class="rule-hd">目标值</div>
+        <div class="rule-hd h-ok">达到 → 行动</div>
+        <div class="rule-hd h-no">未达 → 行动</div>
+
+        <div class="rule-r rule-name">分流页到达率<span>完成开店的门店中看到分流页的比例</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">≥ 85%<em>暂定</em></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 触点位置有效<br>→ <b>保留触点 B</b></div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 触点被绕过<br>→ <b>先修位置，不动文案</b></div>
+
+        <div class="rule-r rule-name">选择率 / 跳过率<span>看到分流页后做出选择的比例</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">选择率 ≥ 70%</div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 选项可被理解<br>→ <b>保留三个选项</b></div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 看不懂 / 不相关<br>→ <b>重写文案，不加选项</b></div>
+
+        <div class="rule-r rule-name">落点成功率<span>选择后成功进入目标版块的比例</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">≥ 95%<em>暂定</em></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 跳转与高亮可用<br>→ <b>可进入 L2 判定</b></div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 功能性缺陷<br>→ <b>阻塞上线先修跳转</b></div>
+
+        <div class="rule-r rule-name">三类选择分布<span>获客 / 小店 / 首页各自占比</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">无单项 &gt; 70%</div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 诉求有<b>结构性差异</b><br>→ <b>分层接待成立</b></div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 诉求高度集中<br>→ <b>重新论证是否分三路</b></div>
+      </div>
+
+      <details class="fold">
+        <summary>标「暂定」的两项目标值待业务确认</summary>
+        <div class="fold-body">
+          <b>到达率 ≥ 85%</b> 与 <b>落点成功率 ≥ 95%</b> 两项原方案未给出，属本页拟定，<b>须经业务确认后写死</b>。
+          其余目标值来自方案第 06 章基准区间或按分步流失反推。
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">三个触点的观测点</h2>
+      <span class="sec-en">Touchpoints</span>
+    </div>
+
+    <div class="step-flow" style="grid-template-columns:repeat(3,1fr);">
+      <div class="step-cell">
+        <div class="step-no">触点 A</div>
+        <div class="step-name">价值预告</div>
+        <div class="step-desc">开店流程<b>中</b>的提示，给一个走完开店的理由</div>
+        <div class="step-watch">观测：是否被打断、是否被跳过</div>
+      </div>
+      <div class="step-cell">
+        <div class="step-no">触点 B</div>
+        <div class="step-name">分流页</div>
+        <div class="step-desc">开店<b>完成那一刻</b>的落点，承接三个选项</div>
+        <div class="step-watch">观测：到达率、选择率、跳过率</div>
+      </div>
+      <div class="step-cell">
+        <div class="step-no">触点 C</div>
+        <div class="step-name">落点与高亮</div>
+        <div class="step-desc">目标版块 + TAB 高亮，让用户知道「到了」</div>
+        <div class="step-watch">观测：落点成功率、跳转耗时</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-h">这一层为什么关键</div>
+      <p>这四项是<b>效果的先行信号</b>——问的是「这一步有没有正常发生」。四项达标，才说明分流设计真正跑起来了，效果才可能出现在 L2。</p>
+    </div>
+  </section>
+</div>
+
+<!-- ==================================================================== -->
+<!-- L2 承接 -->
+<!-- ==================================================================== -->
+<div class="tabpanel" id="panel-l2">
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">承接是否有效<span>效果主指标所在</span></h2>
+      <span class="sec-en">Reception</span>
+    </div>
+
+    <p class="sec-lead">
+      人已被带到正确版块，<b>能不能完成第一个价值动作</b>——这是效果主指标，达标情况与前后提升都看这一层。
+    </p>
+
+    <div class="card">
+      <div class="card-title">L2 目标值与判定规则<span class="thr-tag">目标值 · 主指标</span></div>
+      <div class="rule">
+        <div class="rule-hd">指标</div>
+        <div class="rule-hd">目标值</div>
+        <div class="rule-hd h-ok">达到 → 行动</div>
+        <div class="rule-hd h-no">未达 → 行动</div>
+
+        <div class="rule-r rule-name">第一个价值动作完成率<span>主指标 · 分母为做出分流选择的门店</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">≥ 50%<em>基准 50–60%</em></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 到了能完成<br>→ <b>保留承接四步</b></div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 到了也完不成<br>→ <b>定位阻塞步，修复复测</b></div>
+
+        <div class="rule-r rule-name">承接四步主要跳出位<span>单一步骤的跳出占比</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">单步 ≤ 15%</div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 无明显断点</div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 存在集中断点<br>→ <b>优先修该步前置提示</b></div>
+
+        <div class="rule-r rule-name">次日留存<span>新注册口径</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">≥ 35%<em>基准 35–45%</em></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 第 04 步「下一步指引」有效</div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 第二天不回来<br>→ <b>检查第 04 步指引</b></div>
+
+        <div class="rule-r rule-name">7 日留存<span>是否形成使用习惯</span></div>
+        <div class="rule-r rule-thr" data-lb="目标值">≥ 20%<em>基准 20–30%</em></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 分流与承接同时生效</div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">! <b>绝对数偏小</b><br>→ 与基期对比看趋势，不单独判定</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">承接四步的观测点<span>分步流失是结构性现象，小样本即可指认位置</span></div>
+      <div class="step-flow" style="grid-template-columns:repeat(4,1fr);">
+        <div class="step-cell">
+          <div class="step-no">STEP 01</div>
+          <div class="step-name">欢迎与定位</div>
+          <div class="step-desc">确认「你到的是对的地方」</div>
+          <div class="step-watch">观测：进入数 → 跳出数</div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">STEP 02</div>
+          <div class="step-name">第一个价值动作</div>
+          <div class="step-desc">把项目 / 活动真正建出来</div>
+          <div class="step-watch">观测：跳出数 · <b>效果主指标</b></div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">STEP 03</div>
+          <div class="step-name">即时反馈</div>
+          <div class="step-desc">让用户看到「这件事做成了」</div>
+          <div class="step-watch">观测：跳出数 · 完成耗时</div>
+        </div>
+        <div class="step-cell">
+          <div class="step-no">STEP 04</div>
+          <div class="step-name">下一步指引</div>
+          <div class="step-desc">给一个「明天再来做什么」</div>
+          <div class="step-watch">观测：跳出数 · 对应次日留存</div>
+        </div>
+      </div>
+
+      <details class="fold">
+        <summary>这一层最容易犯的错</summary>
+        <div class="fold-body">
+          <b>把「达标」说成「效果已经验证」。</b>
+          达标说明这一层跑通了，但要给出「提升多少 / 是否显著」的结论，仍需放量后的数据。
+          本层的定位是<b>效果的先行指标</b>——先行指标正向，才值得投入放量验证。
+        </div>
+      </details>
+    </div>
+  </section>
+</div>
+
+<!-- ==================================================================== -->
+<!-- L3 转化 -->
+<!-- ==================================================================== -->
+<div class="tabpanel" id="panel-l3">
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2 class="sec-title">转化是否发生<span>本期作为观察项，只记录</span></h2>
+      <span class="sec-en">Cross-sell</span>
+    </div>
+
+    <p class="sec-lead">
+      连带推荐属 <b>P1</b>，本期作为观察项记录基线，为后续排期提供起跑数据。
+    </p>
+
+    <div class="card">
+      <div class="card-title">L3 目标值与处置<span class="thr-tag">目标值</span></div>
+      <div class="rule">
+        <div class="rule-hd">指标</div>
+        <div class="rule-hd">参考目标值</div>
+        <div class="rule-hd">本期处置</div>
+        <div class="rule-hd">为何本期不作判定</div>
+
+        <div class="rule-r rule-name">跨版块推荐触达率</div>
+        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 60%<em>暂定</em></div>
+        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>与 P1 排期对齐</div>
+        <div class="rule-r rule-note" data-lb="为何本期不作判定">功能<b>本期未上线</b>，低是排期结果</div>
+
+        <div class="rule-r rule-name">跨版块首个动作完成率</div>
+        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 30%<em>暂定</em></div>
+        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>作为 P1 起跑基线</div>
+        <div class="rule-r rule-note" data-lb="为何本期不作判定">功能未上线时<b>没有判定意义</b></div>
+
+        <div class="rule-r rule-name">使用 ≥ 2 个版块<span>门店占比</span></div>
+        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 15%<em>基准 15–25%</em></div>
+        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>仅记录形态，看基期差异</div>
+        <div class="rule-r rule-note" data-lb="为何本期不作判定">绝对数通常个位数，<b>单店即可翻转</b></div>
+
+        <div class="rule-r rule-name">订阅率</div>
+        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 8%<em>基准 8–12%</em></div>
+        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>呈现绝对数，与基期对比</div>
+        <div class="rule-r rule-note" data-lb="为何本期不作判定">当前整体约 5.6%，<b>差 1 家即跨区间</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">订阅率为何本期只记录、不判定<span>用绝对数说明，而不是「样本小」三个字</span></div>
+      <p class="body" style="margin-bottom:11px;">假设 10 家里有 <b>8 家</b>做出分流选择，订阅率只可能是下面三档之一——<b>每档都跨过整个基准区间 8%–12%</b>：</p>
+
+      <div class="sub-grid">
+        <div class="sub-row">
+          <div class="sub-lb">0 / 8 家</div>
+          <div class="sub-dots">
+            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+          </div>
+          <div class="sub-rate num">0.0%</div>
+          <div class="sub-tag is-bad">像「失败」</div>
+        </div>
+        <div class="sub-row">
+          <div class="sub-lb">1 / 8 家</div>
+          <div class="sub-dots">
+            <i class="sub-dot is-on"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+          </div>
+          <div class="sub-rate num">12.5%</div>
+          <div class="sub-tag is-ok">像「达标」</div>
+        </div>
+        <div class="sub-row">
+          <div class="sub-lb">2 / 8 家</div>
+          <div class="sub-dots">
+            <i class="sub-dot is-on"></i><i class="sub-dot is-on"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
+          </div>
+          <div class="sub-rate num">25.0%</div>
+          <div class="sub-tag is-warn">像「大成功」</div>
+        </div>
+      </div>
+      <div class="sub-axis">
+        <span>基准区间 8% – 12% 落在第 1 格与第 2 格之间 —— <b>整档只有 1 家门店的跨度</b></span>
+      </div>
+
+      <div class="insight">
+        <div class="insight-h">本期处置</div>
+        <p><b>1 家门店的差异就能让结论从「失败」翻到「大成功」。</b>因此本项<b>只呈现绝对数</b>（如「2 / 8 家」）并与基期对比，<b>不单独做达标判定</b>——是否达标由放量后的样本给出。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================================================================== -->
+<!-- 规模与效力 -->
+<!-- ==================================================================== -->
+<div class="tabpanel" id="panel-scale">
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">07</span>
+      <h2 class="sec-title">试点设计与定位<span>为什么是 10 家</span></h2>
+      <span class="sec-en">Pilot Scope</span>
+    </div>
+
+    <div class="spec">
+      <div class="spec-i">
+        <div class="spec-lb">试点门店数</div>
+        <div class="spec-v num">10 <small>家</small></div>
+        <div class="spec-n">由<b>销售与服务侧能逐店落实的范围</b>决定，见 Q7</div>
+      </div>
+      <div class="spec-i">
+        <div class="spec-lb">分批方式</div>
+        <div class="spec-v">单批开启</div>
+        <div class="spec-n">再分批则每批只剩 3–5 家，<b>连过程指标都算不稳</b></div>
+      </div>
+      <div class="spec-i">
+        <div class="spec-lb">对照组</div>
+        <div class="spec-v" style="font-size:14px;">同店前后对比</div>
+        <div class="spec-n">同一批 10 家店试点前后对比，<b>无需对照组</b></div>
+      </div>
+      <div class="spec-i">
+        <div class="spec-lb">观测周期</div>
+        <div class="spec-v num">4 <small>周</small></div>
+        <div class="spec-n">覆盖次日与 7 日留存成熟期；<b>不建议短于 3 周</b></div>
+      </div>
+      <div class="spec-i">
+        <div class="spec-lb">判定方式</div>
+        <div class="spec-v" style="font-size:14px;">目标值 + 基期</div>
+        <div class="spec-n">先看<b>是否达标</b>，再看<b>相比基期提升多少</b></div>
+      </div>
+      <div class="spec-i">
+        <div class="spec-lb">本期要拿到</div>
+        <div class="spec-v" style="font-size:14px;">达标 + 提升幅度</div>
+        <div class="spec-n">动作层结论；幅度结论交给 334 家放量</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">08</span>
+      <h2 class="sec-title">放量需要多少门店</h2>
+      <span class="sec-en">Sample Size</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">各规模的最小可检出差异（MDE）<span>条越短越好；越过虚线即测不出方案期望的改进</span><span class="calc-tag">测算值</span></div>
+
+      <svg viewBox="0 0 700 218" role="img" aria-label="各试点规模的 MDE 对比" style="width:100%; height:auto; display:block;">
+        <!-- 坐标轴刻度线：每 10pp 一条，轴 0–60pp 映射 x=118–638（8.67px/pp） -->
+        <g stroke="#E8EEEA" stroke-width="1">
+          <line x1="292" y1="16" x2="292" y2="188"/>
+          <line x1="465" y1="16" x2="465" y2="188"/>
+          <line x1="638" y1="16" x2="638" y2="188"/>
+        </g>
+
+        <!-- 方案期望 +10pp 标记 -->
+        <line x1="205" y1="8" x2="205" y2="188" stroke="#B08D57" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <text x="209" y="14" font-size="10" font-weight="700" fill="#B08D57">方案期望 +10pp</text>
+
+        <!-- 条 1：10 家 · MDE ≥ 55pp -->
+        <text x="110" y="41" font-size="11.5" font-weight="700" fill="#24302C" text-anchor="end">10 家</text>
+        <text x="110" y="55" font-size="9.5" fill="#8A9690" text-anchor="end">每组 5 · 不可用</text>
+        <rect x="118" y="28" width="520" height="24" rx="4" fill="#EFF3F1"/>
+        <rect x="118" y="28" width="479" height="24" rx="4" fill="#A8331F"/>
+        <text x="605" y="45" font-size="11.5" font-weight="700" fill="#A8331F">≥ 55 pp</text>
+
+        <!-- 条 2：20 家 · MDE 47pp -->
+        <text x="110" y="85" font-size="11.5" font-weight="700" fill="#24302C" text-anchor="end">20 家</text>
+        <text x="110" y="99" font-size="9.5" fill="#8A9690" text-anchor="end">每组 10 · 不可用</text>
+        <rect x="118" y="72" width="520" height="24" rx="4" fill="#EFF3F1"/>
+        <rect x="118" y="72" width="408" height="24" rx="4" fill="#C0563F"/>
+        <text x="534" y="89" font-size="11.5" font-weight="700" fill="#A8331F">47 pp</text>
+
+        <!-- 条 3：40 家 · MDE 38pp -->
+        <text x="110" y="129" font-size="11.5" font-weight="700" fill="#24302C" text-anchor="end">40 家</text>
+        <text x="110" y="143" font-size="9.5" fill="#8A9690" text-anchor="end">每组 20 · 不可用</text>
+        <rect x="118" y="116" width="520" height="24" rx="4" fill="#EFF3F1"/>
+        <rect x="118" y="116" width="325" height="24" rx="4" fill="#C0563F"/>
+        <text x="451" y="133" font-size="11.5" font-weight="700" fill="#A8331F">38 pp</text>
+
+        <!-- 条 4：334 家 · MDE 15pp -->
+        <text x="110" y="173" font-size="11.5" font-weight="700" fill="#24302C" text-anchor="end">334 家</text>
+        <text x="110" y="187" font-size="9.5" fill="#3D6B5C" text-anchor="end">每组 167 · 可用</text>
+        <rect x="118" y="160" width="520" height="24" rx="4" fill="#EFF3F1"/>
+        <rect x="118" y="160" width="130" height="24" rx="4" fill="#3D6B5C"/>
+        <text x="256" y="177" font-size="11.5" font-weight="700" fill="#3D6B5C">15 pp</text>
+
+        <!-- 轴与刻度 -->
+        <line x1="118" y1="188" x2="638" y2="188" stroke="#DCE4DF" stroke-width="1"/>
+        <g font-size="10" fill="#8A9690" text-anchor="middle">
+          <text x="118" y="207">0</text>
+          <text x="292" y="207">20pp</text>
+          <text x="465" y="207">40pp</text>
+          <text x="638" y="207">60pp</text>
+        </g>
+      </svg>
+
+      <div class="insight is-sage" style="margin-top:10px;">
+        <div class="insight-h">两步走：10 家验动作，334 家验幅度</div>
+        <p>
+          <b>10 家门店负责把动作跑通</b>（目标值 + 同店前后对比）；<b>334 家负责给出幅度结论</b>——
+          它是唯一能覆盖方案期望 +10pp 的规模。两条腿分工明确，不需要在同一批门店上同时要两件事。
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">按目标差异倒推放量规模<span class="calc-tag">测算值</span></div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bar-lb">+15 pp<span>50% → 65%</span></div>
+          <div class="bar-track"><div class="bar-fill is-sage" style="width:10.7%"></div></div>
+          <div class="bar-val num">334 家<small>约 1.0 个月</small></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lb">+10 pp<span>50% → 60%</span></div>
+          <div class="bar-track"><div class="bar-fill is-sage" style="width:24.7%"></div></div>
+          <div class="bar-val num">770 家<small>约 2.4 个月</small></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lb">+5 pp<span>50% → 55%</span></div>
+          <div class="bar-track"><div class="bar-fill is-sage" style="width:100%"></div></div>
+          <div class="bar-val num">3,122 家<small>约 9.8 个月</small></div>
+        </div>
+      </div>
+
+      <details class="fold">
+        <summary>测算口径与折算假设</summary>
+        <div class="fold-body">
+          MDE 按 n = (z<sub>α/2</sub> + z<sub>β</sub>)² × [p₁(1−p₁) + p₂(1−p₂)] / (p₁−p₂)² 计算，基准 p₁ = 50%，α = 0.05 双侧，power = 0.8。<br>
+          「320 家/月」取自《转化漏斗与增长诊断》中「开店·登录完成 320」的量级，<b>实际增速待业务确认</b>；
+          折算仅表示<b>入组所需的自然时长</b>，不含观测期。<b>建议把 +15pp（334 家）作为首个正式验收目标</b>——唯一在短期内可达的量级。
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">09</span>
+      <h2 class="sec-title">数据接入<span>结果页需要哪些数据</span></h2>
+      <span class="sec-en">Data Spec</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">埋点事件<small>8 个事件 · 支撑目标值与前后对比</small></div>
+      <div class="chips">
+        <span class="chip">triage_page_view</span>
+        <span class="chip">triage_select</span>
+        <span class="chip">triage_skip</span>
+        <span class="chip">triage_landed</span>
+        <span class="chip">onboarding_step</span>
+        <span class="chip is-core">first_value_action</span>
+        <span class="chip">cross_sell_expose</span>
+        <span class="chip">cross_sell_convert</span>
+      </div>
+
+      <details class="fold">
+        <summary>事件触发时机与支撑指标</summary>
+        <div class="fold-body">
+          <b>triage_page_view</b> 分流页曝光 → 到达率（属性：门店 ID、开店完成时间）<br>
+          <b>triage_select</b> 点击任一选项 → 选择率、三类分布（属性：选项值、停留时长）<br>
+          <b>triage_skip</b> 点击「先随便看看」→ 跳过率<br>
+          <b>triage_landed</b> 跳转完成并高亮 TAB → 落点成功率（属性：目标版块、是否成功）<br>
+          <b>onboarding_step</b> 承接四步每步进入 / 完成 / 跳出 → 四步跳出位置、耗时（属性：步骤序号、版块）<br>
+          <b>first_value_action</b> 完成第一个价值动作 → <b>主指标</b>（属性：版块、动作类型、耗时）<br>
+          <b>cross_sell_expose</b> 跨版块推荐曝光 → 推荐触达率（属性：来源 / 目标版块、触发时机）<br>
+          <b>cross_sell_convert</b> 跨版块首个动作完成 → 跨版块完成率（属性：来源 → 目标、间隔时长）
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-title">口径公式<small>结果页每个数字从哪来</small></div>
+      <details class="fold" style="margin-top:0;">
+        <summary>展开 7 项指标的计算口径</summary>
+        <div class="fold-body">
+          <b>分流页到达率</b> = 看到分流页的门店数 ÷ 完成开店的门店数<br>
+          <b>选择率 / 跳过率</b> = 选择数（或跳过数）÷ 看到分流页的门店数<br>
+          <b>落点成功率</b> = 跳转成功数 ÷ 做出选择的门店数<br>
+          <b>第一个价值动作完成率</b> = 完成数 ÷ 做出分流选择的门店数（分母<b>含未落点成功的门店</b>）<br>
+          <b>次日 / 7 日留存</b> = 第 N 日有任意活跃行为的门店数 ÷ 做出分流选择的门店数<br>
+          <b>使用 ≥ 2 个版块</b> = 有效动作版块数 ≥ 2 的门店数 ÷ 做出分流选择的门店数<br>
+          <b>订阅率</b> = 试点期内完成订阅的门店数 ÷ 做出分流选择的门店数<br><br>
+          <b>门店级去重：</b>所有分母均为<b>门店数</b>而非人次，同一门店重复进入只计一次。
+          这一步决定了指标能否与「320 家门店」的漏斗口径对齐。
+        </div>
+      </details>
+    </div>
+  </section>
+</div>
+
+<!-- ==================================================================== -->
+<!-- 答辩预案 -->
+<!-- ==================================================================== -->
+<div class="tabpanel" id="panel-qa">
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">10</span>
+      <h2 class="sec-title">答辩预案<span>七个最可能被追问的问题</span></h2>
+      <span class="sec-en">Q &amp; A Prep</span>
+    </div>
+
+    <p class="sec-lead">
+      每条只留<b>一句核心答法</b>；展开可见完整答法，每题都落到<b>哪个指标、多少、下一步做什么</b>。
+    </p>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q1</span><span class="qa-t">才 10 家门店，能看到效果吗？</span></div>
+      <div class="qa-core">能看到<b>效果的早期信号</b>：动作是否正常发生、<b>首个价值动作完成率能否到 50%</b>。幅度结论需要放量到 334 家。</div>
+      <details class="fold">
+        <summary>完整答法与不要这样说</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「10 家门店看两件事：一是动作有没有正常发生（到达、选择、落点），二是<b>首个价值动作完成率能不能到 50%</b>——这是效果最直接的先行指标，10 家门店就能看出来。要看<b>提升幅度和显著性</b>，放量到 334 家，路径已经排好了。」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>「10 家门店已经能证明方案有效。」<b>——被追问显著性时这句会站不住</b>，反而拖累其他结论。</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q2</span><span class="qa-t">为什么没有设对照组？</span></div>
+      <div class="qa-core">改用<b>同店前后对比</b>：同一批 10 家店，试点前 4 周做基期，<b>自己比自己</b>。基期数据已从现有漏斗取出。</div>
+      <details class="fold">
+        <summary>完整答法与不要这样说</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「对照组的作用是排除外部波动。这次用<b>同店前后对比</b>：同一批 10 家门店，试点前 4 周做基期、试点期再做一次，看同一个指标自己比自己提升了多少——基期数据我已经拉出来了。10 家对半分设对照，每组只剩 5 家，反而什么都看不出来。」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>「对照组意义不大，所以没设。」<b>——这像是没想过，而不是想过了并做了取舍。</b></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q3</span><span class="qa-t">这次能拿出什么结果？</span></div>
+      <div class="qa-core">三层：<b>12 项目标值达标情况</b> · <b>相比基期的提升幅度</b> · <b>卡在哪一步</b>。第三层决定下一步怎么改。</div>
+      <details class="fold">
+        <summary>完整答法与不要这样说</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「三层结果：第一，<b>12 项目标值哪些达标</b>；第二，<b>首个价值动作完成率和留存相比基期提升了多少</b>；第三，如果没达标，<b>卡在哪一步</b>——第三层决定了下一步改什么，所以就算没全达标，这次投入也不会白费。」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>「能验证方案是否有效。」<b>——太空，一个数字都拿不出来。</b></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q4</span><span class="qa-t">如果没达到目标值，怎么办？</span></div>
+      <div class="qa-core">三条路径已写死：<b>达标 → 推广下一批</b> · <b>部分达标 → 定向修卡点复测</b> · <b>未达标 → 定位阻塞点，修复再测</b>。<b>归因已定，结果指向的是执行问题。</b></div>
+      <details class="fold">
+        <summary>完整答法与不要这样说</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「判定线我在上线前就写死了，分三种：全部达标就推广到下一批门店；部分达标就按分步跳出定位到具体哪一步，修完复测；都没达标说明触点和承接的执行有阻塞，同样定位到步、修完再测。<b>因为归因已经确定，结果指向的是执行哪一步没做到位，不是要重新论证方向。</b>」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>临场找理由圆回来，或说「数据有噪声」。<b>——最容易被识破，会让后面所有结论都失去信任。</b></div>
+          <div class="qa-do"><span class="qa-lb">为什么这条最强</span>因为你<b>提前把「没达标怎么办」说清楚了</b>。愿意预先写死判定线并给出下一步的人，比声称数据一定支持自己的人可信得多。</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q5</span><span class="qa-t">什么时候能给出「有效果」的结论？</span></div>
+      <div class="qa-core">试点 <b>4 周</b>出动作层结论；放量到 <b>334 家（约 1 个月入组）</b>给出 <b>+15pp</b> 的幅度结论。</div>
+      <details class="fold">
+        <summary>展开说明</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「两个时间点：<b>试点 4 周</b>给出动作层结论——目标值达标情况和卡点位置；<b>放量到 334 家</b>给出幅度结论，按 320 家/月的入组速度，约 1 个月入组，检出能力 +15pp。之后每加一档投入，需要多少门店我都算好了。」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>「试点跑通后扩大规模再看。」<b>——没给数字，等于没有计划。</b></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q6</span><span class="qa-t">这 10 家的数据，够做决策吗？</span></div>
+      <div class="qa-core">够判断<b>「要不要继续投入」</b>——看目标值达标情况和卡点定位；投入力度与预期收益，由放量后的数据给出。</div>
+      <details class="fold">
+        <summary>完整答法</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「<b>够用来做「要不要继续投入」的决策</b>：目标值达标情况加卡点定位，10 家门店足够，而且用同店前后对比能看到提升幅度。<b>投入力度和预期收益</b>需要放量后的数据。<b>所以我建议分两步</b>：本次试点决定要不要把分流做成标准流程；第二步在全量实验之后，再决定推广力度与资源投入。」</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-no">Q7</span><span class="qa-t">为什么只开 10 家？不能多开一些吗？</span></div>
+      <div class="qa-core">10 家是<b>销售与服务侧能逐店落实的上限</b>。节奏是：<b>先用 10 家把承接动作跑通并标准化，再放量到 334 家看效果幅度</b>。</div>
+      <details class="fold">
+        <summary>完整答法与不要这样说</summary>
+        <div class="qa-detail">
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「本方案要改的不只是一个分流页面，还有门店侧接客的动作和销售侧的说法——这两侧都要一家一家跟，数量一多就落不实，<b>10 家是能逐店落实到位的上限</b>。所以节奏是：<b>先用 10 家把承接动作跑通、标准化，再放量到 334 家看效果幅度</b>。放量那时跑的是线上随机分流，不依赖逐店配合——那正是可以放量的原因。所以 10 家不是缩水版，它是第一步。」</div>
+          <div class="qa-dont"><span class="qa-lb">不要这样说</span>「先小范围试试，跑通了再扩。」<b>——听起来像没想过规模问题。</b>被追问「那多少算跑通」时答不上来，反而显得随意。</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="insight is-sage">
+      <div class="insight-h">贯穿全部回答的一条原则</div>
+      <p><b>给数字，不给形容词。</b>每个问题都落到「哪个指标、多少、什么时候、下一步做什么」——这比任何表态都更有说服力。</p>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<div class="foot">
+  <div><span class="dot"></span>剑琅联盟 · 内部资料 · 效果观测</div>
+  <div>开店分流承接效果目标与观测 · 2026-10-03</div>
+</div>
+
+<script>
+(function () {
+  var tabs = document.getElementById('tabs');
+  if (!tabs) return;
+  tabs.addEventListener('click', function (e) {
+    var btn = e.target.closest('.tab');
+    if (!btn) return;
+    var name = btn.getAttribute('data-tab');
+    tabs.querySelectorAll('.tab').forEach(function (t) {
+      var on = t === btn;
+      t.classList.toggle('is-on', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tabpanel').forEach(function (p) {
+      p.classList.toggle('is-on', p.id === 'panel-' + name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>

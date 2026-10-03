@@ -232,6 +232,57 @@
   }
   .finding b { color: #fff; font-weight: 600; }
 
+  /* ===== 效果观测页入口 ===== */
+  .board-entry {
+    margin-top: 16px;
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    background:
+      radial-gradient(ellipse 70% 130% at 96% 0%, rgba(176, 141, 87, .20), transparent 62%),
+      linear-gradient(135deg, #14352E 0%, #1A3D34 58%, #234D42 100%);
+    border-radius: 14px;
+    padding: 22px 26px;
+  }
+  .be-left { flex: 1 1 440px; min-width: 0; }
+  .be-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2.4px;
+    color: #A8C4B6; text-transform: uppercase;
+  }
+  .be-kicker::before { content: ""; width: 18px; height: 2px; background: var(--sand); }
+  .be-title {
+    font-size: 18px; font-weight: 700; letter-spacing: 1.6px; color: #fff;
+    margin: 9px 0;
+  }
+  .be-desc {
+    font-size: 12.5px; line-height: 1.8; color: rgba(255,255,255,.68);
+    max-width: 640px;
+  }
+  .be-desc b { color: #fff; font-weight: 600; }
+  .be-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 13px; }
+  .be-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+    color: #D4E4DB; background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px; padding: 3px 11px;
+  }
+  .be-tag.is-warn {
+    color: #F2D9C0; border-color: rgba(196, 138, 42, .5);
+    background: rgba(196, 138, 42, .16);
+  }
+  .be-btn {
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sand); color: #2A1F0C;
+    font-size: 13.5px; font-weight: 700; letter-spacing: 1.2px;
+    text-decoration: none; border-radius: 10px; padding: 13px 24px;
+    white-space: nowrap;
+    transition: background .25s, transform .25s, box-shadow .25s;
+  }
+  .be-btn:hover {
+    background: #C4A374; transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(176, 141, 87, .34);
+  }
+  .be-btn i { font-style: normal; font-size: 15px; line-height: 1; }
+
   /* ===== Cause grid (01) ===== */
   .cause-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .cause {
@@ -1874,8 +1925,8 @@
   <div class="part-head">
     <span class="part-no">第三部分</span>
     <span class="part-name">怎么落地</span>
-    <span class="part-desc">怎么衡量、怎么证伪、有什么风险</span>
-    <span class="part-en">Rollout &amp; Proof</span>
+    <span class="part-desc">怎么衡量、怎么判定、有什么风险</span>
+    <span class="part-en">Rollout &amp; Measurement</span>
   </div>
 
   <!-- ============ 06 ============ -->
@@ -1928,12 +1979,13 @@
       <div class="card-title">主战场指标<small>与本方案直接对应的那一段</small></div>
       <p class="body">
         本方案的主战场是漏斗中的 <b>「开店·登录完成 320 → 开店·进首页 168」</b>，当前流失 <b>152 人 / 47.5%</b>。
-        上线后这一段应拆成两支分别观测：<b>分流组</b>与<b>对照组</b>——
-        按开店完成用户<b>随机分配</b>，对照组走原有路径直接进首页（理由见本章末「反向证伪」）。
+        <b>试点期</b>用<b>同店前后对比</b>观测这一段流失是否收窄（基期为上线前 4 周，口径与试点期一致）；
+        <b>放量到 334 家量级后</b>，再改用线上随机小流量实验，拆成分流组与对照组观测（口径见本章末「效果判定」）。
       </p>
       <div class="note sage" style="margin-top:14px;">
-        <b>为什么必须拆组：</b>版块错配只解释这 152 人中的一部分。
-        不拆组就无法判断降幅是分流带来的，还是同期降门槛改动带来的。
+        <b>为什么试点先不拆组：</b>10 家门店对半分后每组只剩 5 家——按 α = 0.05、power = 0.8 反推，
+        只有出现「4 / 5 对 0 / 5」这类极端分离才可能显著，拆了也看不出差异。
+        试点期与自身基期比同样能看出这一段有没有收窄；<b>拆组与显著性判定放到放量阶段执行</b>。
       </div>
     </div>
 
@@ -1984,13 +2036,39 @@
     </div>
 
     <div class="finding">
-      <h4>怎么证明这个方案真的有效 · 反向证伪</h4>
+      <h4>怎么判定这个方案是否有效 · 两步走</h4>
       <ul>
-        <li><b>分组方式必须是随机的。</b>按「是否看到分流页」自然切分不算对照——会跳过的人本来就不一样。因此采用<b>随机小流量实验</b>：开店完成的用户随机分为分流组与对照组，对照组走原有路径直接进首页。</li>
-        <li><b>如果方案有效：</b>分流组中获客 / 小店两类用户的<b>目标版块第一个价值动作完成率</b>，应显著高于对照组中的同类用户（后者只能在首页被引导）。</li>
-        <li><b>如果方案无效：</b>两组<b>没有显著差异</b>——说明版块错配不是这 152 人流失的主因，本方案前提被证伪，应转向已有三条归因。</li>
-        <li><b>证伪条件必须在上线前写死</b>，否则事后总能找到理由说方案有效。</li>
+        <li><b>试点期 · 同店前后对比。</b>同一批 10 家门店，基期为上线前 4 周，口径与试点期完全一致。看两件事：<b>L1 / L2 各项指标是否达到目标值</b>，以及<b>首个价值动作完成率与留存相比基期提升了多少</b>。</li>
+        <li><b>放量期 · 随机小流量实验。</b>门店数达到 334 家量级后，按开店完成用户<b>随机分组</b>：分流组与对照组，对照组走原有路径直接进首页。此时才给出<b>幅度与显著性</b>的结论。</li>
+        <li><b>有效：</b>目标值达标<b>且</b>相比基期有提升 → 推广至下一批门店。</li>
+        <li><b>未达标：</b>按承接四步的分步跳出定位到具体哪一步，修复后复测。归因既已确定，结果指向的是<b>执行哪一步没做到位</b>。</li>
+        <li><b>判定线必须在上线前写死</b>，否则事后总能找到理由说方案有效。</li>
       </ul>
+    </div>
+
+    <div class="board-entry">
+      <div class="be-left">
+        <div class="be-kicker">效果目标 · 判定规则</div>
+        <h4 class="be-title">开店分流承接 · 效果目标与观测</h4>
+        <p class="be-desc">
+          L1 / L2 / L3 共 <b>12 项指标的目标值</b>与三档判定规则（达标 / 部分达标 / 未达标）、
+          <b>承接四步的卡点定位口径</b>、<b>同店前后对比的基期口径</b>，
+          以及<b>放量到 334 家的规模测算</b>与数据接入清单。页面不含结果数据。
+        </p>
+        <div class="be-tags">
+          <span class="be-tag">12 项目标值</span>
+          <span class="be-tag">三档判定规则</span>
+          <span class="be-tag">同店前后对比</span>
+          <span class="be-tag is-warn">试点 10 家 · 不含结果数据</span>
+        </div>
+      </div>
+      <a class="be-btn" href="剑琅联盟开店分流承接效果观测.html">打开效果目标与观测<i>→</i></a>
+    </div>
+
+    <div class="note sage" style="margin-top:14px;">
+      <b>两步走的口径区分：</b>试点阶段 10 家门店对半分后每组 5 家——按 α = 0.05、power = 0.8 反推，
+      <b>只有出现「4 / 5 对 0 / 5」这类极端分离才可能显著</b>，因此试点不拆组，改用<b>同店前后对比</b>给出达标情况与提升幅度；
+      <b>随机对照与显著性判定放到门店数达到 334 家量级时执行</b>（对应 +15pp 的检出能力，测算见效果观测页）。
     </div>
   </section>
 
