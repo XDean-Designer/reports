@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 美业趋势与美丽田园战略对标</title>
+<style>
+  :root {
+    --bg: #0C1219;
+    --bg-2: #101823;
+    --card: #151E2B;
+    --card-2: #1A2434;
+    --card-3: #1F2B3D;
+    --line: #26344A;
+    --line-soft: #1D2839;
+    --ink: #E7EDF6;
+    --ink-2: #C3CEDE;
+    --ink-soft: #93A2B8;
+    --ink-faint: #64768F;
+    --amber: #F0A93B;
+    --amber-2: #FFC46B;
+    --amber-bg: rgba(240, 169, 59, .13);
+    --cyan: #3ED9C0;
+    --cyan-bg: rgba(62, 217, 192, .13);
+    --blue: #5B8DEF;
+    --blue-bg: rgba(91, 141, 239, .13);
+    --rose: #F0716A;
+    --rose-bg: rgba(240, 113, 106, .13);
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px 72px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 55% at 88% 4%, rgba(240,169,59,.20), transparent 58%),
+      radial-gradient(ellipse 60% 50% at 6% 96%, rgba(62,217,192,.13), transparent 60%),
+      linear-gradient(160deg, #0A0F16 0%, #0E1622 52%, #131E2E 100%);
+    padding: 54px 0 46px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.32); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.42); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: var(--amber);
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--amber); }
+  .hero h1 {
+    font-size: clamp(26px, 3.6vw, 38px);
+    font-weight: 700; letter-spacing: 2px; color: #fff;
+    margin: 14px 0 12px; line-height: 1.32;
+  }
+  .hero h1 em { font-style: normal; color: var(--amber-2); }
+  .hero-lead {
+    font-size: 14.5px; color: rgba(255,255,255,.66); line-height: 1.85;
+    max-width: 820px; letter-spacing: .3px;
+  }
+  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .hc {
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 12px; padding: 16px 18px 15px;
+  }
+  .hc-label { font-size: 11px; letter-spacing: 1.6px; color: rgba(255,255,255,.45); text-transform: uppercase; margin-bottom: 8px; }
+  .hc-value { font-size: 21px; font-weight: 700; letter-spacing: .5px; color: var(--amber-2); line-height: 1.3; font-variant-numeric: tabular-nums; }
+  .hc-value.is-cyan { color: var(--cyan); }
+  .hc-note { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.7; margin-top: 8px; }
+
+  /* ===== Section shell ===== */
+  section { margin-top: 44px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 13px; margin-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #0C1219; background: var(--amber);
+    padding: 4px 10px; border-radius: 5px;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: 1.2px; color: var(--ink); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-lead {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.9;
+    max-width: 940px; margin-bottom: 18px;
+  }
+  .sec-lead b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Generic card ===== */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+  }
+  .card + .card { margin-top: 13px; }
+  .card-title {
+    font-size: 15px; font-weight: 700; letter-spacing: .8px;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .card-title small {
+    display: inline-block; margin-left: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    color: var(--amber);
+  }
+  p.body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; }
+  p.body + p.body { margin-top: 10px; }
+  p.body b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Table ===== */
+  .tbl-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  thead th {
+    background: var(--card-2);
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--ink-soft); text-align: left;
+    padding: 12px 15px; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    font-size: 13px; color: var(--ink-soft);
+    padding: 12px 15px; border-bottom: 1px solid var(--line-soft);
+    vertical-align: top; line-height: 1.7;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.is-sum td { background: var(--card-2); font-weight: 700; color: var(--ink); }
+  td.c-name { font-weight: 700; color: var(--ink); font-size: 13.5px; white-space: nowrap; }
+  td.c-key { font-weight: 600; color: var(--ink-2); }
+  td.c-num { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); font-weight: 600; }
+  .tbl-note {
+    margin-top: 11px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+  .up { color: var(--cyan); font-weight: 700; }
+  .down { color: var(--rose); font-weight: 700; }
+  .flat { color: var(--ink-faint); font-weight: 700; }
+
+  /* ===== Tags ===== */
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: .4px; padding: 3px 9px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tag.t-amber { color: var(--amber-2); background: var(--amber-bg); }
+  .tag.t-cyan { color: var(--cyan); background: var(--cyan-bg); }
+  .tag.t-blue { color: var(--blue); background: var(--blue-bg); }
+  .tag.t-rose { color: var(--rose); background: var(--rose-bg); }
+  .tag.t-mist { color: var(--ink-soft); background: var(--card-3); }
+
+  /* ===== Callout ===== */
+  .note {
+    background: var(--amber-bg);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+    padding: 13px 17px;
+    font-size: 13px; color: #E8CFA4; line-height: 1.85;
+  }
+  .note + .note { margin-top: 11px; }
+  .note b { color: var(--amber-2); font-weight: 700; }
+  .note.cyan { background: var(--cyan-bg); border-left-color: var(--cyan); color: #A9E7DB; }
+  .note.cyan b { color: var(--cyan); }
+  .note.rose { background: var(--rose-bg); border-left-color: var(--rose); color: #F2B5B1; }
+  .note.rose b { color: #FF9C95; }
+  .note.plain { background: var(--card-2); border-left-color: var(--line); color: var(--ink-soft); }
+  .note.plain b { color: var(--ink); }
+
+  /* ===== 本文提纲（纯 CSS 选项卡，零 JS） ===== */
+  .tabs { position: relative; }
+  .tabs > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .tab-bar { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+  .tab-bar label {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .3px;
+    color: var(--ink-soft); background: var(--card-2);
+    border: 1px solid var(--line-soft); border-radius: 8px;
+    padding: 7px 14px; cursor: pointer; user-select: none;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .tab-bar label:hover { color: var(--ink-2); border-color: var(--line); }
+  .tab-panel { display: none; margin-top: 14px; }
+  .ol { display: grid; gap: 5px; }
+  .ol-row {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 9px 12px; border-radius: 8px;
+    background: var(--card-2); border: 1px solid var(--line-soft);
+  }
+  .ol-no {
+    font-size: 11.5px; font-weight: 700; color: var(--amber-2);
+    background: var(--amber-bg); border-radius: 4px; padding: 1px 7px;
+    flex: none; min-width: 30px; text-align: center;
+  }
+  .ol-no.is-plain { color: var(--cyan); background: var(--cyan-bg); }
+  .ol-t { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  /* 选中态 */
+  #ot-1:checked ~ .tab-bar label[for="ot-1"],
+  #ot-2:checked ~ .tab-bar label[for="ot-2"],
+  #ot-3:checked ~ .tab-bar label[for="ot-3"],
+  #ot-4:checked ~ .tab-bar label[for="ot-4"] {
+    color: #0C1219; background: var(--amber); border-color: var(--amber);
+  }
+  #ot-1:checked ~ .tab-panels #op-1,
+  #ot-2:checked ~ .tab-panels #op-2,
+  #ot-3:checked ~ .tab-panels #op-3,
+  #ot-4:checked ~ .tab-panels #op-4 { display: block; }
+  /* 键盘焦点可见（radio 靠方向键切换） */
+  #ot-1:focus-visible ~ .tab-bar label[for="ot-1"],
+  #ot-2:focus-visible ~ .tab-bar label[for="ot-2"],
+  #ot-3:focus-visible ~ .tab-bar label[for="ot-3"],
+  #ot-4:focus-visible ~ .tab-bar label[for="ot-4"] { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* ===== KPI ===== */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; }
+  .kpi-grid.n3 { grid-template-columns: repeat(3, 1fr); }
+  .kpi {
+    background: var(--card-2); border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 14px 16px 13px;
+  }
+  .kpi-label { font-size: 11px; letter-spacing: 1.1px; color: var(--ink-faint); margin-bottom: 7px; }
+  .kpi-value { font-size: 22px; font-weight: 700; color: var(--amber-2); line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .kpi-value.is-cyan { color: var(--cyan); }
+  .kpi-value.is-rose { color: var(--rose); }
+  .kpi-value small { font-size: 12px; font-weight: 600; color: var(--ink-faint); margin-left: 3px; }
+  .kpi-note { font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; margin-top: 6px; }
+
+  /* ===== 系统卡 ===== */
+  .sys-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+  .sys {
+    background: var(--card-2); border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 15px 17px 14px;
+  }
+  .sys-head { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+  .sys-no {
+    flex: none; width: 22px; height: 22px; border-radius: 6px;
+    background: var(--amber); color: #0C1219;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sys-name { font-size: 13.5px; font-weight: 700; color: var(--ink); letter-spacing: .4px; }
+  .sys-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.72; }
+  .sys-desc b { color: var(--ink); font-weight: 600; }
+  .sys-data {
+    margin-top: 10px; padding-top: 9px; border-top: 1px dashed var(--line);
+    font-size: 12px; color: var(--cyan); font-weight: 700; line-height: 1.6;
+  }
+
+  /* ===== SVG 图表 ===== */
+  .chart-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 19px 21px 17px;
+  }
+  .chart-wrap svg { width: 100%; height: auto; display: block; }
+  .chart-wrap text { font-family: var(--font-cjk); }
+  .chart-cap {
+    margin-top: 13px; padding-top: 11px;
+    border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+  .chart-cap b { color: var(--ink-soft); font-weight: 700; }
+
+  /* ===== 三路对比 ===== */
+  .road-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+  .road {
+    background: var(--card-2); border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 15px 17px 14px;
+  }
+  .road.is-us { border-color: rgba(240,169,59,.42); background: rgba(240,169,59,.05); }
+  .road-h {
+    font-size: 13.5px; font-weight: 700; color: var(--ink);
+    padding-bottom: 9px; margin-bottom: 10px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .road.is-us .road-h { color: var(--amber-2); }
+  .road-list { display: grid; gap: 8px; }
+  .road-i { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
+  .road-i b { display: block; font-size: 10.5px; letter-spacing: .8px; color: var(--ink-faint); margin-bottom: 2px; }
+  .road-i span { color: var(--ink-2); }
+
+  /* ===== 立论 · 公式 ===== */
+  .formula {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 9px;
+    padding: 15px 17px; margin: 4px 0 14px;
+    background: var(--bg-2); border: 1px dashed var(--line); border-radius: 12px;
+  }
+  .formula-i {
+    display: inline-flex; flex-direction: column; gap: 2px;
+    padding: 7px 13px; border-radius: 9px;
+    background: var(--card-3); border: 1px solid var(--line);
+  }
+  .formula-i b { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .formula-i span { font-size: 10.5px; letter-spacing: .3px; color: var(--ink-faint); }
+  .formula-i.is-lost { border-color: rgba(240,113,106,.42); background: var(--rose-bg); }
+  .formula-i.is-lost b { color: #F2B5B1; }
+  .formula-i.is-lost span { color: var(--rose); }
+  .formula-i.is-ctrl { border-color: rgba(62,217,192,.48); background: var(--cyan-bg); }
+  .formula-i.is-ctrl b { color: var(--cyan); }
+  .formula-i.is-ctrl span { color: var(--cyan); }
+  .formula-op { font-size: 17px; font-weight: 700; color: var(--ink-faint); }
+
+  /* ===== 两个杠杆 ===== */
+  .lever-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .lever {
+    background: var(--card-2); border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 12px 12px 0; padding: 14px 17px 13px;
+  }
+  .lever.is-cyan { border-left-color: var(--cyan); }
+  .lever-h {
+    font-size: 13.5px; font-weight: 700; color: var(--amber-2);
+    letter-spacing: .4px; margin-bottom: 7px;
+  }
+  .lever.is-cyan .lever-h { color: var(--cyan); }
+  .lever-q { font-size: 12.5px; color: var(--ink-soft); line-height: 1.78; }
+  .lever-q b { color: var(--ink); font-weight: 600; }
+  .lever-ref {
+    margin-top: 9px; padding-top: 8px; border-top: 1px dashed var(--line);
+    font-size: 11px; letter-spacing: .7px; color: var(--ink-faint);
+  }
+
+  /* ===== 分隔 ===== */
+  .part-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px;
+    margin-top: 54px; padding: 14px 0 12px;
+    border-top: 2px solid var(--amber);
+    border-bottom: 1px solid var(--line);
+  }
+  .part-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    color: #0C1219; background: var(--amber); padding: 3px 9px; border-radius: 5px;
+  }
+  .part-name { font-size: 20px; font-weight: 700; letter-spacing: 3px; color: var(--ink); }
+  .part-desc { font-size: 12.5px; color: var(--ink-faint); letter-spacing: .5px; }
+  .part-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .part-head.is-cyan { border-top-color: var(--cyan); }
+  .part-head.is-cyan .part-no { background: var(--cyan); }
+  .part-head.is-blue { border-top-color: var(--blue); }
+  .part-head.is-blue .part-no { background: var(--blue); color: #fff; }
+
+  /* ===== Foot ===== */
+  .doc-foot {
+    margin-top: 52px; padding-top: 17px;
+    border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-faint); line-height: 1.95;
+  }
+  .doc-foot b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 960px) {
+    .hero-cards, .kpi-grid, .kpi-grid.n3, .sys-grid, .road-grid { grid-template-columns: 1fr 1fr; }
+    .wrap { padding: 0 20px 56px; }
+    .hero-inner { padding: 0 20px; }
+    .hero { padding: 40px 0 34px; }
+  }
+  @media (max-width: 700px) {
+    .sec-en { display: none; }
+    .sec-title { font-size: 19px; }
+    .sec-title span { display: block; margin-left: 0; margin-top: 4px; }
+    .hero-cards, .kpi-grid, .kpi-grid.n3, .sys-grid, .road-grid, .lever-grid { grid-template-columns: 1fr; }
+    .ol-row { flex-direction: column; gap: 4px; }
+  }
+  @media print {
+    /* 深色主题必须强制保留背景色，否则浅色文字在白纸上不可见 */
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: avoid; }
+    .part-head { break-after: avoid; }
+    /* 提纲选项卡：打印时隐藏 tab 条、展开全部面板 */
+    .tab-bar { display: none; }
+    .tab-panel { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Market Trend &amp; Benchmark</div>
+    <h1>美业正在两极分化<br>我们的机会在 <em>特色小店</em></h1>
+    <p class="hero-lead">
+      行业正在出清：独立门店占比一年下降 <b>9.3 个百分点</b>，而增长变量已经换位——
+      同样是开店，年到店频次可以差 <b>3–4 倍</b>。
+      <b>头部靠资本整合做大，单店靠特色求生</b>；靠个人辨识度立足的「科美 IP / 明星店」，
+      一线城市最高增长 <b>37%</b>——<b>这条路有人走通过。</b>
+      本报告分四部分：行业的判断、美丽田园的打法、我们的机会与路径、可借鉴与不可借鉴。
+    </p>
+
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-label">独立门店占比 · 一年降幅</div>
+        <div class="hc-value">−9.3pct</div>
+        <div class="hc-note">89.8% → 80.5%，一年消失近一成独立门店</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">年到店频次</div>
+        <div class="hc-value">15–20 次</div>
+        <div class="hc-note">新美业（轻资产、社区化小店）；传统门店只有 4–6 次——差 3–4 倍（第三方调研口径）</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">科美 IP / 明星店 · 最高增长</div>
+        <div class="hc-value is-cyan">+37%</div>
+        <div class="hc-note">逆势增长的 5 类门店之一，一线城市最高</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ==================== 本文提纲 ==================== -->
+  <section id="outline" style="margin-top:34px;">
+    <div class="card">
+      <div class="card-title">本文提纲<small>四个部分 · 十章</small></div>
+      <div class="tabs">
+        <input type="radio" name="outline-tab" id="ot-1" checked>
+        <input type="radio" name="outline-tab" id="ot-2">
+        <input type="radio" name="outline-tab" id="ot-3">
+        <input type="radio" name="outline-tab" id="ot-4">
+        <div class="tab-bar">
+          <label for="ot-1">第一部分 · 行业的判断</label>
+          <label for="ot-2">第二部分 · 命名与样本</label>
+          <label for="ot-3">第三部分 · 机会与路径</label>
+          <label for="ot-4">第四部分 · 借鉴与边界</label>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel" id="op-1">
+            <div class="ol">
+              <div class="ol-row"><span class="ol-no">01</span><span class="ol-t">两极分化</span></div>
+              <div class="ol-row"><span class="ol-no">02</span><span class="ol-t">存量经营</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="op-2">
+            <div class="ol">
+              <div class="ol-row"><span class="ol-no">03</span><span class="ol-t">命名即定位</span></div>
+              <div class="ol-row"><span class="ol-no">04</span><span class="ol-t">基本面与战略内核</span></div>
+              <div class="ol-row"><span class="ol-no">05</span><span class="ol-t">四套支撑系统</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="op-3">
+            <div class="ol">
+              <div class="ol-row"><span class="ol-no is-plain">立论</span><span class="ol-t">单店效率：存量时代唯一还能自己控制的东西</span></div>
+              <div class="ol-row"><span class="ol-no">06</span><span class="ol-t">机会：帮小店成为「特色小店」</span></div>
+              <div class="ol-row"><span class="ol-no">07</span><span class="ol-t">杠杆一 · 联盟背书</span></div>
+              <div class="ol-row"><span class="ol-no">08</span><span class="ol-t">杠杆二 · 系统化服务</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="op-4">
+            <div class="ol">
+              <div class="ol-row"><span class="ol-no">09</span><span class="ol-t">可借鉴的六件事</span></div>
+              <div class="ol-row"><span class="ol-no">10</span><span class="ol-t">边界与信号</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第一部分 ==================== -->
+  <div class="part-head is-cyan">
+    <span class="part-no">第一部分</span>
+    <span class="part-name">行业的判断</span>
+    <span class="part-desc">两极分化 · 存量经营</span>
+    <span class="part-en">Market</span>
+  </div>
+
+  <!-- ============ 01 ============ -->
+  <section id="polarize">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">两极分化<span>头部与特色小店两头生长，中间层塌陷</span></h2>
+      <span class="sec-en">Polarization</span>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-title" style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:14px;">
+        美容行业单店占比<small style="display:inline-block;margin-left:8px;font-size:11px;color:var(--amber);">近一成独立门店在一年内消失</small>
+      </div>
+      <svg viewBox="0 0 700 168" role="img" aria-label="美容行业单店占比由 2024 年 89.8% 下降至 2025 年 80.5%">
+        <!-- 网格 -->
+        <line x1="120" y1="18" x2="120" y2="140" stroke="#26344A" stroke-width="1"/>
+        <line x1="257.5" y1="18" x2="257.5" y2="140" stroke="#1D2839" stroke-width="1"/>
+        <line x1="395" y1="18" x2="395" y2="140" stroke="#1D2839" stroke-width="1"/>
+        <line x1="532.5" y1="18" x2="532.5" y2="140" stroke="#1D2839" stroke-width="1"/>
+        <line x1="670" y1="18" x2="670" y2="140" stroke="#1D2839" stroke-width="1"/>
+
+        <text x="108" y="42" text-anchor="end" font-size="12" fill="#93A2B8">2024</text>
+        <rect x="120" y="24" width="493.9" height="30" rx="5" fill="#3B4C66"/>
+        <text x="626" y="43" font-size="12.5" font-weight="700" fill="#C3CEDE">89.8%</text>
+
+        <text x="108" y="98" text-anchor="end" font-size="12" fill="#93A2B8">2025</text>
+        <rect x="120" y="80" width="442.8" height="30" rx="5" fill="#F0A93B"/>
+        <text x="575" y="99" font-size="12.5" font-weight="700" fill="#FFC46B">80.5%</text>
+
+        <!-- 变化标注 -->
+        <path d="M614 60 L614 76" stroke="#F0716A" stroke-width="1.4"/>
+        <path d="M610.5 72 L614 77 L617.5 72" fill="none" stroke="#F0716A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="622" y="72" font-size="11.5" font-weight="700" fill="#F0716A">−9.3pct</text>
+
+        <text x="120" y="126" font-size="10.5" fill="#64768F">0</text>
+        <text x="257.5" y="126" text-anchor="middle" font-size="10.5" fill="#64768F">25%</text>
+        <text x="395" y="126" text-anchor="middle" font-size="10.5" fill="#64768F">50%</text>
+        <text x="532.5" y="126" text-anchor="middle" font-size="10.5" fill="#64768F">75%</text>
+        <text x="670" y="126" text-anchor="middle" font-size="10.5" fill="#64768F">100%</text>
+
+        <line x1="120" y1="140" x2="670" y2="140" stroke="#26344A" stroke-width="1"/>
+        <text x="120" y="158" font-size="11.5" fill="#93A2B8">
+          同期：连锁化率同比 +9.1% ｜ 连锁阵营中 5 家以上门店品牌占比 30% → 38% ｜ 千店连锁 1% → 5%
+        </text>
+      </svg>
+      <div class="chart-cap">
+        <b>数据来源：</b>美业新纬度《回响——2025 美业白皮书》（生活美容口径）。
+        同期全国 88.9% 的美容品牌只有一家门店，9% 有 2–4 家，门店数超 20 家的品牌仅占 <b>0.1%</b>。
+        <br>
+        <b>口径提醒：</b>「88.9% 的品牌只有一家店」按<b>品牌数</b>计，「单店占比 80.5%」按<b>门店数</b>计，分母不同，不可直接相减。
+        <br>
+        出清同时发生在医美侧：天眼查数据显示，2025 年医美相关企业注销约 <b>1.2 万家</b>（同比 +50%，历史峰值），
+        同期新增注册约 <b>2.8 万家</b>——<b>是换血，不是单纯萎缩</b>。需求没有消失，而是在向有品牌、有体系的机构集中。
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">三条路，三种命运<small>中间层是压力最大的一层</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px;">梯队</th>
+              <th style="width:150px;">代表</th>
+              <th>2025–2026 表现</th>
+              <th style="width:150px;">趋势</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">头部连锁</td>
+              <td>美丽田园</td>
+              <td>收入 <b>+28.2%</b>，整合行业前三品牌，门店突破 734 家</td>
+              <td><span class="tag t-cyan">集中</span></td>
+            </tr>
+            <tr>
+              <td class="c-name">中间层</td>
+              <td>区域中型连锁</td>
+              <td>朗姿医美 <b class="down">−4.3%</b>、华韩 <b class="down">−0.4%</b>，靠关店降本才保住利润</td>
+              <td><span class="tag t-rose">承压</span></td>
+            </tr>
+            <tr>
+              <td class="c-name">底层单店</td>
+              <td>88.9% 的品牌</td>
+              <td>单店占比 <b class="down">89.8% → 80.5%</b>；医美侧企业注销 <b>1.2 万家</b></td>
+              <td><span class="tag t-rose">出清</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note rose" style="margin-top:14px;">
+        <b>中间层为什么最危险：</b>「定位介于两者之间的机构，市场空间被不断压缩，业绩表现普遍不佳。」
+        它<b>没有头部的品牌溢价与成本优势，也不具备单店的灵活与特色</b>，两头都够不着。
+        头部与中部的营收增速差距<b>超过 55 个百分点</b>。
+      </div>
+      <div class="tbl-note" style="margin-top:9px;">
+        <b>数据来源与口径：</b>
+        「单店占比」「88.9%」引自美业新纬度《回响——2025 美业白皮书》（生活美容）；
+        头部 / 中部营收增速与「1.2 万家注销」为<b>医美</b>口径，引自上市公司公告与天眼查（2025）。
+        <b>两列数据不同业态，仅作「分化」这一形态的并列说明，不作同口径比较。</b>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">逆势增长的 5 类门店<small>其中一类，就是我们要服务的对象</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:190px;">类型</th>
+              <th>特征</th>
+              <th style="width:170px;">增长情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">行业 TOP 品牌</td>
+              <td>品牌势能带来的溢价效应</td>
+              <td class="c-num">+10% ~ +37%</td>
+            </tr>
+            <tr>
+              <td class="c-name">区域龙头品牌</td>
+              <td>集中于二三线城市，密集布点 + 本土化营销 + 圈层渗透</td>
+              <td class="c-num">稳健</td>
+            </tr>
+            <tr style="background:rgba(240,169,59,.06);">
+              <td class="c-name" style="color:var(--amber-2);">科美 IP / 明星店 ★</td>
+              <td><b>专家型 IP 与流量型 IP</b>，靠个人辨识度与内容能力立足</td>
+              <td class="c-num" style="color:var(--amber-2);">一线最高 +37%</td>
+            </tr>
+            <tr>
+              <td class="c-name">其余两类</td>
+              <td>渠道与项目结构性机会</td>
+              <td class="c-num">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note" style="margin-top:9px;">
+        <b>数据来源：</b>美业新纬度《回响——2025 美业白皮书》「逆势增长的 5 类门店」。<b>口径为生活美容。</b>
+        增长率 +10%~+37% 为原文给出的区间，非精确统计值。
+      </div>
+      <div class="note cyan" style="margin-top:14px;">
+        <b>「科美 IP / 明星店」就是我们说的特色小店。</b>
+        它不靠规模、不靠资本，靠的是<b>手艺辨识度、个人风格和内容能力</b>——
+        这恰好是 2 人小店<b>唯一可能建立、且不需要资本</b>的护城河。这是我们要服务的那一类。
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">先定义清楚：什么是「新美业」<small>它不是「更便宜的美容院」，而是把赚钱的位置换了一处</small></div>
+
+      <div class="note" style="margin-top:0;">
+        <b>新美业 = 轻资产、社区化、靠高频到店而非单次成交赚钱的业态</b>（典型品类：皮肤管理、科技美肤）。
+        它和传统门店的差别不在规模大小，而在<b>钱是从哪一笔里赚出来的</b>。
+      </div>
+
+      <div class="tbl-wrap" style="border:none;border-radius:0;margin-top:12px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:140px;">维度</th>
+              <th style="width:235px;">传统门店</th>
+              <th>新美业（高频型）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">门店形态</td>
+              <td>商场 / 街边大店，重装修、重人力</td>
+              <td><b>轻资产、社区化小店</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">典型品类</td>
+              <td>综合美容、养生、SPA</td>
+              <td><b>皮肤管理、科技美肤</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">卖的是什么</td>
+              <td>项目与套餐——一次成交</td>
+              <td><b>持续到店的护理关系</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">赚钱靠什么</td>
+              <td>一次成交赚够</td>
+              <td><b>频次 × 复购</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">客户的角色</td>
+              <td>一次性的客人</td>
+              <td><b>可留存的资产</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note cyan" style="margin-top:13px;">
+        <b>别把三个词混在一起：</b>
+        <b>「新美业」</b>说的是<b>怎么赚钱</b>（模型）；
+        <b>「科美 IP / 明星店」</b>说的是<b>靠什么立足</b>（定位），是白皮书里逆势增长的一类门店。
+        我们服务的<b>特色小店</b>更接近后者——<b>但它要想活得久，赚钱逻辑必须学前者。</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section id="stock">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">存量经营<span>客单价没崩，崩的是「一次成交赚够」</span></h2>
+      <span class="sec-en">From Traffic to Retention</span>
+    </div>
+
+    <p class="sec-lead">
+      行业从「抢增量」转入「经营存量」。但真实图景和常见说法不同：
+      <b>客单价并没有崩，真正的问题是新客的第一道门已经不在门店自己手里</b>。
+      两件事同时成立，增长的重心就必须换地方。
+    </p>
+
+    <div class="chart-wrap">
+      <div class="chart-title" style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:14px;">
+        一笔新客预约，发生在谁的地盘上<small style="display:inline-block;margin-left:8px;font-size:11px;color:var(--amber);">2025 年首次预约的渠道构成，同一比例尺</small>
+      </div>
+      <svg viewBox="0 0 700 150" role="img" aria-label="首次预约渠道：第三方平台 46.8%，机构自建小程序 11.2%">
+        <!-- 基线 -->
+        <line x1="196" y1="16" x2="196" y2="104" stroke="#26344A" stroke-width="1"/>
+
+        <!-- 第三方平台 -->
+        <text x="188" y="40" text-anchor="end" font-size="11.5" fill="#93A2B8">第三方平台</text>
+        <rect x="196" y="22" width="221.8" height="26" rx="4" fill="#F0A93B"/>
+        <text x="427.8" y="40" font-size="12.5" font-weight="700" fill="#FFC46B">46.8%</text>
+
+        <!-- 机构自建小程序 -->
+        <text x="188" y="82" text-anchor="end" font-size="11.5" fill="#93A2B8">机构自建小程序</text>
+        <rect x="196" y="64" width="53.1" height="26" rx="4" fill="#3ED9C0"/>
+        <text x="259.1" y="82" font-size="12.5" font-weight="700" fill="#3ED9C0">11.2%</text>
+
+        <line x1="196" y1="104" x2="670" y2="104" stroke="#26344A" stroke-width="1"/>
+        <text x="196" y="122" text-anchor="middle" font-size="10.5" fill="#64768F">0</text>
+        <text x="314.5" y="122" text-anchor="middle" font-size="10.5" fill="#64768F">25%</text>
+        <text x="433" y="122" text-anchor="middle" font-size="10.5" fill="#64768F">50%</text>
+        <text x="551.5" y="122" text-anchor="middle" font-size="10.5" fill="#64768F">75%</text>
+        <text x="670" y="122" text-anchor="middle" font-size="10.5" fill="#64768F">100%</text>
+      </svg>
+      <div class="chart-cap">
+        <b>数据来源：</b>2026 中国美容美发机构行业调查报告（2025 年线上渠道口径：美团 / 大众点评 / 抖音本地生活等第三方平台）。
+        <br>
+        <b>这说明什么：</b>门店自己的小程序只接过 11.2% 的新客——<b>拉新的入口握在平台手里，门店只能被动接单、被动比价</b>。
+        在 25–35 岁客群里这个数字更极端：线上预约率高达 <b>73.4%</b>。
+        <br>
+        <b>结论：</b>能自己控制的，只剩「顾客来得有多勤、留得有多久」。
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:14px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">指标</th>
+            <th style="width:230px;">真实数据</th>
+            <th>这说明什么</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">单次服务均价</td>
+            <td class="c-num"><span class="up">285 → 302 元（+6.0%）</span></td>
+            <td>客单价在<b>微涨</b>，不是崩盘——但也几乎没有涨价空间</td>
+          </tr>
+          <tr>
+            <td class="c-name">新客入口</td>
+            <td class="c-num"><span class="down">第三方平台 46.8% ／ 自建 11.2%</span></td>
+            <td>新客的第一道门在平台手里，门店拿不到入口</td>
+          </tr>
+          <tr>
+            <td class="c-name">消费频次</td>
+            <td class="c-num">平台美容用户年均 <b>8.2 次</b></td>
+            <td>高频是可能的；但传统门店自己做出来只有 4–6 次</td>
+          </tr>
+          <tr>
+            <td class="c-name">消费结构</td>
+            <td class="c-num">单次服务项目数 2.1 → <b>2.8 项</b></td>
+            <td>顾客要的是「一次做成套」，而不是单次更高客单</td>
+          </tr>
+          <tr>
+            <td class="c-name">单次服务时长</td>
+            <td class="c-num">72.4 分钟（−9.3 分钟）</td>
+            <td>更看重便利与效率——<b>73% 的顾客要求到店 ≤ 30 分钟</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-note">
+      <b>数据来源与口径：</b>
+      「单次服务均价 / 项目数 / 时长」为生活美容口径，引自 2026 中国美容美发机构行业调查报告；
+      「年均消费 8.2 次」为<b>美团平台美容用户</b>口径（2024 年美团连锁美容大会），非全行业门店到店频次，两者分母不同，不可直接换算；
+      「73% 要求到店 ≤ 30 分钟」引自美业门店模式调研报告。
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">真正的分化：两种模型，不是两种规模<small>客单价低 3–4 倍，效率却全面反超</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:145px;">指标</th>
+              <th style="width:155px;">传统门店</th>
+              <th style="width:175px;">新美业（高频型）</th>
+              <th>差距</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">客单价</td>
+              <td>300–800 元</td>
+              <td><b>50–200 元</b></td>
+              <td>低 3–4 倍——换来下面四项</td>
+            </tr>
+            <tr>
+              <td class="c-name">年到店频次</td>
+              <td>4–6 次</td>
+              <td><b>15–20 次</b></td>
+              <td><b class="up">3–4 倍</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">客户复购率</td>
+              <td>40%–50%</td>
+              <td><b>65%–75%</b></td>
+              <td><b class="up">+25pct</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">获客成本</td>
+              <td>200–300 元 / 人</td>
+              <td><b>50–80 元 / 人</b></td>
+              <td><b class="up">低约 70%</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">净利率</td>
+              <td>5%–8%</td>
+              <td><b>18%–25%</b></td>
+              <td><b class="up">3 倍以上</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">单店投资</td>
+              <td>80–150 万元</td>
+              <td><b>8–10 万元</b></td>
+              <td>低约 90%（社区小店可负担）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note cyan" style="margin-top:14px;">
+        <b>结论不是「客单价高的赢」，而是「频次高的赢」。</b>
+        新美业把客单价压到 1/3，却在频次、复购、获客成本、净利率四项上全面反超——
+        <b>它赚的不是单次的钱，是关系的钱。</b>
+      </div>
+      <div class="note" style="margin-top:11px;">
+        <b>和美丽田园是同一个逻辑。</b>它的入口（生美）毛利率最低（44.2%），本身不赚钱，
+        是用来获客和建立关系的；赚钱的是后面的转化。<b>小店的版本是：把频次和复购做成入口。</b>
+        <br>
+        <b>回到公式：</b>这两个模型的差别，正好落在等式里那两个「可控」项上——<b>到店频次</b>与<b>留存年数</b>。
+      </div>
+      <div class="tbl-note" style="margin-top:10px;">
+        <b>数据来源与口径：</b>美业门店模式调研报告（2026）。「新美业」指轻资产、社区化、高频到店的业态（如皮肤管理、科技美肤）。
+        该组为第三方调研口径，非上市公司披露数据，供趋势判断参考，不作为精确基线。
+      </div>
+    </div>
+
+    <div class="note plain" style="margin-top:13px;">
+      <b>补充一个同向的信号：</b>在医美机构的实际招新渠道中，<b>老带新占比 89%</b>，
+      明显高于大众点评 / 美团 65%、小红书 57%——
+      <b>信任链正在替代流量采买成为获客主力</b>（证券之星研究员专栏，2026-07，医美机构口径）。
+      有意思的是，唯一能自己造出这种信任的，恰恰是 2 人小店。
+    </div>
+
+    <div class="card" style="margin-top:13px;border-color:rgba(240,169,59,.34);">
+      <div class="card-title">认知差：门店的第一诉求，和数据指向的不是同一个<small>不是谁不懂经营，而是过去的经验在存量市场里失效了</small></div>
+
+      <div class="note" style="margin-top:0;">
+        <b>门店说：</b>7 家门店回访中，<b>4 家（57%）</b>主动提出的第一诉求是<b>拓客引流</b>。
+        <b>但平台拓客实际换回来的，通常是三件事——</b>
+      </div>
+
+      <div class="tbl-wrap" style="border:none;border-radius:0;margin-top:12px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:150px;">平台拓客的代价</th>
+              <th>实际表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">① 不赚钱</td>
+              <td>引流品本身就是低价品，<b>利润低，甚至是亏本赚吆喝</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">② 不沉淀</td>
+              <td><b>一单就走</b>、回头客很少，<b>几乎都是薅羊毛的</b>——只有少数能转成会员的才有价值</td>
+            </tr>
+            <tr style="background:rgba(240,113,106,.07);">
+              <td class="c-name" style="color:var(--rose);">③ 挤产能</td>
+              <td>集中到店时 <b>2 个人根本招待不过来</b>，<b>挤掉的正是本来有正常利润的单子</b>——这一层损失最大，也最容易被忽略</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note rose" style="margin-top:14px;">
+        <b>2 人小店的产能是固定的。</b>同一个工位、同一双手，给了低价客就用不到复购老客身上。
+        <b>多接一个薅羊毛的单，不是多赚一单，而是少赚一单。</b>
+        拓客的价值不能按「来了多少新客」算，只能按<b>单位产能贡献了多少利润</b>算。
+      </div>
+
+      <div class="note cyan" style="margin-top:11px;">
+        <b>租来的客户，还是买断的客户？</b>
+        平台来的每个新客，门店都要为这一次到店再付一次钱，<b>价格和规则还由平台定</b>——这是<b>租</b>；
+        留住的老客第二次起不再产生获客成本——这是<b>买断</b>。
+        <br><br>
+        <b>拓客并没有变得不重要，而是变得不可控了。</b>
+        入口在平台手里，成本与规则都不由门店决定；真正还能自己决定的，只有<b>让已有客户来得更勤、留得更久</b>。
+        <b>把第一诉求押在一个不可控项上——这才是要帮门店跨过的认知差。</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第二部分 ==================== -->
+  <div class="part-head is-blue">
+    <span class="part-no">第二部分</span>
+    <span class="part-name">命名与样本</span>
+    <span class="part-desc">它为什么叫「医疗健康」· 我们为什么叫「联盟」</span>
+    <span class="part-en">Benchmark</span>
+  </div>
+
+  <!-- ============ 03 ============ -->
+  <section id="naming">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">命名即定位<span>「联盟」二字，决定了我们能做多远</span></h2>
+      <span class="sec-en">Positioning</span>
+    </div>
+
+    <p class="sec-lead">
+      美丽田园把自己叫「医疗健康」，换进了一个更被信任的品类。
+      <b>而我们的名字里同时写着两件事——「剑琅」是品牌，「联盟」是组织形态。</b>
+      它不是对一款产品的描述。
+    </p>
+
+    <div class="card">
+      <div class="card-title">「联盟」不是「系统」的另一种叫法<small>同样的能力，在不同名字下的合法性完全不同</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:175px;">我们要做的事</th>
+              <th style="width:200px;">若命名为「系统 / SaaS」</th>
+              <th>命名为「联盟」</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">认证与评级</td>
+              <td><span class="down">越界</span>　工具凭什么给商家评级</td>
+              <td><span class="up">射程内</span>　联盟本该有成员标准</td>
+            </tr>
+            <tr>
+              <td class="c-name">联合采购 / 集采</td>
+              <td><span class="down">越界</span>　软件不卖货</td>
+              <td><span class="up">射程内</span>　联盟的本职</td>
+            </tr>
+            <tr>
+              <td class="c-name">培训与标准输出</td>
+              <td><span class="down">越界</span>　超出功能边界</td>
+              <td><span class="up">射程内</span>　成员赋能</td>
+            </tr>
+            <tr>
+              <td class="c-name">品牌背书</td>
+              <td><span class="down">越界</span>　我们不是权威</td>
+              <td><span class="up">射程内</span>　联盟就是那个权威</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;">
+        <b>产品会过时，组织不会。</b>
+        命名为一款系统，关系是<b>买卖（订阅）</b>，对方是客户；命名为一个联盟，关系是<b>共生（成员）</b>——
+        一企一票，<b>不向成员索取利润，从共同做大中获益</b>。
+        命名为系统，边界就是那些功能；命名为联盟，上限是一整套行业基础设施。
+        <b>射程不是后来挣来的，是名字一开始就划定的。</b>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">现实中的联盟长什么样<small>零售业的同构样本：蚂蚁商业联盟（2017 年由 6 省 12 家零售企业发起）</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:150px;">维度</th>
+              <th>蚂蚁商业联盟（蚂蚁商联）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">形态与规模</td>
+              <td>公司化运作的<b>自愿联盟组织</b>；<b>100 家</b>成员企业 · <b>9,000+</b> 门店 · 年营业额合计近 <b>1,000 亿元</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">治理</td>
+              <td><b>一企一票</b>共建组织，成员深度参与</td>
+            </tr>
+            <tr>
+              <td class="c-name">与成员关系</td>
+              <td>各项赋能板块<b>不向成员企业索取利润</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">统一标识</td>
+              <td>联合自有品牌统一标注「<b>CAA</b>」标志，<b>为成员背书</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note cyan" style="margin-top:14px;">
+        <b>它证明了两件事：</b>「联盟」可以是一种<b>真实存在的组织形态</b>，不是系统的委婉叫法；
+        而<b>统一标识背书 + 不向成员索取利润</b>，是这种组织能立住的根基。
+      </div>
+      <div class="tbl-note" style="margin-top:9px;"><b>数据来源：</b>蚂蚁商业联盟（CAA）官方公开资料与公开报道；成员数、门店数与营业额为官方披露口径。</div>
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">对照：它在上市那一刻就把自己定义为「医疗健康」<small>不是事后包装，随后也确实因此获益</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:135px;">节点</th>
+              <th>事实</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">1993</td>
+              <td>品牌创立——<b>美容院起家</b></td>
+            </tr>
+            <tr>
+              <td class="c-key">2022 年 2 月</td>
+              <td>搭建上市主体，命名为 <b>「美丽田园医疗健康产业有限公司」</b>
+                （Beauty Farm Medical and Health Industry Inc.）——<b>不是「美容」</b></td>
+            </tr>
+            <tr>
+              <td class="c-key">2023 年 1 月</td>
+              <td>港交所上市 <b>2373.HK</b>；名称<b>沿用至今未变更</b></td>
+            </tr>
+            <tr style="background:rgba(240,169,59,.07);">
+              <td class="c-key" style="color:var(--amber-2);">命名之后</td>
+              <td style="color:var(--amber-2);font-weight:600;">它确实因此获益 ↓</td>
+            </tr>
+            <tr>
+              <td class="c-key">业务结构</td>
+              <td>2026H1 医疗美容 + 亚健康合计 <b>7.87 亿</b>，占总收入 <b>41.8%</b>
+                <span style="color:var(--ink-faint);">（医美 6.03 + 亚健康 1.84；中报未直接披露该合计，此为本报告加总计算）</span></td>
+            </tr>
+            <tr>
+              <td class="c-key">盈利质量</td>
+              <td>毛利率梯度 <b>44.2% → 58.9% → 69.0%</b>——<b>越靠近「医疗健康」，越赚钱</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-title" style="margin-top:18px;">但它做集中，我们做联盟<small>同一个机制，不同的货币</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:150px;">维度</th>
+              <th>美丽田园</th>
+              <th>剑琅联盟</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">扩张方式</td>
+              <td>并购收编，门店并入统一品牌</td>
+              <td><b>联盟，门店保留独立品牌与特色</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">换信任的货币</td>
+              <td>医疗资质</td>
+              <td><b>联盟认证</b></td>
+            </tr>
+            <tr>
+              <td class="c-name">名字在避开什么</td>
+              <td>「医疗健康」——避开「美容」品类</td>
+              <td><b>「联盟」——避开「系统 / SaaS」框架</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note" style="margin-top:14px;">
+        <b>两者都在做同一件事：把门店搬进一个更被信任的类别。</b>
+        医疗资质 2 人小店永远拿不到，但<b>认证能做到同一件事</b>——
+        <b>它用「医疗」换信任，我们用「联盟认证」换信任。</b>
+      </div>
+    </div>
+
+    <div class="note plain" style="margin-top:13px;">
+      <b>名字是起点，不是包装。</b>它在上市那一刻选择了「医疗健康」，此后每一步经营都在往这个名字上靠——
+      <b>名字先划定方向，经营再把方向兑成事实。</b>
+      我们的「<b>联盟</b>」二字，同样已经划定了方向；剩下的是把它兑成事实。
+      <br><br>
+      <b>而这个名字是有承诺的：</b>成员独立、共同定标准、不向成员索取利润——做到这些，名字才有分量。
+      第三部分 07 章的<b>认证评级体系</b>，就是「联盟」最直接的一次落地。
+    </div>
+
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section id="beautyfarm">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">基本面与战略内核<span>一条公式，三个数字</span></h2>
+      <span class="sec-en">Profile &amp; Engine</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:90px;">年度</th>
+            <th>收入</th>
+            <th>毛利率</th>
+            <th>经调净利</th>
+            <th>经调净利率</th>
+            <th>直营活跃会员</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-key">2024</td>
+            <td class="c-num">25.72 亿</td>
+            <td class="c-num">46.3%</td>
+            <td class="c-num">2.70 亿</td>
+            <td class="c-num">10.5%</td>
+            <td class="c-num">13.70 万</td>
+          </tr>
+          <tr>
+            <td class="c-key">2025</td>
+            <td class="c-num">30.01 亿 <span class="up">+16.7%</span></td>
+            <td class="c-num">49.1%</td>
+            <td class="c-num">3.81 亿 <span class="up">+41.0%</span></td>
+            <td class="c-num">12.7%</td>
+            <td class="c-num">15.44 万</td>
+          </tr>
+          <tr>
+            <td class="c-key">2026H1</td>
+            <td class="c-num">18.82 亿 <span class="up">+29.0%</span></td>
+            <td class="c-num">51.4%</td>
+            <td class="c-num">2.63 亿 <span class="up">+39.9%</span></td>
+            <td class="c-num">14.0%</td>
+            <td class="c-num">22.0 万 <span class="flat">(年化)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-note">
+      <b>数据来源：</b>美丽田园医疗健康（<b>2373.HK</b>）2024 年报、2025 年报、2026 中期报告（港交所披露原文）。
+      「经调净利 / 经调净利率」为公司披露的非 IFRS 调整口径。
+      1993 年成立，2023 年 1 月港交所上市；
+      门店 <b>706 家</b>（直营 395 / 加盟 311，截至 2026-06-30），覆盖 100+ 城市。
+      <br>
+      <b>口径提醒：</b>集团门店总数在 2025 年 10 月收购思妍丽后曾达 <b>734 家</b>，
+      2026 年中报为 <b>706 家</b>——是主动关闭低效门店、推动门店向高端商业体迁移后的结果，不是规模收缩。
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">核心公式<small>一句话说清它靠什么赢</small></div>
+      <div class="note" style="margin-top:0;">
+        <b>用高频、低门槛的入口业务获取客户 → 沉淀为会员资产与信任 → 向高毛利业务交叉转化 → 把客户终身价值拉满 → 获客成本因此被摊薄到接近于零。</b>
+      </div>
+
+      <div class="chart-wrap" style="border:none;padding:0;margin-top:16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px;">
+          毛利率梯度：入口最薄、转化最厚
+        </div>
+        <svg viewBox="0 0 700 196" role="img" aria-label="三大板块毛利率：美容和保健 44.2%，医疗美容 58.9%，亚健康医疗 69.0%">
+          <line x1="120" y1="14" x2="120" y2="158" stroke="#26344A" stroke-width="1"/>
+          <line x1="220" y1="14" x2="220" y2="158" stroke="#1D2839" stroke-width="1"/>
+          <line x1="320" y1="14" x2="320" y2="158" stroke="#1D2839" stroke-width="1"/>
+          <line x1="420" y1="14" x2="420" y2="158" stroke="#1D2839" stroke-width="1"/>
+          <line x1="520" y1="14" x2="520" y2="158" stroke="#1D2839" stroke-width="1"/>
+
+          <text x="108" y="38" text-anchor="end" font-size="12" fill="#C3CEDE">美容和保健</text>
+          <rect x="120" y="22" width="176.8" height="28" rx="4" fill="#2E6B5E"/>
+          <text x="305" y="41" font-size="12.5" font-weight="700" fill="#3ED9C0">44.2%</text>
+          <text x="366" y="41" font-size="11.5" fill="#64768F">流量入口</text>
+
+          <text x="108" y="92" text-anchor="end" font-size="12" fill="#C3CEDE">医疗美容</text>
+          <rect x="120" y="76" width="235.6" height="28" rx="4" fill="#4A9E8D"/>
+          <text x="364" y="95" font-size="12.5" font-weight="700" fill="#3ED9C0">58.9%</text>
+          <text x="425" y="95" font-size="11.5" fill="#64768F">转化标的</text>
+
+          <text x="108" y="146" text-anchor="end" font-size="12" fill="#C3CEDE">亚健康医疗</text>
+          <rect x="120" y="130" width="276" height="28" rx="4" fill="#3ED9C0"/>
+          <text x="405" y="149" font-size="12.5" font-weight="700" fill="#3ED9C0">69.0%</text>
+          <text x="460" y="149" font-size="11.5" fill="#64768F">高毛利延伸</text>
+
+          <line x1="120" y1="158" x2="670" y2="158" stroke="#26344A" stroke-width="1"/>
+          <text x="120" y="176" text-anchor="middle" font-size="10.5" fill="#64768F">0</text>
+          <text x="220" y="176" text-anchor="middle" font-size="10.5" fill="#64768F">25%</text>
+          <text x="320" y="176" text-anchor="middle" font-size="10.5" fill="#64768F">50%</text>
+          <text x="420" y="176" text-anchor="middle" font-size="10.5" fill="#64768F">75%</text>
+          <text x="520" y="176" text-anchor="middle" font-size="10.5" fill="#64768F">100%</text>
+          <text x="120" y="192" font-size="11.5" fill="#93A2B8">2026H1 收入结构：美容保健 10.95 亿（58%）· 医美 6.03 亿（32%）· 亚健康 1.84 亿（10%）</text>
+        </svg>
+      </div>
+
+      <div class="note plain" style="margin-top:14px;">
+        <b>关键：入口本来就不是用来赚钱的，是用来获客和建立信任的。</b>
+        入口毛利率最低（44.2%），转化标的最高（69.0%）——这个梯度是整条公式成立的前提。
+      </div>
+    </div>
+
+    <div class="kpi-grid" style="margin-top:13px;">
+      <div class="kpi">
+        <div class="kpi-label">生美 → 医美 / 亚健康 转化率</div>
+        <div class="kpi-value">24.9%</div>
+        <div class="kpi-note">高端美容会员达 28.7%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">获客相关费用占收入</div>
+        <div class="kpi-value">&lt; 2%</div>
+        <div class="kpi-note">年报原文：significantly below the industry average</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">活跃会员次年留存率</div>
+        <div class="kpi-value">80%</div>
+        <div class="kpi-note">15 年留存率 51%（2025 年报）</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">私域贡献新会员</div>
+        <div class="kpi-value">46%</div>
+        <div class="kpi-note">2025H1，来自精准推送 + 老带新（2024 年为 34%）</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:13px;">
+      <b>交叉转化率 24.9% 是整条公式的心脏。</b>
+      它意味着医美业务几乎不需要自己获客——直接从入口业务的会员池里转化。
+      由此形成自我强化的循环：<b>转化越强 → 获客成本越低 → 越能投入服务 → 留存越高 → 可转化池越大。</b>
+    </div>
+    <div class="tbl-note" style="margin-top:9px;">
+      <b>数据来源与口径：</b>毛利率梯度（44.2% / 58.9% / 69.0%）与「获客相关费用占收入 &lt; 2%」引自 2026 中期报告原文；
+      「交叉转化率 24.9%」源自 2024 年报（口径：美容和保健活跃会员中同期购买医美或亚健康服务者的比例），
+      <b>2025H1 该口径为 20%</b>，年度间有波动，此处取最近一次披露的年度值；
+      「次年留存率 80% / 15 年留存率 51%」引自 2025 年报；
+      「私域贡献新会员 46%」为 2025H1 口径（2024 年为 34%）。
+      <b>年报未披露「同业获客成本占比」的具体数值，故本报告不给出同业对比数。</b>
+    </div>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section id="systems">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">四套支撑系统<span>公式不是靠人跑出来的，是靠系统</span></h2>
+      <span class="sec-en">The Systems</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:170px;">系统</th>
+            <th>做什么</th>
+            <th style="width:250px;">关键数据</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">① 客户价值成长系统</td>
+            <td>覆盖推广、获客、转化、留存、价值提升、复购、裂变全链路；把「经验判断」变成「数据驱动」</td>
+            <td class="c-num">8 级会员 · 200+ 标签 · 会员年消费带 3,600–18 万元</td>
+          </tr>
+          <tr>
+            <td class="c-name">② 强平台 + 多品牌系统</td>
+            <td>供应链、数字化、CRM、HR 做成平台能力向各品牌输出，被并购品牌「即插即用」</td>
+            <td class="c-num">奈瑞儿净利率 6.5% → 10.8%<br>思妍丽 9.5% → 11.0%</td>
+          </tr>
+          <tr>
+            <td class="c-name">③ 并购价值成长系统</td>
+            <td>10 年 30 余起收购，「投资 + 整合 + 成长」全周期管理，自研「X 系统」做并购数据清洗与过渡</td>
+            <td class="c-num">行业前三品牌全部归其旗下</td>
+          </tr>
+          <tr>
+            <td class="c-name">④ 数智化与 AI 系统</td>
+            <td>贯穿前三套系统的神经中枢；自研行业首个自训练大模型「AI 小奈」；「风铃系统」整合质控、满意度、神秘客、工单</td>
+            <td class="c-num">累计投入 5 亿+<br>100+ 人 IT · 40+ 自研系统</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note" style="margin-top:13px;">
+      <b>单店效率是它真正拉开差距的地方：</b>
+      主品牌直营门店<b>单店年化平均收入超 1,200 万元</b>，直营会员单店收入同比 <b>+5.5%</b>；
+      奈瑞儿被整合后<b>单店年收入从 575 万升至 810 万元</b>。
+      同样是做美容，它把每一家店的产出做到了另一个量级。
+    </div>
+    <div class="tbl-note" style="margin-top:9px;">
+      <b>数据来源与口径：</b>
+      「奈瑞儿 6.5% → 10.8%」「思妍丽 9.5% → 11.0%」为<b>经调整净利率</b>（非 IFRS 口径），6.5% 与 9.5% 为收购前水平，
+      引自 2026 中期报告及公司业绩公告；
+      「单店年化平均收入超 1,200 万元」为 2026H1 主品牌直营门店口径（2024 年报口径为超 1,000 万元）；
+      「累计投入 5 亿+ / 100+ 人 IT」引自公司业绩交流会材料，为十年累计口径；
+      「8 级会员 / 200+ 标签 / 会员年消费带 3,600–18 万元」为客户价值成长系统披露口径，
+      <b>3,600–18 万元为会员<b>年消费</b>带（按会员分层），不是单次客单价。</b>
+    </div>
+  </section>
+
+  <!-- ==================== 第三部分 ==================== -->
+  <div class="part-head">
+    <span class="part-no">第三部分</span>
+    <span class="part-name">机会与路径</span>
+    <span class="part-desc">单店效率 · 两个杠杆</span>
+    <span class="part-en">Our Play</span>
+  </div>
+
+  <!-- ============ 立论 ============ -->
+  <section id="thesis">
+    <div class="card" style="border-color:rgba(240,169,59,.34);">
+      <div class="card-title">单店效率：存量时代唯一还能自己控制的东西</div>
+
+      <div class="formula">
+        <span class="formula-op" style="font-size:12px;letter-spacing:1.5px;color:var(--ink-faint);">单店收入　=</span>
+        <span class="formula-i is-lost"><b>客户数</b><span>入口在平台 ↓</span></span>
+        <span class="formula-op">×</span>
+        <span class="formula-i is-ctrl"><b>到店频次</b><span>可控</span></span>
+        <span class="formula-op">×</span>
+        <span class="formula-i is-lost"><b>客单价</b><span>增速仅 6.0% →</span></span>
+        <span class="formula-op">×</span>
+        <span class="formula-i is-ctrl"><b>留存年数</b><span>可控</span></span>
+      </div>
+
+      <p class="body">
+        等式右边四项里，<b>「客户数」不由门店说了算——新客的第一道门在第三方平台手里（46.8%），自建渠道只接到 11.2%；「客单价」同样难动——单次服务均价 302 元、年增速仅 6.0%</b>。
+        这两项门店很难单方面改变。真正还能自己决定的，是<b>顾客来得有多勤、留得有多久</b>——
+        而这两个数字的区间差距极大：传统门店年到店 4–6 次，高频模型能做到 15–20 次。
+      </p>
+
+      <div class="lever-grid">
+        <div class="lever">
+          <div class="lever-h">杠杆一 · 联盟背书</div>
+          <div class="lever-q">解决「<b>顾客凭什么信你</b>」。2 人小店最缺的不是手艺，是让人一眼信得过的凭证。</div>
+          <div class="lever-ref">→ 07 章</div>
+        </div>
+        <div class="lever is-cyan">
+          <div class="lever-h">杠杆二 · 系统化服务</div>
+          <div class="lever-q">解决「<b>顾客为什么留下</b>」。从卖一次项目，变成卖一个有计划的长期方案。</div>
+          <div class="lever-ref">→ 08 章</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section id="niche">
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2 class="sec-title">机会：帮小店成为「特色小店」<span>中间层在塌，单店的第三条路在哪</span></h2>
+      <span class="sec-en">Niche Brand</span>
+    </div>
+
+    <p class="sec-lead">
+      行业只剩三条路。<b>头部靠资本整合，中间层两头受挤，单店唯一的出路是做出辨识度。</b>
+      但 2 人小店没有预算请设计师、没有团队做内容、也没有专人管客户——
+      <b>把这三个「没有」补上，就是我们能提供的价值。</b>
+    </p>
+
+    <div class="road-grid">
+      <div class="road">
+        <div class="road-h">头部连锁 <span class="tag t-cyan">集中</span></div>
+        <div class="road-list">
+          <div class="road-i"><b>靠什么赢</b><span>资本整合、标准化、品牌溢价</span></div>
+          <div class="road-i"><b>对剑琅的含义</b><span>不是我们的客户</span></div>
+        </div>
+      </div>
+      <div class="road">
+        <div class="road-h">中间层 <span class="tag t-rose">承压</span></div>
+        <div class="road-list">
+          <div class="road-i"><b>靠什么活</b><span>无品牌溢价、无成本优势，两头受压</span></div>
+          <div class="road-i"><b>对剑琅的含义</b><span>转型压力最大，可能成为客户，但不是主体</span></div>
+        </div>
+      </div>
+      <div class="road is-us">
+        <div class="road-h">特色小店 <span class="tag t-amber">机会</span></div>
+        <div class="road-list">
+          <div class="road-i"><b>靠什么赢</b><span>手艺辨识度、个人风格、内容能力</span></div>
+          <div class="road-i"><b>对剑琅的含义</b><span><b style="color:var(--amber-2);">我们的主战场</b></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">「特色小店」需要三个支点<small>前两个解决「被信任」，第三个解决「被留住」</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:180px;">支点</th>
+              <th style="width:280px;">小店的真实困境</th>
+              <th>剑琅已有的能力</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">① 有辨识度的项目</td>
+              <td>项目一大堆，但说不出自己的强项是什么</td>
+              <td>项目创建与管理、价目表分组（<b>分组即营销抓手</b>，把主推拖到前排）</td>
+            </tr>
+            <tr>
+              <td class="c-name">② 能被看见的内容</td>
+              <td>请不起设计师，做不起宣传物料；想做内容又没素材</td>
+              <td><b style="color:var(--amber-2);">AI 图库</b>——生成营销海报、活动宣传图、产品宣传图；
+                C 端小程序「剑琅美遇」作为自有展示入口</td>
+            </tr>
+            <tr>
+              <td class="c-name">③ 记得住的客户关系</td>
+              <td>客户做完就走，靠脑子记不住，复购全凭运气</td>
+              <td>会员卡（储值 / 次卡）、客户档案、B 端与 C 端<b>共享同一会员数据中心</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;">
+        <b>一线已经有活样本：</b>试点门店喜哥「<b>平时常拍短视频做个人展示，具备成为内容 IP 的天然条件</b>」，
+        3 家试点门店老板也都有意愿共做视频推广。
+        <b>他们已经在往「特色小店」的方向走了，只是没有工具把这件事做省力。</b>
+      </div>
+      <div class="note cyan" style="margin-top:11px;">
+        <b>与头部的根本区别：</b>美丽田园把门店做成<b>连锁</b>——统一品牌、统一标准，门店越像越好；
+        我们帮门店做出<b>自己的特色</b>——保留独立品牌，让它越有辨识度越好。
+        <b>它做集中，我们做差异。</b>这是两个方向，我们不与它正面竞争。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section id="endorse">
+    <div class="sec-head">
+      <span class="sec-no">07</span>
+      <h2 class="sec-title">杠杆一 · 联盟背书<span>让别人信得过</span></h2>
+      <span class="sec-en">Endorsement</span>
+    </div>
+
+    <p class="sec-lead">
+      2 人小店最大的劣势不是手艺，是<b>没有背书</b>。
+      行业数据说得很直接——消费者在不确定中，<b>把信任押注给了那些看起来更稳定、更标准化的品牌</b>。
+      这份信任靠小店自己是拿不到的，<b>这正是「联盟」二字该兑现的地方。</b>
+    </p>
+
+    <div class="card">
+      <div class="card-title">一个被忽略的事实：标准早就有，只是没人把它做成品牌</div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px;">已有的</th>
+              <th>内容</th>
+              <th style="width:180px;">问题</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">国家标准</td>
+              <td><b>SB/T 11018-2013《美发美容企业星级划分》</b>——商务部发布、中国美发美容协会提出。一至五星，按单店评定，依据设施设备、服务质量、管理水平、顾客满意度</td>
+              <td><span class="tag t-rose">消费者不知道、也不认</span></td>
+            </tr>
+            <tr>
+              <td class="c-name">地方标准</td>
+              <td>杭州 <b>DB3301/T 0154-2018</b>、山西 <b>DB14/T 164-2019</b> 等星级评定与服务规范</td>
+              <td><span class="tag t-rose">只在行业内部流转</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;">
+        <b>缺的不是标准，是把标准变成「消费者信得过的品牌」。</b>
+        而且现有标准评的是设施与规模，对 2 人小店并不友好。
+        让一个陌生顾客隔着屏幕相信一家小店——这件事，餐饮行业已经证明了三遍：
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:13px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:170px;">参照</th>
+            <th>公信力是怎么建立的</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">米其林指南</td>
+            <td>匿名评审员、<b>自费就餐</b>、五项标准公开、<b>不登付费广告</b></td>
+          </tr>
+          <tr>
+            <td class="c-name">黑珍珠餐厅指南</td>
+            <td>匿名评委 + <b>利益申报回避</b> + 国家公证机构公证 + 平台大数据交叉验证</td>
+          </tr>
+          <tr>
+            <td class="c-name">大众点评必吃榜</td>
+            <td><b>3.63 亿条</b>真实评价，从 600 多万商户中选出 <b>3,091 家</b>；近三成商户因「评价真实可信」不达标失去资格；2025 年近 <b>40 家</b>因品质下降被下榜</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-note">
+      三者的共同点是<b>「不收费、不人为干预、客观呈现」</b>——公信力来自机制，不来自宣传。
+      <br>
+      <b>数据来源：</b>必吃榜数据引自 2025 大众点评「必吃榜」官方发布（新华网、新浪财经等报道）——
+      过去一年平台累计 3.63 亿条真实评价，从 600 多万商户中遴选出覆盖 144 城的 3,091 家餐厅。
+      「近 40 家因品质下降被下榜」为 2025 年榜单调整口径。
+      米其林指南、黑珍珠餐厅指南的评选机制引自各指南官方公开说明。
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">设想：三层一套的联盟认证体系</div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px;">层</th>
+              <th>做什么</th>
+              <th style="width:210px;">输出</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">标准层</td>
+              <td>制定「特色小店」认证标准——<b>不评规模与装修，评特色辨识度与服务规范化程度</b></td>
+              <td>一套公开、可解释、可复核的规则</td>
+            </tr>
+            <tr>
+              <td class="c-name">认证层</td>
+              <td>材料初审 → 现场评审 → 公示 → 发证 → <b>年度复核</b></td>
+              <td>认证结果与档位</td>
+            </tr>
+            <tr>
+              <td class="c-name">展示层</td>
+              <td>C 端可见的认证标识：剑琅美遇小程序、门店物料、线上店铺</td>
+              <td><b>顾客一眼能看到的信任信号</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-title" style="margin-top:18px;">分档设想<small>按「特色辨识度 + 服务规范化程度」分三档</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px;">档位</th>
+              <th style="width:250px;">特色辨识度</th>
+              <th>服务规范化程度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">认证店</td>
+              <td>有明确的招牌项目</td>
+              <td>明码标价、服务流程留痕</td>
+            </tr>
+            <tr>
+              <td class="c-name">特色店</td>
+              <td>招牌项目有稳定口碑，<b>可被描述、可被传播</b></td>
+              <td>一客一档 + 标准服务流程</td>
+            </tr>
+            <tr>
+              <td class="c-name">标杆店</td>
+              <td>有成型品牌形象与内容能力</td>
+              <td>疗程方案化、效果可追踪、复购有机制</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note rose" style="margin-top:14px;">
+        <b>一条不能破的原则：认证是门槛，不是商品。</b>
+        米其林自费就餐、必吃榜明确「不收费」——<b>认证一旦变成收入，公信力就没有了</b>。
+        认证应当作为<b>加入联盟的资格</b>，收入仍来自服务与供应链。
+        这条如果含糊，整套体系的地基就是虚的。
+      </div>
+      <div class="note cyan" style="margin-top:11px;">
+        <b>联盟品牌本身需要被当作产品来经营。</b>
+        认证标准、复核机制、C 端传播与标识落地，这些不是功能的副产品，
+        需要被当成一件独立的事情来做——<b>功能让门店用得上，品牌才让门店被信任。</b>
+      </div>
+      <div class="note" style="margin-top:11px;">
+        <b>这是「联盟」二字的第一次落地（见 03 章）。</b>
+        认证体系不是一项增值功能，而是<b>联盟存在的理由本身</b>——
+        它让「联盟」从一个名字，变成一个顾客能看见的信任凭证。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 ============ -->
+  <section id="retention">
+    <div class="sec-head">
+      <span class="sec-no">08</span>
+      <h2 class="sec-title">杠杆二 · 系统化服务<span>让顾客留得下</span></h2>
+      <span class="sec-en">Retention</span>
+    </div>
+
+    <p class="sec-lead">
+      同样是开店，<b>年到店频次可以是 4–6 次，也可以是 15–20 次</b>（见 02 章）——
+      差距不在手艺，而在<b>这段关系只发生了一次，还是被设计成了一段长期关系</b>。
+      要改变它，得先改变我们卖的是什么。
+    </p>
+
+    <div class="card">
+      <div class="card-title">从「卖项目」到「卖方案」<small>四个支点</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px;">支点</th>
+              <th style="width:250px;">现在的小店</th>
+              <th>设想</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">一客一档</td>
+              <td>靠脑子记，人一走就断</td>
+              <td>肤质、禁忌、诉求、预算、<b>沟通偏好</b>结构化建档</td>
+            </tr>
+            <tr>
+              <td class="c-name">卖什么</td>
+              <td>顾客自己挑项目，一次一结</td>
+              <td>按肤质 + 诉求生成<b>疗程方案</b>：几次、周期、目标</td>
+            </tr>
+            <tr>
+              <td class="c-name">效果</td>
+              <td>做完了就完了</td>
+              <td>每次拍照 + 参数记录，<b>进度可见</b>，阶段性回顾</td>
+            </tr>
+            <tr>
+              <td class="c-name">复约</td>
+              <td>等顾客自己想起来</td>
+              <td>系统生成<b>复约日历</b>，到点提醒</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;">
+        <b>一个值得写进认知的概念：未完成疗程。</b>
+        行业把「只记开单、不记疗程进度」称为——<b>看不到未完成疗程负债</b>。
+        反过来看，<b>疗程完成率就是留存的核心指标</b>：顾客买了 10 次卡只做 3 次，对门店是负债不是收入；
+        但也正因为没做完，<b>才有天然、不尴尬的再次触达理由</b>——这比发优惠券高级得多。
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:13px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">机制</th>
+            <th>顾客的感受</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">有计划的</td>
+            <td>知道下一步做什么，不用每次都重新决策、重新比价</td>
+          </tr>
+          <tr>
+            <td class="c-name">看得见的</td>
+            <td>效果被记录、被对比，<b>能看到自己在变好</b></td>
+          </tr>
+          <tr>
+            <td class="c-name">被记住的</td>
+            <td>档案在，这家店<b>了解我</b>，而不是每次都从头问一遍</td>
+          </tr>
+          <tr>
+            <td class="c-name">未完成的</td>
+            <td>方案没走完，有自然的再次到店理由</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">小店自己做不了，所以需要系统替它做</div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:290px;">小店做不到的</th>
+              <th>联盟提供的</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">不会设计疗程方案</td>
+              <td><b>方案模板库</b>——按肤质 / 诉求 / 项目直接套用</td>
+            </tr>
+            <tr>
+              <td class="c-name">没有工具记录效果</td>
+              <td><b>服务档案</b>——拍照、参数、进度可视化</td>
+            </tr>
+            <tr>
+              <td class="c-name">记不住该回访谁</td>
+              <td><b>复约日历</b>——自动生成、到点提醒</td>
+            </tr>
+            <tr>
+              <td class="c-name">没有人力去做这些配置</td>
+              <td><b style="color:var(--amber-2);">AI 助手</b>——语音一句话开单、价目表自动补录、复杂设置代办</td>
+            </tr>
+            <tr>
+              <td class="c-name">顾客看不到这些</td>
+              <td><b>剑琅美遇小程序</b>——顾客侧的服务档案入口</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note cyan" style="margin-top:14px;">
+        <b>美丽田园就是这么做的</b>——8 级会员、200+ 标签、全生命周期管理。
+        <b>小店不是不想做，是没有系统替它做。</b>
+        把「小店做不到的事」系统化，正好是我们的位置。
+      </div>
+      <div class="note" style="margin-top:11px;">
+        <b>回到公式：</b>这一章动的正是等式里那两个「可控」项——<b>到店频次</b>与<b>留存年数</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第四部分 ==================== -->
+  <div class="part-head is-blue">
+    <span class="part-no">第四部分</span>
+    <span class="part-name">借鉴与边界</span>
+    <span class="part-desc">六条可借鉴 · 哪些不能照搬</span>
+    <span class="part-en">Transfer</span>
+  </div>
+
+  <!-- ============ 09 ============ -->
+  <section id="transfer">
+    <div class="sec-head">
+      <span class="sec-no">09</span>
+      <h2 class="sec-title">可借鉴的六件事<span>它怎么做 → 我们现状 → 建议</span></h2>
+      <span class="sec-en">Transferable</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">主题</th>
+            <th style="width:255px;">美丽田园怎么做</th>
+            <th style="width:255px;">我们现状</th>
+            <th>建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-name">① 验证目标<br>有实证锚点</td>
+            <td>生美 → 医美 / 亚健康转化率 <b>24.9%</b>（2024 年报），高端会员 28.7%，按会员质量分层统计<br>
+              <span style="color:var(--ink-faint);">注：该口径 2025H1 为 20%，年度间有波动</span></td>
+            <td>开店分流目标「使用 ≥ 2 版块 <b>≥ 15%</b>」，单一档，未分层</td>
+            <td>改为两档：整体 <b>≥ 15%</b>、高活跃会员 <b>≥ 25%</b>，后一档对齐行业实证值</td>
+          </tr>
+          <tr>
+            <td class="c-name">② 入口的选择<br>标准（认知差）</td>
+            <td>入口是高频低毛利业务（44.2%），且持续<b>加宽</b>入口而非加深单一入口</td>
+            <td>新用户默认落到「首页」（开单记账）；门店主观诉求仍是拓客（7 家中 4 家，论证见 <b>02 章</b>）</td>
+            <td><b>拓客不是不重要，而是不可控</b>——入口标准应从「哪个重要」改为<b>「哪个能立刻让店主看到钱」</b></td>
+          </tr>
+          <tr>
+            <td class="c-name">③ 客户资产<br>是地基</td>
+            <td>8 级会员 + 200+ 标签 + 40 多个系统，累计 5 亿投入、100 人 IT，才实现会员数据中心化</td>
+            <td>「客户」TAB 在现有文档中<b>完全未展开</b>，客户分层粒度较粗</td>
+            <td>把「客户」TAB 提为<b>一级议题</b>；我们天生 B+C 共享数据中心，差距在<b>分层颗粒度</b>而非架构</td>
+          </tr>
+          <tr>
+            <td class="c-name">④ 私域要从<br>副产品变主引擎</td>
+            <td>私域贡献 <b>46% 新会员</b>（2025H1），是把获客费用压到收入 2% 以下的主力；设「员工品牌大使」「用户品牌大使」</td>
+            <td>抖音公域 → 剑琅美遇私域，目前定位是核销的「转化承接」；口碑自传播<b>有意图、没有机制</b></td>
+            <td>把「私域沉淀率」「老带新占比」提为一级指标；落地「<b>店主品牌大使</b>」，与已有的老板短视频矩阵合并推进</td>
+          </tr>
+          <tr>
+            <td class="c-name">⑤ 供应链的<br>启动顺序</td>
+            <td><b>先有规模，才有集采议价权</b>——收购后「规模效应下供应链议价能力提升」，毛利率才上去</td>
+            <td>小店承接动作是「关联第一个供应商」，但供应商<b>存在顾虑、不愿接入</b></td>
+            <td>顺序<b>反转</b>：先做「分销 / 带货」（卖门店自有产品，<b>零供应商依赖</b>），有规模后再做「找好货」</td>
+          </tr>
+          <tr>
+            <td class="c-name">⑥「联盟」的<br>真正兑现</td>
+            <td>「强平台」把供应链、培训、数字化做成<b>可复用的模块化能力</b>向多品牌输出</td>
+            <td>更接近<b>软件授权</b>：门店各自使用系统，能力没有在门店之间流动</td>
+            <td>把能力<b>模块化输出</b>，并让「联盟」本身成为背书：<b>认证评级体系</b>、供应链（集采 / 分销）、培训、数字化标准——见第三部分 07 / 08</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 10 ============ -->
+  <section id="boundary">
+    <div class="sec-head">
+      <span class="sec-no">10</span>
+      <h2 class="sec-title">边界与信号<span>哪些不能照搬 · 一个需要知道的动向</span></h2>
+      <span class="sec-en">Boundaries</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">维度</th>
+            <th>美丽田园</th>
+            <th>剑琅联盟</th>
+            <th style="width:100px;">可否迁移</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="c-key">市场层级</td>
+            <td>一线 / 新一线，高端商圈覆盖 42%</td>
+            <td>县级市（太仓试点）</td>
+            <td><span class="tag t-mist">—</span></td>
+          </tr>
+          <tr>
+            <td class="c-key">门店形态</td>
+            <td>直营为主，706 家</td>
+            <td>2 人小店为硬约束</td>
+            <td><span class="tag t-mist">—</span></td>
+          </tr>
+          <tr>
+            <td class="c-key">客单价</td>
+            <td>会员年均消费 9,738 元；会员年消费带 3,600–18 万元</td>
+            <td>订阅 298 元</td>
+            <td><span class="tag t-mist">—</span></td>
+          </tr>
+          <tr>
+            <td class="c-key">增值业务</td>
+            <td>医美、亚健康（需资质与医生）</td>
+            <td>不能做医美；增值来自<b>供应链与平台能力</b></td>
+            <td><span class="tag t-mist">—</span></td>
+          </tr>
+          <tr>
+            <td class="c-key">客户分层</td>
+            <td>8 级会员、200+ 标签</td>
+            <td>分层粒度较粗，起步阶段</td>
+            <td><span class="tag t-cyan">方向可迁移</span></td>
+          </tr>
+          <tr>
+            <td class="c-key">经营结构</td>
+            <td>入口薄利、转化厚利，靠会员资产连接</td>
+            <td>同样需要「入口 — 信任 — 转化」的结构</td>
+            <td><span class="tag t-cyan">结构可迁移</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note rose" style="margin-top:13px;">
+      <b>一句话划清边界：</b>可迁移的是<b>「用高频入口建立信任、再向增值转化」这个结构</b>，
+      不是它的客群、客单价与业务资质。
+      我们的增值业务不是医美，而是<b>供应链、SaaS 增值能力与平台流量</b>；
+      我们追求的不是高客单价，而是<b>单个门店使用更多版块</b>——同样把 LTV 做厚，但走的是另一条路。
+    </div>
+    <div class="tbl-note" style="margin-top:9px;">
+      <b>数据来源与口径：</b>
+      「高端商圈覆盖 42%」为 20 个核心城市 456 家高端商业物业的口径（2025 年报 / 公开报道）；
+      「门店 706 家」为 2026-06-30 口径；「会员年消费 9,738 元」为会员级年均消费，
+      <b>与单次客单价不是同一口径，不能与生活美容的 302 元 / 次直接对比</b>；
+      「订阅 298 元」为剑琅联盟侧内部定价。
+    </div>
+
+    <div class="card" style="margin-top:13px;">
+      <div class="card-title">一个需要知道的信号<small>2026 年 3 月，美丽田园发布行业赋能战略</small></div>
+      <div class="tbl-wrap" style="border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:150px;">对比项</th>
+              <th>美丽田园</th>
+              <th>剑琅联盟</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">赋能手段</td>
+              <td>资本 + 品牌</td>
+              <td>SaaS + 平台</td>
+            </tr>
+            <tr>
+              <td class="c-key">整合方式</td>
+              <td>战略投资、并购、直营（门店被<b>收编</b>）</td>
+              <td>联盟，保留门店<b>独立品牌与特色</b></td>
+            </tr>
+            <tr>
+              <td class="c-key">目标对象</td>
+              <td>面向全国「寻找 100 位美业同行者」</td>
+              <td>县域 2 人小店</td>
+            </tr>
+            <tr>
+              <td class="c-key">相对优势</td>
+              <td>资金、品牌势能、供应链议价权</td>
+              <td>轻资产、无品牌门槛、决策链短</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;">
+        <b>两面看：</b>一方面，<b>方向被龙头验证了</b>——行业整合与赋能是被资本认可的路；
+        另一方面，<b>窗口期有限</b>。
+        我们的相对优势是「轻」：不占用资本、不要求门店改换品牌、2 人小店也能进来，
+        而且我们做的是<b>帮门店做自己</b>，不是把它变成别人的连锁分店。
+      </div>
+    </div>
+  </section>
+
+  <div class="doc-foot">
+    <b>数据来源：</b>
+    美丽田园医疗健康（2373.HK）2024 年报、2025 年报、2026 中期报告及业绩交流会材料（港交所披露原文为准）；
+    美业新纬度《回响——2025 美业白皮书》；
+    美团连锁美容年度大会数据、《2025 医美行业上半年机构运营调研报告》（医美行业观察）；
+    2026 中国美容美发机构行业调查报告、美业门店模式调研报告、中研普华、天眼查；
+    公开媒体报道（经济日报／中国经济网、新华网、新快报、观察者网、21 世纪经济报道、证券之星等）。
+    <br>
+    <b>口径说明（重要）：</b>
+    <b>1. 本报告混用了两个子行业的数字，请勿混读：</b>
+    「生活美容」口径用于行业结构、客单价、频次、门店模型等（第 01、02 章）；
+    「医疗美容」口径用于客单价历史降幅、机构注销数、老带新渠道占比等——<b>医美与生活美容是两个不同业态，数字不可互相套用</b>，文中已逐处标注。
+    <br>
+    <b>2. 「客单价」曾出现的两处问题已修正：</b>
+    原「行业平均客单价 6,800 → 4,200 元（−38.2%）」实为<b>医美</b>口径，出处为经济日报《医美行业利润为何走低》（2025-04-21）与新华网 2025 医美半年报报道，且原文为「某连锁医美机构」自述；生活美容单次服务均价同期为 <b>285 → 302 元（+6.0%）</b>，方向相反，此处不作合并。
+    <br>
+    <b>3. 「获客成本」已删除原 8,000–12,000 元 一组：</b>
+    该数源于 AI 营销公司推广文转述，非权威披露；权威口径为「<b>部分医美机构获客成本超过 3,000 元/人</b>」（新快网／新华网，2025 医美半年报）。
+    <br>
+    <b>4. 其它已修正项：</b>
+    「超 3 万家机构关闭」→ 实为天眼查口径「医美相关企业注销约 <b>1.2 万家</b>（2025，同比 +50%）」；
+    会员次年留存率 81% → <b>80%</b>（2025 年报，15 年留存率 51%）；
+    私域贡献新会员 45% → <b>46%</b>（2025H1；2024 年为 34%）；
+    「5 家以上门店品牌占比 30% → 38%」原文限定为「<b>在连锁品牌中</b>」；
+    已删除无独立来源的「复购率每提升 5%、利润提升 25%–95%」，改为有出处的渠道结构数据。
+    <br>
+    <b>5. 其余口径：</b>
+    「活跃会员」指集团直营门店会员，不含加盟；
+    「医疗美容 + 亚健康合计 7.87 亿 / 41.8%」为按中报分项加总所得，中报未直接披露该合计；
+    「获客相关费用占收入 &lt; 2%」为年报原文表述（significantly below the industry average），<b>年报未给出具体同业对比数值</b>；
+    「年均消费 8.2 次」为美团平台美容用户口径，非全行业门店到店频次；
+    「传统门店 / 新美业」六项对比为第三方调研口径，非上市公司披露，仅供趋势参考。
+    <br>
+    剑琅联盟侧数据引自本项目组内部文档与试点埋点。
+    <br>
+    <b>编制：</b>剑琅联盟项目组 · 仅供内部汇报使用
+  </div>
+
+</div>
+
+</body>
+</html>
