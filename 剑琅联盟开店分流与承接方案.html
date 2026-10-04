@@ -862,11 +862,33 @@
   .part-desc { font-size: 12.5px; color: var(--ink-faint); letter-spacing: .5px; }
   .part-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
 
+  /* ===== 行业对标（第 03 章） ===== */
+  .bench-list { display: grid; gap: 10px; margin-top: 16px; }
+  .bench {
+    display: grid; grid-template-columns: 160px 440px 1fr;
+    gap: 14px; align-items: center;
+    background: #FBFCFB; border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 13px 16px;
+  }
+  .bench-hd { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+  .bench-name { font-size: 14.5px; font-weight: 700; color: var(--pine-2); letter-spacing: .5px; }
+  .bench-tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    color: var(--sand); background: var(--sand-bg);
+    padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .bench-svg { line-height: 0; }
+  .bench-svg svg { width: 100%; height: auto; display: block; }
+  .bench-svg text { font-family: var(--font-cjk); }
+  .bench-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .bench-desc b { color: var(--ink); font-weight: 600; }
+
   /* ===== Responsive ===== */
   @media (max-width: 900px) {
     .hero-cards, .cause-grid, .prin-grid, .choice-grid,
     .metric-grid, .risk-grid, .phase-grid,
-    .wf-grid { grid-template-columns: 1fr; }
+    .wf-grid, .bench { grid-template-columns: 1fr; }
+    .bench-svg svg { max-width: 440px; }
     .wf-strip { grid-template-columns: repeat(2, 1fr); }
     .shot-rail { grid-template-columns: repeat(3, 1fr); }
     .rail-grid { grid-template-columns: repeat(4, 1fr); }
@@ -1533,6 +1555,157 @@
             <b>设计要点：</b>跳过<b>不额外加门槛</b>，只需轻提示一次，不做常驻「回流入口」控件。
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">行业对标<small>五个头部产品，都在「先问一句，再带路」</small></div>
+      <p class="body">
+        分流不是我们从零想出来的。<b>国内几个头部产品在注册或开户完成的那一刻，都会先问一句「你是来做什么的」，再决定把人带到哪儿</b>：
+      </p>
+
+      <div class="bench-list">
+
+        <!-- 1 · BOSS直聘 -->
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">BOSS直聘</span>
+            <span class="bench-tag">双身份分流</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="BOSS直聘：注册完成后先选身份，招聘与求职各走一套功能">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">注册完成</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="22" width="112" height="44" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">我是招人的</text>
+              <text x="141.5" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">我是找工作的</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">发布职位 · 找牛人</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">投递简历 · 聊 BOSS</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            注册第一步先分身份，<b>招聘与求职是两套完全不同的功能</b>，选完各走各的，身份还能随时切回来。
+          </div>
+        </div>
+
+        <!-- 2 · 企业微信 -->
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">企业微信</span>
+            <span class="bench-tag">二选一分叉</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="企业微信：首次进入必选创建或加入企业">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">首次进入</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">创建或加入企业</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">创建新企业 · 配后台</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">个人团队 · 轻量起步</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            首次进入必过一道选择，<b>「开一家新的」和「先用个人团队」的权限、可登录端、引导流程都不同</b>。
+          </div>
+        </div>
+
+        <!-- 3 · 抖音来客 -->
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">抖音来客</span>
+            <span class="bench-tag">按经营形态分流</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 124" role="img" aria-label="抖音来客：登录后选行业与门店形态，单店多店无门店走三套路径">
+              <rect x="0.5" y="47" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="66" text-anchor="middle" font-size="10" fill="#5A6B63">手机号登录</text>
+              <line x1="65" y1="62" x2="84" y2="62" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 58.5 L84.5 62 L80 65.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="47" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="66" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">行业 + 门店形态</text>
+              <path d="M198 62 L208 62 M208 62 L218 26 M208 62 L218 62 M208 62 L218 96" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">单店 · 单店后台</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">多店 · 连锁后台</text>
+              <rect x="218.5" y="84" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="102" font-size="10.5" fill="#24302C">无门店 · 线索版</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            同样是商家，<b>单店、多店、无门店走的是三套不同的入驻路径</b>，选完才知道该给你看什么。
+          </div>
+        </div>
+
+        <!-- 4 · 有赞 -->
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">有赞</span>
+            <span class="bench-tag">选择决定后续</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="有赞：先选主体类型与经营类目，后续材料与引导由选择决定">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">入驻开店</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">主体 + 经营类目</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">企业 · 个体户（材料多）</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">个人（材料精简）</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            先选主体类型与经营类目，<b>后面要交什么材料、走什么引导，由这个选择决定</b>。
+          </div>
+        </div>
+
+        <!-- 5 · 钉钉 -->
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">钉钉</span>
+            <span class="bench-tag">按需自选</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="钉钉：创建团队后自选需要的应用，工作台按勾选生成">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">创建团队</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">你需要哪些应用</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">考勤 · 审批 · 请假</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">出差 · 日志 · 更多</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            创建完团队后<b>自选需要的应用</b>，工作台按勾选生成——不预设用户要什么。
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note sage" style="margin-top:14px;">
+        <b>五个产品、五种业务，动作顺序是同一个：先问一句，再按答案带路。</b>
+        没有一个的做法是「不管你来干什么，先落到默认首页」。它们问的多半是「你是谁」（身份 / 资质 / 经营形态），
+        我们问的是「你现在想做什么」——<b>后者更轻，也更容易被用户回答</b>。
+        我们的分流页就是把这个动作搬到门店场景：<b>不是我们独创的设计，是行业里已经跑通的标准做法。</b>
       </div>
     </div>
   </section>
