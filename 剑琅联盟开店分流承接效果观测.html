@@ -217,7 +217,7 @@
   .rule-ok { background: rgba(234,241,237,.4); color: #2F4F44; }
   .rule-no { background: rgba(251,234,236,.35); color: #7A3122; }
   .rule-ok b, .rule-no b { font-weight: 700; color: var(--ink); }
-  /* L3 无达标/未达标分支，用中性底色，避免被读成败 */
+  /* 只记录类指标用中性底色，避免被读成败 */
   .rule-note { background: #FAFBFA; color: var(--ink-soft); }
   .rule-note b { font-weight: 700; color: var(--ink); }
 
@@ -466,8 +466,8 @@
       </div>
       <div class="hc">
         <div class="hc-label">效果目标</div>
-        <div class="hc-value num">12 <small>项</small></div>
-        <div class="hc-note">L1 分流 · L2 承接 · L3 转化</div>
+        <div class="hc-value num">8 <small>项</small></div>
+        <div class="hc-note">L1 分流 · L2 承接</div>
       </div>
       <div class="hc">
         <div class="hc-label">放量验证</div>
@@ -491,7 +491,6 @@
       <button class="tab is-on" data-tab="overview" role="tab" aria-selected="true">效果目标与判定</button>
       <button class="tab" data-tab="l1" role="tab" aria-selected="false"><i>L1</i>分流</button>
       <button class="tab" data-tab="l2" role="tab" aria-selected="false"><i>L2</i>承接</button>
-      <button class="tab" data-tab="l3" role="tab" aria-selected="false"><i>L3</i>转化</button>
       <button class="tab" data-tab="scale" role="tab" aria-selected="false">放量路径</button>
       <button class="tab" data-tab="qa" role="tab" aria-selected="false">答辩预案</button>
     </div>
@@ -557,10 +556,6 @@
         <div class="tgt-c tgt-lv"><b>L2</b> 承接<span>效果主指标</span></div>
         <div class="tgt-c tgt-val" data-lb="效果目标值"><b>首个价值动作完成率 ≥ 50%</b><br>次日留存 ≥ 35% · 7 日留存 ≥ 20%</div>
         <div class="tgt-c tgt-cmp" data-lb="前后对比口径">基期完成率 → 试点期<span>看提升幅度</span></div>
-
-        <div class="tgt-c tgt-lv"><b>L3</b> 转化<span>观察项</span></div>
-        <div class="tgt-c tgt-val" data-lb="效果目标值">使用 ≥ 2 版块 ≥ 15% · 订阅率 ≥ 8%</div>
-        <div class="tgt-c tgt-cmp" data-lb="前后对比口径">仅记录<span>本期不作判定</span></div>
       </div>
 
       <div class="insight is-sage" style="margin-top:12px;">
@@ -819,102 +814,12 @@
 </div>
 
 <!-- ==================================================================== -->
-<!-- L3 转化 -->
-<!-- ==================================================================== -->
-<div class="tabpanel" id="panel-l3">
-  <section>
-    <div class="sec-head">
-      <span class="sec-no">06</span>
-      <h2 class="sec-title">转化是否发生<span>本期作为观察项，只记录</span></h2>
-      <span class="sec-en">Cross-sell</span>
-    </div>
-
-    <p class="sec-lead">
-      连带推荐属 <b>P1</b>，本期作为观察项记录基线，为后续排期提供起跑数据。
-    </p>
-
-    <div class="card">
-      <div class="card-title">L3 目标值与处置<span class="thr-tag">目标值</span></div>
-      <div class="rule">
-        <div class="rule-hd">指标</div>
-        <div class="rule-hd">参考目标值</div>
-        <div class="rule-hd">本期处置</div>
-        <div class="rule-hd">为何本期不作判定</div>
-
-        <div class="rule-r rule-name">跨版块推荐触达率</div>
-        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 60%<em>暂定</em></div>
-        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>与 P1 排期对齐</div>
-        <div class="rule-r rule-note" data-lb="为何本期不作判定">功能<b>本期未上线</b>，低是排期结果</div>
-
-        <div class="rule-r rule-name">跨版块首个动作完成率</div>
-        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 30%<em>暂定</em></div>
-        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>作为 P1 起跑基线</div>
-        <div class="rule-r rule-note" data-lb="为何本期不作判定">功能未上线时<b>没有判定意义</b></div>
-
-        <div class="rule-r rule-name">使用 ≥ 2 个版块<span>门店占比</span></div>
-        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 15%<em>基准 15–25%</em></div>
-        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>仅记录形态，看基期差异</div>
-        <div class="rule-r rule-note" data-lb="为何本期不作判定">绝对数通常个位数，<b>单店即可翻转</b></div>
-
-        <div class="rule-r rule-name">订阅率</div>
-        <div class="rule-r rule-thr" data-lb="参考目标值">≥ 8%<em>基准 8–12%</em></div>
-        <div class="rule-r rule-note" data-lb="本期处置">! <b>只记录</b><br>呈现绝对数，与基期对比</div>
-        <div class="rule-r rule-note" data-lb="为何本期不作判定">当前整体约 5.6%，<b>差 1 家即跨区间</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">订阅率为何本期只记录、不判定<span>用绝对数说明，而不是「样本小」三个字</span></div>
-      <p class="body" style="margin-bottom:11px;">假设 10 家里有 <b>8 家</b>做出分流选择，订阅率只可能是下面三档之一——<b>每档都跨过整个基准区间 8%–12%</b>：</p>
-
-      <div class="sub-grid">
-        <div class="sub-row">
-          <div class="sub-lb">0 / 8 家</div>
-          <div class="sub-dots">
-            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-          </div>
-          <div class="sub-rate num">0.0%</div>
-          <div class="sub-tag is-bad">像「失败」</div>
-        </div>
-        <div class="sub-row">
-          <div class="sub-lb">1 / 8 家</div>
-          <div class="sub-dots">
-            <i class="sub-dot is-on"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-          </div>
-          <div class="sub-rate num">12.5%</div>
-          <div class="sub-tag is-ok">像「达标」</div>
-        </div>
-        <div class="sub-row">
-          <div class="sub-lb">2 / 8 家</div>
-          <div class="sub-dots">
-            <i class="sub-dot is-on"></i><i class="sub-dot is-on"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-            <i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i><i class="sub-dot"></i>
-          </div>
-          <div class="sub-rate num">25.0%</div>
-          <div class="sub-tag is-warn">像「大成功」</div>
-        </div>
-      </div>
-      <div class="sub-axis">
-        <span>基准区间 8% – 12% 落在第 1 格与第 2 格之间 —— <b>整档只有 1 家门店的跨度</b></span>
-      </div>
-
-      <div class="insight">
-        <div class="insight-h">本期处置</div>
-        <p><b>1 家门店的差异就能让结论从「失败」翻到「大成功」。</b>因此本项<b>只呈现绝对数</b>（如「2 / 8 家」）并与基期对比，<b>不单独做达标判定</b>——是否达标由放量后的样本给出。</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ==================================================================== -->
 <!-- 规模与效力 -->
 <!-- ==================================================================== -->
 <div class="tabpanel" id="panel-scale">
   <section>
     <div class="sec-head">
-      <span class="sec-no">07</span>
+      <span class="sec-no">06</span>
       <h2 class="sec-title">试点设计与定位<span>为什么是 10 家</span></h2>
       <span class="sec-en">Pilot Scope</span>
     </div>
@@ -955,7 +860,7 @@
 
   <section>
     <div class="sec-head">
-      <span class="sec-no">08</span>
+      <span class="sec-no">07</span>
       <h2 class="sec-title">放量需要多少门店</h2>
       <span class="sec-en">Sample Size</span>
     </div>
@@ -1055,13 +960,13 @@
 
   <section>
     <div class="sec-head">
-      <span class="sec-no">09</span>
+      <span class="sec-no">08</span>
       <h2 class="sec-title">数据接入<span>结果页需要哪些数据</span></h2>
       <span class="sec-en">Data Spec</span>
     </div>
 
     <div class="card">
-      <div class="card-title">埋点事件<small>8 个事件 · 支撑目标值与前后对比</small></div>
+      <div class="card-title">埋点事件<small>6 个事件 · 支撑目标值与前后对比</small></div>
       <div class="chips">
         <span class="chip">triage_page_view</span>
         <span class="chip">triage_select</span>
@@ -1069,8 +974,6 @@
         <span class="chip">triage_landed</span>
         <span class="chip">onboarding_step</span>
         <span class="chip is-core">first_value_action</span>
-        <span class="chip">cross_sell_expose</span>
-        <span class="chip">cross_sell_convert</span>
       </div>
 
       <details class="fold">
@@ -1081,9 +984,7 @@
           <b>triage_skip</b> 点击「先随便看看」→ 跳过率<br>
           <b>triage_landed</b> 跳转完成并高亮 TAB → 落点成功率（属性：目标版块、是否成功）<br>
           <b>onboarding_step</b> 承接四步每步进入 / 完成 / 跳出 → 四步跳出位置、耗时（属性：步骤序号、版块）<br>
-          <b>first_value_action</b> 完成第一个价值动作 → <b>主指标</b>（属性：版块、动作类型、耗时）<br>
-          <b>cross_sell_expose</b> 跨版块推荐曝光 → 推荐触达率（属性：来源 / 目标版块、触发时机）<br>
-          <b>cross_sell_convert</b> 跨版块首个动作完成 → 跨版块完成率（属性：来源 → 目标、间隔时长）
+          <b>first_value_action</b> 完成第一个价值动作 → <b>主指标</b>（属性：版块、动作类型、耗时）
         </div>
       </details>
     </div>
@@ -1091,15 +992,13 @@
     <div class="card">
       <div class="card-title">口径公式<small>结果页每个数字从哪来</small></div>
       <details class="fold" style="margin-top:0;">
-        <summary>展开 7 项指标的计算口径</summary>
+        <summary>展开 5 项指标的计算口径</summary>
         <div class="fold-body">
           <b>分流页到达率</b> = 看到分流页的门店数 ÷ 完成开店的门店数<br>
           <b>选择率 / 跳过率</b> = 选择数（或跳过数）÷ 看到分流页的门店数<br>
           <b>落点成功率</b> = 跳转成功数 ÷ 做出选择的门店数<br>
           <b>第一个价值动作完成率</b> = 完成数 ÷ 做出分流选择的门店数（分母<b>含未落点成功的门店</b>）<br>
-          <b>次日 / 7 日留存</b> = 第 N 日有任意活跃行为的门店数 ÷ 做出分流选择的门店数<br>
-          <b>使用 ≥ 2 个版块</b> = 有效动作版块数 ≥ 2 的门店数 ÷ 做出分流选择的门店数<br>
-          <b>订阅率</b> = 试点期内完成订阅的门店数 ÷ 做出分流选择的门店数<br><br>
+          <b>次日 / 7 日留存</b> = 第 N 日有任意活跃行为的门店数 ÷ 做出分流选择的门店数<br><br>
           <b>门店级去重：</b>所有分母均为<b>门店数</b>而非人次，同一门店重复进入只计一次。
           这一步决定了指标能否与「320 家门店」的漏斗口径对齐。
         </div>
@@ -1114,7 +1013,7 @@
 <div class="tabpanel" id="panel-qa">
   <section>
     <div class="sec-head">
-      <span class="sec-no">10</span>
+      <span class="sec-no">09</span>
       <h2 class="sec-title">答辩预案<span>七个最可能被追问的问题</span></h2>
       <span class="sec-en">Q &amp; A Prep</span>
     </div>
@@ -1149,11 +1048,11 @@
 
     <div class="qa">
       <div class="qa-q"><span class="qa-no">Q3</span><span class="qa-t">这次能拿出什么结果？</span></div>
-      <div class="qa-core">三层：<b>12 项目标值达标情况</b> · <b>相比基期的提升幅度</b> · <b>卡在哪一步</b>。第三层决定下一步怎么改。</div>
+      <div class="qa-core">三层：<b>8 项目标值达标情况</b> · <b>相比基期的提升幅度</b> · <b>卡在哪一步</b>。第三层决定下一步怎么改。</div>
       <details class="fold">
         <summary>完整答法与不要这样说</summary>
         <div class="qa-detail">
-          <div class="qa-do"><span class="qa-lb">建议这样说</span>「三层结果：第一，<b>12 项目标值哪些达标</b>；第二，<b>首个价值动作完成率和留存相比基期提升了多少</b>；第三，如果没达标，<b>卡在哪一步</b>——第三层决定了下一步改什么，所以就算没全达标，这次投入也不会白费。」</div>
+          <div class="qa-do"><span class="qa-lb">建议这样说</span>「三层结果：第一，<b>8 项目标值哪些达标</b>；第二，<b>首个价值动作完成率和留存相比基期提升了多少</b>；第三，如果没达标，<b>卡在哪一步</b>——第三层决定了下一步改什么，所以就算没全达标，这次投入也不会白费。」</div>
           <div class="qa-dont"><span class="qa-lb">不要这样说</span>「能验证方案是否有效。」<b>——太空，一个数字都拿不出来。</b></div>
         </div>
       </details>
