@@ -266,6 +266,16 @@
   .tag.t-pine { color: #17453A; background: #DCE9E3; }
   .tag.t-mist { color: #5D6B63; background: #EDF1EE; }
 
+  /* 正文行内小标记（如「2026-10-01 补充」） */
+  .tag-inline {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: .2px; white-space: nowrap;
+    color: var(--sand); background: var(--sand-bg);
+    border: 1px solid rgba(176, 141, 87, .42);
+    border-radius: 4px; padding: 1px 7px;
+    margin-left: 6px; vertical-align: 1px;
+  }
+
   .finding {
     margin-top: 16px; padding: 18px 20px;
     background: linear-gradient(135deg, #14352E 0%, #1A3D34 55%, #234D42 100%);
