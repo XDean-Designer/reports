@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 开店分流与承接方案（精简版）</title>
+<style>
+  :root {
+    --pine: #1A3D34;
+    --pine-2: #234D42;
+    --sage: #3D6B5C;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --amber: #C48A2A;
+    --amber-bg: #F8F0E0;
+    --bg: #F4F6F4;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --line-soft: #E8EEEA;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px 72px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(176, 141, 87, .18), transparent 55%),
+      linear-gradient(145deg, #14352E 0%, #1A3D34 48%, #1F4A3E 100%);
+    padding: 56px 0 48px;
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .brand-mark {
+    width: 42px; height: 42px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 19px; font-weight: 700;
+  }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #A8C4B6;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--sand); }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700; letter-spacing: 3px; color: #fff;
+    margin: 14px 0 12px; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #D4C4A0; }
+  .hero-lead {
+    font-size: 14.5px; color: rgba(255,255,255,.72); line-height: 1.85;
+    max-width: 780px; letter-spacing: .3px;
+  }
+  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .hc {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px; padding: 16px 18px 15px;
+  }
+  .hc-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.52); text-transform: uppercase; margin-bottom: 8px; }
+  .hc-value { font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #fff; line-height: 1.35; }
+  .hc-note { font-size: 12px; color: rgba(255,255,255,.68); line-height: 1.7; margin-top: 8px; }
+
+  /* ===== Section shell ===== */
+  section { margin-top: 48px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #fff; background: var(--pine-2);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; color: var(--pine-2); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-lead {
+    font-size: 14.5px; color: var(--ink-soft); line-height: 1.9;
+    max-width: 920px; margin-bottom: 22px;
+  }
+  .sec-lead b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Generic card ===== */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px 20px;
+  }
+  .card + .card { margin-top: 14px; }
+  .card-title {
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    color: var(--pine-2); margin-bottom: 12px;
+  }
+  .card-title small {
+    display: inline-block; margin-left: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    color: var(--sand);
+  }
+  p.body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; }
+  p.body + p.body { margin-top: 10px; }
+  p.body b { color: var(--ink); font-weight: 600; }
+
+  ul.list { list-style: none; display: grid; gap: 9px; }
+  ul.list li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 18px; position: relative;
+  }
+  ul.list li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  ul.list li b { color: var(--ink); font-weight: 600; }
+  ul.list li .em { color: var(--pine-2); font-weight: 600; }
+
+  ol.steps { list-style: none; counter-reset: si; display: grid; gap: 10px; }
+  ol.steps li {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 26px; position: relative;
+  }
+  ol.steps li::before {
+    counter-increment: si; content: counter(si);
+    position: absolute; left: 0; top: 3px;
+    width: 17px; height: 17px; border-radius: 50%;
+    background: #E7F1EE; color: var(--sage);
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps li b { color: var(--ink); font-weight: 600; }
+  ol.steps .map {
+    display: inline-block; margin-left: 6px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    color: var(--sand); background: var(--sand-bg);
+    padding: 1px 7px; border-radius: 4px; white-space: nowrap;
+  }
+
+  /* ===== Table ===== */
+  .tbl-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 880px; }
+  thead th {
+    background: #F3F7F4;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--pine-2); text-align: left;
+    padding: 13px 16px; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    font-size: 13.5px; color: var(--ink-soft);
+    padding: 15px 16px; border-bottom: 1px solid var(--line-soft);
+    vertical-align: top; line-height: 1.75;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.c-name { font-weight: 700; color: var(--pine-2); font-size: 14px; }
+  td.c-name .idx {
+    display: block; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 1.5px; color: var(--ink-faint); margin-bottom: 4px;
+  }
+  td.c-key { font-weight: 600; color: var(--ink); }
+  td.c-center { text-align: center; }
+  .tbl-note {
+    margin-top: 12px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+
+  /* ===== Tags ===== */
+  .tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700;
+    letter-spacing: .5px; padding: 3px 10px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tag.t-sand { color: var(--sand); background: var(--sand-bg); }
+  .tag.t-amber { color: var(--amber); background: var(--amber-bg); }
+  .tag.t-sage { color: var(--sage); background: #E7F1EE; }
+  .tag.t-pine { color: #17453A; background: #DCE9E3; }
+  .tag.t-mist { color: #5D6B63; background: #EDF1EE; }
+  .tag.t-ok { color: #1F6B4F; background: #DFF0E7; }
+  .tag.t-gap { color: #A8331F; background: #F8E3DE; }
+
+  /* ===== Callout ===== */
+  .note {
+    background: var(--sand-bg);
+    border-left: 3px solid var(--sand);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 13.5px; color: #6B5426; line-height: 1.85;
+  }
+  .note + .note { margin-top: 12px; }
+  .note b { color: #4E3C19; font-weight: 700; }
+  .note.amber { background: var(--amber-bg); border-left-color: var(--amber); color: #7A5715; }
+  .note.amber b { color: #6B4A0F; }
+  .note.sage { background: #F3F7F4; border-left-color: var(--sage); color: var(--ink-soft); }
+  .note.sage b { color: var(--pine-2); }
+
+  /* ===== Finding (dark) ===== */
+  .finding {
+    margin-top: 16px; padding: 18px 20px;
+    background: linear-gradient(135deg, #14352E 0%, #1A3D34 55%, #234D42 100%);
+    border-radius: 12px;
+    font-size: 13.5px; line-height: 1.9; color: rgba(255,255,255,.78);
+  }
+  .finding h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: #D4C4A0; margin-bottom: 10px;
+  }
+  .finding ul { list-style: none; display: grid; gap: 8px; }
+  .finding li { padding-left: 16px; position: relative; }
+  .finding li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--sand);
+  }
+  .finding b { color: #fff; font-weight: 600; }
+
+  /* ===== 效果观测页入口 ===== */
+  .board-entry {
+    margin-top: 16px;
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    background:
+      radial-gradient(ellipse 70% 130% at 96% 0%, rgba(176, 141, 87, .20), transparent 62%),
+      linear-gradient(135deg, #14352E 0%, #1A3D34 58%, #234D42 100%);
+    border-radius: 14px;
+    padding: 22px 26px;
+  }
+  .be-left { flex: 1 1 440px; min-width: 0; }
+  .be-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2.4px;
+    color: #A8C4B6; text-transform: uppercase;
+  }
+  .be-kicker::before { content: ""; width: 18px; height: 2px; background: var(--sand); }
+  .be-title {
+    font-size: 18px; font-weight: 700; letter-spacing: 1.6px; color: #fff;
+    margin: 9px 0;
+  }
+  .be-desc {
+    font-size: 12.5px; line-height: 1.8; color: rgba(255,255,255,.68);
+    max-width: 640px;
+  }
+  .be-desc b { color: #fff; font-weight: 600; }
+  .be-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 13px; }
+  .be-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+    color: #D4E4DB; background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px; padding: 3px 11px;
+  }
+  .be-tag.is-warn {
+    color: #F2D9C0; border-color: rgba(196, 138, 42, .5);
+    background: rgba(196, 138, 42, .16);
+  }
+  .be-btn {
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sand); color: #2A1F0C;
+    font-size: 13.5px; font-weight: 700; letter-spacing: 1.2px;
+    text-decoration: none; border-radius: 10px; padding: 13px 24px;
+    white-space: nowrap;
+    transition: background .25s, transform .25s, box-shadow .25s;
+  }
+  .be-btn:hover {
+    background: #C4A374; transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(176, 141, 87, .34);
+  }
+  .be-btn i { font-style: normal; font-size: 15px; line-height: 1; }
+
+  /* ===== Cause grid (01) ===== */
+  .cause-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .cause {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+  }
+  .cause::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--line);
+  }
+  .cause.is-old::before { background: #B9C6C0; }
+  .cause.is-new::before { background: var(--sand); }
+  .cause.is-new { border-color: rgba(176,141,87,.5); }
+  .cause-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .cause-name { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--pine-2); }
+  .cause-sub { font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; color: var(--ink-faint); margin-bottom: 10px; }
+  .cause.is-new .cause-sub { color: var(--sand); }
+
+  /* ===== Principles (02) ===== */
+  .prin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .prin {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+  }
+  .prin-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 9px; border-radius: 4px;
+    display: inline-block; margin-bottom: 12px;
+  }
+  .prin-name { font-size: 15.5px; font-weight: 700; letter-spacing: .8px; color: var(--pine-2); margin-bottom: 8px; }
+  .prin-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  .prin-desc b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Choice cards (03) ===== */
+  .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .choice {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+    position: relative; overflow: hidden;
+  }
+  .choice::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .choice.c-rts::after { background: var(--sand); }
+  .choice.c-rtp::after { background: var(--amber); }
+  .choice.c-rtb::after { background: var(--sage); }
+  .choice-code {
+    font-size: 18px; font-weight: 700; letter-spacing: 2px;
+    color: var(--pine-2); line-height: 1;
+  }
+  .choice-code small {
+    display: block; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.4px; color: var(--ink-faint);
+    margin-top: 5px; text-transform: uppercase;
+  }
+  .choice-persona {
+    margin-top: 14px; padding-top: 13px;
+    border-top: 1px dashed var(--line);
+    font-size: 14.5px; font-weight: 700; color: var(--ink); letter-spacing: .5px;
+  }
+  .choice-q { font-size: 12.5px; color: var(--ink-faint); margin-top: 6px; line-height: 1.7; }
+  .choice-value {
+    margin-top: 12px; font-size: 13px; color: var(--ink-soft); line-height: 1.75;
+  }
+  .choice-value b { color: var(--pine-2); font-weight: 600; }
+
+  /* ===== Route matrix (05) ===== */
+  .route-from {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  .route-arrow {
+    font-size: 13px; font-weight: 700; color: var(--sand);
+    letter-spacing: 1px;
+  }
+
+  /* ===== Metric (06) ===== */
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .metric {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px 16px;
+  }
+  .metric-lv {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.8px;
+    color: var(--sand); margin-bottom: 8px;
+  }
+  .metric-name { font-size: 15.5px; font-weight: 700; color: var(--pine-2); margin-bottom: 10px; letter-spacing: .5px; }
+  .metric ul { list-style: none; display: grid; gap: 7px; }
+  .metric li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.7;
+    padding-left: 14px; position: relative;
+  }
+  .metric li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--sage);
+  }
+  .metric li b { color: var(--ink); font-weight: 600; }
+
+  .assume-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: #fff; background: var(--amber);
+    padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== Risk (07) ===== */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .risk {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+  }
+  .risk::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--amber);
+  }
+  .risk-name { font-size: 15px; font-weight: 700; color: var(--pine-2); margin-bottom: 9px; letter-spacing: .5px; }
+  .risk-row { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  .risk-row + .risk-row { margin-top: 8px; }
+  .risk-row .k {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; color: var(--ink-faint); margin-right: 7px;
+  }
+  .risk-row b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Phase (08) ===== */
+  .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .phase {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 20px 18px;
+    position: relative; overflow: hidden;
+  }
+  .phase::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .phase.p0::after { background: var(--pine-2); }
+  .phase.p1::after { background: var(--sand); }
+  .phase.p2::after { background: #B9C6C0; }
+  .phase-no {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 2px;
+    color: var(--ink-faint); margin-bottom: 6px;
+  }
+  .phase-name { font-size: 16px; font-weight: 700; color: var(--pine-2); margin-bottom: 10px; letter-spacing: .5px; }
+  .phase ul { list-style: none; display: grid; gap: 8px; }
+  .phase li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.75;
+    padding-left: 15px; position: relative;
+  }
+  .phase li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  .phase li b { color: var(--ink); font-weight: 600; }
+  .phase-dep {
+    margin-top: 13px; padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 12px; color: var(--ink-faint); line-height: 1.7;
+  }
+
+  /* ===== Open items ===== */
+  .open-list { list-style: none; display: grid; gap: 0; }
+  .open-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.8;
+  }
+  .open-list li:last-child { border-bottom: none; }
+  .open-list li .n {
+    flex: none; font-size: 11.5px; font-weight: 700; letter-spacing: 1px;
+    color: var(--sand); padding-top: 3px;
+  }
+  .open-list li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Footer ===== */
+  .foot {
+    margin-top: 52px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 1.2px;
+  }
+  .foot .dot {
+    display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--sand); margin-right: 8px; vertical-align: 1px;
+  }
+
+  /* ===== Wireframe (mono / grayscale) ===== */
+  .wf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .wf {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+  }
+  .wf-cap {
+    font-size: 14.5px; font-weight: 700; color: var(--pine-2);
+    letter-spacing: .5px; margin-bottom: 5px;
+  }
+  .wf-sub {
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .wf-stage { display: flex; justify-content: center; }
+
+  /* phone frame */
+  .phone {
+    width: 100%; max-width: 262px;
+    background: #fff;
+    border: 2px solid #9E9E9E;
+    border-radius: 24px;
+    padding: 9px 9px 12px;
+  }
+  .phone-notch {
+    width: 48px; height: 4px; border-radius: 2px;
+    background: #C4C4C4; margin: 0 auto 9px;
+  }
+  .screen {
+    border: 1px solid #D6D6D6;
+    border-radius: 14px;
+    background: #FCFCFC;
+    padding: 12px 11px;
+    display: flex; flex-direction: column; gap: 9px;
+    min-height: 416px;
+  }
+  .scr-top {
+    font-size: 10px; letter-spacing: .5px; color: #9E9E9E;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 7px; border-bottom: 1px solid #E8E8E8;
+  }
+  .scr-h { font-size: 12.5px; font-weight: 700; color: #424242; line-height: 1.5; }
+  .scr-p { font-size: 10px; color: #8A8A8A; line-height: 1.5; }
+
+  /* mono cards inside screen */
+  .m-card {
+    border: 1px dashed #BDBDBD; border-radius: 9px;
+    background: #fff; padding: 9px 10px;
+  }
+  .m-card.is-sel { border: 1.5px solid #616161; background: #F0F0F0; }
+  .m-code { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #424242; }
+  .m-code span {
+    font-size: 9.5px; font-weight: 500; color: #9E9E9E;
+    margin-left: 5px; letter-spacing: 0;
+  }
+  .m-persona { font-size: 11.5px; font-weight: 700; color: #3A3A3A; margin-top: 5px; }
+  .m-val { font-size: 9.5px; color: #8A8A8A; margin-top: 3px; line-height: 1.5; }
+
+  /* skeleton bars */
+  .m-sk { height: 7px; border-radius: 3px; background: #E4E4E4; }
+  .m-sk.w35 { width: 35%; }
+  .m-sk.w50 { width: 50%; }
+  .m-sk.w70 { width: 70%; }
+  .m-sk.w100 { width: 100%; }
+  .m-sk.tall { height: 32px; border-radius: 7px; }
+
+  .m-btn {
+    border-radius: 8px; background: #616161; color: #fff;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    text-align: center; padding: 8px 6px;
+  }
+  .m-btn.ghost {
+    background: #fff; color: #616161;
+    border: 1px dashed #BDBDBD; font-weight: 500;
+  }
+  /* 底部 TAB 条（真实 5 个：首页 / 客户 / AI助手 / 小店 / 获客） */
+  .m-tabbar {
+    display: flex; margin-top: auto;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 7px; gap: 2px;
+  }
+  .m-tab-item {
+    flex: 1; text-align: center;
+    font-size: 8.5px; color: #ADADAD; line-height: 1.2;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .m-tab-item .ti {
+    width: 13px; height: 13px; border-radius: 4px;
+    border: 1px solid #C4C4C4; background: #F4F4F4;
+  }
+  .m-tab-item.on { color: #3A3A3A; font-weight: 700; }
+  .m-tab-item.on .ti {
+    border: 1.5px solid #616161; background: #E4E4E4;
+  }
+  .m-tabbar-hint {
+    font-size: 9px; color: #9E9E9E; text-align: center;
+    padding-bottom: 2px;
+  }
+  .m-row { display: flex; gap: 6px; align-items: center; }
+  .m-banner {
+    border-radius: 9px; background: #F0F0F0;
+    border: 1px solid #D6D6D6;
+    padding: 8px 10px;
+    font-size: 10px; color: #4A4A4A; line-height: 1.5;
+  }
+  .m-toast {
+    border-radius: 9px; background: #fff;
+    border: 1.5px solid #616161;
+    padding: 9px 10px; text-align: center;
+    font-size: 10.5px; font-weight: 700; color: #3A3A3A;
+  }
+  .m-toast small { display: block; font-size: 9px; font-weight: 500; color: #8A8A8A; margin-top: 3px; }
+
+  .wf-note {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px dashed #E0E0E0;
+    font-size: 12px; color: var(--ink-faint); line-height: 1.75;
+  }
+  .wf-note b { color: var(--ink-soft); font-weight: 600; }
+
+  /* 3-step strip */
+  .wf-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 4px;
+  }
+  .wf-step {
+    background: #FCFCFC; border: 1px solid #E0E0E0;
+    border-radius: 12px; padding: 14px 13px 12px;
+  }
+  .wf-step-no {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+    color: #9E9E9E; margin-bottom: 7px;
+  }
+  .wf-step-name { font-size: 13px; font-weight: 700; color: #424242; margin-bottom: 9px; }
+  .wf-step .screen { min-height: 158px; gap: 7px; border-radius: 10px; padding: 10px 9px; }
+  .wf-step-desc {
+    font-size: 11.5px; color: var(--ink-faint);
+    line-height: 1.65; margin-top: 10px;
+  }
+
+  /* ===== 真实截图（现状实拍） ===== */
+  .shot-rail {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+  }
+  /* 4 图轨道（开店动线） */
+  .shot-rail.is-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .shot-rail.is-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .shot-rail.is-4 { grid-template-columns: 1fr; } }
+  .shot { display: flex; flex-direction: column; min-width: 0; }
+  .shot-frame {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 7px;
+    box-shadow: 0 10px 26px rgba(26,61,52,.09);
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .shot:hover .shot-frame {
+    border-color: var(--sage);
+    box-shadow: 0 14px 34px rgba(26,61,52,.17);
+    transform: translateY(-3px);
+  }
+  .shot-screen {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #F5F7F9;
+    aspect-ratio: 1080 / 1848;
+    cursor: zoom-in;
+  }
+  .shot-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* 高比例实拍（现状泳道 / 行业对标）：原框偏矮会裁掉上下 */
+  .shot-screen:has(img[src*="现状泳道图/"]),
+  .shot-screen:has(img[src*="行业对标图/"]) {
+    aspect-ratio: 1080 / 2340;
+  }
+  .shot-screen:has(img[src*="现状泳道图/"]) img,
+  .shot-screen:has(img[src*="行业对标图/"]) img {
+    object-fit: contain;
+    background: #111418;
+  }
+  .shot-screen:has(img[src*="开店动线图/"]) {
+    aspect-ratio: 1080 / 1920;
+  }
+  .shot-screen:has(img[src*="开店动线图/"]) img {
+    object-fit: contain;
+    background: #111418;
+  }
+  .shot-screen::after {
+    content: "点击放大";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 18px 8px 7px;
+    font-size: 10.5px; letter-spacing: 1px; text-align: center; color: #fff;
+    background: linear-gradient(to top, rgba(18,32,27,.66), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .shot:hover .shot-screen::after { opacity: 1; }
+
+  /* 截图内的标注框 */
+  .mk {
+    position: absolute;
+    border: 2px solid #D93A4E;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.88), 0 0 12px rgba(217,58,78,.4);
+    pointer-events: none;
+  }
+  .mk-lb {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #D93A4E; color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: .5px;
+    padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.24);
+  }
+  .mk-lb.is-below { transform: translate(-50%, 0); }
+  .mk-lb.is-left { transform: translate(-100%, -50%); }
+
+  .shot-cap { margin-top: 11px; }
+  .shot-cap-t { font-size: 12.5px; font-weight: 700; color: var(--ink); letter-spacing: .3px; }
+  .shot-cap-d { font-size: 11px; color: var(--ink-faint); line-height: 1.6; margin-top: 4px; }
+  .shot-badge {
+    display: inline-block; margin-top: 7px;
+    font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .shot-badge.is-gap { color: #B3313F; background: #FBEAEC; }
+  .shot-badge.is-ok { color: var(--sage); background: #E7F0EC; }
+
+  /* 截图对照（现状 vs 判断） */
+  .shot-2up {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 18px; margin-top: 18px;
+  }
+  .shot-2up .shot-frame { padding: 8px; }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(14,22,19,.82);
+    backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox[hidden] { display: none !important; }
+  .lightbox-inner { position: relative; max-width: min(430px, 92vw); max-height: 92vh; }
+  .lightbox-inner img {
+    display: block; width: 100%; height: auto; max-height: 86vh;
+    object-fit: contain; border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4); background: #fff;
+  }
+  .lightbox-cap {
+    margin-top: 12px; text-align: center;
+    font-size: 12.5px; letter-spacing: .5px; color: rgba(255,255,255,.82);
+  }
+  .lightbox-close {
+    position: absolute; top: -42px; right: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: none; cursor: pointer;
+    background: rgba(255,255,255,.16); color: #fff;
+    font-size: 19px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,.3); }
+
+  /* ===== 图 1 · 漏斗流失图 ===== */
+  .funnel { margin-top: 4px; }
+  .fn-row {
+    display: grid; grid-template-columns: 122px 1fr 88px;
+    align-items: center; gap: 14px;
+  }
+  .fn-stage { font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .fn-stage small { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-faint); margin-top: 2px; }
+  .fn-track { height: 34px; background: #F1F5F2; border-radius: 7px; overflow: hidden; }
+  .fn-bar { height: 100%; border-radius: 7px; background: linear-gradient(90deg, #234D42, #3D6B5C); }
+  .fn-bar.is-tail { background: linear-gradient(90deg, #7C948A, #9DB2A9); }
+  .fn-val {
+    font-size: 17px; font-weight: 700; color: var(--pine-2);
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  .fn-drop { display: grid; grid-template-columns: 122px 1fr 88px; align-items: center; gap: 14px; }
+  .fn-drop-mid { position: relative; height: 30px; }
+  .fn-lost {
+    position: absolute; top: 2px; bottom: 2px;
+    border-radius: 0 6px 6px 0;
+    border-left: 2px dashed #C0563F;
+    background: repeating-linear-gradient(45deg,
+      rgba(168,51,31,.16) 0, rgba(168,51,31,.16) 5px,
+      rgba(168,51,31,.05) 5px, rgba(168,51,31,.05) 10px);
+  }
+  .fn-lost.is-focus { border-left-color: #A8331F; background: repeating-linear-gradient(45deg,
+      rgba(168,51,31,.3) 0, rgba(168,51,31,.3) 5px,
+      rgba(168,51,31,.12) 5px, rgba(168,51,31,.12) 10px); }
+  .fn-lost-lb {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    left: 9px; white-space: nowrap;
+    font-size: 11.5px; font-weight: 700; color: #A8331F;
+  }
+  .fn-focus-tag {
+    display: inline-block; margin-left: 7px;
+    font-size: 10px; font-weight: 700; letter-spacing: .5px;
+    padding: 2px 7px; border-radius: 999px;
+    background: #A8331F; color: #fff; vertical-align: middle;
+  }
+  .fn-foot {
+    margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+  .fn-foot b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ===== 图 2 · 双轨对照图 ===== */
+  .rail { margin-top: 4px; }
+  .rail-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 9px; }
+  .rail-col {
+    background: #fff; border: 1px solid var(--line);
+    border-top: 4px solid var(--line);
+    border-radius: 0 0 10px 10px;
+    padding: 12px 10px 13px; min-width: 0;
+  }
+  .rail-col.is-gap { border-top-color: #C0563F; background: #FEFAF9; }
+  .rail-col.is-part { border-top-color: var(--amber); background: #FFFCF6; }
+  .rail-col.is-ok { border-top-color: #4F8A6E; }
+  .rail-no {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.3px;
+    color: var(--ink-faint); margin-bottom: 5px;
+  }
+  .rail-door { font-size: 13.5px; font-weight: 700; color: var(--ink); letter-spacing: .5px; }
+  .rail-heart {
+    font-size: 10px; color: var(--ink-faint); line-height: 1.5;
+    margin-top: 5px; padding-bottom: 8px; border-bottom: 1px dashed var(--line-soft);
+  }
+  .rail-prod { font-size: 11px; color: var(--ink-soft); line-height: 1.6; margin-top: 8px; }
+  .rail-tag { margin-top: 9px; }
+  .rail-foot {
+    margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.8;
+  }
+  .rail-foot b { color: var(--ink-soft); font-weight: 600; }
+  .rail-legend {
+    display: flex; flex-wrap: wrap; gap: 8px 18px;
+    margin-top: 10px; font-size: 11.5px; color: var(--ink-faint);
+  }
+  .rail-legend i {
+    display: inline-block; width: 11px; height: 4px; border-radius: 2px;
+    margin-right: 6px; vertical-align: middle;
+  }
+
+  /* ===== 图 3 · 死结循环图 ===== */
+  .loop-wrap {
+    margin-top: 4px;
+    background: #FCFDFC; border: 1px solid var(--line);
+    border-radius: 14px; padding: 8px 10px 4px;
+  }
+  .loop-wrap svg { display: block; width: 100%; height: auto; }
+
+  /* ===== 图 4 · 三阶段总览图 ===== */
+  .flow3 {
+    display: grid; grid-template-columns: 1fr 36px 1fr 36px 1fr;
+    align-items: stretch; margin-top: 4px;
+  }
+  .f3-node {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 14px; padding: 17px 19px 16px;
+    display: flex; flex-direction: column;
+  }
+  .f3-node.is-core { border-color: #C6D8CF; box-shadow: 0 6px 18px rgba(26,61,52,.07); }
+  .f3-head { display: flex; align-items: baseline; gap: 9px; }
+  .f3-no {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 7px; border-radius: 4px;
+  }
+  .f3-name { font-size: 16px; font-weight: 700; color: var(--pine-2); letter-spacing: 1px; }
+  .f3-sub { font-size: 11px; color: var(--sand); font-weight: 700; letter-spacing: .8px; margin-top: 6px; }
+  .f3-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; margin-top: 9px; }
+  .f3-ok {
+    font-size: 11.5px; color: var(--ink-faint); line-height: 1.6;
+    margin-top: auto; padding-top: 11px;
+  }
+  .f3-ok b { color: var(--pine-2); font-weight: 700; }
+  .f3-arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sand); font-size: 19px; font-weight: 700;
+  }
+
+  /* ===== 三大部分分隔 ===== */
+  .part-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px;
+    margin-top: 58px; padding: 15px 0 13px;
+    border-top: 2px solid var(--pine-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .part-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    color: #fff; background: var(--sand); padding: 3px 9px; border-radius: 4px;
+  }
+  .part-name { font-size: 20px; font-weight: 700; letter-spacing: 3px; color: var(--pine-2); }
+  .part-desc { font-size: 12.5px; color: var(--ink-faint); letter-spacing: .5px; }
+  .part-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+
+  /* ===== 行业对标（第 03 章） ===== */
+  .bench-list { display: grid; gap: 10px; margin-top: 16px; }
+  .bench {
+    display: grid; grid-template-columns: 160px 440px 1fr;
+    gap: 14px; align-items: center;
+    background: #FBFCFB; border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 13px 16px;
+  }
+  .bench-hd { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+  .bench-name { font-size: 14.5px; font-weight: 700; color: var(--pine-2); letter-spacing: .5px; }
+  .bench-tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    color: var(--sand); background: var(--sand-bg);
+    padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .bench-svg { line-height: 0; }
+  .bench-svg svg { width: 100%; height: auto; display: block; }
+  .bench-svg text { font-family: var(--font-cjk); }
+  .bench-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .bench-desc b { color: var(--ink); font-weight: 600; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero-cards, .cause-grid, .prin-grid, .choice-grid,
+    .metric-grid, .risk-grid, .phase-grid,
+    .wf-grid, .bench { grid-template-columns: 1fr; }
+    .bench-svg svg { max-width: 440px; }
+    .wf-strip { grid-template-columns: repeat(2, 1fr); }
+    .shot-rail { grid-template-columns: repeat(3, 1fr); }
+    .rail-grid { grid-template-columns: repeat(4, 1fr); }
+    .flow3 { grid-template-columns: 1fr; gap: 10px; }
+    .f3-arrow { transform: rotate(90deg); padding: 2px 0; }
+    .hero { padding: 40px 0 34px; }
+    .wrap { padding: 0 20px 56px; }
+    .hero-inner { padding: 0 20px; }
+  }
+  @media (max-width: 720px) {
+    .sec-en { display: none; }
+    .sec-title { font-size: 19px; }
+    .sec-title span { display: block; margin-left: 0; margin-top: 4px; }
+    .shot-rail { grid-template-columns: repeat(2, 1fr); }
+    .shot-2up { grid-template-columns: 1fr; }
+    .mk-lb { font-size: 9px; padding: 1px 5px; }
+    .rail-grid { grid-template-columns: repeat(2, 1fr); }
+    .fn-row, .fn-drop { grid-template-columns: 88px 1fr 62px; gap: 9px; }
+    .fn-stage { font-size: 11.5px; }
+    .fn-val { font-size: 15px; }
+  }
+  @media (max-width: 560px) {
+    .wf-strip { grid-template-columns: 1fr; }
+    .shot-rail { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: avoid; }
+    .shot-screen::after { display: none; }
+    .lightbox { display: none !important; }
+  }
+
+  .hero-cards.is-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .rail-grid.is-4col { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 560px) {
+    .rail-grid.is-4col { grid-template-columns: 1fr !important; }
+  }
+
+
+  .bench-shots {
+    margin: -2px 0 12px;
+    padding: 14px 16px 12px;
+    background: #FBFCFB;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+  }
+  .bench-shots-cap {
+    font-size: 12px; font-weight: 700; letter-spacing: .8px;
+    color: var(--pine-2); margin-bottom: 10px;
+  }
+  .bench-shots-cap small {
+    margin-left: 8px; font-weight: 600; color: var(--sand);
+    letter-spacing: .5px;
+  }
+  .bench-shots .shot-rail { margin-top: 0; }
+  .bench-shots .shot-rail.is-3 { grid-template-columns: repeat(3, 1fr); }
+  .bench-shots .shot-rail.is-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media (max-width: 900px) {
+    .bench-shots .shot-rail.is-6 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .bench-shots .shot-rail.is-3,
+    .bench-shots .shot-rail.is-6 { grid-template-columns: 1fr; }
+  }
+
+  /* ===== 现状泳道 ===== */
+  .lane + .lane { margin-top: 14px; }
+  .lane-hd {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 12px;
+    margin-bottom: 10px;
+  }
+  .lane-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .lane-name { font-size: 15px; font-weight: 700; color: var(--pine-2); letter-spacing: .5px; }
+  .lane-desc { font-size: 12.5px; color: var(--ink-faint); }
+  .lane-flow {
+    font-size: 12px; color: var(--ink-soft); line-height: 1.7;
+    margin: 0 0 14px; padding: 10px 14px;
+    background: #F3F7F4; border-radius: 8px;
+  }
+  .lane-flow b { color: var(--pine-2); font-weight: 600; }
+  .shot-rail.is-2 { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
+  .shot-rail.is-3 { grid-template-columns: repeat(3, 1fr); }
+
+  /* ----- 树状分叉 A ----- */
+  .tree-fork {
+    margin-top: 6px;
+    position: relative;
+  }
+  .tree-stem {
+    display: flex; flex-direction: column; align-items: center;
+    margin-top: 4px;
+  }
+  .tree-stem-line {
+    width: 2px; height: 22px;
+    background: linear-gradient(to bottom, #C9D6CF, var(--sand));
+    border-radius: 1px;
+  }
+  .tree-decision {
+    margin-top: 2px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    color: #6B5426; background: var(--sand-bg);
+    border: 1.5px solid rgba(176,141,87,.55);
+    border-radius: 999px; padding: 6px 16px;
+    box-shadow: 0 4px 12px rgba(176,141,87,.12);
+  }
+  .tree-decision small {
+    display: block; font-size: 10px; font-weight: 600;
+    letter-spacing: .4px; color: var(--ink-faint);
+    margin-top: 2px; text-align: center;
+  }
+  .tree-y {
+    display: block; width: 100%; max-width: 520px;
+    height: 52px; margin: 2px auto 0;
+  }
+  .tree-y path {
+    fill: none; stroke: var(--sand); stroke-width: 2.2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .tree-y.is-side path { stroke: #C0563F; }
+  .tree-y.is-single path { stroke: #C0563F; }
+  .tree-arms {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 2px;
+  }
+  .tree-arms.is-single {
+    grid-template-columns: minmax(0, 280px);
+    justify-content: center;
+  }
+  .tree-arm {
+    position: relative;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 13px 12px;
+    box-shadow: 0 6px 16px rgba(26,61,52,.05);
+  }
+  .tree-arm::before {
+    content: "";
+    position: absolute; top: -1px; left: 16px; right: 16px; height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--sage);
+  }
+  .tree-arm.is-side::before { background: #C0563F; }
+  .tree-arm-hd {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 11px; flex-wrap: wrap;
+  }
+  .tree-arm-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .6px;
+    color: var(--sage); background: #E7F1EE;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .tree-arm.is-side .tree-arm-tag {
+    color: #A8331F; background: #FBEAEC;
+  }
+  .tree-arm-hint {
+    font-size: 11.5px; color: var(--ink-faint); line-height: 1.5;
+  }
+  .tree-arm .shot-rail { margin-top: 0; gap: 10px; }
+  .tree-arm .shot-rail.is-1 { grid-template-columns: minmax(0, 150px); }
+  .tree-arm .shot-rail.is-2 { max-width: none; }
+  .tree-arm .shot-rail.is-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .tree-merge {
+    display: block; width: 100%; max-width: 520px;
+    height: 40px; margin: 10px auto 0;
+  }
+  .tree-merge path {
+    fill: none; stroke: var(--sage); stroke-width: 2.2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .tree-join-bar {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 2px auto 0; max-width: 640px;
+    padding: 11px 16px;
+    background: linear-gradient(135deg, #E7F1EE 0%, #F3F7F4 100%);
+    border: 1px solid #C6D8CF; border-radius: 10px;
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.65;
+    text-align: center;
+  }
+  .tree-join-bar b { color: var(--pine-2); font-weight: 700; }
+  .tree-join-bar .tj-arrow {
+    flex: none;
+    font-size: 14px; font-weight: 700; color: var(--sand);
+  }
+
+  @media (max-width: 900px) {
+    .tree-arms { grid-template-columns: 1fr; gap: 20px; }
+    .tree-y, .tree-merge { max-width: 220px; height: 44px; }
+    .shot-rail.is-2, .shot-rail.is-3,
+    .tree-arm .shot-rail.is-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .shot-rail.is-2, .shot-rail.is-3,
+    .tree-arm .shot-rail.is-1,
+    .tree-arm .shot-rail.is-3 { grid-template-columns: 1fr; }
+    .tree-arms.is-single { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Guest Journey Design · Brief</div>
+    <h1>开店分流与<em>承接方案</em><span style="display:block;font-size:14px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,.55);margin-top:8px;">精简版</span></h1>
+    <p class="hero-lead">
+      先看清用户<strong>进入 App 后实际经历的页面</strong>，再对照行业做法，最后给出<strong>分流与承接</strong>要补的动作。
+      本页为完整方案的精简版，不含问题诊断长文、指标体系与落地分期。
+    </p>
+
+    <div class="hero-cards" style="grid-template-columns:repeat(2,1fr);">
+      <div class="hc">
+        <div class="hc-label">本文范围</div>
+        <div class="hc-value">现状 · 对标 · 解法</div>
+        <div class="hc-note">按进 App 流程排列实拍 → 行业对标 → 分流与承接</div>
+      </div>
+      <div class="hc">
+        <div class="hc-label">方案主线</div>
+        <div class="hc-value">分流 · 承接</div>
+        <div class="hc-note">先问需再引路，再把目标版块服务到位</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 01 现状 ============ -->
+  <section id="status">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">现状实拍<span>按进入 App 的真实流程 · 四条泳道</span></h2>
+      <span class="sec-en">As-Is Journey</span>
+    </div>
+
+    <p class="sec-lead">
+      以下为线上 App 的<strong>真实截图</strong>，按用户经历拆成四条泳道。
+      登录方式、定位授权、认领冲突等差异用<strong>泳道内分叉</strong>展示，避免拆成过多平行轨道。
+      红框为本文档标注，<b>点击可放大</b>。
+    </p>
+
+    <!-- 泳道 ① -->
+    <div class="card lane">
+      <div class="lane-hd">
+        <span class="lane-no">泳道 ①</span>
+        <span class="lane-name">启动与登录</span>
+        <span class="lane-desc">封面 → 登录页 → 两种登录方式分叉后汇合</span>
+      </div>
+      <div class="lane-flow">
+        <b>主干：</b>封面 → 登录页 →（分叉）→ <b>汇合后进入泳道 ②</b>
+      </div>
+      <div class="shot-rail is-2">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/01-封面.jpg" alt="封面页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">① 封面</div>
+            <div class="shot-cap-d">启动页：品牌与价值主张。</div>
+            <span class="shot-badge is-ok">起点</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/02-登录页.jpg" alt="登录页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">② 登录页</div>
+            <div class="shot-cap-d">提供「本机一键登录」与「手机验证码登录」。</div>
+            <span class="shot-badge is-gap">分叉点</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-fork">
+        <div class="tree-stem">
+          <div class="tree-stem-line"></div>
+          <div class="tree-decision">从登录页分叉<small>选一种方式进入</small></div>
+        </div>
+      <svg class="tree-y" viewBox="0 0 400 52" aria-hidden="true">
+        <path d="M200 2 V16"/>
+        <path d="M200 16 C200 28 110 28 110 44"/>
+        <path d="M200 16 C200 28 290 28 290 44"/>
+        <circle cx="200" cy="16" r="3.2" fill="#B08D57" stroke="none"/>
+        <circle cx="110" cy="44" r="2.6" fill="#B08D57" stroke="none"/>
+        <circle cx="290" cy="44" r="2.6" fill="#B08D57" stroke="none"/>
+      </svg>
+        <div class="tree-arms">
+          <div class="tree-arm">
+            <div class="tree-arm-hd">
+              <span class="tree-arm-tag">L1 · 本机一键登录</span>
+              <span class="tree-arm-hint">主路径 · 一步完成</span>
+            </div>
+            <div class="shot-rail is-1">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/03-一键登录转圈.jpg" alt="一键登录转圈">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">一键登录 · 转圈</div>
+            <div class="shot-cap-d">点击后等待运营商认证结果。</div>
+          </div>
+        </div>
+            </div>
+          </div>
+          <div class="tree-arm">
+            <div class="tree-arm-hd">
+              <span class="tree-arm-tag">L2 · 手机验证码</span>
+              <span class="tree-arm-hint">备选 · 三步表单</span>
+            </div>
+            <div class="shot-rail is-3">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/04-验证码登录.jpg" alt="手机验证码登录">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">验证码登录页</div>
+            <div class="shot-cap-d">进入手机号 + 验证码表单。</div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/05-输入手机号.jpg" alt="输入手机号">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">输入手机号</div>
+            <div class="shot-cap-d">填写手机号。</div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/06-输入验证码.jpg" alt="输入验证码">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">输入验证码</div>
+            <div class="shot-cap-d">填写验证码后登录。</div>
+          </div>
+        </div>
+            </div>
+          </div>
+        </div>
+      <svg class="tree-merge" viewBox="0 0 400 40" aria-hidden="true">
+        <path d="M110 4 C110 18 200 18 200 30"/>
+        <path d="M290 4 C290 18 200 18 200 30"/>
+        <path d="M200 30 V38"/>
+        <circle cx="200" cy="30" r="3.2" fill="#3D6B5C" stroke="none"/>
+      </svg>
+        <div class="tree-join-bar">
+          <span class="tj-arrow">↓</span>
+          <span><b>汇合</b>：任一登录成功后，进入门店入驻前的定位权限说明（泳道 ②）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 泳道 ② -->
+    <div class="card lane">
+      <div class="lane-hd">
+        <span class="lane-no">泳道 ②</span>
+        <span class="lane-name">定位与门店列表</span>
+        <span class="lane-desc">权限说明 → 同意即申请系统定位 → 允许后出附近门店；拒绝 / 不允许走分叉</span>
+      </div>
+      <div class="lane-flow">
+        <b>主干（同意路径）：</b>权限说明弹窗 → 点「同意」→ 系统申请定位 → 允许 → 附近门店列表
+      </div>
+      <div class="shot-rail is-3">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/07-权限说明弹窗.jpg" alt="权限说明弹窗">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">① 权限说明</div>
+            <div class="shot-cap-d">进入开店前的 App 内说明；可选同意 / 拒绝。</div>
+            <span class="shot-badge is-ok">主干起点</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/09-申请定位权限.jpg" alt="申请定位权限">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">② 系统申请定位</div>
+            <div class="shot-cap-d">点「同意」后立刻弹出系统定位权限。</div>
+            <span class="shot-badge is-ok">同意后</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/12-附近门店列表.jpg" alt="附近门店列表">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">③ 附近门店列表</div>
+            <div class="shot-cap-d">允许定位后展示附近可认领门店。</div>
+            <span class="shot-badge is-gap">允许后</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-fork">
+        <div class="tree-stem">
+          <div class="tree-stem-line"></div>
+          <div class="tree-decision">授权分叉<small>相对上方「同意 → 允许」主干的旁路</small></div>
+        </div>
+      <svg class="tree-y is-side" viewBox="0 0 400 52" aria-hidden="true">
+        <path d="M200 2 V16"/>
+        <path d="M200 16 C200 28 110 28 110 44"/>
+        <path d="M200 16 C200 28 290 28 290 44"/>
+        <circle cx="200" cy="16" r="3.2" fill="#C0563F" stroke="none"/>
+        <circle cx="110" cy="44" r="2.6" fill="#C0563F" stroke="none"/>
+        <circle cx="290" cy="44" r="2.6" fill="#C0563F" stroke="none"/>
+      </svg>
+        <div class="tree-arms">
+          <div class="tree-arm is-side">
+            <div class="tree-arm-hd">
+              <span class="tree-arm-tag">若点「拒绝」权限说明</span>
+              <span class="tree-arm-hint">自①分出</span>
+            </div>
+            <div class="shot-rail is-1">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/08-拒绝后空态门店列表.jpg" alt="拒绝后空态门店列表">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">空态门店列表</div>
+            <div class="shot-cap-d">显示「定位失败 / 暂无内容」，可手工创建新门店。</div>
+            <span class="shot-badge is-gap">旁路</span>
+          </div>
+        </div>
+            </div>
+          </div>
+          <div class="tree-arm is-side">
+            <div class="tree-arm-hd">
+              <span class="tree-arm-tag">若系统权限「不允许」</span>
+              <span class="tree-arm-hint">自②分出</span>
+            </div>
+            <div class="shot-rail is-2" style="max-width:none;">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/10-不允许授权失败.jpg" alt="不允许之后授权失败">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">授权失败</div>
+            <div class="shot-cap-d">提示需在设置中开启定位。</div>
+            <span class="shot-badge is-gap">不允许后</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/11-去设置.jpg" alt="去设置跳转页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">去设置</div>
+            <div class="shot-cap-d">跳转系统应用信息页，需手动开权限。</div>
+            <span class="shot-badge is-gap">去设置</span>
+          </div>
+        </div>
+            </div>
+          </div>
+        </div>
+      <svg class="tree-merge" viewBox="0 0 400 40" aria-hidden="true">
+        <path d="M110 4 C110 18 200 18 200 30"/>
+        <path d="M290 4 C290 18 200 18 200 30"/>
+        <path d="M200 30 V38"/>
+        <circle cx="200" cy="30" r="3.2" fill="#3D6B5C" stroke="none"/>
+      </svg>
+        <div class="tree-join-bar">
+          <span class="tj-arrow">↓</span>
+          <span><b>汇合</b>：拿到可用的门店列表（或选择手工创建）后，进入泳道 ③</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 泳道 ③ -->
+    <div class="card lane">
+      <div class="lane-hd">
+        <span class="lane-no">泳道 ③</span>
+        <span class="lane-name">认领与开店填资料</span>
+        <span class="lane-desc">认领成功或手工创建 → 填资料；已认领门店走分叉弹窗</span>
+      </div>
+      <div class="lane-flow">
+        <b>主干：</b>认领成功 / 手工创建 → 开店填资料 → <b>落点写死为首页</b>（整段无「你想做什么」的询问）
+      </div>
+
+      <div class="tree-fork">
+        <div class="tree-stem">
+          <div class="tree-stem-line"></div>
+          <div class="tree-decision">认领分叉<small>绿点续主干填资料；红点为「已被认领」旁路</small></div>
+        </div>
+      <svg class="tree-y is-single" viewBox="0 0 400 52" aria-hidden="true">
+        <path d="M200 2 V18"/>
+        <path d="M200 18 C200 30 200 30 200 44"/>
+        <path d="M200 18 C170 34 130 38 110 44"/>
+        <circle cx="200" cy="18" r="3.2" fill="#C0563F" stroke="none"/>
+        <circle cx="110" cy="44" r="2.6" fill="#C0563F" stroke="none"/>
+        <circle cx="200" cy="44" r="2.6" fill="#3D6B5C" stroke="none"/>
+      </svg>
+        <div class="tree-arms is-single">
+          <div class="tree-arm is-side">
+            <div class="tree-arm-hd">
+              <span class="tree-arm-tag">若认领「已被认领」的门店</span>
+              <span class="tree-arm-hint">旁路 · 无法直接走完开店主干</span>
+            </div>
+            <div class="shot-rail is-1">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="现状泳道图/13-门店已被认领.jpg" alt="门店已被认领">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">该店已被认领</div>
+            <div class="shot-cap-d">可取消或「申请加入」；无法直接走完开店主干。</div>
+            <span class="shot-badge is-gap">旁路</span>
+          </div>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lane-flow" style="margin-top:14px; background:#E7F1EE;">
+        <b>主干续行（绿点）：</b>认领成功或手工创建后，进入开店填资料
+      </div>
+      <div class="shot-rail is-3">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开店动线图/02-开店流程-1.jpg" alt="创建店铺流程第 1 步">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">① 创建店铺 · 第 1 步</div>
+            <div class="shot-cap-d">开店流程的起始环节。</div>
+            <span class="shot-badge is-ok">填资料</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开店动线图/03-开店流程-2.jpg" alt="创建店铺流程第 2 步">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">② 创建店铺 · 第 2 步</div>
+            <div class="shot-cap-d">开店流程的中间环节。</div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开店动线图/04-开店流程-3.jpg" alt="创建店铺流程第 3 步">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">③ 创建店铺 · 第 3 步</div>
+            <div class="shot-cap-d">走完开店，随即进入首页。</div>
+            <span class="shot-badge is-gap">落点：首页</span>
+          </div>
+        </div>
+      </div>
+      <div class="tree-join-bar" style="margin-top:14px;">
+        <span class="tj-arrow">↓</span>
+        <span><b>汇合</b>：开店走完后一律进入首页（泳道 ④）</span>
+      </div>
+    </div>
+
+    <!-- 泳道 ④ -->
+    <div class="card lane">
+      <div class="lane-hd">
+        <span class="lane-no">泳道 ④</span>
+        <span class="lane-name">进入首页之后</span>
+        <span class="lane-desc">默认落在首页；小店有承接，获客无引导且存在死结</span>
+      </div>
+      <div class="lane-flow">
+        <b>主干：</b>首页 → 小店 / 新手指南 → 获客 → 发布活动空态
+      </div>
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/01-首页.jpg" alt="App 首页（RTB）">
+              <div class="mk" style="left:80.2%; top:90.4%; width:19.6%; height:9.4%;"></div>
+              <div class="mk-lb is-left" style="left:78.5%; top:95.1%;">获客 · 第 5 个 TAB</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">① 首页（RTB）</div>
+            <div class="shot-cap-d">开店完成后<b>所有人一律落到这里</b>。APP 主体，功能密集。</div>
+            <span class="shot-badge is-gap">默认落点</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/02-小店.jpg" alt="小店页面（RTP）">
+              <div class="mk" style="left:75.5%; top:1.4%; width:23.5%; height:6.2%;"></div>
+              <div class="mk-lb is-left" style="left:73.8%; top:4.5%;">「新手指南」入口</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">② 小店（RTP）</div>
+            <div class="shot-cap-d">右上角有<b>显著的「新手指南」入口</b>，点击即进入引导页。</div>
+            <span class="shot-badge is-ok">已有承接</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/03-小店新手指南.jpg" alt="小店新手指南引导页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">③ 小店 · 新手指南页</div>
+            <div class="shot-cap-d">分步骤、配说明的完整引导页，<b>是一套已经被验证的承接模板</b>。</div>
+            <span class="shot-badge is-ok">可复用</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/04-获客.jpg" alt="获客页面（RTS）">
+              <div class="mk" style="left:80.2%; top:90.4%; width:19.6%; height:9.4%;"></div>
+              <div class="mk-lb is-left" style="left:78.5%; top:95.1%;">用户想看的是这里</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">④ 获客（RTS）</div>
+            <div class="shot-cap-d">以「发布活动」为核心。<b>没有新手引导</b>，进来靠用户自己猜。</div>
+            <span class="shot-badge is-gap">有入口 · 无承接</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/05-发布活动空态.jpg" alt="发布活动页面的空态">
+              <div class="mk" style="left:6%; top:20%; width:88%; height:45%;"></div>
+              <div class="mk-lb" style="left:50%; top:19%;">空态：无项目可选</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">⑤ 发布活动 · 空态</div>
+            <div class="shot-cap-d">点进「发布活动」后的死结：<b>价目表未配置，活动发不出去</b>。</div>
+            <span class="shot-badge is-gap">死结现场</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding" style="margin-top:18px;">
+      <h4>四条泳道说明了什么</h4>
+      <ul>
+        <li><b>① 登录有两条路，但终点一样。</b>一键登录与验证码登录只是入口差异，之后都进入同一套门店入驻。</li>
+        <li><b>② 定位是进门店列表的硬门槛。</b>拒绝 App 说明会落到空态；系统「不允许」还要绕去设置——附近门店列表只在「同意 + 允许」主干上出现。</li>
+        <li><b>③ 开店填资料段仍然不问需。</b>认领冲突走旁路弹窗；走完主干后落点写死为首页。</li>
+        <li><b>④ 首页与获客并排，就是版块错配。</b>小店已有可复用的新手指南；获客无引导，发布活动还撞上价目表死结。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 02 门店类比极简 ============ -->
+  <section id="analogy">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">门店类比<span>迎宾 / 问需 / 引座 ↔ 分流与承接</span></h2>
+      <span class="sec-en">Analogy</span>
+    </div>
+
+    <p class="sec-lead">
+      把接待翻译成产品动作：前三步对应<strong>分流</strong>，第四步对应<strong>承接</strong>。
+    </p>
+
+    <div class="rail">
+      <div class="rail-grid is-4col" style="grid-template-columns:repeat(4,1fr);">
+        <div class="rail-col is-gap">
+          <div class="rail-no">STEP 01</div>
+          <div class="rail-door">迎宾</div>
+          <div class="rail-heart">「我进来了，有人吗？」</div>
+          <div class="rail-prod">开店完成后<b>主动问需</b></div>
+          <div class="rail-tag"><span class="tag t-gap">缺失 · 分流</span></div>
+        </div>
+        <div class="rail-col is-gap">
+          <div class="rail-no">STEP 02</div>
+          <div class="rail-door">问需</div>
+          <div class="rail-heart">「我是来干这个的？」</div>
+          <div class="rail-prod"><b>分流</b>：确认意图，不替他决定</div>
+          <div class="rail-tag"><span class="tag t-gap">缺失 · 分流</span></div>
+        </div>
+        <div class="rail-col is-gap">
+          <div class="rail-no">STEP 03</div>
+          <div class="rail-door">引座</div>
+          <div class="rail-heart">「那我去哪儿坐？」</div>
+          <div class="rail-prod">带到目标版块并<b>高亮 TAB</b></div>
+          <div class="rail-tag"><span class="tag t-gap">缺失 · 分流</span></div>
+        </div>
+        <div class="rail-col is-part">
+          <div class="rail-no">STEP 04</div>
+          <div class="rail-door">服务中</div>
+          <div class="rail-heart">「接下来做什么？」</div>
+          <div class="rail-prod"><b>承接</b>：引导 + 第一个价值动作</div>
+          <div class="rail-tag"><span class="tag t-amber">不齐 · 承接</span></div>
+        </div>
+      </div>
+      <div class="rail-foot">
+        <b>一句话：</b>迎宾 / 问需 / 引座全部缺失 → 补分流；服务中不齐 → 补承接。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 行业对标 ============ -->
+  <section id="benchmark">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">行业对标<span>五个头部产品，都在「先问一句，再带路」</span></h2>
+      <span class="sec-en">Benchmark</span>
+    </div>
+
+    <p class="sec-lead">
+      分流不是从零想出来的。<b>国内几个头部产品在注册或开户完成的那一刻，都会先问一句「你是来做什么的」，再决定把人带到哪儿</b>。
+    </p>
+
+    <div class="card">
+      <div class="bench-list" style="margin-top:0;">
+
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">BOSS直聘</span>
+            <span class="bench-tag">双身份分流</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="BOSS直聘：注册完成后先选身份，招聘与求职各走一套功能">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">注册完成</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="22" width="112" height="44" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">我是招人的</text>
+              <text x="141.5" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">我是找工作的</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">发布职位 · 找牛人</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">投递简历 · 聊 BOSS</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            注册第一步先分身份，<b>招聘与求职是两套完全不同的功能</b>，选完各走各的，身份还能随时切回来。
+          </div>
+        </div>
+
+        <div class="bench-shots" id="bench-boss-flow">
+          <div class="bench-shots-cap">实拍 · BOSS 直聘<small>登录 → 验证码 → 身份分流</small></div>
+          <div class="shot-rail is-3">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="行业对标图/boss-01-登录.jpg" alt="BOSS直聘登录页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">① 登录</div>
+            <div class="shot-cap-d">微信登录 / 一键登录等入口。</div>
+            <span class="shot-badge is-ok">前置</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="行业对标图/boss-02-验证码.jpg" alt="BOSS直聘输入验证码">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">② 输入验证码</div>
+            <div class="shot-cap-d">完成认证后进入下一步。</div>
+            <span class="shot-badge is-ok">前置</span>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="行业对标图/boss-03-身份分流.jpg" alt="BOSS直聘身份分流页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">③ 身份分流</div>
+            <div class="shot-cap-d">「我要找工作」或「我要招人」——<b>登录后立刻问身份</b>。</div>
+            <span class="shot-badge is-gap">分流页</span>
+          </div>
+        </div>
+          </div>
+          <p class="body" style="margin-top:12px;font-size:12.5px;">
+            与我们方案同构：<b>认证完成 → 先问一句 → 再带进不同功能集</b>，而不是先丢进默认首页。
+          </p>
+        </div>
+
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">企业微信</span>
+            <span class="bench-tag">二选一分叉</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="企业微信：首次进入必选创建或加入企业">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">首次进入</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">创建或加入企业</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">创建新企业 · 配后台</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">个人团队 · 轻量起步</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            首次进入必过一道选择，<b>「开一家新的」和「先用个人团队」的权限、可登录端、引导流程都不同</b>。
+          </div>
+        </div>
+
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">抖音来客</span>
+            <span class="bench-tag">按经营形态分流</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 124" role="img" aria-label="抖音来客：登录后选行业与门店形态，单店多店无门店走三套路径">
+              <rect x="0.5" y="47" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="66" text-anchor="middle" font-size="10" fill="#5A6B63">手机号登录</text>
+              <line x1="65" y1="62" x2="84" y2="62" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 58.5 L84.5 62 L80 65.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="47" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="66" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">行业 + 门店形态</text>
+              <path d="M198 62 L208 62 M208 62 L218 26 M208 62 L218 62 M208 62 L218 96" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">单店 · 单店后台</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">多店 · 连锁后台</text>
+              <rect x="218.5" y="84" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="102" font-size="10.5" fill="#24302C">无门店 · 线索版</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            同样是商家，<b>单店、多店、无门店走的是三套不同的入驻路径</b>，选完才知道该给你看什么。
+            另：发布团购券前在同一路径里就地建商品——实拍见承接章
+            <a href="#bench-douyin-product" style="color:var(--sand);font-weight:700;text-decoration:underline;text-underline-offset:2px;">「抖音来客 · 就地建商品」</a>。
+          </div>
+        </div>
+
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">有赞</span>
+            <span class="bench-tag">选择决定后续</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="有赞：先选主体类型与经营类目，后续材料与引导由选择决定">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">入驻开店</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">主体 + 经营类目</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">企业 · 个体户（材料多）</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">个人（材料精简）</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            先选主体类型与经营类目，<b>后面要交什么材料、走什么引导，由这个选择决定</b>。
+          </div>
+        </div>
+
+        <div class="bench">
+          <div class="bench-hd">
+            <span class="bench-name">钉钉</span>
+            <span class="bench-tag">按需自选</span>
+          </div>
+          <div class="bench-svg">
+            <svg viewBox="0 0 380 88" role="img" aria-label="钉钉：创建团队后自选需要的应用，工作台按勾选生成">
+              <rect x="0.5" y="29" width="64" height="30" rx="6" fill="#F3F7F4" stroke="#DCE4DF"/>
+              <text x="32.5" y="48" text-anchor="middle" font-size="10" fill="#5A6B63">创建团队</text>
+              <line x1="65" y1="44" x2="84" y2="44" stroke="#B08D57" stroke-width="1.3"/>
+              <path d="M80 40.5 L84.5 44 L80 47.5" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85.5" y="29" width="112" height="30" rx="8" fill="#E7F1EE" stroke="#3D6B5C"/>
+              <text x="141.5" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#234D42">你需要哪些应用</text>
+              <path d="M198 44 L208 44 M208 44 L218 26 M208 44 L218 62" fill="none" stroke="#B08D57" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="218.5" y="12" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="30" font-size="10.5" fill="#24302C">考勤 · 审批 · 请假</text>
+              <rect x="218.5" y="48" width="161" height="28" rx="14" fill="#FFFFFF" stroke="#DCE4DF"/>
+              <text x="229" y="66" font-size="10.5" fill="#24302C">出差 · 日志 · 更多</text>
+            </svg>
+          </div>
+          <div class="bench-desc">
+            创建完团队后<b>自选需要的应用</b>，工作台按勾选生成——不预设用户要什么。
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note sage" style="margin-top:14px;">
+        <b>五个产品、五种业务，动作顺序是同一个：先问一句，再按答案带路。</b>
+        没有一个的做法是「不管你来干什么，先落到默认首页」。它们问的多半是「你是谁」，
+        我们问的是「你现在想做什么」——<b>后者更轻，也更容易被用户回答</b>。
+        分流页就是把这个动作搬到门店场景：<b>不是独创设计，是行业里已经跑通的标准做法。</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 分流 ============ -->
+  <section id="triage">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">分流 · 迎宾与问需<span>把「你今天是来做什么的」问清楚</span></h2>
+      <span class="sec-en">Triage</span>
+    </div>
+
+    <p class="sec-lead">
+      分流要发生在<b>用户落到首页之前</b>——一旦他在首页看到一排与预期无关的功能，这次接待就已经失败了。
+    </p>
+
+    <div class="card">
+      <div class="card-title">版块与底部 TAB 的对应关系<small>分流选项必须说用户听得懂的名字</small></div>
+      <p class="body">
+        RTB / RTS / RTP 是内部代号，<b>用户看不见</b>；分流页与可见文案一律用真实名称。
+      </p>
+      <div class="tbl-wrap" style="border:none; border-radius:0; margin-top:14px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px;">内部代号</th>
+              <th style="width:150px;">用户看到的名称</th>
+              <th style="width:190px;">在 APP 中的位置</th>
+              <th>分流选项文案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">RTS</td>
+              <td class="c-name" style="font-size:15px;">获客</td>
+              <td>底部 TAB 第 <b>5</b> 个</td>
+              <td>想拉新客的老板</td>
+            </tr>
+            <tr>
+              <td class="c-key">RTP</td>
+              <td class="c-name" style="font-size:15px;">小店</td>
+              <td>底部 TAB 第 <b>4</b> 个</td>
+              <td>想找好货的老板</td>
+            </tr>
+            <tr>
+              <td class="c-key">RTB</td>
+              <td class="c-name" style="font-size:15px;">首页</td>
+              <td>APP 主体，底部 TAB 第 <b>1</b> 个</td>
+              <td>先把店管起来的老板</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note">
+        底部 TAB：<b>首页、客户、AI助手、小店、获客</b>。「客户」与「AI 助手」不在本方案范围内。
+      </div>
+      <div class="note amber" style="margin-top:14px;">
+        <b>结构本身放大了错配：</b>获客与小店是第 5、第 4 个 TAB，新用户最不易扫到；首页是默认落点——<b>用户不是到不了，是没人指给他看。</b>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">两个触点<small>开店流程内预告 + 开店完成后正式分流</small></div>
+      <div class="flow3" style="grid-template-columns:1fr 30px 1fr; margin-top:4px;">
+        <div class="f3-node">
+          <div class="f3-head"><span class="f3-no">A</span><span class="f3-name">价值预告</span></div>
+          <div class="f3-sub">开店流程内 · 轻提示</div>
+          <div class="f3-desc">告诉用户：开完之后可以做「拉新客 / 找好货 / 管门店」。</div>
+          <div class="f3-ok">解决：<b>开店没走完就走了</b>——缺少走完的理由</div>
+        </div>
+        <div class="f3-arrow">→</div>
+        <div class="f3-node is-core">
+          <div class="f3-head"><span class="f3-no">B</span><span class="f3-name">正式分流</span></div>
+          <div class="f3-sub">开店完成后 · 三选一</div>
+          <div class="f3-desc">开店完成的第一步插入轻量问需，选完即跳转对应 TAB 并高亮。</div>
+          <div class="f3-ok">解决：<b>走完开店却发现落点不对</b></div>
+        </div>
+      </div>
+      <div class="note sage" style="margin-top:16px;">
+        <b>A 必须轻：</b>只能是一句提示或可滑过的说明，避免用新中断点去解决中断问题。
+        <b>必须两个：</b>分流页只对已走完开店的人有效；「开完能得到什么」要提前到流程内。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">一次三选一<small>人话画像 + 一句预期价值</small></div>
+      <p class="body">
+        选完后系统<b>直接跳转到对应 TAB 并高亮</b>。跳过则落到首页（现有默认路径）；底部 TAB 始终可自由切换。
+      </p>
+      <div class="choice-grid" style="margin-top:16px;">
+        <div class="choice c-rts">
+          <div class="choice-code">获客<small>底部 TAB · 会带你过去</small></div>
+          <div class="choice-persona">想拉新客的老板</div>
+          <div class="choice-q">「店里客人不够，得想办法让人知道我这儿。」</div>
+          <div class="choice-value">预期价值：<b>把活动发出去，让附近的人看到</b></div>
+        </div>
+        <div class="choice c-rtp">
+          <div class="choice-code">小店<small>底部 TAB · 会带你过去</small></div>
+          <div class="choice-persona">想找好货的老板</div>
+          <div class="choice-q">「手上没什么好产品，想找靠谱的货源来卖。」</div>
+          <div class="choice-value">预期价值：<b>关联供应商，把货摆上架</b></div>
+        </div>
+        <div class="choice c-rtb">
+          <div class="choice-code">首页<small>留在这一页就行</small></div>
+          <div class="choice-persona">先把店管起来的老板</div>
+          <div class="choice-q">「账乱、卡乱、员工提成算不清，想有个系统管起来。」</div>
+          <div class="choice-value">预期价值：<b>开第一单，把生意记清楚</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">分流页线框示意<small>灰阶线框，只表达结构，不是视觉稿</small></div>
+      <div class="wf-grid" style="grid-template-columns:repeat(2,1fr); margin-top:8px;">
+        <div class="wf">
+          <div class="wf-cap">① 分流页主态 · 三选一</div>
+          <div class="wf-sub">开店完成后的第一步。问句用店主的语言。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>开店完成</span><span>1 / 1</span></div>
+                <div class="scr-h">今天最想先解决哪件事？</div>
+                <div class="scr-p">选一个，我们直接带你过去</div>
+                <div class="m-card">
+                  <div class="m-code">获客<span>会带你过去</span></div>
+                  <div class="m-persona">想拉新客的老板</div>
+                  <div class="m-val">把活动发出去，让附近的人看到</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">小店<span>会带你过去</span></div>
+                  <div class="m-persona">想找好货的老板</div>
+                  <div class="m-val">关联供应商，把货摆上架</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">首页<span>就在这一页</span></div>
+                  <div class="m-persona">先把店管起来的老板</div>
+                  <div class="m-val">开第一单，把生意记清楚</div>
+                </div>
+                <div class="m-btn ghost" style="margin-top:auto;">先随便看看</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note">
+            <b>要点：</b>三张卡平权、无默认高亮；选项名不出现内部代号。
+          </div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">② 兜底态 · 跳过或未选择</div>
+          <div class="wf-sub">跳过时落到首页。获客与小店本来就是底部 TAB，不另造入口。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>首页</span><span>跳过分流</span></div>
+                <div class="m-sk tall"></div>
+                <div class="m-sk w70"></div>
+                <div class="m-sk w100"></div>
+                <div class="m-sk w50"></div>
+                <div class="m-tabbar-hint">想去哪儿就点哪个</div>
+                <div class="m-tabbar">
+                  <div class="m-tab-item on"><span class="ti"></span>首页</div>
+                  <div class="m-tab-item"><span class="ti"></span>客户</div>
+                  <div class="m-tab-item"><span class="ti"></span>AI助手</div>
+                  <div class="m-tab-item"><span class="ti"></span>小店</div>
+                  <div class="m-tab-item"><span class="ti"></span>获客</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note">
+            <b>要点：</b>跳过不额外加门槛；轻提示一次即可。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 承接 ============ -->
+  <section id="reception">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">承接 · 引座与服务中<span>把人送到位子，还得有人照应</span></h2>
+      <span class="sec-en">Reception</span>
+    </div>
+
+    <p class="sec-lead">
+      分流只是把人领对了门。<b>进门之后无人照应，用户照样会走</b>。
+      承接的目标：让用户在目标版块里，<b>完成一个他自己认可的价值动作</b>。
+    </p>
+
+    <div class="card">
+      <div class="card-title">三版块承接现状<small>先看清哪间房是空的</small></div>
+      <div class="tbl-wrap" style="border:none; border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:150px;">目标版块</th>
+              <th style="width:170px;">第一个价值动作</th>
+              <th style="width:230px;">前置条件</th>
+              <th>现状</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-name">首页<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想管店的老板</span></td>
+              <td>开第一单</td>
+              <td>项目 / 价目表、员工与提成的基本配置</td>
+              <td><span class="tag t-ok">较完整</span>　已有较为完整的新手引导流程</td>
+            </tr>
+            <tr>
+              <td class="c-name">小店<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想找货的老板</span></td>
+              <td><b>关联第一个供应商</b></td>
+              <td>供应商接入 / 商品上架</td>
+              <td><span class="tag t-ok">已有</span>　有详细新手指引页，首次进入也会引导</td>
+            </tr>
+            <tr>
+              <td class="c-name">获客<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想拉新客的老板</span></td>
+              <td>发布第一个活动</td>
+              <td><b>首页价目表中必须有项目或产品</b></td>
+              <td><span class="tag t-gap">存在死结</span>　无新手引导；未配价目表则发不出去</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note">
+        <b>对照实拍：</b>泳道 ④ 中小店新手指南与获客现状。<b>差距不在能力，而在有没有把模板搬过去。</b>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">获客的死结<small>最该补，也最容易补错</small></div>
+      <p class="body">
+        <b>用户最想做的第一件事，前置条件却在另一个版块。</b>
+      </p>
+      <div class="loop-wrap">
+        <svg viewBox="0 0 760 420" role="img" aria-label="获客死结的循环示意">
+          <defs>
+            <marker id="ahG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#3D6B5C"/>
+            </marker>
+            <marker id="ahR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#A8331F"/>
+            </marker>
+          </defs>
+          <path d="M 497 62 C 585 62 645 112 645 168" fill="none" stroke="#3D6B5C" stroke-width="2.5" marker-end="url(#ahG)"/>
+          <path d="M 645 252 C 645 312 585 369 500 369" fill="none" stroke="#3D6B5C" stroke-width="2.5" marker-end="url(#ahG)"/>
+          <path d="M 262 369 C 172 369 118 320 118 252" fill="none" stroke="#3D6B5C" stroke-width="2.5" marker-end="url(#ahG)"/>
+          <path d="M 118 168 C 118 100 190 62 262 62" fill="none" stroke="#A8331F" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#ahR)"/>
+          <rect x="265" y="14" width="230" height="66" rx="12" fill="#fff" stroke="#DCE4DF" stroke-width="2"/>
+          <text x="380" y="43" text-anchor="middle" font-size="15" font-weight="700" fill="#24302C">用户在「获客」</text>
+          <text x="380" y="64" text-anchor="middle" font-size="12" fill="#5A6B63">想拉新客，来对了地方</text>
+          <rect x="535" y="172" width="212" height="80" rx="12" fill="#fff" stroke="#DCE4DF" stroke-width="2"/>
+          <text x="641" y="203" text-anchor="middle" font-size="15" font-weight="700" fill="#24302C">想发布活动</text>
+          <text x="641" y="225" text-anchor="middle" font-size="12" fill="#5A6B63">而活动需要项目</text>
+          <rect x="265" y="336" width="230" height="68" rx="12" fill="#fff" stroke="#DCE4DF" stroke-width="2"/>
+          <text x="380" y="365" text-anchor="middle" font-size="15" font-weight="700" fill="#24302C">项目只在「首页」能配</text>
+          <text x="380" y="386" text-anchor="middle" font-size="12" fill="#5A6B63">价目表配置在另一个版块</text>
+          <rect x="13" y="172" width="212" height="80" rx="12" fill="#FBEAEC" stroke="#C0563F" stroke-width="2"/>
+          <text x="119" y="203" text-anchor="middle" font-size="15" font-weight="700" fill="#A8331F">要求他切回首页</text>
+          <text x="119" y="225" text-anchor="middle" font-size="12" fill="#A8331F">可他对首页本就没兴趣</text>
+          <text x="380" y="196" text-anchor="middle" font-size="19" font-weight="700" fill="#A8331F">死结</text>
+          <text x="380" y="220" text-anchor="middle" font-size="11.5" fill="#8A9690">他不会回来</text>
+          <text x="380" y="250" text-anchor="middle" font-size="11" font-weight="700" fill="#A8331F">— — 红色虚线：被支回原点</text>
+        </svg>
+      </div>
+      <div class="note sage" style="margin-top:14px;">
+        <b>解法 · 最小化配置：</b>把「配置一个项目」<b>嵌进获客承接流程就地完成</b>，建 <b>1 个项目</b>即可发布第一个活动。
+        完整价目表仍留在首页，不挡在第一个价值动作前面。
+      </div>
+    </div>
+
+    <div class="card" id="bench-douyin-product">
+      <div class="card-title">行业对照 · 抖音来客<small>发团购券前，就地创建商品</small></div>
+      <p class="body">
+        抖音来客在商家要发团购时，<b>不把人支去另一个「房间」配价目</b>，而是在商品管理路径里直接建品：
+        选品类 → 选类型（团购套餐等）→ 填信息提交。这与获客侧「最小化配置 · 就地建项目」是同一类解法。
+      </p>
+      <div class="bench-shots" style="margin-top:14px; border:none; padding:0; background:transparent;">
+        <div class="shot-rail is-3" style="margin-bottom:12px;">
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-01-商品管理入口.jpg" alt="抖音来客首页商品管理">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">① 商品管理入口</div>
+              <div class="shot-cap-d">来客首页进入「商品管理」。</div>
+              <span class="shot-badge is-ok">入口</span>
+            </div>
+          </div>
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-02-团购商品列表.jpg" alt="团购商品列表">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">② 团购商品列表</div>
+              <div class="shot-cap-d">底部主按钮「创建商品」。</div>
+              <span class="shot-badge is-ok">列表</span>
+            </div>
+          </div>
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-03-商品创建.jpg" alt="商品创建页">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">③ 商品创建</div>
+              <div class="shot-cap-d">可用模板，或「直接创建商品」。</div>
+              <span class="shot-badge is-ok">建品</span>
+            </div>
+          </div>
+        </div>
+        <div class="shot-rail is-3">
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-04-选商品类型.jpg" alt="选择商品类型">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">④ 选商品类型</div>
+              <div class="shot-cap-d">团购套餐 / 代金券 / 次卡等。</div>
+              <span class="shot-badge is-gap">分叉点</span>
+            </div>
+          </div>
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-05-确认类型后.jpg" alt="确认类型后的创建页">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">⑤ 确认类型</div>
+              <div class="shot-cap-d">类型写回后可继续模板或直建。</div>
+            </div>
+          </div>
+          <div class="shot">
+            <div class="shot-frame">
+              <div class="shot-screen">
+                <img src="行业对标图/douyin-06-建品表单.jpg" alt="建品表单多Tab">
+              </div>
+            </div>
+            <div class="shot-cap">
+              <div class="shot-cap-t">⑥ 建品表单</div>
+              <div class="shot-cap-d">品类/类型锁定，就地填商家与商品信息。</div>
+              <span class="shot-badge is-gap">就地完成</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note sage" style="margin-top:14px;">
+        <b>对照结论：</b>行业做法是「发布所需的前置物，在发布路径里补齐」。
+        获客不应要求用户先切回首页配完整价目表，而应在发布活动流程内完成最小化建项。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">空态设计主张<small>空白页本身就是承接位</small></div>
+      <div class="shot-2up" style="margin-top:6px;">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/05-发布活动空态.jpg" alt="发布活动页面的空态">
+              <div class="mk" style="left:6%; top:20%; width:88%; height:45%;"></div>
+              <div class="mk-lb" style="left:50%; top:19%;">现状：什么都没有</div>
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">现状 · 点进「发布活动」</div>
+            <div class="shot-cap-d">价目表未配置时一片空白。</div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="分流承接图/03-小店新手指南.jpg" alt="小店新手指南页">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t">参照 · 小店「新手指南」</div>
+            <div class="shot-cap-d">同样情境，小店给的是分步骤引导。</div>
+          </div>
+        </div>
+      </div>
+      <div class="note sage" style="margin-top:14px;">
+        <b>主张：空态页不该是终点，而应该是引导的第一步。</b>
+        把「暂无」换成「还差一步」；就地「添加一个项目」；建好后自动回到发布活动。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">承接三步 · 三版块统一模板<small>结构一致，只是内容不同</small></div>
+      <p class="body">
+        <b>不必从零设计</b>——小店已有跑通的「新手指南」（泳道 ④），获客把同一套模式搬过来、替换内容即可。
+      </p>
+      <div class="rail-foot" style="margin-top:14px;">
+        <b>三步对应的价值动作：</b>获客 = 发布第一个活动；小店 = 关联第一个供应商；首页 = 开第一单。
+        <br><b>与门店动线：</b>第 1 步 = 引座；第 2、3 步 = 服务中。第 3 步庆祝成功并指出底部 TAB 还能去哪儿。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">落地点与承接线框示意<small>灰阶线框 · 不是视觉稿</small></div>
+      <div class="wf-grid" style="margin-top:8px;">
+        <div class="wf">
+          <div class="wf-cap">③ 选中后落地 · 跳转并高亮目标 TAB</div>
+          <div class="wf-sub">落地先复述选择，然后只给一个动作。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>获客</span><span>已为你跳转</span></div>
+                <div class="m-banner">你来对地方了 —— 这里是帮你拉新客的</div>
+                <div class="scr-h">第一步：发布你的第一个活动</div>
+                <div class="m-card">
+                  <div class="m-persona">还没有可选的价目</div>
+                  <div class="m-val">没关系，就在这儿建一个，不用切回首页</div>
+                </div>
+                <div class="m-btn">发布第一个活动</div>
+                <div class="m-tabbar">
+                  <div class="m-tab-item"><span class="ti"></span>首页</div>
+                  <div class="m-tab-item"><span class="ti"></span>客户</div>
+                  <div class="m-tab-item"><span class="ti"></span>AI助手</div>
+                  <div class="m-tab-item"><span class="ti"></span>小店</div>
+                  <div class="m-tab-item on"><span class="ti"></span>获客</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>高亮目标 TAB，建立「功能住在哪个 TAB」的认知。</div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">④ 最小化配置 · 就地建项目</div>
+          <div class="wf-sub">把手续就地办完，不要求用户切回首页。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>发布活动</span><span>1 / 2</span></div>
+                <div class="scr-h">先加一个要推的项目</div>
+                <div class="scr-p">发布活动需要至少一个项目，加完就能继续</div>
+                <div class="m-card">
+                  <div class="m-code">项目名称</div>
+                  <div class="m-sk w70" style="margin-top:6px;"></div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">价格</div>
+                  <div class="m-sk w50" style="margin-top:6px;"></div>
+                </div>
+                <div class="m-btn" style="margin-top:auto;">添加并继续发布</div>
+                <div class="m-tabbar-hint">完整价目表之后可在「首页」慢慢配</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>只收最少必要字段（名称 + 价格）。</div>
+        </div>
+      </div>
+
+      <div class="wf-strip" style="margin-top:16px;">
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 01</div>
+          <div class="wf-step-name">欢迎与定位</div>
+          <div class="screen">
+            <div class="m-banner">这里是「获客」<br>帮你拉新客的</div>
+            <div class="m-sk w70"></div>
+            <div class="m-sk w100"></div>
+            <div class="m-tabbar">
+              <div class="m-tab-item"><span class="ti"></span>首页</div>
+              <div class="m-tab-item"><span class="ti"></span>客户</div>
+              <div class="m-tab-item on"><span class="ti"></span>获客</div>
+            </div>
+          </div>
+          <div class="wf-step-desc">复述选择并高亮 TAB，确认「选对了、也知道自己在哪」。</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 02</div>
+          <div class="wf-step-name">第一个价值动作</div>
+          <div class="screen">
+            <div class="scr-p">只给一个动作</div>
+            <div class="m-sk tall"></div>
+            <div class="m-btn">发布第一个活动</div>
+          </div>
+          <div class="wf-step-desc">前置条件在流程内就地补齐（含获客最小化配置）。</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-no">STEP 03</div>
+          <div class="wf-step-name">即时反馈与指路</div>
+          <div class="screen">
+            <div class="m-toast">活动已发布<small>附近的人现在可以看到了</small></div>
+            <div class="m-sk w100"></div>
+            <div class="scr-p">底部还能去</div>
+            <div class="m-tabbar">
+              <div class="m-tab-item"><span class="ti"></span>首页</div>
+              <div class="m-tab-item"><span class="ti"></span>小店</div>
+              <div class="m-tab-item on"><span class="ti"></span>获客</div>
+            </div>
+          </div>
+          <div class="wf-step-desc">让第一次成功被看见，并指出底部 TAB 还能去哪儿。</div>
+        </div>
+      </div>
+      <div class="rail-foot">
+        <b>范围说明：</b>线框只覆盖分流与承接，不含视觉稿、交互动效与异常态。
+      </div>
+    </div>
+  </section>
+
+  <div class="board-entry" style="margin-top:36px;">
+    <div class="be-left">
+      <div class="be-kicker">效果目标 · 判定规则</div>
+      <h4 class="be-title">开店分流承接 · 效果目标与观测</h4>
+      <p class="be-desc">
+        指标目标值、三档判定规则、承接三步卡点口径与数据接入清单，见效果观测页（不含结果数据）。
+      </p>
+      <div class="be-tags">
+        <span class="be-tag">8 项目标值</span>
+        <span class="be-tag">三档判定规则</span>
+        <span class="be-tag is-warn">不含结果数据</span>
+      </div>
+    </div>
+    <a class="be-btn" href="剑琅联盟开店分流承接效果观测.html">打开效果目标与观测<i>→</i></a>
+  </div>
+
+  <div class="foot">
+    <div><span class="dot"></span>剑琅联盟 · 内部资料 · 精简版</div>
+    <div>
+      <a href="剑琅联盟开店分流与承接方案.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">完整版</a>
+      · 开店分流与承接 · 2026-10-08
+    </div>
+  </div>
+
+</main>
+
+<!-- 截图放大 -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭">×</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-cap" id="lightbox-cap"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('lightbox');
+  var pic = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-cap');
+  var closeBtn = document.getElementById('lightbox-close');
+  if (!box || !pic || !closeBtn) return;
+
+  function open(src, title) {
+    pic.src = src;
+    pic.alt = title || '';
+    cap.textContent = title || '';
+    box.hidden = false;
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    box.classList.remove('open');
+    box.hidden = true;
+    pic.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.shot-screen').forEach(function (screen) {
+    screen.addEventListener('click', function () {
+      var img = screen.querySelector('img');
+      if (!img) return;
+      var shot = screen.closest('.shot');
+      var t = '', d = '';
+      if (shot) {
+        var tn = shot.querySelector('.shot-cap-t');
+        var dn = shot.querySelector('.shot-cap-d');
+        t = tn ? tn.textContent : '';
+        d = dn ? dn.textContent : '';
+      }
+      open(img.getAttribute('src'), (t || img.alt) + (d ? ' · ' + d : ''));
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) close();
+  });
+})();
+</script>
+
+</body>
+</html>
