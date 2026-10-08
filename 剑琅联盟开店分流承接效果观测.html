@@ -536,7 +536,7 @@
         </div>
         <div class="step-cell">
           <div class="step-no">动作 D</div>
-          <div class="step-name">承接四步</div>
+          <div class="step-name">承接三步</div>
           <div class="step-desc">让第一个价值动作真正完成</div>
         </div>
       </div>
@@ -752,18 +752,18 @@
 
         <div class="rule-r rule-name">第一个价值动作完成率<span>主指标 · 分母为做出分流选择的门店</span></div>
         <div class="rule-r rule-thr" data-lb="目标值">≥ 50%<em>基准 50–60%</em></div>
-        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 到了能完成<br>→ <b>保留承接四步</b></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 到了能完成<br>→ <b>保留承接三步</b></div>
         <div class="rule-r rule-no" data-lb="未达 → 行动">× 到了也完不成<br>→ <b>定位阻塞步，修复复测</b></div>
 
-        <div class="rule-r rule-name">承接四步主要跳出位<span>单一步骤的跳出占比</span></div>
+        <div class="rule-r rule-name">承接三步主要跳出位<span>单一步骤的跳出占比</span></div>
         <div class="rule-r rule-thr" data-lb="目标值">单步 ≤ 15%</div>
         <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 无明显断点</div>
         <div class="rule-r rule-no" data-lb="未达 → 行动">× 存在集中断点<br>→ <b>优先修该步前置提示</b></div>
 
         <div class="rule-r rule-name">次日留存<span>新注册口径</span></div>
         <div class="rule-r rule-thr" data-lb="目标值">≥ 35%<em>基准 35–45%</em></div>
-        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 第 04 步「下一步指引」有效</div>
-        <div class="rule-r rule-no" data-lb="未达 → 行动">× 第二天不回来<br>→ <b>检查第 04 步指引</b></div>
+        <div class="rule-r rule-ok" data-lb="达到 → 行动">✓ 第 03 步「即时反馈与指路」有效</div>
+        <div class="rule-r rule-no" data-lb="未达 → 行动">× 第二天不回来<br>→ <b>检查第 03 步指路</b></div>
 
         <div class="rule-r rule-name">7 日留存<span>是否形成使用习惯</span></div>
         <div class="rule-r rule-thr" data-lb="目标值">≥ 20%<em>基准 20–30%</em></div>
@@ -773,8 +773,8 @@
     </div>
 
     <div class="card">
-      <div class="card-title">承接四步的观测点<span>分步流失是结构性现象，小样本即可指认位置</span></div>
-      <div class="step-flow" style="grid-template-columns:repeat(4,1fr);">
+      <div class="card-title">承接三步的观测点<span>分步流失是结构性现象，小样本即可指认位置</span></div>
+      <div class="step-flow" style="grid-template-columns:repeat(3,1fr);">
         <div class="step-cell">
           <div class="step-no">STEP 01</div>
           <div class="step-name">欢迎与定位</div>
@@ -789,14 +789,8 @@
         </div>
         <div class="step-cell">
           <div class="step-no">STEP 03</div>
-          <div class="step-name">即时反馈</div>
-          <div class="step-desc">让用户看到「这件事做成了」</div>
-          <div class="step-watch">观测：跳出数 · 完成耗时</div>
-        </div>
-        <div class="step-cell">
-          <div class="step-no">STEP 04</div>
-          <div class="step-name">下一步指引</div>
-          <div class="step-desc">给一个「明天再来做什么」</div>
+          <div class="step-name">即时反馈与指路</div>
+          <div class="step-desc">让成功被看见，并指出底部 TAB 还能去哪儿</div>
           <div class="step-watch">观测：跳出数 · 对应次日留存</div>
         </div>
       </div>
@@ -983,7 +977,7 @@
           <b>triage_select</b> 点击任一选项 → 选择率、三类分布（属性：选项值、停留时长）<br>
           <b>triage_skip</b> 点击「先随便看看」→ 跳过率<br>
           <b>triage_landed</b> 跳转完成并高亮 TAB → 落点成功率（属性：目标版块、是否成功）<br>
-          <b>onboarding_step</b> 承接四步每步进入 / 完成 / 跳出 → 四步跳出位置、耗时（属性：步骤序号、版块）<br>
+          <b>onboarding_step</b> 承接三步每步进入 / 完成 / 跳出 → 三步跳出位置、耗时（属性：步骤序号、版块）<br>
           <b>first_value_action</b> 完成第一个价值动作 → <b>主指标</b>（属性：版块、动作类型、耗时）
         </div>
       </details>
