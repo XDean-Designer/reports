@@ -625,6 +625,10 @@
     gap: 15px;
     margin-top: 20px;
   }
+  /* 4 图轨道（开店动线） */
+  .shot-rail.is-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .shot-rail.is-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .shot-rail.is-4 { grid-template-columns: 1fr; } }
   .shot { display: flex; flex-direction: column; min-width: 0; }
   .shot-frame {
     background: #fff;
@@ -1173,6 +1177,80 @@
         <li><b>② ③ 与 ④ 对比，说明问题不在「做不出来」。</b>小店已有一套完整的新手指南页，这套承接模式<b>在自家产品里已被验证</b>，缺的只是把它搬到获客。</li>
         <li><b>⑤ 是整份方案里最硬的一处证据。</b>「发布活动」点进去是空的——这不是体验粗糙，而是<b>一条必然失败的动线</b>：活动需要项目，项目配在首页，而用户此刻在获客。</li>
         <li>于是前面那三条判断——<b>落点错、位置边缘、无人指路</b>——在这 5 张图上都能直接指认。</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:22px;">
+      <div class="card-title">当前开店动线实拍<small>登录 → 创建店铺 → 进入首页</small></div>
+      <p class="body">
+        以下 4 张为<b>当前线上版本的真实截图</b>，按用户实际经历的顺序排列：从登录开始，经过创建店铺的各个步骤，直到进入首页。
+        <b>点击可放大</b>。
+      </p>
+      <div class="shot-rail is-4">
+      <!-- ① 登录 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="开店动线图/01-登录.jpg" alt="登录页">
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">① 登录</div>
+          <div class="shot-cap-d">动线起点：用户在此进入。</div>
+          <span class="shot-badge is-ok">第 1 步</span>
+        </div>
+      </div>
+
+      <!-- ② 创建店铺 · 1 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="开店动线图/02-开店流程-1.jpg" alt="创建店铺流程第 1 步">
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">② 创建店铺 · 第 1 步</div>
+          <div class="shot-cap-d">开店流程的起始环节。</div>
+          <span class="shot-badge is-ok">第 2 步</span>
+        </div>
+      </div>
+
+      <!-- ③ 创建店铺 · 2 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="开店动线图/03-开店流程-2.jpg" alt="创建店铺流程第 2 步">
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">③ 创建店铺 · 第 2 步</div>
+          <div class="shot-cap-d">开店流程的中间环节。</div>
+          <span class="shot-badge is-ok">第 3 步</span>
+        </div>
+      </div>
+
+      <!-- ④ 创建店铺 · 3 -->
+      <div class="shot">
+        <div class="shot-frame">
+          <div class="shot-screen">
+            <img src="开店动线图/04-开店流程-3.jpg" alt="创建店铺流程第 3 步">
+          </div>
+        </div>
+        <div class="shot-cap">
+          <div class="shot-cap-t">④ 创建店铺 · 第 3 步</div>
+          <div class="shot-cap-d">走完开店，随即进入首页。</div>
+          <span class="shot-badge is-gap">落点：首页</span>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="finding" style="margin-top:18px;">
+      <h4>这 4 张图说明了什么</h4>
+      <ul>
+        <li><b>整条动线上没有任何一次「你想做什么」的询问。</b>从登录到进入首页，用户只被要求「把资料填完」，没有被要求表达他的目的。</li>
+        <li><b>落点是被写死的。</b>开店走完后直接进入首页，用户没有机会说「我其实想去获客 / 小店」。</li>
+        <li>这正是前面那条判断的实拍证据：<b>不是用户到不了，是这条动线从没给过他选择的机会。</b></li>
       </ul>
     </div>
   </section>
