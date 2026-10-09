@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 太仓调研·破局</title>
+<style>
+  :root {
+    --pine: #142E28;
+    --pine-2: #1A3D34;
+    --sage: #3D6B5C;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --amber: #C48A2A;
+    --amber-bg: #F8F0E0;
+    --amber-deep: #9A6B18;
+    --bg: #F3F5F3;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px 64px; }
+
+  .hero {
+    background:
+      radial-gradient(ellipse 70% 55% at 92% 8%, rgba(196, 138, 42, .28), transparent 52%),
+      linear-gradient(150deg, #0F2722 0%, #142E28 42%, #1A3D34 100%);
+    padding: 48px 0 40px;
+  }
+  .hero-inner { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .brand-mark {
+    width: 40px; height: 40px; flex: none;
+    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 18px; font-weight: 700;
+  }
+  .brand-name { font-size: 15px; letter-spacing: 5px; font-weight: 600; color: #fff; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.48); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11.5px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #C4A574;
+  }
+  .kicker::before { content: ""; width: 22px; height: 2px; background: var(--amber); }
+  .hero h1 {
+    font-size: clamp(26px, 3.8vw, 36px);
+    font-weight: 700; letter-spacing: 2px; color: #fff;
+    margin: 12px 0 10px; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #E2C48A; }
+  .hero-lead {
+    font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.8;
+    max-width: 780px;
+  }
+  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+  }
+  .hm {
+    font-size: 12px; color: rgba(255,255,255,.78);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px; padding: 5px 12px;
+  }
+  .hm b { color: #E2C48A; font-weight: 600; }
+  .hero-nav {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px;
+  }
+  .hn {
+    display: block; text-decoration: none;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px; padding: 14px 14px 12px;
+    transition: background .15s;
+  }
+  .hn:hover { background: rgba(255,255,255,.12); }
+  .hn-lb { font-size: 10.5px; letter-spacing: 2px; color: rgba(255,255,255,.5); text-transform: uppercase; }
+  .hn-v { font-size: 16px; font-weight: 700; color: #fff; margin-top: 4px; }
+  .hn-n { font-size: 11.5px; color: rgba(255,255,255,.62); margin-top: 6px; line-height: 1.5; }
+  .hn-n .p0 { color: #E2C48A; font-weight: 700; }
+
+  section { margin-top: 40px; }
+  .sec-head {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    padding-bottom: 8px; margin-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 2px 7px; border-radius: 3px; line-height: 1.4;
+  }
+  .sec-no.is-p0 { background: var(--amber-deep); }
+  .sec-title { font-size: 16px; font-weight: 700; letter-spacing: 1px; color: var(--pine-2); }
+  .sec-title .pre {
+    color: var(--amber-deep); font-weight: 700; margin-right: 2px;
+  }
+  .sec-title span { font-size: 12px; font-weight: 500; color: var(--ink-faint); margin-left: 8px; }
+  .sec-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+
+  .judge-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .judge {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .judge-t { font-size: 14px; font-weight: 700; color: var(--pine-2); margin-bottom: 6px; }
+  .judge-d { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
+  .judge-d b { color: var(--ink); font-weight: 600; }
+
+  .north {
+    background: linear-gradient(135deg, #F8F0E0 0%, #FFF 55%);
+    border: 1px solid #E5D4AE;
+    border-radius: 14px; padding: 18px 18px 16px;
+  }
+  .north-h {
+    display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
+  }
+  .north-h h3 { font-size: 15px; font-weight: 700; color: var(--amber-deep); letter-spacing: 1px; }
+  .north-h span { font-size: 12px; color: var(--ink-faint); }
+  .north-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  }
+  .ni {
+    background: rgba(255,255,255,.75);
+    border: 1px solid #E8D9B8;
+    border-radius: 10px; padding: 12px 12px 10px; text-align: center;
+  }
+  .ni-n { font-size: 10.5px; letter-spacing: 1px; color: var(--ink-faint); margin-bottom: 4px; }
+  .ni-v { font-size: 14px; font-weight: 700; color: var(--pine-2); }
+  .north-note {
+    margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.65;
+  }
+  .north-note b { color: var(--amber-deep); }
+
+  .item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px 12px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .item.is-p0 {
+    border-color: #E2C48A;
+    box-shadow: inset 3px 0 0 var(--amber);
+  }
+  .item-top {
+    display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .item-id {
+    flex: none; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    color: var(--sage); background: #E7F1EE;
+    padding: 2px 7px; border-radius: 5px;
+  }
+  .item.is-p0 .item-id { color: var(--amber-deep); background: var(--amber-bg); }
+  .item-title { font-size: 14.5px; font-weight: 700; color: var(--ink); flex: 1; min-width: 200px; line-height: 1.4; }
+  .badge {
+    flex: none; font-size: 10.5px; font-weight: 800; letter-spacing: 1px;
+    padding: 3px 8px; border-radius: 5px;
+  }
+  .badge.p0 { color: #fff; background: var(--amber); }
+  .badge.p1 { color: var(--sage); background: #E7F1EE; }
+  .item-body { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin: 4px 0 8px; }
+  .item-body b { color: var(--ink); font-weight: 600; }
+  .ev {
+    background: #F7FAF8;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.65;
+  }
+  .ev b { color: var(--ink); font-weight: 600; }
+  .tags { display: inline-flex; flex-wrap: wrap; gap: 5px; margin-right: 6px; vertical-align: middle; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+    padding: 1px 7px; border-radius: 4px; vertical-align: middle;
+  }
+  .tag.t-g { color: #17453A; background: #DCE9E3; }
+  .tag.t-x { color: #6B4A0F; background: #F5EFE3; }
+  .tag.t-s { color: #1F4A6B; background: #E4EEF5; }
+  .tag.t-m { color: #6B2F4A; background: #F5E6ED; }
+
+  .p0-board {
+    background: var(--pine);
+    border-radius: 14px;
+    padding: 20px 20px 16px;
+    color: #fff;
+  }
+  .p0-board h3 {
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    color: #E2C48A; margin-bottom: 4px;
+  }
+  .p0-board .sub { font-size: 12.5px; color: rgba(255,255,255,.62); margin-bottom: 14px; }
+  .p0-cols {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .p0-col {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px; padding: 12px;
+  }
+  .p0-col h4 { font-size: 12px; color: #E2C48A; letter-spacing: 1px; margin-bottom: 8px; }
+  .p0-col ul { list-style: none; display: grid; gap: 6px; }
+  .p0-col li { font-size: 12px; color: rgba(255,255,255,.82); line-height: 1.45; padding-left: 10px; position: relative; }
+  .p0-col li::before {
+    content: ""; position: absolute; left: 0; top: 7px;
+    width: 4px; height: 4px; border-radius: 50%; background: var(--amber);
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 14px;
+    font-size: 12px; color: var(--ink-faint); margin: 8px 0 16px;
+  }
+  .legend i {
+    display: inline-block; width: 8px; height: 8px; border-radius: 2px;
+    margin-right: 5px; vertical-align: middle;
+  }
+
+  .foot {
+    margin-top: 40px; padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    font-size: 12px; color: var(--ink-faint);
+  }
+  .foot .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--amber); margin-right: 6px; vertical-align: middle;
+  }
+
+  @media (max-width: 800px) {
+    .hero-nav, .north-grid, .p0-cols, .judge-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .hero-nav, .north-grid, .p0-cols, .judge-grid { grid-template-columns: 1fr; }
+    .wrap { padding: 0 16px 48px; }
+    .hero-inner { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">JIANLANG ALLIANCE</div>
+      </div>
+    </div>
+
+    <div class="kicker">Field Research · Breakout</div>
+    <h1>太仓调研·<em>破局</em></h1>
+    <p class="hero-lead">
+      产品现状不及预期。本次太仓联合调研不以流水账复盘为目的，
+      而把一线依据收成可执行的<strong>破局动作</strong>——先补销售工具与客群策略，
+      再抓<strong>价值抓手</strong>（留存、升单、核销、高价值项目），并同步修掉阻碍开单使用的关键体验。
+    </p>
+    <div class="hero-meta">
+      <span class="hm"><b>日期</b> 2026-10-09</span>
+      <span class="hm"><b>地点</b> 太仓 · 高美丝 / 漂亮宝贝 · 木子造型</span>
+      <span class="hm"><b>团队</b> 产品·市场·销售联合调研</span>
+    </div>
+
+    <div class="hero-nav">
+      <a class="hn" href="#sales">
+        <div class="hn-lb">备战</div>
+        <div class="hn-v">销售</div>
+        <div class="hn-n"><span class="p0">P0 ×4</span> · P1 ×2</div>
+      </a>
+      <a class="hn" href="#toker">
+        <div class="hn-lb">取势</div>
+        <div class="hn-v">拓客</div>
+        <div class="hn-n"><span class="p0">P0 ×4</span> · P1 ×2</div>
+      </a>
+      <a class="hn" href="#upsell">
+        <div class="hn-lb">夺利</div>
+        <div class="hn-v">升单</div>
+        <div class="hn-n">P1 ×2</div>
+      </a>
+      <a class="hn" href="#ux">
+        <div class="hn-lb">固本</div>
+        <div class="hn-v">体验优化</div>
+        <div class="hn-n"><span class="p0">P0 ×2</span> · P1 ×4</div>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 核心判断 -->
+  <section id="judge">
+    <div class="sec-head">
+      <span class="sec-no is-p0">00</span>
+      <h2 class="sec-title">核心判断<span>破局先看清这四件事</span></h2>
+      <span class="sec-en">Key Calls</span>
+    </div>
+    <div class="judge-grid">
+      <div class="judge">
+        <div class="judge-t">价值抓手 &gt; 系统好不好用</div>
+        <div class="judge-d">店主普遍认为店务系统<strong>够用</strong>；真正缺的是帮门店<strong>拓客、提高客单价、提高留存</strong>的抓手——有抓手，系统再难也会用。</div>
+      </div>
+      <div class="judge">
+        <div class="judge-t">信任是销售第一阻力</div>
+        <div class="judge-d">品牌不及大平台时，口头推销易碰壁；需要<strong>拿到结果的成功门店案例</strong>背书，并给销售可落地的敲门砖。</div>
+      </div>
+      <div class="judge">
+        <div class="judge-t">主攻具备易成交特征的门店</div>
+        <div class="judge-d">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店暂不作为主攻对象。</div>
+      </div>
+      <div class="judge">
+        <div class="judge-t">寻找与大平台差异化竞争的路径</div>
+        <div class="judge-d">不强拼大平台线下抢新店的兵力；把破局切口放在<strong>留存与升单</strong>等对方难深耕的阵地，形成差异化胜势。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 北极星 -->
+  <section id="north">
+    <div class="north">
+      <div class="north-h">
+        <h3>小军的经营四指标</h3>
+        <span>漂亮宝贝 · 小军</span>
+      </div>
+      <div class="north-grid">
+        <div class="ni"><div class="ni-n">01</div><div class="ni-v">获客成本</div></div>
+        <div class="ni"><div class="ni-n">02</div><div class="ni-v">转化率</div></div>
+        <div class="ni"><div class="ni-n">03</div><div class="ni-v">客单价</div></div>
+        <div class="ni"><div class="ni-n">04</div><div class="ni-v">留存率</div></div>
+      </div>
+      <p class="north-note">
+        <b>留存口径：</b>本期以「是否办会员」作为留存依据讨论（非 App 活跃天数）。
+        客单价突破对应升单；留存对应会员与充卡提醒；获客与转化对应核销与活动能力。
+        <span class="tags" style="margin-left:6px;"><span class="tag t-x">小军</span></span>
+      </p>
+    </div>
+  </section>
+
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>P0 · 优先推进</span>
+    <span><i style="background:var(--sage)"></i>P1 · 承接推进</span>
+    <span>依据标签：高总（高美丝）· 小军（漂亮宝贝）· 销售（含驻店）· 木子（木子造型）</span>
+  </div>
+
+  <!-- 销售 -->
+  <section id="sales">
+    <div class="sec-head">
+      <span class="sec-no is-p0">01</span>
+      <h2 class="sec-title"><span class="pre">备战</span> · 销售</h2>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">S1</span>
+        <div class="item-title">制作宣传册 / 销售工具包，作拓客敲门砖</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">把价值主张、成功场景与可验证结果做成可留下的物料，降低「上门只靠口述」的碰壁率。</p>
+      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>前线反馈：仅凭上门口述难打开局面；需要实体/图文工具支援进店沟通。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">S2</span>
+        <div class="item-title">话术改为「价值抓手」优先，弱化纯系统功能推销</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">开场与主线围绕<strong>帮门店赚钱</strong>（拓客结果、升单、留存），系统能力作支撑说明，不作主卖点。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-m">木子</span><span class="tag t-s">销售</span></span>店主明确：能帮拓客赚钱，系统难用也接受；部分成交正是冲着拓客、分销等价值点购买。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">S3</span>
+        <div class="item-title">主攻具备易成交特征的门店</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店暂不作为主攻对象。</p>
+      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>已成交画像高度集中在上述类型；无外人员工的小店几乎无 SaaS 需求。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">S4</span>
+        <div class="item-title">沉淀成功门店案例，作信任背书</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">整理「拿到结果」的门店故事（指标前后、动作、周期），进入宣传册与话术包，专门打信任阻力。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>推广阻力核心是信任度；需要有结果的门店案例背书。品牌知名度不及大平台时，风险顾虑更强。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">S5</span>
+        <div class="item-title">异业联盟从主推话术中降权</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">销售与物料中不再把异业联盟作为主卖点；若提及，改为可选能力，避免触发历史负面联想。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-m">木子</span><span class="tag t-s">销售</span></span>店主兴趣低或结果不及预期；排斥常因早年打着「异业」旗号的劣质项目经历。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">S6</span>
+        <div class="item-title">评估培训机构渠道（类「驾校带销量」路径）</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">调研美业培训机构课件与演示系统合作可能——学员开店后的默认采购习惯，是竞品渗透的重要路径。</p>
+      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>博卡占有率高的常被忽略原因：培训机构老师多用博卡授课，学员开店后大概率沿用。</div>
+    </div>
+  </section>
+
+  <!-- 拓客 -->
+  <section id="toker">
+    <div class="sec-head">
+      <span class="sec-no is-p0">02</span>
+      <h2 class="sec-title"><span class="pre">取势</span> · 拓客</h2>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">T1</span>
+        <div class="item-title">补齐分流与承接：帮用户进入目标功能并完成第一个价值动作</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">不是再堆新手教学页，而是问清「今天要做什么」，把人送到对应版块，并护航完成<strong>第一个有结果的动作</strong>。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>明确指出缺少必要引导——帮助进入想要的功能并完成第一个动作；同时强调这仍次于价值抓手，但属于必须补齐的基础。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">T4</span>
+        <div class="item-title">高价值项目分析：用时段利润指导推广重点</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">基于门店历史经营数据，识别时间段内<strong>利润贡献最高</strong>的项目，输出可直接用于营销重点与升单方向的清单。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>高美丝专业美发老板表示：若有此类能力会很好，能直接帮助门店赚钱；其决策极看重业绩相关能力。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">T5</span>
+        <div class="item-title">团购核销功能尽快上线</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">把团购核销作为近期必须交付的拓客闭环能力，缩短门店「在外部平台获客 → 店内核销入会」的断点。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span><span class="tag t-x">小军</span></span>木子造型老板多次追问核销上线时间。小军侧对大平台获客预期不高，但核销是门店已有客源进店的刚需承接。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">T6</span>
+        <div class="item-title">差异化竞争：主打留存 + 升单，另辟与大平台不同的路径</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">对内对外统一口径：破局切口是<strong>留存率与客单价</strong>；获客能力照常建设，但不以拼大平台线下拓店兵力为胜负标准。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>小军认为相对大平台，获客不宜硬碰，突破口在留存与升单。销售侧：新店最先被大平台线下团队接触，我们缺少对等资源，更需走差异化。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">T2</span>
+        <div class="item-title">可拿到结果的营销活动能力（月小活动 / 年大活动）</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">降低门店自办活动门槛，支持折扣、秒杀等常见形式，形成可复用的月度/年度活动节奏，让「拓客」看得见结果。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>木子造型老板认可竞品「每月小活动、每年一次大活动」的获客效果，形式以折扣与秒杀为主。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">T3</span>
+        <div class="item-title">会员低余额提醒 + 充卡话术触发</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">在开单/会员场景暴露余额告警，并给出可执行的充卡话术提示，把「看见余额」推进到「主动促充」。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>相对手写开单，APP 能看见会员余额很有用；被问及若余额过低是否会主动用话术促充卡，答复肯定。留存以办会员为讨论口径。</div>
+    </div>
+  </section>
+
+  <!-- 升单 -->
+  <section id="upsell">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title"><span class="pre">夺利</span> · 升单</h2>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">U1</span>
+        <div class="item-title">开发升单相关辅助功能</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">在开单过程中为店员提供加项/搭配建议与话术支撑，降低「不会升单」的能力门槛，服务小店与缺乏培训的团队。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>漂亮宝贝老板视升单为门店最核心能力与获利最重要手段，并系统分享了升单方法；认为缺的是价值抓手而非系统本身。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">U2</span>
+        <div class="item-title">高价值项目洞察用于升单推荐</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">把 T4 的高价值项目结果接入开单建议：优先推荐利润贡献高、且与当前服务情境匹配的加项，避免盲目推销。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span><span class="tag t-x">小军</span></span>高总认可「用数据找赚钱项目」；小军侧升单依赖对项目价值与顾客情境的判断——数据洞察可降低经验门槛。</div>
+    </div>
+  </section>
+
+  <!-- 体验 -->
+  <section id="ux">
+    <div class="sec-head">
+      <span class="sec-no is-p0">04</span>
+      <h2 class="sec-title"><span class="pre">固本</span> · 体验优化</h2>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">E1</span>
+        <div class="item-title">快捷开单「选择服务员工」UI 强化</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">功能已具备选员工能力，但入口不够显眼，导致「不能统计业绩」的误解。优化信息层级与引导，让选员工成为默认可见步骤。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>高美丝很少用直接收款/快捷开单，原因是以为无法选择服务员工、不能统计业绩——属于可见性与引导问题，而非能力缺失。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">E3</span>
+        <div class="item-title">欠款单：支持赊账交易落单</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">顾客赊账时生成欠款订单，可记录、可追缴、可计入经营台账，覆盖门店真实收款场景。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>明确提出需要欠款单能力，用于记录赊账交易；与其「最看重业绩计算」的偏好一致。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">E4</span>
+        <div class="item-title">预约：要有，但必须轻操作</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">提供预约能力的同时严格控制步骤与字段，避免「有功能但懒得用」。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>对预约有需求，同时强调不能太麻烦。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">E5</span>
+        <div class="item-title">多店模式</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">支持一老板多门店的统一管理与切换，解除「多店只能当单店用」的摩擦。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>木子造型（上海西路店）老板多次询问多店模式上线时间，称现有几家店用单店模式不方便。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">E6</span>
+        <div class="item-title">PC / 一体机大屏操作系统</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">提供大屏端经营界面，满足「店有档次」的形象诉求，并改善店员开单姿态与操作效率。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>追问后原因是：大屏显得有档次；店员都拿手机开单像「在饭店点餐」。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-top">
+        <span class="item-id">E8</span>
+        <div class="item-title">到期续费提醒</div>
+        <span class="badge p1">P1</span>
+      </div>
+      <p class="item-body">在订阅/服务到期前多触点提醒门店续费，避免服务突然中断冲击经营信任。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>门店经营依赖连续服务；到期前提醒是降低弃用与投诉风险的基础能力。</div>
+    </div>
+  </section>
+
+  <!-- P0 收尾 -->
+  <section id="p0">
+    <div class="p0-board">
+      <h3>P0 清单一览</h3>
+      <p class="sub">优先推进的破局动作 · 销售工具 / 价值抓手 / 关键体验三线并行</p>
+      <div class="p0-cols">
+        <div class="p0-col">
+          <h4>备战 · 销售</h4>
+          <ul>
+            <li>S1 宣传册 / 工具包</li>
+            <li>S2 价值抓手话术</li>
+            <li>S3 易成交门店主攻</li>
+            <li>S4 成功案例背书</li>
+          </ul>
+        </div>
+        <div class="p0-col">
+          <h4>取势 · 拓客</h4>
+          <ul>
+            <li>T1 分流与承接</li>
+            <li>T4 高价值项目分析</li>
+            <li>T5 团购核销上线</li>
+            <li>T6 差异化竞争路径</li>
+          </ul>
+        </div>
+        <div class="p0-col">
+          <h4>固本 · 体验</h4>
+          <ul>
+            <li>E1 快捷开单选员工 UI</li>
+            <li>E3 欠款单</li>
+          </ul>
+        </div>
+        <div class="p0-col">
+          <h4>P1 紧随</h4>
+          <ul>
+            <li>升单辅助 · 高价值推荐</li>
+            <li>活动能力 · 低余额提醒</li>
+            <li>预约 / 多店 / 大屏 / 续费提醒</li>
+            <li>异业降权 · 培训渠道</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div><span class="dot"></span>剑琅联盟 · 内部资料</div>
+    <div>太仓调研·破局 · 2026-10-09</div>
+  </div>
+</main>
+
+</body>
+</html>
