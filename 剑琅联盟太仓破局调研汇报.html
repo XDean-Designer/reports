@@ -6,20 +6,18 @@
 <title>剑琅联盟 · 太仓调研·破局</title>
 <style>
   :root {
-    --pine: #142E28;
-    --pine-2: #1A3D34;
-    --sage: #3D6B5C;
-    --sand: #B08D57;
-    --sand-bg: #F5EFE3;
-    --amber: #C48A2A;
-    --amber-bg: #F8F0E0;
-    --amber-deep: #9A6B18;
-    --bg: #F3F5F3;
+    --ink: #1E2A32;
+    --ink-soft: #3D4E58;
+    --ink-faint: #5E6E78;
+    --hope: #C4A35A;
+    --hope-bg: #F7F1E4;
+    --hope-deep: #8A6A2E;
+    --trust: #4A6B7A;
+    --trust-bg: #E8F0F3;
+    --trust-deep: #2F4A56;
+    --bg: #F7F6F2;
     --card: #FFFFFF;
-    --line: #DCE4DF;
-    --ink: #24302C;
-    --ink-soft: #5A6B63;
-    --ink-faint: #8A9690;
+    --line: #D5DBD8;
     --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
                 "思源黑体 SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   }
@@ -30,68 +28,71 @@
     color: var(--ink);
     font-family: var(--font-cjk);
     -webkit-font-smoothing: antialiased;
-    line-height: 1.6;
+    line-height: 1.65;
+    font-size: 16px;
   }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px 64px; }
 
   .hero {
     background:
-      radial-gradient(ellipse 70% 55% at 92% 8%, rgba(196, 138, 42, .28), transparent 52%),
-      linear-gradient(150deg, #0F2722 0%, #142E28 42%, #1A3D34 100%);
+      radial-gradient(ellipse 65% 50% at 88% 12%, rgba(196, 163, 90, .22), transparent 55%),
+      linear-gradient(165deg, #E4ECF1 0%, #EEF2F4 48%, #F7F6F2 100%);
     padding: 48px 0 40px;
+    border-bottom: 1px solid #E0E6EA;
   }
   .hero-inner { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
   .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
   .brand-mark {
     width: 40px; height: 40px; flex: none;
-    border: 1.5px solid rgba(255,255,255,.4); border-radius: 50%;
+    border: 1.5px solid rgba(44, 58, 66, .28); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 18px; font-weight: 700;
+    color: var(--ink); font-size: 18px; font-weight: 700;
+    background: rgba(255,255,255,.55);
   }
-  .brand-name { font-size: 15px; letter-spacing: 5px; font-weight: 600; color: #fff; }
-  .brand-sub { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.48); margin-top: 2px; }
+  .brand-name { font-size: 16px; letter-spacing: 5px; font-weight: 600; color: var(--ink); }
+  .brand-sub { font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
   .kicker {
     display: inline-flex; align-items: center; gap: 10px;
-    font-size: 11.5px; letter-spacing: 3px; font-weight: 700;
-    text-transform: uppercase; color: #C4A574;
+    font-size: 12.5px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: var(--trust-deep);
   }
-  .kicker::before { content: ""; width: 22px; height: 2px; background: var(--amber); }
+  .kicker::before { content: ""; width: 22px; height: 2px; background: var(--hope); }
   .hero h1 {
-    font-size: clamp(26px, 3.8vw, 36px);
-    font-weight: 700; letter-spacing: 2px; color: #fff;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700; letter-spacing: 2px; color: var(--ink);
     margin: 12px 0 10px; line-height: 1.3;
   }
-  .hero h1 em { font-style: normal; color: #E2C48A; }
+  .hero h1 em { font-style: normal; color: var(--hope-deep); }
   .hero-lead {
-    font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.8;
-    max-width: 780px;
+    font-size: 15.5px; color: var(--ink-soft); line-height: 1.85;
+    max-width: 800px;
   }
-  .hero-lead b { color: #fff; font-weight: 600; }
+  .hero-lead b { color: var(--ink); font-weight: 700; }
   .hero-meta {
     display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
   }
   .hm {
-    font-size: 12px; color: rgba(255,255,255,.78);
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 999px; padding: 5px 12px;
+    font-size: 13.5px; color: var(--ink-soft);
+    background: rgba(255,255,255,.85);
+    border: 1px solid #C8D2D8;
+    border-radius: 999px; padding: 6px 13px;
   }
-  .hm b { color: #E2C48A; font-weight: 600; }
+  .hm b { color: var(--hope-deep); font-weight: 700; }
   .hero-nav {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px;
   }
   .hn {
     display: block; text-decoration: none;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.82);
+    border: 1px solid #D8E0E4;
     border-radius: 12px; padding: 14px 14px 12px;
-    transition: background .15s;
+    transition: border-color .15s, box-shadow .15s;
   }
-  .hn:hover { background: rgba(255,255,255,.12); }
-  .hn-lb { font-size: 10.5px; letter-spacing: 2px; color: rgba(255,255,255,.5); text-transform: uppercase; }
-  .hn-v { font-size: 16px; font-weight: 700; color: #fff; margin-top: 4px; }
-  .hn-n { font-size: 11.5px; color: rgba(255,255,255,.62); margin-top: 6px; line-height: 1.5; }
-  .hn-n .p0 { color: #E2C48A; font-weight: 700; }
+  .hn:hover { border-color: #C4D0D6; box-shadow: 0 4px 14px rgba(44,58,66,.06); }
+  .hn-lb { font-size: 12px; letter-spacing: 2px; color: var(--hope-deep); text-transform: uppercase; font-weight: 700; }
+  .hn-v { font-size: 17.5px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .hn-n { font-size: 13px; color: var(--ink-faint); margin-top: 6px; line-height: 1.5; }
+  .hn-n .p0 { color: var(--hope-deep); font-weight: 800; }
 
   section { margin-top: 40px; }
   .sec-head {
@@ -100,17 +101,17 @@
     border-bottom: 1px solid var(--line);
   }
   .sec-no {
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-    color: #fff; background: var(--pine-2);
-    padding: 2px 7px; border-radius: 3px; line-height: 1.4;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--trust);
+    padding: 3px 8px; border-radius: 3px; line-height: 1.4;
   }
-  .sec-no.is-p0 { background: var(--amber-deep); }
-  .sec-title { font-size: 16px; font-weight: 700; letter-spacing: 1px; color: var(--pine-2); }
+  .sec-no.is-p0 { background: var(--hope-deep); }
+  .sec-title { font-size: 18px; font-weight: 700; letter-spacing: 1px; color: var(--ink); }
   .sec-title .pre {
-    color: var(--amber-deep); font-weight: 700; margin-right: 2px;
+    color: var(--hope-deep); font-weight: 700; margin-right: 2px;
   }
-  .sec-title span { font-size: 12px; font-weight: 500; color: var(--ink-faint); margin-left: 8px; }
-  .sec-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+  .sec-title span { font-size: 13.5px; font-weight: 600; color: var(--ink-faint); margin-left: 8px; }
+  .sec-en { margin-left: auto; font-size: 12px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
 
   .judge-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
@@ -119,34 +120,38 @@
     background: var(--card); border: 1px solid var(--line);
     border-radius: 12px; padding: 14px 16px;
   }
-  .judge-t { font-size: 14px; font-weight: 700; color: var(--pine-2); margin-bottom: 6px; }
-  .judge-d { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
-  .judge-d b { color: var(--ink); font-weight: 600; }
+  .judge-t { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .judge-d { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+  .judge-d b { color: var(--ink); font-weight: 700; }
 
   .north {
-    background: linear-gradient(135deg, #F8F0E0 0%, #FFF 55%);
-    border: 1px solid #E5D4AE;
+    background: linear-gradient(135deg, #F7F1E4 0%, #FFF 58%);
+    border: 1px solid #E6D9B8;
     border-radius: 14px; padding: 18px 18px 16px;
   }
   .north-h {
     display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
   }
-  .north-h h3 { font-size: 15px; font-weight: 700; color: var(--amber-deep); letter-spacing: 1px; }
-  .north-h span { font-size: 12px; color: var(--ink-faint); }
+  .north-h h3 { font-size: 16.5px; font-weight: 700; color: var(--hope-deep); letter-spacing: 1px; }
+  .north-h span { font-size: 13.5px; color: var(--ink-faint); font-weight: 600; }
   .north-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
   }
   .ni {
-    background: rgba(255,255,255,.75);
-    border: 1px solid #E8D9B8;
-    border-radius: 10px; padding: 12px 12px 10px; text-align: center;
+    background: rgba(255,255,255,.82);
+    border: 1px solid #E8DCC0;
+    border-radius: 10px; padding: 12px 12px 11px; text-align: center;
   }
-  .ni-n { font-size: 10.5px; letter-spacing: 1px; color: var(--ink-faint); margin-bottom: 4px; }
-  .ni-v { font-size: 14px; font-weight: 700; color: var(--pine-2); }
+  .ni-n { font-size: 12px; letter-spacing: 1px; color: var(--ink-faint); margin-bottom: 4px; font-weight: 600; }
+  .ni-v { font-size: 15.5px; font-weight: 700; color: var(--ink); }
+  .ni-d {
+    margin-top: 6px; font-size: 12.5px; color: var(--ink-soft);
+    line-height: 1.45; font-weight: 500;
+  }
   .north-note {
-    margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.65;
+    margin-top: 10px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7;
   }
-  .north-note b { color: var(--amber-deep); }
+  .north-note b { color: var(--hope-deep); }
 
   .item {
     background: var(--card);
@@ -157,75 +162,77 @@
     position: relative;
   }
   .item.is-p0 {
-    border-color: #E2C48A;
-    box-shadow: inset 3px 0 0 var(--amber);
+    border-color: #E0D0A8;
+    box-shadow: inset 3px 0 0 var(--hope);
   }
   .item-top {
     display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
     margin-bottom: 6px;
   }
   .item-id {
-    flex: none; font-size: 11px; font-weight: 800; letter-spacing: 1px;
-    color: var(--sage); background: #E7F1EE;
-    padding: 2px 7px; border-radius: 5px;
-  }
-  .item.is-p0 .item-id { color: var(--amber-deep); background: var(--amber-bg); }
-  .item-title { font-size: 14.5px; font-weight: 700; color: var(--ink); flex: 1; min-width: 200px; line-height: 1.4; }
-  .badge {
-    flex: none; font-size: 10.5px; font-weight: 800; letter-spacing: 1px;
+    flex: none; font-size: 12.5px; font-weight: 800; letter-spacing: 1px;
+    color: var(--trust-deep); background: var(--trust-bg);
     padding: 3px 8px; border-radius: 5px;
   }
-  .badge.p0 { color: #fff; background: var(--amber); }
-  .badge.p1 { color: var(--sage); background: #E7F1EE; }
-  .item-body { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin: 4px 0 8px; }
-  .item-body b { color: var(--ink); font-weight: 600; }
-  .ev {
-    background: #F7FAF8;
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 12.5px; color: var(--ink-soft); line-height: 1.65;
+  .item.is-p0 .item-id { color: var(--hope-deep); background: var(--hope-bg); }
+  .item-title { font-size: 16px; font-weight: 700; color: var(--ink); flex: 1; min-width: 200px; line-height: 1.4; }
+  .badge {
+    flex: none; font-size: 12px; font-weight: 800; letter-spacing: 1px;
+    padding: 4px 9px; border-radius: 5px;
   }
-  .ev b { color: var(--ink); font-weight: 600; }
+  .badge.p0 { color: #fff; background: var(--hope); }
+  .badge.p1 { color: var(--trust-deep); background: var(--trust-bg); }
+  .item-body { font-size: 14.5px; color: var(--ink-soft); line-height: 1.75; margin: 4px 0 8px; }
+  .item-body b { color: var(--ink); font-weight: 700; }
+  .ev {
+    background: #EBF0F2;
+    border: 1px solid #D0D9DE;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.7;
+  }
+  .ev b { color: var(--ink); font-weight: 700; }
   .tags { display: inline-flex; flex-wrap: wrap; gap: 5px; margin-right: 6px; vertical-align: middle; }
   .tag {
-    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
-    padding: 1px 7px; border-radius: 4px; vertical-align: middle;
+    display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .5px;
+    padding: 2px 8px; border-radius: 4px; vertical-align: middle;
   }
-  .tag.t-g { color: #17453A; background: #DCE9E3; }
-  .tag.t-x { color: #6B4A0F; background: #F5EFE3; }
-  .tag.t-s { color: #1F4A6B; background: #E4EEF5; }
-  .tag.t-m { color: #6B2F4A; background: #F5E6ED; }
+  .tag.t-g { color: #3F5F6C; background: #E8F0F3; }
+  .tag.t-x { color: #9A7B3A; background: #F7F1E4; }
+  .tag.t-s { color: #3F5F6C; background: #E4EEF5; }
+  .tag.t-m { color: #6B4E6A; background: #F3E8EF; }
 
   .p0-board {
-    background: var(--pine);
+    background: linear-gradient(145deg, #EEF3F5 0%, #F7F6F2 100%);
+    border: 1px solid #D5DFE4;
     border-radius: 14px;
     padding: 20px 20px 16px;
-    color: #fff;
+    color: var(--ink);
   }
   .p0-board h3 {
-    font-size: 15px; font-weight: 700; letter-spacing: 1px;
-    color: #E2C48A; margin-bottom: 4px;
+    font-size: 17px; font-weight: 700; letter-spacing: 1px;
+    color: var(--hope-deep); margin-bottom: 4px;
   }
-  .p0-board .sub { font-size: 12.5px; color: rgba(255,255,255,.62); margin-bottom: 14px; }
+  .p0-board .sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; }
   .p0-cols {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
   }
   .p0-col {
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.88);
+    border: 1px solid #DCE4E8;
     border-radius: 10px; padding: 12px;
   }
-  .p0-col h4 { font-size: 12px; color: #E2C48A; letter-spacing: 1px; margin-bottom: 8px; }
+  .p0-col h4 { font-size: 13.5px; color: var(--hope-deep); letter-spacing: 1px; margin-bottom: 8px; font-weight: 700; }
   .p0-col ul { list-style: none; display: grid; gap: 6px; }
-  .p0-col li { font-size: 12px; color: rgba(255,255,255,.82); line-height: 1.45; padding-left: 10px; position: relative; }
+  .p0-col li { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; padding-left: 10px; position: relative; }
   .p0-col li::before {
     content: ""; position: absolute; left: 0; top: 7px;
-    width: 4px; height: 4px; border-radius: 50%; background: var(--amber);
+    width: 4px; height: 4px; border-radius: 50%; background: var(--hope);
   }
 
   .legend {
     display: flex; flex-wrap: wrap; gap: 8px 14px;
-    font-size: 12px; color: var(--ink-faint); margin: 8px 0 16px;
+    font-size: 13.5px; color: var(--ink-faint); margin: 8px 0 16px; font-weight: 500;
   }
   .legend i {
     display: inline-block; width: 8px; height: 8px; border-radius: 2px;
@@ -236,11 +243,11 @@
     margin-top: 40px; padding-top: 16px;
     border-top: 1px solid var(--line);
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-    font-size: 12px; color: var(--ink-faint);
+    font-size: 13.5px; color: var(--ink-faint);
   }
   .foot .dot {
     display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--amber); margin-right: 6px; vertical-align: middle;
+    background: var(--hope); margin-right: 6px; vertical-align: middle;
   }
 
   @media (max-width: 800px) {
@@ -265,12 +272,12 @@
       </div>
     </div>
 
-    <div class="kicker">Field Research · Breakout</div>
+    <div class="kicker">Field Research · Path Forward</div>
     <h1>太仓调研·<em>破局</em></h1>
     <p class="hero-lead">
-      产品现状不及预期。本次太仓联合调研不以流水账复盘为目的，
-      而把一线依据收成可执行的<strong>破局动作</strong>——先补销售工具与客群策略，
-      再抓<strong>价值抓手</strong>（留存、升单、核销、高价值项目），并同步修掉阻碍开单使用的关键体验。
+      现状尚未达预期，但方向已经收束。本次太仓联合调研把一线声音收成
+      <strong>可先做成的几步</strong>——先立住销售工具与客群策略，再补上
+      <strong>价值抓手</strong>（留存、升单、核销、高价值项目），并让开单相关体验更顺、更稳。
     </p>
     <div class="hero-meta">
       <span class="hm"><b>日期</b> 2026-10-09</span>
@@ -297,7 +304,7 @@
       <a class="hn" href="#ux">
         <div class="hn-lb">固本</div>
         <div class="hn-v">体验优化</div>
-        <div class="hn-n"><span class="p0">P0 ×2</span> · P1 ×4</div>
+        <div class="hn-n"><span class="p0">P0 ×3</span> · P1 ×4</div>
       </a>
     </div>
   </div>
@@ -309,25 +316,25 @@
   <section id="judge">
     <div class="sec-head">
       <span class="sec-no is-p0">00</span>
-      <h2 class="sec-title">核心判断<span>破局先看清这四件事</span></h2>
+      <h2 class="sec-title">核心判断<span>先看清，再稳步推进</span></h2>
       <span class="sec-en">Key Calls</span>
     </div>
     <div class="judge-grid">
       <div class="judge">
         <div class="judge-t">价值抓手 &gt; 系统好不好用</div>
-        <div class="judge-d">店主普遍认为店务系统<strong>够用</strong>；真正缺的是帮门店<strong>拓客、提高客单价、提高留存</strong>的抓手——有抓手，系统再难也会用。</div>
+        <div class="judge-d">店主普遍认为店务系统<strong>够用</strong>；更期待能帮门店<strong>拓客、提高客单价、提高留存</strong>的抓手——抓手到位，使用意愿会自然上来。</div>
       </div>
       <div class="judge">
-        <div class="judge-t">信任是销售第一阻力</div>
-        <div class="judge-d">品牌不及大平台时，口头推销易碰壁；需要<strong>拿到结果的成功门店案例</strong>背书，并给销售可落地的敲门砖。</div>
+        <div class="judge-t">信任可以用结果慢慢立住</div>
+        <div class="judge-d">口头推销容易碰壁时，最稳的办法是拿出<strong>拿到结果的成功门店案例</strong>，并给销售可留下的敲门砖。</div>
       </div>
       <div class="judge">
         <div class="judge-t">主攻具备易成交特征的门店</div>
-        <div class="judge-d">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店暂不作为主攻对象。</div>
+        <div class="judge-d">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店可暂缓，把力气用在更稳的胜场。</div>
       </div>
       <div class="judge">
         <div class="judge-t">寻找与大平台差异化竞争的路径</div>
-        <div class="judge-d">不强拼大平台线下抢新店的兵力；把破局切口放在<strong>留存与升单</strong>等对方难深耕的阵地，形成差异化胜势。</div>
+        <div class="judge-d">我们更擅长的阵地在<strong>留存与升单</strong>——把力气用在对方难深耕、我们能持续见效的地方，走出自己的路径。</div>
       </div>
     </div>
   </section>
@@ -340,10 +347,26 @@
         <span>漂亮宝贝 · 小军</span>
       </div>
       <div class="north-grid">
-        <div class="ni"><div class="ni-n">01</div><div class="ni-v">获客成本</div></div>
-        <div class="ni"><div class="ni-n">02</div><div class="ni-v">转化率</div></div>
-        <div class="ni"><div class="ni-n">03</div><div class="ni-v">客单价</div></div>
-        <div class="ni"><div class="ni-n">04</div><div class="ni-v">留存率</div></div>
+        <div class="ni">
+          <div class="ni-n">01</div>
+          <div class="ni-v">获客成本</div>
+          <div class="ni-d">拉来一位新客，门店平均要花多少钱</div>
+        </div>
+        <div class="ni">
+          <div class="ni-n">02</div>
+          <div class="ni-v">转化率</div>
+          <div class="ni-d">进店或触达的人里，有多少最终成交</div>
+        </div>
+        <div class="ni">
+          <div class="ni-n">03</div>
+          <div class="ni-v">客单价</div>
+          <div class="ni-d">单次消费平均花多少，升单主要抬这一项</div>
+        </div>
+        <div class="ni">
+          <div class="ni-n">04</div>
+          <div class="ni-v">留存率</div>
+          <div class="ni-d">顾客会不会留下来复购；本期以是否办会员来看</div>
+        </div>
       </div>
       <p class="north-note">
         <b>留存口径：</b>本期以「是否办会员」作为留存依据讨论（非 App 活跃天数）。
@@ -354,9 +377,12 @@
   </section>
 
   <div class="legend">
-    <span><i style="background:var(--amber)"></i>P0 · 优先推进</span>
-    <span><i style="background:var(--sage)"></i>P1 · 承接推进</span>
+    <span><i style="background:var(--hope)"></i>P0 · 先做成、先见效</span>
+    <span><i style="background:var(--trust)"></i>P1 · 稳步承接</span>
     <span>依据标签：高总（高美丝）· 小军（漂亮宝贝）· 销售（含驻店）· 木子（木子造型）</span>
+  </div>
+  <div class="legend" style="margin-top:-8px;">
+    <span>备战 = 先立住销售根基 · 取势 = 找准拓客胜场 · 夺利 = 抬高客单价 · 固本 = 让体验更顺更稳</span>
   </div>
 
   <!-- 销售 -->
@@ -372,8 +398,8 @@
         <div class="item-title">制作宣传册 / 销售工具包，作拓客敲门砖</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">把价值主张、成功场景与可验证结果做成可留下的物料，降低「上门只靠口述」的碰壁率。</p>
-      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>前线反馈：仅凭上门口述难打开局面；需要实体/图文工具支援进店沟通。</div>
+      <p class="item-body">把价值主张、成功场景与可验证结果做成可留下的物料，让进店沟通更从容、更好开场。</p>
+      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>前线反馈：仅凭上门口述不容易打开局面；有实体/图文工具后，进店沟通更稳。</div>
     </div>
 
     <div class="item is-p0">
@@ -392,7 +418,7 @@
         <div class="item-title">主攻具备易成交特征的门店</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店暂不作为主攻对象。</p>
+      <p class="item-body">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店可暂缓，把力气用在更稳的胜场。</p>
       <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>已成交画像高度集中在上述类型；无外人员工的小店几乎无 SaaS 需求。</div>
     </div>
 
@@ -402,8 +428,8 @@
         <div class="item-title">沉淀成功门店案例，作信任背书</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">整理「拿到结果」的门店故事（指标前后、动作、周期），进入宣传册与话术包，专门打信任阻力。</p>
-      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>推广阻力核心是信任度；需要有结果的门店案例背书。品牌知名度不及大平台时，风险顾虑更强。</div>
+      <p class="item-body">整理「拿到结果」的门店故事（指标前后、动作、周期），进入宣传册与话术包，用结果把信任<strong>一点点立住</strong>。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>推广关键在信任；有结果的门店案例最能背书。品牌知名度还在积累时，案例是最稳的说服。</div>
     </div>
 
     <div class="item">
@@ -441,7 +467,7 @@
         <span class="badge p0">P0</span>
       </div>
       <p class="item-body">不是再堆新手教学页，而是问清「今天要做什么」，把人送到对应版块，并护航完成<strong>第一个有结果的动作</strong>。</p>
-      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>明确指出缺少必要引导——帮助进入想要的功能并完成第一个动作；同时强调这仍次于价值抓手，但属于必须补齐的基础。</div>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>明确指出需要引导——帮助进入想要的功能并完成第一个动作；价值抓手更优先，分流承接是值得先补齐的基础。</div>
     </div>
 
     <div class="item is-p0">
@@ -460,8 +486,8 @@
         <div class="item-title">团购核销功能尽快上线</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">把团购核销作为近期必须交付的拓客闭环能力，缩短门店「在外部平台获客 → 店内核销入会」的断点。</p>
-      <div class="ev"><span class="tags"><span class="tag t-m">木子</span><span class="tag t-x">小军</span></span>木子造型老板多次追问核销上线时间。小军侧对大平台获客预期不高，但核销是门店已有客源进店的刚需承接。</div>
+      <p class="item-body">把团购核销作为近期优先交付的拓客闭环能力，让门店「外部平台获客 → 店内核销入会」走得更顺。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span><span class="tag t-x">小军</span></span>木子造型老板多次关心核销上线时间。小军侧更看重留存与升单，同时核销是已有客源进店的刚需承接。</div>
     </div>
 
     <div class="item is-p0">
@@ -470,8 +496,8 @@
         <div class="item-title">差异化竞争：主打留存 + 升单，另辟与大平台不同的路径</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">对内对外统一口径：破局切口是<strong>留存率与客单价</strong>；获客能力照常建设，但不以拼大平台线下拓店兵力为胜负标准。</p>
-      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>小军认为相对大平台，获客不宜硬碰，突破口在留存与升单。销售侧：新店最先被大平台线下团队接触，我们缺少对等资源，更需走差异化。</div>
+      <p class="item-body">对内对外统一口径：优先切口是<strong>留存率与客单价</strong>；获客能力照常建设，胜负标准放在我们更能持续见效的阵地上。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span><span class="tag t-s">销售</span></span>小军认为突破口在留存与升单，获客不必硬碰大平台。销售侧：新店常被大平台线下团队先接触，差异化路径更稳妥。</div>
     </div>
 
     <div class="item">
@@ -508,7 +534,7 @@
         <div class="item-title">开发升单相关辅助功能</div>
         <span class="badge p1">P1</span>
       </div>
-      <p class="item-body">在开单过程中为店员提供加项/搭配建议与话术支撑，降低「不会升单」的能力门槛，服务小店与缺乏培训的团队。</p>
+      <p class="item-body">在开单过程中为店员提供加项/搭配建议与话术支撑，让小店与缺少系统培训的团队也能<strong>更有把握地升单</strong>。</p>
       <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>漂亮宝贝老板视升单为门店最核心能力与获利最重要手段，并系统分享了升单方法；认为缺的是价值抓手而非系统本身。</div>
     </div>
 
@@ -543,6 +569,16 @@
     <div class="item is-p0">
       <div class="item-top">
         <span class="item-id">E3</span>
+        <div class="item-title">订单流水展示退卡订单</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">退卡记录同步出现在订单流水，不只留在退卡页，便于核对与回溯经营往来。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>高美丝老板提出：会员卡退卡目前只能在退卡页面看到，希望订单流水里也能看到退卡订单。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">E4</span>
         <div class="item-title">欠款单：支持赊账交易落单</div>
         <span class="badge p0">P0</span>
       </div>
@@ -552,7 +588,7 @@
 
     <div class="item">
       <div class="item-top">
-        <span class="item-id">E4</span>
+        <span class="item-id">E5</span>
         <div class="item-title">预约：要有，但必须轻操作</div>
         <span class="badge p1">P1</span>
       </div>
@@ -562,7 +598,7 @@
 
     <div class="item">
       <div class="item-top">
-        <span class="item-id">E5</span>
+        <span class="item-id">E6</span>
         <div class="item-title">多店模式</div>
         <span class="badge p1">P1</span>
       </div>
@@ -572,7 +608,7 @@
 
     <div class="item">
       <div class="item-top">
-        <span class="item-id">E6</span>
+        <span class="item-id">E7</span>
         <div class="item-title">PC / 一体机大屏操作系统</div>
         <span class="badge p1">P1</span>
       </div>
@@ -586,16 +622,16 @@
         <div class="item-title">到期续费提醒</div>
         <span class="badge p1">P1</span>
       </div>
-      <p class="item-body">在订阅/服务到期前多触点提醒门店续费，避免服务突然中断冲击经营信任。</p>
-      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>门店经营依赖连续服务；到期前提醒是降低弃用与投诉风险的基础能力。</div>
+      <p class="item-body">在订阅/服务到期前多触点提醒门店续费，让续费更从容，经营不中断。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>门店经营依赖连续服务；到期前提醒是稳住信任与使用习惯的基础能力。</div>
     </div>
   </section>
 
   <!-- P0 收尾 -->
   <section id="p0">
     <div class="p0-board">
-      <h3>P0 清单一览</h3>
-      <p class="sub">优先推进的破局动作 · 销售工具 / 价值抓手 / 关键体验三线并行</p>
+      <h3>优先推进清单 · 先做成、先见效</h3>
+      <p class="sub">销售工具 / 价值抓手 / 关键体验三线并行，把最稳的几步先落地</p>
       <div class="p0-cols">
         <div class="p0-col">
           <h4>备战 · 销售</h4>
@@ -619,11 +655,12 @@
           <h4>固本 · 体验</h4>
           <ul>
             <li>E1 快捷开单选员工 UI</li>
-            <li>E3 欠款单</li>
+            <li>E3 流水展示退卡订单</li>
+            <li>E4 欠款单</li>
           </ul>
         </div>
         <div class="p0-col">
-          <h4>P1 紧随</h4>
+          <h4>P1 · 稳步承接</h4>
           <ul>
             <li>升单辅助 · 高价值推荐</li>
             <li>活动能力 · 低余额提醒</li>
