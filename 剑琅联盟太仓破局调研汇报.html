@@ -78,6 +78,25 @@
     border-radius: 999px; padding: 6px 13px;
   }
   .hm b { color: var(--hope-deep); font-weight: 700; }
+  .itinerary {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    margin-top: 14px;
+  }
+  .it {
+    background: rgba(255,255,255,.85);
+    border: 1px solid #C8D2D8;
+    border-radius: 12px; padding: 12px 14px 11px;
+  }
+  .it-t {
+    font-size: 12px; letter-spacing: 2px; font-weight: 700;
+    color: var(--hope-deep); text-transform: uppercase;
+  }
+  .it-v {
+    margin-top: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.45;
+  }
+  .it-d {
+    margin-top: 4px; font-size: 13px; color: var(--ink-soft); line-height: 1.5;
+  }
   .hero-nav {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px;
   }
@@ -215,7 +234,7 @@
   }
   .p0-board .sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; }
   .p0-cols {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
   }
   .p0-col {
     background: rgba(255,255,255,.88);
@@ -251,10 +270,10 @@
   }
 
   @media (max-width: 800px) {
-    .hero-nav, .north-grid, .p0-cols, .judge-grid { grid-template-columns: 1fr 1fr; }
+    .hero-nav, .north-grid, .p0-cols, .judge-grid, .itinerary { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 520px) {
-    .hero-nav, .north-grid, .p0-cols, .judge-grid { grid-template-columns: 1fr; }
+    .hero-nav, .north-grid, .p0-cols, .judge-grid, .itinerary { grid-template-columns: 1fr; }
     .wrap { padding: 0 16px 48px; }
     .hero-inner { padding: 0 16px; }
   }
@@ -281,8 +300,26 @@
     </p>
     <div class="hero-meta">
       <span class="hm"><b>日期</b> 2026-10-09</span>
-      <span class="hm"><b>地点</b> 太仓 · 高美丝 / 漂亮宝贝 · 木子造型</span>
+      <span class="hm"><b>地点</b> 太仓 · 高美丝 / 木子造型</span>
       <span class="hm"><b>团队</b> 产品·市场·销售联合调研</span>
+    </div>
+
+    <div class="itinerary">
+      <div class="it">
+        <div class="it-t">上午</div>
+        <div class="it-v">高美丝</div>
+        <div class="it-d">与高总交流</div>
+      </div>
+      <div class="it">
+        <div class="it-t">中午</div>
+        <div class="it-v">高美丝</div>
+        <div class="it-d">与小军及销售人员座谈</div>
+      </div>
+      <div class="it">
+        <div class="it-t">下午</div>
+        <div class="it-v">木子造型</div>
+        <div class="it-d">赶赴现场，与木子交流</div>
+      </div>
     </div>
 
     <div class="hero-nav">
@@ -294,17 +331,17 @@
       <a class="hn" href="#toker">
         <div class="hn-lb">取势</div>
         <div class="hn-v">拓客</div>
-        <div class="hn-n"><span class="p0">P0 ×4</span> · P1 ×2</div>
+        <div class="hn-n"><span class="p0">P0 ×3</span> · P1 ×1</div>
       </a>
       <a class="hn" href="#upsell">
         <div class="hn-lb">夺利</div>
         <div class="hn-v">升单</div>
-        <div class="hn-n">P1 ×2</div>
+        <div class="hn-n"><span class="p0">P0 ×2</span> · P1 ×1</div>
       </a>
       <a class="hn" href="#ux">
         <div class="hn-lb">固本</div>
         <div class="hn-v">体验优化</div>
-        <div class="hn-n"><span class="p0">P0 ×3</span> · P1 ×4</div>
+        <div class="hn-n"><span class="p0">P0 ×4</span> · P1 ×4</div>
       </a>
     </div>
   </div>
@@ -418,8 +455,8 @@
         <div class="item-title">主攻具备易成交特征的门店</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店可暂缓，把力气用在更稳的胜场。</p>
-      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>已成交画像高度集中在上述类型；无外人员工的小店几乎无 SaaS 需求。</div>
+      <p class="item-body">优先投入：原有<strong>单机版记账</strong>、现有 SaaS<strong>即将到期</strong>、店内有「外人」员工的门店。1 人店 / 夫妻店可暂缓，把力气用在更稳的胜场。销售侧反馈：已成交门店几乎都是<strong>多次拜访后才成交</strong>——更说明要把精力集中在易成交画像上，而不是广撒网。</p>
+      <div class="ev"><span class="tags"><span class="tag t-s">销售</span></span>已成交画像高度集中在上述类型；无外人员工的小店几乎无 SaaS 需求。销售反馈成交门店均为多次拜访后落地，进一步支撑「主攻易成交门店、少在低胜率门店空转」的策略。</div>
     </div>
 
     <div class="item is-p0">
@@ -463,16 +500,6 @@
     <div class="item is-p0">
       <div class="item-top">
         <span class="item-id">T1</span>
-        <div class="item-title">补齐分流与承接：帮用户进入目标功能并完成第一个价值动作</div>
-        <span class="badge p0">P0</span>
-      </div>
-      <p class="item-body">不是再堆新手教学页，而是问清「今天要做什么」，把人送到对应版块，并护航完成<strong>第一个有结果的动作</strong>。</p>
-      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>明确指出需要引导——帮助进入想要的功能并完成第一个动作；价值抓手更优先，分流承接是值得先补齐的基础。</div>
-    </div>
-
-    <div class="item is-p0">
-      <div class="item-top">
-        <span class="item-id">T4</span>
         <div class="item-title">高价值项目分析：用时段利润指导推广重点</div>
         <span class="badge p0">P0</span>
       </div>
@@ -482,17 +509,17 @@
 
     <div class="item is-p0">
       <div class="item-top">
-        <span class="item-id">T5</span>
-        <div class="item-title">团购核销功能尽快上线</div>
+        <span class="item-id">T2</span>
+        <div class="item-title">团购核销：试点推进中，待优化项明确且紧急</div>
         <span class="badge p0">P0</span>
       </div>
-      <p class="item-body">把团购核销作为近期优先交付的拓客闭环能力，让门店「外部平台获客 → 店内核销入会」走得更顺。</p>
-      <div class="ev"><span class="tags"><span class="tag t-m">木子</span><span class="tag t-x">小军</span></span>木子造型老板多次关心核销上线时间。小军侧更看重留存与升单，同时核销是已有客源进店的刚需承接。</div>
+      <p class="item-body">团购核销已在试点门店测试。当前有一批待优化项，覆盖多项 UI 与功能优化，并涉及开发与第三方对接协调——工作边界清楚、优先级为 P0，需尽快推进。</p>
+      <div class="ev"><span class="tags"><span class="tag t-m">木子</span><span class="tag t-x">小军</span></span>木子造型老板多次关心核销上线时间。小军侧更看重留存与升单，同时核销是已有客源进店的刚需承接。试点门店已在测，待优化清单明确，开发与第三方协调需同步推进。</div>
     </div>
 
     <div class="item is-p0">
       <div class="item-top">
-        <span class="item-id">T6</span>
+        <span class="item-id">T3</span>
         <div class="item-title">差异化竞争：主打留存 + 升单，另辟与大平台不同的路径</div>
         <span class="badge p0">P0</span>
       </div>
@@ -502,30 +529,40 @@
 
     <div class="item">
       <div class="item-top">
-        <span class="item-id">T2</span>
+        <span class="item-id">T4</span>
         <div class="item-title">可拿到结果的营销活动能力（月小活动 / 年大活动）</div>
         <span class="badge p1">P1</span>
       </div>
       <p class="item-body">降低门店自办活动门槛，支持折扣、秒杀等常见形式，形成可复用的月度/年度活动节奏，让「拓客」看得见结果。</p>
       <div class="ev"><span class="tags"><span class="tag t-m">木子</span></span>木子造型老板认可竞品「每月小活动、每年一次大活动」的获客效果，形式以折扣与秒杀为主。</div>
     </div>
-
-    <div class="item">
-      <div class="item-top">
-        <span class="item-id">T3</span>
-        <div class="item-title">会员低余额提醒 + 充卡话术触发</div>
-        <span class="badge p1">P1</span>
-      </div>
-      <p class="item-body">在开单/会员场景暴露余额告警，并给出可执行的充卡话术提示，把「看见余额」推进到「主动促充」。</p>
-      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>相对手写开单，APP 能看见会员余额很有用；被问及若余额过低是否会主动用话术促充卡，答复肯定。留存以办会员为讨论口径。</div>
-    </div>
   </section>
 
   <!-- 升单 -->
   <section id="upsell">
     <div class="sec-head">
-      <span class="sec-no">03</span>
+      <span class="sec-no is-p0">03</span>
       <h2 class="sec-title"><span class="pre">夺利</span> · 升单</h2>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">U2</span>
+        <div class="item-title">高价值项目洞察用于升单推荐</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">把 T1 的高价值项目结果接入开单建议：优先推荐利润贡献高、且与当前服务情境匹配的加项，避免盲目推销。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span><span class="tag t-x">小军</span></span>高总认可「用数据找赚钱项目」；小军侧升单依赖对项目价值与顾客情境的判断——数据洞察可降低经验门槛。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">U3</span>
+        <div class="item-title">会员低余额提醒 + 充卡话术触发</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">在开单/会员场景暴露余额告警，并给出可执行的充卡话术提示，把「看见余额」推进到「主动促充」。</p>
+      <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>相对手写开单，APP 能看见会员余额很有用；被问及若余额过低是否会主动用话术促充卡，答复肯定。留存以办会员为讨论口径。</div>
     </div>
 
     <div class="item">
@@ -536,16 +573,6 @@
       </div>
       <p class="item-body">在开单过程中为店员提供加项/搭配建议与话术支撑，让小店与缺少系统培训的团队也能<strong>更有把握地升单</strong>。</p>
       <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>漂亮宝贝老板视升单为门店最核心能力与获利最重要手段，并系统分享了升单方法；认为缺的是价值抓手而非系统本身。</div>
-    </div>
-
-    <div class="item">
-      <div class="item-top">
-        <span class="item-id">U2</span>
-        <div class="item-title">高价值项目洞察用于升单推荐</div>
-        <span class="badge p1">P1</span>
-      </div>
-      <p class="item-body">把 T4 的高价值项目结果接入开单建议：优先推荐利润贡献高、且与当前服务情境匹配的加项，避免盲目推销。</p>
-      <div class="ev"><span class="tags"><span class="tag t-g">高总</span><span class="tag t-x">小军</span></span>高总认可「用数据找赚钱项目」；小军侧升单依赖对项目价值与顾客情境的判断——数据洞察可降低经验门槛。</div>
     </div>
   </section>
 
@@ -564,6 +591,16 @@
       </div>
       <p class="item-body">功能已具备选员工能力，但入口不够显眼，导致「不能统计业绩」的误解。优化信息层级与引导，让选员工成为默认可见步骤。</p>
       <div class="ev"><span class="tags"><span class="tag t-g">高总</span></span>高美丝很少用直接收款/快捷开单，原因是以为无法选择服务员工、不能统计业绩——属于可见性与引导问题，而非能力缺失。</div>
+    </div>
+
+    <div class="item is-p0">
+      <div class="item-top">
+        <span class="item-id">E2</span>
+        <div class="item-title">补齐分流与承接：帮用户进入目标功能并完成第一个价值动作</div>
+        <span class="badge p0">P0</span>
+      </div>
+      <p class="item-body">不是再堆新手教学页，而是问清「今天要做什么」，把人送到对应版块，并护航完成<strong>第一个有结果的动作</strong>。</p>
+      <div class="ev"><span class="tags"><span class="tag t-x">小军</span></span>明确指出需要引导——帮助进入想要的功能并完成第一个动作；价值抓手更优先，分流承接是值得先补齐的基础。</div>
     </div>
 
     <div class="item is-p0">
@@ -631,7 +668,7 @@
   <section id="p0">
     <div class="p0-board">
       <h3>优先推进清单 · 先做成、先见效</h3>
-      <p class="sub">销售工具 / 价值抓手 / 关键体验三线并行，把最稳的几步先落地</p>
+      <p class="sub">销售工具 / 价值抓手 / 升单 / 关键体验四线并行，把最稳的几步先落地</p>
       <div class="p0-cols">
         <div class="p0-col">
           <h4>备战 · 销售</h4>
@@ -645,16 +682,23 @@
         <div class="p0-col">
           <h4>取势 · 拓客</h4>
           <ul>
-            <li>T1 分流与承接</li>
-            <li>T4 高价值项目分析</li>
-            <li>T5 团购核销上线</li>
-            <li>T6 差异化竞争路径</li>
+            <li>T1 高价值项目分析</li>
+            <li>T2 团购核销试点优化</li>
+            <li>T3 差异化竞争路径</li>
+          </ul>
+        </div>
+        <div class="p0-col">
+          <h4>夺利 · 升单</h4>
+          <ul>
+            <li>U2 高价值推荐</li>
+            <li>U3 低余额提醒</li>
           </ul>
         </div>
         <div class="p0-col">
           <h4>固本 · 体验</h4>
           <ul>
             <li>E1 快捷开单选员工 UI</li>
+            <li>E2 分流与承接</li>
             <li>E3 流水展示退卡订单</li>
             <li>E4 欠款单</li>
           </ul>
@@ -662,8 +706,8 @@
         <div class="p0-col">
           <h4>P1 · 稳步承接</h4>
           <ul>
-            <li>升单辅助 · 高价值推荐</li>
-            <li>活动能力 · 低余额提醒</li>
+            <li>升单辅助</li>
+            <li>活动能力</li>
             <li>预约 / 多店 / 大屏 / 续费提醒</li>
             <li>异业降权 · 培训渠道</li>
           </ul>
