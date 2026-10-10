@@ -553,6 +553,32 @@
     background: #fff; color: #616161;
     border: 1px dashed #BDBDBD; font-weight: 500;
   }
+  .m-modal {
+    border-radius: 12px; background: #fff;
+    border: 1.5px solid #616161;
+    padding: 11px 10px 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  }
+  .m-modal .mm-t {
+    font-size: 11.5px; font-weight: 700; color: #3A3A3A; margin-bottom: 5px;
+  }
+  .m-modal .mm-d {
+    font-size: 9.5px; color: #6A6A6A; line-height: 1.55; margin-bottom: 10px;
+  }
+  .m-modal .mm-row {
+    display: flex; gap: 6px;
+  }
+  .m-modal .mm-row .m-btn,
+  .m-modal .mm-row .m-btn.ghost { flex: 1; padding: 7px 4px; font-size: 10px; }
+  .m-dim {
+    position: relative;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    background: rgba(0,0,0,.06);
+    border-radius: 8px;
+    padding: 8px;
+    min-height: 72px;
+  }
   /* 底部 TAB 条（真实 5 个：首页 / 客户 / AI助手 / 小店 / 获客） */
   .m-tabbar {
     display: flex; margin-top: auto;
@@ -2107,10 +2133,12 @@
           </thead>
           <tbody>
             <tr>
-              <td class="c-name">首页<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想管店的老板</span></td>
-              <td>开第一单</td>
-              <td>项目 / 价目表、员工与提成的基本配置</td>
-              <td><span class="tag t-ok">较完整</span>　已有较为完整的新手引导流程</td>
+              <td class="c-name">首页 · RTB<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想管店的老板</span></td>
+              <td>熟悉主干链路<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">价目表→员工→开单→流水→会员卡</span></td>
+              <td>至少一个价目项目；能进入员工详情</td>
+              <td><span class="tag t-gap">待补承接</span>　分步弹窗引导（可跳过、每步仅一次）· 见
+                <a href="#rtb-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTB 承接</a>
+              </td>
             </tr>
             <tr>
               <td class="c-name">小店<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想找货的老板</span></td>
@@ -2129,6 +2157,7 @@
       </div>
       <div class="tbl-note">
         <b>对照实拍：</b>泳道 ④ 中小店新手指南与获客现状。<b>差距不在能力，而在有没有把模板搬过去。</b>
+        首页 · RTB 补分步弹窗承接，见下文。
       </div>
     </div>
 
@@ -2500,13 +2529,196 @@
       </div>
     </div>
 
+    <div class="card" id="rtb-onboarding">
+      <div class="card-title">RTB 承接 · 首页主干熟悉链路<small>价目表 → 员工 → 开单 → 流水 → 会员卡</small></div>
+      <p class="body">
+        分流选中「先把店管起来的老板」并落地首页后启动。
+        用<strong>分步弹窗</strong>串起主干能力，帮助用户完成一次可撤销的试跑；
+        与获客「就地建 1 个项目再发活动」不同——RTB 是<strong>串门熟悉首页能力</strong>，不是单点价值动作。
+      </p>
+      <div class="note sage" style="margin-top:12px;">
+        <b>弹窗规则：</b>每一步弹窗对每个用户<strong>只曝光一次</strong>；提供「去看看 / 跳过」——跳过只跳过当前步，不阻塞页面，后续触发点仍可弹下一步。
+        整条链路以「引导至会员卡」结束。
+      </div>
+
+      <div class="tbl-wrap" style="border:none; border-radius:0; margin-top:14px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:56px;">步</th>
+              <th style="width:160px;">触发</th>
+              <th>弹窗内容（要点）</th>
+              <th style="width:180px;">期望动作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">①</td>
+              <td>分流落地首页后</td>
+              <td>引导进入<strong>价目表</strong>，先创建一个项目（名称 + 价格即可）</td>
+              <td>创建 1 个项目</td>
+            </tr>
+            <tr>
+              <td class="c-key">②</td>
+              <td>项目创建完成</td>
+              <td>提示创建成功，引导跳转<strong>员工管理</strong>列表</td>
+              <td>进入员工管理列表</td>
+            </tr>
+            <tr>
+              <td class="c-key">③</td>
+              <td>已在员工管理列表</td>
+              <td>引导点击某张<strong>员工卡片</strong>进入详情页（如店主本人）</td>
+              <td>进入员工详情</td>
+            </tr>
+            <tr>
+              <td class="c-key">④</td>
+              <td>退出员工详情页</td>
+              <td>引导进入<strong>开单页</strong>：「开一单试试，这次尝试的单可以删除」</td>
+              <td>完成一笔试开单</td>
+            </tr>
+            <tr>
+              <td class="c-key">⑤</td>
+              <td>开单成功页</td>
+              <td>引导点击<strong>查看流水</strong>，并说明如何删除该订单</td>
+              <td>进入该笔订单流水</td>
+            </tr>
+            <tr>
+              <td class="c-key">⑥</td>
+              <td>删除完成 <b>或</b> 退出订单流水</td>
+              <td>引导进入<strong>会员卡</strong>，尝试创建一张本店会员卡</td>
+              <td>到此结束</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note">
+        <b>与获客承接的边界：</b>获客把「建项目」嵌进发布活动；RTB 先把价目表建起来，再带着用户摸员工、开单、流水、会员卡。
+        试开单强调可删，降低试错心理成本。
+      </div>
+
+      <div class="wf-grid" style="margin-top:18px;">
+        <div class="wf">
+          <div class="wf-cap">① 落地首页 · 引导进价目表</div>
+          <div class="wf-sub">分流选中「管店」后出现；可跳过。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>首页</span><span>RTB</span></div>
+                <div class="m-sk w70"></div>
+                <div class="m-sk w100"></div>
+                <div class="m-dim">
+                  <div class="m-modal">
+                    <div class="mm-t">先配一个价目项目</div>
+                    <div class="mm-d">管店从价目表开始。去建 1 个项目就行，名称和价格即可。</div>
+                    <div class="mm-row">
+                      <div class="m-btn ghost">跳过</div>
+                      <div class="m-btn">去价目表</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-tabbar">
+                  <div class="m-tab-item on"><span class="ti"></span>首页</div>
+                  <div class="m-tab-item"><span class="ti"></span>客户</div>
+                  <div class="m-tab-item"><span class="ti"></span>小店</div>
+                  <div class="m-tab-item"><span class="ti"></span>获客</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>跳过不挡浏览首页；本步标记已曝光，不再重复弹。</div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">② 建项完成 · 跳员工管理</div>
+          <div class="wf-sub">创建动作完成时弹出；可取消。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>价目表</span><span>已创建</span></div>
+                <div class="m-toast">项目已创建<small>可以继续熟悉员工与开单</small></div>
+                <div class="m-sk w100"></div>
+                <div class="m-dim">
+                  <div class="m-modal">
+                    <div class="mm-t">接下来看看员工</div>
+                    <div class="mm-d">去员工管理列表，点开一张员工卡片了解详情。</div>
+                    <div class="mm-row">
+                      <div class="m-btn ghost">稍后</div>
+                      <div class="m-btn">去员工管理</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>先进列表，再引导点卡片进详情（非强制新建员工）。</div>
+        </div>
+      </div>
+
+      <div class="wf-grid" style="margin-top:14px;">
+        <div class="wf">
+          <div class="wf-cap">④ 退出员工详情 · 引导开单</div>
+          <div class="wf-sub">从详情返回时弹出。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>员工管理</span><span>列表</span></div>
+                <div class="m-sk w100"></div>
+                <div class="m-sk w70"></div>
+                <div class="m-dim">
+                  <div class="m-modal">
+                    <div class="mm-t">开一单试试</div>
+                    <div class="mm-d">用刚建的项目开一单。这次尝试的单可以删除，放心试。</div>
+                    <div class="mm-row">
+                      <div class="m-btn ghost">跳过</div>
+                      <div class="m-btn">去开单</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>明确「可删」，降低试错顾虑。</div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">⑤⑥ 开单成功 → 流水 → 会员卡</div>
+          <div class="wf-sub">成功页指路流水；删单或退出流水后收尾。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>开单成功</span><span>✓</span></div>
+                <div class="m-toast">开单成功<small>可在流水里查看或删除</small></div>
+                <div class="m-btn">查看流水</div>
+                <div class="m-btn ghost">完成</div>
+                <div class="m-dim" style="margin-top:6px;">
+                  <div class="m-modal">
+                    <div class="mm-t">再试一张会员卡</div>
+                    <div class="mm-d">去会员卡，创建一张本店会员卡。主干熟悉到此结束。</div>
+                    <div class="mm-row">
+                      <div class="m-btn ghost">结束引导</div>
+                      <div class="m-btn">去会员卡</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>成功页强化「查看流水」；删单或退出流水任一发生即触发会员卡引导。</div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-title">承接三步 · 三版块统一模板<small>结构一致，只是内容不同</small></div>
       <p class="body">
         <b>不必从零设计</b>——小店已有跑通的「新手指南」（泳道 ④），获客把同一套模式搬过来、替换内容即可。
+        首页 · RTB 则用分步弹窗串主干（见
+        <a href="#rtb-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTB 承接</a>）。
       </p>
       <div class="rail-foot" style="margin-top:14px;">
-        <b>三步对应的价值动作：</b>获客 = 发布第一个活动；小店 = 关联第一个供应商；首页 = 开第一单。
+        <b>三步对应的价值动作：</b>获客 = 发布第一个活动；小店 = 关联第一个供应商；首页 = 熟悉主干（价目表→员工→开单→流水→会员卡）。
         <br><b>与门店动线：</b>第 1 步 = 引座；第 2、3 步 = 服务中。第 3 步庆祝成功并指出底部 TAB 还能去哪儿。
       </div>
     </div>
