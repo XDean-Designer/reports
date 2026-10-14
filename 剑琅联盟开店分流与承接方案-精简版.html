@@ -319,7 +319,7 @@
   .prin-desc b { color: var(--ink); font-weight: 600; }
 
   /* ===== Choice cards (03) ===== */
-  .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .choice {
     background: var(--card); border: 1px solid var(--line);
     border-radius: 14px; padding: 20px 20px 18px;
@@ -331,6 +331,7 @@
   .choice.c-rts::after { background: var(--sand); }
   .choice.c-rtp::after { background: var(--amber); }
   .choice.c-rtb::after { background: var(--sage); }
+  .choice.c-rtl::after { background: #5B7C99; }
   .choice-code {
     font-size: 18px; font-weight: 700; letter-spacing: 2px;
     color: var(--pine-2); line-height: 1;
@@ -1945,17 +1946,17 @@
     </p>
 
     <div class="card">
-      <div class="card-title">版块与底部 TAB 的对应关系<small>分流选项必须说用户听得懂的名字</small></div>
+      <div class="card-title">版块与入口的对应关系<small>分流选项必须说用户听得懂的名字</small></div>
       <p class="body">
-        RTB / RTS / RTP 是内部代号，<b>用户看不见</b>；分流页与可见文案一律用真实名称。
+        RTB / RTS / RTP / RTL 是内部代号，<b>用户看不见</b>；分流页与可见文案一律用真实名称。
       </p>
       <div class="tbl-wrap" style="border:none; border-radius:0; margin-top:14px;">
         <table>
           <thead>
             <tr>
-              <th style="width:120px;">内部代号</th>
-              <th style="width:150px;">用户看到的名称</th>
-              <th style="width:190px;">在 APP 中的位置</th>
+              <th style="width:100px;">内部代号</th>
+              <th style="width:130px;">用户看到的名称</th>
+              <th style="width:220px;">在 APP 中的位置</th>
               <th>分流选项文案</th>
             </tr>
           </thead>
@@ -1978,14 +1979,21 @@
               <td>APP 主体，底部 TAB 第 <b>1</b> 个</td>
               <td>先把店管起来的老板</td>
             </tr>
+            <tr>
+              <td class="c-key">RTL</td>
+              <td class="c-name" style="font-size:15px;">学习培训</td>
+              <td><b>独立入口</b>（不在底部 TAB；分流直达 RTL 首页）</td>
+              <td>想提升美业技能的老板 / 员工</td>
+            </tr>
           </tbody>
         </table>
       </div>
       <div class="tbl-note">
         底部 TAB：<b>首页、客户、AI助手、小店、获客</b>。「客户」与「AI 助手」不在本方案范围内。
+        <b>学习培训</b>不占底部 TAB，靠分流问需送达。
       </div>
       <div class="note amber" style="margin-top:14px;">
-        <b>结构本身放大了错配：</b>获客与小店是第 5、第 4 个 TAB，新用户最不易扫到；首页是默认落点——<b>用户不是到不了，是没人指给他看。</b>
+        <b>结构本身放大了错配：</b>获客与小店是第 5、第 4 个 TAB，新用户最不易扫到；学习培训更无 TAB 锚点——<b>用户不是到不了，是没人指给他看。</b>
       </div>
     </div>
 
@@ -1995,14 +2003,14 @@
         <div class="f3-node">
           <div class="f3-head"><span class="f3-no">A</span><span class="f3-name">价值预告</span></div>
           <div class="f3-sub">开店流程内 · 轻提示</div>
-          <div class="f3-desc">告诉用户：开完之后可以做「拉新客 / 找好货 / 管门店」。</div>
+          <div class="f3-desc">告诉用户：开完之后可以做「拉新客 / 找好货 / 管门店 / 学习培训」。</div>
           <div class="f3-ok">解决：<b>开店没走完就走了</b>——缺少走完的理由</div>
         </div>
         <div class="f3-arrow">→</div>
         <div class="f3-node is-core">
           <div class="f3-head"><span class="f3-no">B</span><span class="f3-name">正式分流</span></div>
-          <div class="f3-sub">开店完成后 · 三选一</div>
-          <div class="f3-desc">开店完成的第一步插入轻量问需，选完即跳转对应 TAB 并高亮。</div>
+          <div class="f3-sub">开店完成后 · 四选一</div>
+          <div class="f3-desc">开店完成的第一步插入轻量问需；选获客/小店/首页则跳转对应 TAB 并高亮；选学习培训则直达 RTL 首页。</div>
           <div class="f3-ok">解决：<b>走完开店却发现落点不对</b></div>
         </div>
       </div>
@@ -2013,9 +2021,11 @@
     </div>
 
     <div class="card">
-      <div class="card-title">一次三选一<small>人话画像 + 一句预期价值</small></div>
+      <div class="card-title">一次四选一<small>人话画像 + 一句预期价值</small></div>
       <p class="body">
-        选完后系统<b>直接跳转到对应 TAB 并高亮</b>。跳过则落到首页（现有默认路径）；底部 TAB 始终可自由切换。
+        选获客 / 小店 / 首页：系统<b>跳转对应 TAB 并高亮</b>。
+        选学习培训：直达 <b>RTL 首页</b>（独立入口，不占底部 TAB）。
+        跳过则落到首页（现有默认路径）；底部 TAB 始终可自由切换。
       </p>
       <div class="choice-grid" style="margin-top:16px;">
         <div class="choice c-rts">
@@ -2034,7 +2044,13 @@
           <div class="choice-code">首页<small>留在这一页就行</small></div>
           <div class="choice-persona">先把店管起来的老板</div>
           <div class="choice-q">「账乱、卡乱、员工提成算不清，想有个系统管起来。」</div>
-          <div class="choice-value">预期价值：<b>开第一单，把生意记清楚</b></div>
+          <div class="choice-value">预期价值：<b>熟悉管店主干，把生意记清楚</b></div>
+        </div>
+        <div class="choice c-rtl">
+          <div class="choice-code">学习培训<small>独立入口 · 会带你过去</small></div>
+          <div class="choice-persona">想提升美业技能的老板 / 员工</div>
+          <div class="choice-q">「线上线下美业培训课程很多，想找到适合自己的。」</div>
+          <div class="choice-value">预期价值：<b>进入学习培训，找到合适的美业技能课程</b></div>
         </div>
       </div>
     </div>
@@ -2043,7 +2059,7 @@
       <div class="card-title">分流页线框示意<small>灰阶线框，只表达结构，不是视觉稿</small></div>
       <div class="wf-grid" style="grid-template-columns:repeat(2,1fr); margin-top:8px;">
         <div class="wf">
-          <div class="wf-cap">① 分流页主态 · 三选一</div>
+          <div class="wf-cap">① 分流页主态 · 四选一</div>
           <div class="wf-sub">开店完成后的第一步。问句用店主的语言。</div>
           <div class="wf-stage">
             <div class="phone">
@@ -2065,19 +2081,24 @@
                 <div class="m-card">
                   <div class="m-code">首页<span>就在这一页</span></div>
                   <div class="m-persona">先把店管起来的老板</div>
-                  <div class="m-val">开第一单，把生意记清楚</div>
+                  <div class="m-val">熟悉管店主干</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">学习培训<span>独立入口</span></div>
+                  <div class="m-persona">想提升美业技能</div>
+                  <div class="m-val">找到适合的培训课程</div>
                 </div>
                 <div class="m-btn ghost" style="margin-top:auto;">先随便看看</div>
               </div>
             </div>
           </div>
           <div class="wf-note">
-            <b>要点：</b>三张卡平权、无默认高亮；选项名不出现内部代号。
+            <b>要点：</b>四张卡平权、无默认高亮；选项名不出现内部代号；学习培训不造假底部 TAB。
           </div>
         </div>
         <div class="wf">
           <div class="wf-cap">② 兜底态 · 跳过或未选择</div>
-          <div class="wf-sub">跳过时落到首页。获客与小店本来就是底部 TAB，不另造入口。</div>
+          <div class="wf-sub">跳过时落到首页。获客与小店是底部 TAB；学习培训靠分流送达。</div>
           <div class="wf-stage">
             <div class="phone">
               <div class="phone-notch"></div>
@@ -2120,14 +2141,14 @@
     </p>
 
     <div class="card">
-      <div class="card-title">三版块承接现状<small>先看清哪间房是空的</small></div>
+      <div class="card-title">四版块承接现状<small>先看清哪间房是空的</small></div>
       <div class="tbl-wrap" style="border:none; border-radius:0;">
         <table>
           <thead>
             <tr>
               <th style="width:150px;">目标版块</th>
               <th style="width:170px;">第一个价值动作</th>
-              <th style="width:230px;">前置条件</th>
+              <th style="width:210px;">前置条件</th>
               <th>现状</th>
             </tr>
           </thead>
@@ -2136,28 +2157,36 @@
               <td class="c-name">首页 · RTB<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想管店的老板</span></td>
               <td>熟悉主干链路<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">价目表→员工→开单→流水→会员卡</span></td>
               <td>至少一个价目项目；能进入员工详情</td>
-              <td><span class="tag t-gap">待补承接</span>　分步弹窗引导（可跳过、每步仅一次）· 见
+              <td><span class="tag t-gap">待补承接</span>　分步弹窗引导 · 见
                 <a href="#rtb-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTB 承接</a>
               </td>
             </tr>
             <tr>
-              <td class="c-name">小店<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想找货的老板</span></td>
+              <td class="c-name">小店 · RTP<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想找货的老板</span></td>
               <td><b>关联第一个供应商</b></td>
               <td>供应商接入 / 商品上架</td>
               <td><span class="tag t-ok">已有</span>　有详细新手指引页，首次进入也会引导</td>
             </tr>
             <tr>
-              <td class="c-name">获客<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想拉新客的老板</span></td>
+              <td class="c-name">获客 · RTS<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想拉新客的老板</span></td>
               <td>发布第一个活动</td>
               <td><b>首页价目表中必须有项目或产品</b></td>
               <td><span class="tag t-gap">存在死结</span>　无新手引导；未配价目表则发不出去</td>
+            </tr>
+            <tr>
+              <td class="c-name">学习培训 · RTL<br><span style="font-weight:400;font-size:12px;color:var(--ink-faint);">想提升美业技能</span></td>
+              <td>进入 RTL 首页浏览课程</td>
+              <td>无硬前置</td>
+              <td><span class="tag t-gap">待补承接</span>　退出时二次分流 · 见
+                <a href="#rtl-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTL 承接</a>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="tbl-note">
         <b>对照实拍：</b>泳道 ④ 中小店新手指南与获客现状。<b>差距不在能力，而在有没有把模板搬过去。</b>
-        首页 · RTB 补分步弹窗承接，见下文。
+        RTB / RTL 承接见下文。
       </div>
     </div>
 
@@ -2710,16 +2739,155 @@
       </div>
     </div>
 
+    <div class="card" id="rtl-onboarding">
+      <div class="card-title">RTL 承接 · 学习培训<small>进首页逛课程；退出时二次分流</small></div>
+      <p class="body">
+        分流选中「想提升美业技能的老板 / 员工」后，<strong>直接进入学习培训（RTL）首页</strong>——线上线下美业技能培训课程的独立板块，无分步任务链。
+        承接重点只有一件事：用户<strong>退出 RTL 首页时</strong>，轻量问一句要不要去其他板块，避免逛完培训后找不到管店 / 获客 / 小店。
+      </p>
+      <div class="note sage" style="margin-top:12px;">
+        <b>弹窗规则（同 RTB）：</b>每个节点对每个用户<strong>只曝光一次</strong>；可取消 / 返回，不阻塞。
+        「再逛逛」留在 RTL；「想去其他板块」再弹一层三选一（首页 / 小店 / 获客），仍可返回。
+      </div>
+
+      <div class="tbl-wrap" style="border:none; border-radius:0; margin-top:14px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:56px;">步</th>
+              <th style="width:160px;">触发</th>
+              <th>内容</th>
+              <th style="width:180px;">结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c-key">①</td>
+              <td>分流选中学习培训</td>
+              <td>直达 <b>RTL 首页</b>，浏览培训课程</td>
+              <td>进入学习培训</td>
+            </tr>
+            <tr>
+              <td class="c-key">②</td>
+              <td>退出 RTL 首页</td>
+              <td>弹窗：要不要去其他板块？</td>
+              <td>再逛逛 / 想去其他板块</td>
+            </tr>
+            <tr>
+              <td class="c-key">③</td>
+              <td>用户选「想去其他板块」</td>
+              <td>再弹一层：首页 · RTB / 小店 · RTP / 获客 · RTS；可返回</td>
+              <td>跳转所选板块（或返回 RTL）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="wf-grid" style="margin-top:18px;">
+        <div class="wf">
+          <div class="wf-cap">① 落地 RTL 首页</div>
+          <div class="wf-sub">分流直达；独立入口，无底部 TAB。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>学习培训</span><span>RTL</span></div>
+                <div class="m-banner">美业技能培训<br>线上线下课程都在这儿</div>
+                <div class="m-sk w100"></div>
+                <div class="m-sk w70"></div>
+                <div class="m-sk w100"></div>
+                <div class="m-tabbar-hint">返回 / 退出时再问要不要去其他板块</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>进门即逛课，不塞任务清单。</div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">② 退出时询问</div>
+          <div class="wf-sub">可跳过；本节点仅一次。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>学习培训</span><span>退出</span></div>
+                <div class="m-sk w70"></div>
+                <div class="m-dim">
+                  <div class="m-modal">
+                    <div class="mm-t">要不要去其他板块？</div>
+                    <div class="mm-d">培训逛完了，也可以去管店、找货或拉新客。</div>
+                    <div class="mm-row">
+                      <div class="m-btn ghost">再逛逛</div>
+                      <div class="m-btn">想去其他板块</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>「再逛逛」= 取消跳转，留在 RTL。</div>
+        </div>
+      </div>
+
+      <div class="wf-grid" style="margin-top:14px;">
+        <div class="wf">
+          <div class="wf-cap">③ 二次分流 · 三选一</div>
+          <div class="wf-sub">仅当用户明确想去其他板块时出现。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>去哪儿</span><span>可选</span></div>
+                <div class="scr-h">想先去哪个板块？</div>
+                <div class="m-card">
+                  <div class="m-code">首页</div>
+                  <div class="m-val">先把店管起来</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">小店</div>
+                  <div class="m-val">找好货、关联供应商</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-code">获客</div>
+                  <div class="m-val">发活动拉新客</div>
+                </div>
+                <div class="m-btn ghost" style="margin-top:auto;">返回</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>三选项平权；返回可回到询问层或 RTL 首页。</div>
+        </div>
+        <div class="wf">
+          <div class="wf-cap">与 RTB 的分工</div>
+          <div class="wf-sub">RTL 轻；RTB 重。</div>
+          <div class="wf-stage">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen">
+                <div class="scr-top"><span>对照</span><span>承接</span></div>
+                <div class="m-banner"><b>RTL</b>：进首页 + 退出二次分流</div>
+                <div class="m-banner"><b>RTB</b>：价目表→员工→开单→流水→会员卡</div>
+                <div class="m-sk w100"></div>
+                <div class="scr-p">学习培训不复制管店任务链，避免把「学技能」做成「配系统」。</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-note"><b>要点：</b>板块意图不同，承接重量不同。</div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
-      <div class="card-title">承接三步 · 三版块统一模板<small>结构一致，只是内容不同</small></div>
+      <div class="card-title">承接三步 · 统一模板<small>结构一致，按版块填内容</small></div>
       <p class="body">
         <b>不必从零设计</b>——小店已有跑通的「新手指南」（泳道 ④），获客把同一套模式搬过来、替换内容即可。
-        首页 · RTB 则用分步弹窗串主干（见
-        <a href="#rtb-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTB 承接</a>）。
+        首页 · RTB 用分步弹窗串主干（见
+        <a href="#rtb-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTB 承接</a>）；
+        学习培训 · RTL 只做退出二次分流（见
+        <a href="#rtl-onboarding" style="color:var(--sage);font-weight:700;text-decoration:underline;text-underline-offset:2px;">RTL 承接</a>）。
       </p>
       <div class="rail-foot" style="margin-top:14px;">
-        <b>三步对应的价值动作：</b>获客 = 发布第一个活动；小店 = 关联第一个供应商；首页 = 熟悉主干（价目表→员工→开单→流水→会员卡）。
-        <br><b>与门店动线：</b>第 1 步 = 引座；第 2、3 步 = 服务中。第 3 步庆祝成功并指出底部 TAB 还能去哪儿。
+        <b>价值动作：</b>获客 = 发布第一个活动；小店 = 关联第一个供应商；首页 = 熟悉主干；学习培训 = 进入课程首页。
+        <br><b>与门店动线：</b>第 1 步 = 引座；第 2、3 步 = 服务中。第 3 步庆祝成功并指出还能去哪儿。
       </div>
     </div>
 

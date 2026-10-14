@@ -1,0 +1,2750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 美业 SaaS 开单流程逐屏拆解</title>
+<style>
+  :root {
+    --pine: #1A3D34;
+    --pine-2: #234D42;
+    --sage: #3D6B5C;
+    --sand: #B08D57;
+    --sand-bg: #F5EFE3;
+    --bg: #F4F6F4;
+    --card: #FFFFFF;
+    --line: #DCE4DF;
+    --line-soft: #E8EEEA;
+    --ink: #24302C;
+    --ink-soft: #5A6B63;
+    --ink-faint: #8A9690;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cjk);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px 64px; min-width: 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(176, 141, 87, .18), transparent 55%),
+      linear-gradient(145deg, #14352E 0%, #1A3D34 48%, #1F4A3E 100%);
+    padding: 58px 0 50px;
+  }
+  .hero-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; color: #A8C4B6;
+  }
+  .kicker::before { content: ""; width: 24px; height: 2px; background: var(--sand); }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700; letter-spacing: 3px; color: #fff;
+    margin: 0; line-height: 1.3;
+  }
+  .hero h1 em { font-style: normal; color: #D4C4A0; }
+
+  /* ===== Section shell ===== */
+  section { margin-top: 44px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 12px; margin-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #fff; background: var(--pine-2);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; color: var(--pine-2); }
+  .sec-title span { font-size: 12.5px; font-weight: 500; color: var(--ink-faint); letter-spacing: .6px; margin-left: 10px; }
+  .sec-en { margin-left: auto; font-size: 11.5px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
+
+  /* ===== 说明条 ===== */
+  .note {
+    display: flex; gap: 11px; align-items: flex-start;
+    background: var(--sand-bg); border: 1px solid #E4D7BE;
+    border-radius: 12px; padding: 14px 17px;
+    font-size: 12.5px; color: #6E5630; line-height: 1.8;
+  }
+  .note b { color: #4A3A1C; font-weight: 600; }
+  .note-i {
+    flex: none; width: 19px; height: 19px; border-radius: 50%;
+    background: var(--sand); color: #fff; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .note code {
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11.5px;
+    background: rgba(176,141,87,.16); padding: 1px 5px; border-radius: 4px;
+  }
+
+  /* ===== 正文段落 ===== */
+  .pn { font-size: 13px; color: var(--ink-soft); line-height: 1.9; letter-spacing: .2px; }
+  .pn + .pn { margin-top: 9px; }
+  .pn b { color: var(--ink); font-weight: 600; }
+  .pn code, .mx code, ul.tk code {
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px;
+    background: #F1F6F3; color: var(--ink-soft); padding: 1px 5px; border-radius: 4px;
+  }
+
+  /* ===== 分部标题 ===== */
+  .part {
+    margin: 56px 0 6px; padding-bottom: 13px;
+    border-bottom: 3px solid var(--pine-2);
+  }
+  .part-hd { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 13px; }
+  .part-no {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12.5px; font-weight: 700; letter-spacing: 2px;
+    color: #fff; background: var(--pine-2);
+    padding: 4px 11px; border-radius: 5px;
+  }
+  .part-title { font-size: 21px; font-weight: 700; letter-spacing: 1.5px; color: var(--pine-2); }
+  .part-sub {
+    margin-top: 9px; max-width: 900px;
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.85; letter-spacing: .3px;
+  }
+  .part-sub b { color: var(--ink); font-weight: 600; }
+
+  /* ===== 进度 ===== */
+  .status-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .st {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 16px 13px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .st.is-done { border-color: #BFD5CB; background: #F7FBF9; }
+  .st.is-wait { border-style: dashed; background: #FAFBFA; }
+  .st-top { display: flex; align-items: center; gap: 8px; }
+  .st-name { font-size: 15px; font-weight: 700; letter-spacing: .8px; color: var(--ink); }
+  .st-tag {
+    margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    padding: 2px 9px; border-radius: 999px;
+  }
+  .st-tag.is-done { color: var(--sage); background: #E7F0EC; }
+  .st-tag.is-wait { color: #9A8A66; background: #F3EFE4; }
+  .st-desc { font-size: 11.5px; color: var(--ink-soft); line-height: 1.65; }
+  .st-meta { font-size: 10.5px; color: var(--ink-faint); font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+  /* ===== 链路步骤条 ===== */
+  .flow {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 8px; margin: 18px 0 4px;
+  }
+  .fl {
+    background: #FCFCFC; border: 1px solid var(--line-soft);
+    border-radius: 10px; padding: 11px 10px 10px;
+    position: relative;
+  }
+  .fl::after {
+    content: ""; position: absolute; right: -9px; top: 50%;
+    width: 9px; height: 1px; background: var(--line);
+  }
+  .fl:last-child::after { display: none; }
+  .fl-no {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--sand); margin-bottom: 4px; font-family: Georgia, serif;
+  }
+  .fl-name { font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .fl-desc { font-size: 10.5px; color: var(--ink-faint); line-height: 1.5; margin-top: 4px; }
+
+  /* ===== 截图（宽屏整窗实拍） ===== */
+  .shot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+  .shot { display: flex; flex-direction: column; min-width: 0; }
+  .shot-frame {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 7px;
+    box-shadow: 0 10px 26px rgba(26,61,52,.09);
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .shot:hover .shot-frame {
+    border-color: var(--sage);
+    box-shadow: 0 14px 34px rgba(26,61,52,.17);
+    transform: translateY(-3px);
+  }
+  .shot-screen {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #F5F7F9;
+    cursor: zoom-in;
+  }
+  /* 按图片自身比例排布，不做裁切 —— 全窗截图与局部截图都完整显示 */
+  .shot-screen img { display: block; width: 100%; height: auto; }
+  .shot-screen::after {
+    content: "点击放大";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 18px 8px 7px;
+    font-size: 10.5px; letter-spacing: 1px; text-align: center; color: #fff;
+    background: linear-gradient(to top, rgba(18,32,27,.66), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .shot:hover .shot-screen::after { opacity: 1; }
+
+  .shot-cap { margin-top: 10px; }
+  .shot-cap-t { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .3px; }
+  .shot-cap-t .no,
+  .lightbox-cap-t .no {
+    display: inline-block; margin-right: 7px;
+    font-family: Georgia, serif; font-size: 12px;
+    color: #fff; background: var(--sage);
+    width: 19px; height: 19px; line-height: 19px; text-align: center;
+    border-radius: 5px; vertical-align: 1px;
+  }
+  .shot-cap-d { font-size: 11.5px; color: var(--ink-faint); line-height: 1.65; margin-top: 4px; }
+  .shot-cap-d b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ===== 借鉴点 ===== */
+  .takeaway {
+    margin-top: 24px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 22px 16px;
+  }
+  .takeaway-h {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--pine-2); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .takeaway-h::before { content: "◆"; color: var(--sand); font-size: 11px; }
+  ul.tk { list-style: none; display: grid; gap: 8px; }
+  ul.tk li {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.8;
+    padding-left: 16px; position: relative;
+  }
+  ul.tk li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--sand); transform: rotate(45deg);
+  }
+  ul.tk li b { color: var(--ink); font-weight: 600; }
+
+  /* ===== 泳道 ===== */
+  .lane { margin-top: 24px; }
+  .lane-hd {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 12px;
+    padding-bottom: 9px; border-bottom: 2px solid var(--line);
+  }
+  .lane-no {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #fff; background: var(--pine-2);
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .lane-name { font-size: 15.5px; font-weight: 700; color: var(--pine-2); letter-spacing: .6px; }
+  .lane-ask { font-size: 12.5px; color: var(--ink-soft); }
+  .lane-count {
+    margin-left: auto; font-size: 11px; color: var(--ink-faint);
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  .shot-rail { display: grid; gap: 16px; margin-top: 16px; align-items: start; }
+  .shot-rail.is-2 { grid-template-columns: repeat(2, 1fr); }
+  .shot-rail.is-3 { grid-template-columns: repeat(3, 1fr); }
+  .shot-rail.is-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* 未触发卡 */
+  .miss {
+    border: 1.5px dashed #CBBFA6; background: #FCFAF4;
+    border-radius: 10px; padding: 13px 16px; margin-top: 14px;
+  }
+  .miss-h { font-size: 12.5px; font-weight: 700; color: #8A6A34; letter-spacing: .4px; }
+  .miss-b { font-size: 11.5px; color: #7A6A4E; line-height: 1.75; margin-top: 6px; }
+  .miss-b b { color: #6B5426; font-weight: 600; }
+
+  /* 待写入占位 */
+  .pend {
+    border: 1px dashed var(--line); background: #FAFBFA;
+    border-radius: 10px; padding: 12px 16px; margin-top: 14px;
+    font-size: 11.5px; color: var(--ink-faint); line-height: 1.75;
+  }
+  .pend b { color: var(--ink-soft); font-weight: 600; }
+
+  .lane .takeaway { margin-top: 16px; }
+
+  /* 枚举清单 */
+  .enum {
+    margin-top: 14px; border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden; background: #fff;
+  }
+  .enum-h {
+    padding: 10px 16px; font-size: 12px; font-weight: 700; color: #8A6A34;
+    background: #FCFAF4; border-bottom: 1px solid var(--line-soft);
+  }
+  .enum-row { display: flex; gap: 14px; padding: 11px 16px; border-top: 1px solid var(--line-soft); }
+  .enum-row:first-of-type { border-top: 0; }
+  .enum-k { flex: 0 0 156px; font-size: 11.5px; font-weight: 700; color: var(--pine-2); line-height: 1.9; }
+  .enum-k em { font-style: normal; font-weight: 500; color: var(--ink-faint); font-size: 10.5px; }
+  .enum-v { flex: 1; display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
+  .enum-v span {
+    font-size: 11px; color: var(--ink-soft); background: #F1F6F3;
+    border-radius: 4px; padding: 2px 7px; line-height: 1.6;
+  }
+  .enum-v span.is-default { background: var(--sand-bg); color: #7A5E22; font-weight: 600; }
+  @media (max-width: 620px) {
+    .enum-row { flex-direction: column; gap: 6px; }
+    .enum-k { flex: none; }
+  }
+
+  @media (max-width: 900px) {
+    .shot-rail.is-3, .shot-rail.is-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .shot-rail.is-2, .shot-rail.is-3, .shot-rail.is-4 { grid-template-columns: 1fr; }
+  }
+
+  .mx-wrap { overflow-x: auto; margin-top: 16px; }
+  .mx { width: 100%; border-collapse: collapse; min-width: 780px; }
+  .mx th, .mx td {
+    border: 1px solid var(--line);
+    padding: 9px 12px; font-size: 12.5px;
+    text-align: left; vertical-align: top;
+  }
+  .mx thead th {
+    background: var(--pine-2); color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .mx tbody th {
+    background: #F7FAF8; font-weight: 700; color: var(--ink);
+    white-space: nowrap; font-size: 12px;
+  }
+  .mx td { color: var(--ink-soft); line-height: 1.7; }
+  .mx td b { color: var(--ink); font-weight: 600; }
+  .mx .is-pending { color: #B5A98C; background: #FCFAF5; }
+  .mx .is-pending::after { content: "待采集"; font-size: 10.5px; }
+
+  /* ===== 待采集 ===== */
+  .todo {
+    border: 1px dashed #D6C9AC; background: #FCFAF5;
+    border-radius: 12px; padding: 16px 20px;
+  }
+  .todo-h { font-size: 13px; font-weight: 700; color: #8A6A34; margin-bottom: 8px; }
+  ul.td { list-style: none; display: grid; gap: 6px; }
+  ul.td li { font-size: 12.5px; color: #7A6640; line-height: 1.75; padding-left: 15px; position: relative; }
+  ul.td li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 1px;
+    background: #C9B98A; transform: rotate(45deg);
+  }
+  ul.td li b { color: #5A4A28; font-weight: 600; }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(14,22,19,.86);
+    backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    width: min(1500px, 96vw);
+    max-height: 94vh;
+    display: flex; flex-direction: column;
+    align-items: stretch;
+  }
+  .lightbox-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .lightbox-inner img {
+    display: block; max-width: 100%; max-height: 68vh;
+    width: auto; height: auto;
+    object-fit: contain; border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45); background: #fff;
+  }
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%;
+    border: none; cursor: pointer; z-index: 2;
+    background: rgba(14,22,19,.55); color: #fff;
+    font-size: 25px; line-height: 1; padding-bottom: 3px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .22s, transform .22s;
+    box-shadow: 0 4px 18px rgba(0,0,0,.3);
+  }
+  .lightbox-nav:hover { background: var(--pine-2); }
+  .lightbox-prev { left: 14px; }
+  .lightbox-next { right: 14px; }
+  .lightbox-panel {
+    margin-top: 14px; flex: 1 1 auto; min-height: 0;
+    display: flex; flex-direction: column;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px; padding: 13px 18px 14px;
+  }
+  .lightbox-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    padding-bottom: 9px; border-bottom: 1px solid rgba(255,255,255,.13);
+  }
+  .lightbox-cap-t { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: .3px; }
+  .lightbox-idx {
+    margin-left: auto; font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11.5px; letter-spacing: 1px; color: rgba(255,255,255,.5);
+  }
+  .lightbox-cap {
+    margin-top: 9px; overflow-y: auto; flex: 1 1 auto;
+    font-size: 12.5px; line-height: 1.8; letter-spacing: .2px;
+    color: rgba(255,255,255,.78);
+  }
+  .lightbox-cap b { color: #fff; font-weight: 600; }
+  .lightbox-cap code {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11.5px; background: rgba(255,255,255,.14);
+    padding: 1px 5px; border-radius: 4px;
+  }
+  .lightbox-close {
+    position: absolute; top: -42px; right: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: none; cursor: pointer;
+    background: rgba(255,255,255,.16); color: #fff;
+    font-size: 19px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,.3); }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 52px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 12px; color: var(--ink-faint); letter-spacing: 1.5px;
+  }
+  .footer .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sand); display: inline-block; margin-right: 8px; }
+
+  @media (max-width: 900px) {
+    .flow { grid-template-columns: repeat(2, 1fr); }
+    .fl::after { display: none; }
+    .shot-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .lightbox { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>美业 SaaS <em>开单流程</em> 逐屏拆解</h1>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===================== PART 1 ===================== -->
+  <div class="part">
+    <div class="part-hd">
+      <span class="part-no">PART 1</span>
+      <span class="part-title">开单流程逐屏实录</span>
+      <span class="sec-en">Boka 8 · Meiguanjia · Meiwen</span>
+    </div>
+    <p class="part-sub">
+      以「一次开单」为统一任务，逐屏还原三家的开单界面与交互动作 —— 从入口、加项、派工，到收款与收尾。
+      三家各自独立成章，只讲开单流程本身。
+    </p>
+  </div>
+
+  <!-- ===================== 01 博卡8 ===================== -->
+  <section id="boka8">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">博卡8<span>收银 · 单据式开单</span></h2>
+      <span class="sec-en">Boka 8 · gl.boka.vc</span>
+    </div>
+
+
+    <div class="flow">
+      <div class="fl">
+        <div class="fl-no">01</div>
+        <div class="fl-name">进入收银与建单</div>
+        <div class="fl-desc">入口 · 单据信息</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">02</div>
+        <div class="fl-name">认这个人是谁</div>
+        <div class="fl-desc">顾客识别 · 建档</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">03</div>
+        <div class="fl-name">这次消费什么</div>
+        <div class="fl-desc">项目 · 产品 · 消耗</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">04</div>
+        <div class="fl-name">谁来做 · 在哪做</div>
+        <div class="fl-desc">员工 · 工位指派</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">05</div>
+        <div class="fl-name">卖多少钱 · 怎么收</div>
+        <div class="fl-desc">折扣 · 支付方式</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">06</div>
+        <div class="fl-name">挂单 · 收款 · 收尾</div>
+        <div class="fl-desc">暂存 · 结账 · 善后</div>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 01 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">01</span>
+        <span class="lane-name">进入收银与建单</span>
+        <span class="lane-ask">用户怎么找到开单入口？一张单据要先交代什么？</span>
+        <span class="lane-count">11 张</span>
+      </div>
+
+      <div class="shot-rail is-3">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-01-entry-home.png" alt="博卡8 首页快捷菜单中的收银入口" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>入口 A · 首页快捷菜单</div>
+            <div class="shot-cap-d">工作台铺了一行快捷菜单，<b>「收银」在列</b>，登录第一屏即可开单。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-02-entry-submenu.png" alt="博卡8 现场管理二级菜单展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>入口 B · 现场管理二级菜单</div>
+            <div class="shot-cap-d">正式入口在「现场管理」下共 11 项，<b>「收银」排第一</b>。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-03-cashier-list.png" alt="博卡8 收银列表页" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>收银列表 · 单据即列表</div>
+            <div class="shot-cap-d">
+              开单起点是列表上的<b>「添加(Alt + A)」</b>，不是空白表单。列表已铺 <b>13 列</b>，
+              含「服务人员」与「座位号」—— 座位号从这里来，不在开单表单里。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-A4-status-filter.png" alt="博卡8 收银列表状态筛选展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>状态筛选 · 四种生命周期</div>
+            <div class="shot-cap-d">
+              全部 / 待结账 / 已结账 / 已作废。筛选<b>挂在表头图标上</b>，不是独立筛选栏 —— 省空间，但不好找。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-A4-source-filter.png" alt="博卡8 收银列表来源筛选展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>来源 · 9 个渠道 + 全部</div>
+            <div class="shot-cap-d">
+              管理中心8 / 智慧前台8 / 员工端8 / 营销平台 / <b>座位码</b> / 小店通小程序 / 营销平台预定 / 省心贴 / 管理中心7。
+              这一栏等于把门店全部下单触点一次摊开。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-B6b-stale-bills-clean.png" alt="博卡8 开单前的历史待结账单提醒" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>开单即提醒 · 历史待结账单</div>
+            <div class="shot-cap-d">
+              进开单页先弹「当前门店有 <b>3 笔非今日的待结账收银单</b>」，按日期分组，可「查看」或「今天不再提醒」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-04-form-empty.png" alt="博卡8 开单表单空态" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">7</span>单据表单 · 空态</div>
+            <div class="shot-cap-d">单号、当天日期、客数、姓名「散客」全部预置，<b>零填写即可开单</b>。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-B2-channel-dropdown.png" alt="博卡8 进店渠道下拉展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">8</span>进店渠道 · 8 项</div>
+            <div class="shot-cap-d">
+              默认「新客」。<b>一旦选中会员，自动改判为「老客」</b> —— 渠道跟着顾客身份走，不需要人手改。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-B4-accountdate-calendar.png" alt="博卡8 账务日期日历展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">9</span>账务日期 · 可回改</div>
+            <div class="shot-cap-d">默认当天，但可回改到历史日期，为补录留了口子。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-B3b-customer-split-with-items.png" alt="博卡8 客户分配弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">10</span>客数分配 · 有门槛</div>
+            <div class="shot-cap-d">
+              「拆分」默认禁用，<b>客数 ≥ 2 才亮起</b>；弹窗内按项目列出待分配行。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-B5-billno-edit.png" alt="博卡8 收银单号编辑态" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">11</span>收银单号 · 可清空</div>
+            <div class="shot-cap-d">单号可编辑，<b>清空后无任何校验提示</b> —— 一个真实的风险点。</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>开单落点选在「列表」而不是空白表单。</b>挂单 / 取单天然成立，多端来单能续做，也不用先想好给谁开。</li>
+          <li><b>用默认值换零填写，而不是砍字段。</b>字段面极宽，但高频场景被预置值压到几次击键。</li>
+          <li><b>开单前主动提醒历史待结账单。</b>还带「今天不再提醒」，既堵漏又不烦人 —— 这个值得直接抄。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 02 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">02</span>
+        <span class="lane-name">认这个人是谁</span>
+        <span class="lane-ask">顾客怎么识别？选中之后系统自动做了什么？</span>
+        <span class="lane-count">7 张</span>
+      </div>
+
+      <div class="shot-rail is-3">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C2-member-search-phone.png" alt="博卡8 会员关键字联想下拉" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>关键字联想 · 手机号</div>
+            <div class="shot-cap-d">输入「1」即列出近期会员，带编号、姓名、脱敏手机号与所属门店。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C2b-member-search-name.png" alt="博卡8 会员姓名联想下拉" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>同一个框 · 姓名也走它</div>
+            <div class="shot-cap-d">
+              输入「王」精确过滤到 2 条。旁边的「姓名」框<b>不参与搜索</b> —— 手机号与姓名共用一个关键字框。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C5b-member-filled-clean.png" alt="博卡8 选中会员后的信息回填" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>选中回填 · 一屏给足</div>
+            <div class="shot-cap-d">
+              姓名、脱敏手机、会员等级、储值余额（<b>储值 ¥854 / 赠金 ¥99</b>）、权益折扣 9 折、
+              品项 2 / 套餐 0 / 抵用券 0，全在顾客卡片里。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C6-member-benefits-modal.png" alt="博卡8 会员权益弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>自动弹窗 A · 会员权益</div>
+            <div class="shot-cap-d">
+              <b>选中会员即自动弹出</b>，不需要点。品项 Tab 列出「本次消费 / 销售金额 / 剩余金额」，可直接勾选本次要消耗的品项。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C6b-benefits-coupon-tab.png" alt="博卡8 会员权益抵用券 Tab" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>四类权益 · 抵用券 Tab</div>
+            <div class="shot-cap-d">同一弹窗分储值权益 / 品项 / 套餐 / 抵用券四类。此会员抵用券为空，给出空态。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C6c-member-memo-prompt.png" alt="博卡8 会员备注浮层" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>自动弹窗 B · 会员备注</div>
+            <div class="shot-cap-d">
+              与「会员权益」<b>同时叠出，两层遮罩叠加</b>。取消即跳过，不阻塞开单。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-C8-member-picker-modal.png" alt="博卡8 选择会员弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">7</span>选择会员 · 独立弹窗</div>
+            <div class="shot-cap-d">
+              顾客信息区左上图标打开。支持<b>精准匹配 / 模糊匹配</b>两种搜索模式，比行内联想更适合找老客。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>选中即自动弹权益，把「能用什么」前置到开单瞬间。</b>是主动提醒而不是让收银员自己去查 —— 这一步能直接带来权益消耗。</li>
+          <li><b>一键搜索，接受简单。</b>手机号与姓名共用一个框，没有分栏、没有高级搜索。代价是<b>没有新建顾客档案入口</b>，新客只能先当散客。</li>
+          <li><b>权益出口形态不统一，且会跳出开单页。</b>购买权益跳「卖卡充值」、会员资料跳会员中心、券码核销开平台弹窗 —— 三种形态并存，跳转会丢未保存的编辑。我们做的话应该收敛成弹窗内完成。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 03 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">03</span>
+        <span class="lane-name">这次消费什么</span>
+        <span class="lane-ask">项目怎么加进来？产品与消耗怎么处理？</span>
+        <span class="lane-count">3 张</span>
+      </div>
+
+      <div class="shot-rail is-3">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-D1-project-inline-search.png" alt="博卡8 项目行内联想搜索" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>加项 · 行内 autocomplete</div>
+            <div class="shot-cap-d">输入即出联想，带分类头「护理」与价格 ¥160。选中直接建行，不弹窗。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-D5-product-tab.png" alt="博卡8 产品 Tab" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>产品 (Alt + 2)</div>
+            <div class="shot-cap-d">
+              独立 Tab，列为<b>领取方式 / 第1销售·业绩(%) / 第2销售·业绩(%) / 仓库</b> —— 卖实物比卖服务多一层库存与归属。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-D6-consume-tab.png" alt="博卡8 产品消耗 Tab" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>产品消耗 (Alt + 3)</div>
+            <div class="shot-cap-d">
+              第三个 Tab，列为<b>对应项目 / 消耗方式 / 消耗产品 / 领用人 / 仓库</b> —— 做项目时顺手扣掉耗材。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>三类货品分 Tab，不混一张表。</b>项目 / 产品 / 消耗各占一个 Tab，列头完全不同；代价是要靠 Alt+1/2/3 切换，新手不易发现。</li>
+          <li><b>加项是行内联想，不是弹窗。</b>少一次弹层往返，适合输编号的老手；<b>但没法批量勾选</b>，连加五个项目要搜五次。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 04 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">04</span>
+        <span class="lane-name">谁来做 · 在哪做</span>
+        <span class="lane-ask">选中一个员工，系统要连带确认哪些事？</span>
+        <span class="lane-count">4 张 · 1 项未触发</span>
+      </div>
+
+      <div class="shot-rail is-3">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-E1-staff-picker-modal.png" alt="博卡8 选择员工弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>选择员工 · 独立弹窗</div>
+            <div class="shot-cap-d">
+              不是下拉，是弹窗。按<b>职称 + 关键字</b>筛选，八个字段全展示（编号 / 工号 / 姓名 / 性别 / 部门 / 职位 / 职称 / 所属门店）。
+              底部三个开关，<b>「隐藏未在职、离职、停用员工」默认勾选</b>。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-E5-staff-assigned.png" alt="博卡8 指派大工后的明细行" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>指派完成 · 四工并列</div>
+            <div class="shot-cap-d">
+              「婉清」回填大工列后，该列自动带出<b>服务类型</b>（默认轮牌/B客）与<b>虚业绩 · 提成</b>。
+              大 / 中 / 小 / 四工四列常驻，加人只需填一格。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-E4-same-staff-no-check.png" alt="博卡8 同一人重复指派无校验" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>重复指派 · 零校验</div>
+            <div class="shot-cap-d">
+              把同一人同时填进大工与中工，<b>无任何提示、无拦截</b>。详情页照单渲染为「大工：婉清 / 中工：婉清 | 轮牌/B客」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-E5b-two-staff-one-item.png" alt="博卡8 同一个项目行同时挂两名不同技师" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>一个项目 · 两名不同技师</div>
+            <div class="shot-cap-d">
+              <b>这是「多人服务同一个项目」的落地形态。</b>同一行「深层清洁毛孔呼吸」，<b>大工＝晓萱、中工＝婉清</b>，两人在不同列各自记一份服务类型与业绩 · 提成；
+              项目和金额仍只有一份（标准价格 ￥160）。加第二个人不用新增单据行，直接在右侧空列再点一次图标即可。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="miss">
+        <div class="miss-h">未能触发 · E6 工位 / 座位号</div>
+        <div class="miss-b">
+          开单表单全页两轮关键词扫描（座位 / 工位 / 床位 / station / seat），<b>命中 0</b>。
+          但收银列表的「来源」筛选里确实存在 <b>「座位码」</b> 渠道，且列表有「座位号」列 —— 指向工位是随预约单或座位码带入，而非开单时手选。
+          <b>结论：博卡8 开单链路不含独立选工位环节。</b>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>选择器带「数据卫生」开关。</b>默认勾选「隐藏未在职 / 离职 / 停用员工」，避免把离职员工开进单里 —— 低成本、高价值的防错设计。</li>
+          <li><b>四工并列而非动态增删。</b>大 / 中 / 小 / 四工四列常驻，加人只填一格，比「+ 添加服务人员」少一次点击；代价是宽度被锁死，每列只剩 130px。</li>
+          <li><b>重复指派不设校验。</b>同一人可同时挂大工与中工且无提示 —— 效率优先、容错差，正是我们能做出差异的地方。</li>
+          <li><b>多人共担一个项目，用「并列列」而不是「拆行」。</b>两名技师服务同一项目时，项目行不复制、金额不重复计价，各自只在自己的列里记服务类型与业绩 —— 这点值得抄；但第二个人只能塞进固定空列，列宽被锁在 130px，姓名稍长就被截断。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 05 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">05</span>
+        <span class="lane-name">卖多少钱 · 怎么收</span>
+        <span class="lane-ask">价格、折扣、支付方式怎么定？谁来定？</span>
+        <span class="lane-count">4 张 · 枚举已录</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-F3-discount-8-applied.png" alt="博卡8 手工改折扣后的联动" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>手工改折扣 · 联动</div>
+            <div class="shot-cap-d">折扣改 <b>8</b>，实收 160 → <b>128</b>，拆分金额保持 160。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-D2b-item-row-member-autodiscount.png" alt="博卡8 会员权益自动套用折扣与支付方式" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>会员权益自动套 · 零操作</div>
+            <div class="shot-cap-d">
+              选了带 9 折储值权益的会员后再加项，系统<b>自动把支付方式切成「储值支付」、折扣自动填 9、实收 160 → 144</b>，用户一个键都没按。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 这两张是局部截图，比例较宽，单独整幅铺开以便读清 -->
+      <div class="shot-rail">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-F4-paymethod-dropdown.png" alt="博卡8 支付方式下拉展开" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>支付方式 · 散客态 14 项</div>
+            <div class="shot-cap-d">
+              「支付方式」是原生 <code>select</code>，展开层由浏览器进程绘制。散客单上只列 <b>14 项</b>，
+              每项带键盘热键前缀：<code>1-现金</code>、<code>FB-支付宝</code>、<code>X-微信支付</code>、<code>SF-银联云闪付</code>、
+              <code>B6-博卡POS机</code>、<code>0-内调</code>、<code>8-经理签单</code>、<code>KB-口碑支付</code>、<code>D-微店支付</code>、
+              <code>MT-美团支付</code>、<code>DY-抖音支付</code>、<code>DBT-京东白条</code>、<code>KS-快手支付</code>、<code>GDYD-高德云店</code>。
+              <b>依赖会员的 6 项（品项支付 / 储值支付 / 套餐支付 / 签单挂账 / 抵用券（会员）/ 赠金支付）在散客单上不出现</b>，
+              同一控件挂上会员后是 20 项（见下方枚举）—— 选项列表随单据上下文增删，而不是一次性铺满。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-F5-split-amount.png" alt="博卡8 拆分金额行内编辑器" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>拆分金额 · 应收与实收分开拆</div>
+            <div class="shot-cap-d">
+              明细行里还有一层<b>「拆分金额」</b>：<code>应收 ⊙ 实收</code> 二选一切换，输入「应收拆分金额」后点「确定」。
+              也就是单个项目行能拆成多份分别落账，与同一行的支付方式配合 —— <b>一个项目走多种收款</b>在这一行里同时有入口。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="enum">
+        <div class="enum-h">原生下拉 · 枚举已从 DOM 逐项读出（付款方式已有展开实拍，见上图）</div>
+        <div class="enum-row">
+          <div class="enum-k">付款方式<em> · 会员在单 20 项 / 散客 14 项</em></div>
+          <div class="enum-v">
+            <span>现金</span><span>支付宝</span><span>微信支付</span><span>银联云闪付</span><span>博卡POS机</span>
+            <span>品项支付</span><span class="is-default">储值支付 · 默认</span><span>套餐支付</span><span>内调</span><span>经理签单</span>
+            <span>签单挂账</span><span>抵用券（会员）</span><span>口碑支付</span><span>微店支付</span><span>美团支付</span>
+            <span>抖音支付</span><span>赠金支付</span><span>京东白条</span><span>快手支付</span><span>高德云店</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">服务类型<em> · 4 类大工/中工/小工/四工各一份</em></div>
+          <div class="enum-v">
+            <span>点牌/A客</span><span class="is-default">轮牌/B客 · 默认</span><span>补工/返工</span><span>内创</span><span>外创</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">营业所属<em> · 7 项</em></div>
+          <div class="enum-v">
+            <span>请选择</span><span>销售部</span><span>管理部</span><span class="is-default">美容部 · 默认</span><span>美发部</span><span>按摩部</span><span>足疗部</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">进店渠道<em> · 8 项（泳道 01）</em></div>
+          <div class="enum-v">
+            <span class="is-default">新客 · 默认</span><span>朋友介绍</span><span>广告传单</span><span>微信</span><span>支付宝</span><span>抖音</span><span>博卡会员通</span><span>美团团购引流</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">收银单来源<em> · 9 个渠道 + 全部</em></div>
+          <div class="enum-v">
+            <span class="is-default">全部 · 默认</span><span>管理中心8</span><span>智慧前台8</span><span>员工端8</span><span>营销平台</span><span>座位码</span><span>小店通小程序</span><span>营销平台预定</span><span>省心贴</span><span>管理中心7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pend">
+        <b>视觉覆盖情况。</b><b>付款方式</b>已有展开态实拍（见上）。
+        <b>服务类型</b>与<b>营业所属</b>的<b>文字枚举已逐项补全</b>（见上），但原生弹层不在页面渲染面内，
+        自动化截图工具拿不到 —— 已实测验证：点击前后同一区域<b>逐像素零差异</b>。这两处的视觉留档待补。
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>会员权益是「自动套用」而不是「手动勾选」。</b>省事，但用户未必意识到钱已经变了 —— 折扣自动填进去时应该给一个显式提示。</li>
+          <li><b>八个字段铺在一行。</b>信息密度换判断效率，改折扣的同时能看见实收、支付方式与营业所属。</li>
+          <li><b>明细行自带「拆分金额」。</b>单个项目行也能拆成多份分别落账，一个项目走多种收款不用另开单 —— 这种「拆分发生在行上、而不是发生在单据上」的做法值得抄。</li>
+          <li><b>支付方式列表随单据上下文增删。</b>散客单 14 项、会员在单 20 项，依赖会员的方式（储值 / 套餐 / 抵用券 / 赠金）在散客态直接不出现。比「全部铺满再置灰」更省判断成本。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 06 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">06</span>
+        <span class="lane-name">挂单 · 收款 · 收尾 · 全局</span>
+        <span class="lane-ask">单子怎么暂存、怎么结账、事后怎么改？</span>
+        <span class="lane-count">9 张</span>
+      </div>
+
+      <div class="shot-rail is-3">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G3-empty-bill-validation.png" alt="博卡8 空单点收款被拦截" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>空单拦截</div>
+            <div class="shot-cap-d">没有项目就点收款 → 「请录入单据内容」。<b>拦截只针对空单</b>，有内容就一路放行。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G1-hold-bill-success.png" alt="博卡8 挂单成功返回列表" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>挂单 · Alt + D</div>
+            <div class="shot-cap-d">挂单后<b>自动回到列表</b>并提示「挂单成功」，单据留在列表里等取单。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G2-pick-bill-resume.png" alt="博卡8 取单恢复挂起的单据" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>取单 · 回到原单</div>
+            <div class="shot-cap-d">列表点「取单」恢复编辑，<b>单号不变</b>，接着上次继续。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G4-settle-preview-page.png" alt="博卡8 收款后直达单据详情" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>收款即结账 · 零确认</div>
+            <div class="shot-cap-d">
+              <b>没有二次确认，也没有支付方式选择窗口</b> —— 点「收款」直接结账并落到单据详情。
+              支付方式是在明细行里预先选好的。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G6-void-confirm.png" alt="博卡8 作废二次确认" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>作废 · 有二次确认</div>
+            <div class="shot-cap-d">
+              与收款相反，作废<b>有确认弹窗</b>：「确定作废当前单据吗？」。不可逆的操作才拦一次。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G6b-voided-detail.png" alt="博卡8 作废后的单据详情" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>作废后 · 状态与出口</div>
+            <div class="shot-cap-d">状态变为「已作废」，同时给出「重新结账」的出口，不是死胡同。</div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G7-recheck-edit-page.png" alt="博卡8 重新结账打开编辑页" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">7</span>重新结账 · 回到编辑页</div>
+            <div class="shot-cap-d">
+              打开已结账单的编辑页（/bill/cash/edit），改完可重结 —— <b>已结账的单仍然可改</b>。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-G8-edit-staff-modal.png" alt="博卡8 修改服务人员弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">8</span>修改服务人员 · 事后改人</div>
+            <div class="shot-cap-d">
+              详情页弹窗里可改大小工、服务类型、营业所属，并直接显示<b>业绩与提成</b>。
+              服务类型在这里是可视图元，正好补上泳道 04 抓不到的展开态。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-08-shortcuts.png" alt="博卡8 快捷键说明面板" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">9</span>全局 · 快捷键面板</div>
+            <div class="shot-cap-d">
+              右上角常驻入口，Windows / MacOS 双列共 <b>12 组键位</b>：添加 Alt+A、散客 Alt+Z、项目 Alt+1、产品 Alt+2、
+              消耗 Alt+3、备注 Alt+4、挂单 Alt+D、收款并继续 Alt+C、查找 Alt+F。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>收款零确认，是效率也是风险。</b>支付方式提前落在明细行，所以结账不需要再问一次；但误触会直接产生财务凭证。反过来，<b>作废要确认</b> —— 这个「可逆的快、不可逆的慢」的分寸拿得很准，值得抄。</li>
+          <li><b>挂单 / 取单闭环完整且单号不变。</b>配合开单入口落在列表，多端来单能无缝续做。</li>
+          <li><b>收尾能力全部挂在详情页。</b>改人、重算业绩、作废、重结都在一处，不用回列表找 —— 已结账的单也允许修改。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 02 美管加 ===================== -->
+  <section id="meiguanjia">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">美管加<span>小掌柜 · 收银台开单</span></h2>
+      <span class="sec-en">Meiguanjia · young.meiguanjia.net</span>
+    </div>
+
+
+    <div class="flow">
+      <div class="fl">
+        <div class="fl-no">01</div>
+        <div class="fl-name">进入工位 · 收银台</div>
+        <div class="fl-desc">宫格 · 工位池</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">02</div>
+        <div class="fl-name">认人 · 会员搜索</div>
+        <div class="fl-desc">搜索 · 命中</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">03</div>
+        <div class="fl-name">加项 · 宫格点选</div>
+        <div class="fl-desc">分类 · 加单</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">04</div>
+        <div class="fl-name">派工 · 三工位</div>
+        <div class="fl-desc">工位列 · 指派</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">05</div>
+        <div class="fl-name">结算 · 整页支付</div>
+        <div class="fl-desc">支付方式 · 签名</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">06</div>
+        <div class="fl-name">收尾 · 流水与挂单</div>
+        <div class="fl-desc">台账 · 并单</div>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 01 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">01</span>
+        <span class="lane-name">进入工位 · 收银台就是开单台</span>
+        <span class="lane-ask">没有「新建单据」按钮的话，单子从哪来？</span>
+        <span class="lane-count">2 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-A1-cashier-home.png" alt="美管加 小掌柜 收银台全貌" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>收银台 · 三栏工作站</div>
+            <div class="shot-cap-d">
+              左：9 个一级入口竖排。<b>中</b>：分类药丸（剪发 / 烫发 / 染发 / 护理 / 直发 / 全部）+ 项目宫格，每个卡片带价格与编号。
+              <b>右</b>：第一 / 第二 / 第三工位的员工池，每个人带工号（101 刘开文、201 卫飞…）。
+              右下角常驻「挂单」「结 算」，并标注<b>回车键 ×3 次 = 结算</b>。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-C1-item-added.png" alt="美管加点选项目后宫格开单" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>点一下项目，单子就长出来</div>
+            <div class="shot-cap-d">
+              宫格卡片<b>单击即入单</b>，单据表出现「项目 / 价格 / 第一工位 / 第二工位 / 第三工位」列，
+              金额实时进右下角合计。没有弹窗、没有二次确认，也没有「添加」按钮。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== 泳道 02 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">02</span>
+        <span class="lane-name">认人 · 搜索会员并读到全部余额</span>
+        <span class="lane-ask">收银员要几次操作才能确认「这个人是谁、有什么权益」？</span>
+        <span class="lane-count">4 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-B1-member-search.png" alt="美管加选择会员整页搜索" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>选择会员 · 整页而非弹窗</div>
+            <div class="shot-cap-d">
+              搜索会员是<b>整页</b>，不是弹层。顶部有「会员开单 / 本店 / 分店」切换，
+              结果行直接摊开余额、套餐、赠金与折扣（见第 5 张），一屏完成「认人」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-B1b-inline-member-search.png" alt="美管加屏幕小键盘输入手机号" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>手机号走屏幕小键盘</div>
+            <div class="shot-cap-d">
+              输入框标 <code>readonly</code>，键盘弹层由页面自己绘制（数字键带 <code>data-val</code>，backspace / clear / confirm 齐全）。
+              触摸优先，代价是桌面端每输一次手机号要多一次点击。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-B4-member-card-found.png" alt="美管加搜索命中会员卡" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>命中 · 一张卡说清全部余额</div>
+            <div class="shot-cap-d">
+              结果行直接摊开：<b>余额 ￥754 / 套餐 ￥0 / 赠金 ￥52 / 折扣 0 折</b>，并标明「莲安东路店(本店)」。
+              旁边挂着「在分店搜索」「在冻结顾客中搜索」——把跨店与冻结客户也放进同一次搜索。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-B6-member-on-bill-memberprice.png" alt="美管加会员上单后自动改价" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>会员上单 · 单价被悄悄改写</div>
+            <div class="shot-cap-d">
+              同一行项目，宫格里标 ￥58，单据里变成 <b>￥48</b>；会员名「周甜（800元）」进左侧会员位，合计随之变为 ￥48。
+              <b>这是一次自动改价，界面上没有任何「已套用会员价」的提示。</b>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== 泳道 03 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">03</span>
+        <span class="lane-name">加项 · 宫格点选</span>
+        <span class="lane-ask">加一个项目要几次操作？</span>
+        <span class="lane-count">已并入泳道 01</span>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 04 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">04</span>
+        <span class="lane-name">派工 · 三个工位常驻成列</span>
+        <span class="lane-ask">谁做这一项，是开单时定还是收银时补？</span>
+        <span class="lane-count">4 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-D1-staff-assigned.png" alt="美管加工位指派员工" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">7</span>派工 · 选中行再选人</div>
+            <div class="shot-cap-d">
+              右侧员工池按工位分组，员工条显示工号 + 姓名（101 刘开文 / 201 卫飞 / 202 张方良 …），
+              池子里还带一个 <code>delserver</code> 删除位，说明指派可撤销。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-D2-bill-member-staff.png" alt="美管加会员加项目加工位的完整单据" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">8</span>一张完整的单 · 人货工位齐</div>
+            <div class="shot-cap-d">
+              会员、项目、金额、三个工位的指派同屏——<b>左侧会员位「周甜（800元）」，中间单据行带价格与三工位列，右侧员工池高亮当前指派</b>。
+              一屏之内把「谁买、买什么、谁来做」全部交代完，不需要来回切页。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-D3-one-item-two-staff.png" alt="美管加同一项目行挂两名服务人员" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">9</span>一个项目 · 两名服务人员</div>
+            <div class="shot-cap-d">
+              <b>这是「多人服务同一个项目」的落地形态。</b>同一行「女士剪发 ￥58」的第一工位里连挂两人：
+              表格单元格显示<b>「刘开文 ＋ 2」</b>（首位姓名 + 人数徽标），右侧员工池里 <b>101 刘开文</b> 与 <b>201 卫飞</b> 同时高亮。
+              第二个人被折叠进同一个单元格，且金额不重复计价 —— 视野干净，代价是要点开才看得见另一个人。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 局部截图较宽，单独整幅铺开以便读清 -->
+      <div class="shot-rail">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-D4-set-performance-modal.png" alt="美管加请设置业绩弹层按占比分配" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">10</span>设置业绩 · 按工位摊占比</div>
+            <div class="shot-cap-d">
+              派工之后还有一步<b>「请设置业绩」</b>弹层，把这一行的钱按人分掉：列为 <b>姓名 / 占比 / 价格 / 业绩</b>，
+              行按<b>第一工位 / 第二工位 / 第三工位</b>列出，占比默认<b>按人数平摊</b>（三人各 <code>33.333</code>，价格 ￥58），
+              底部「确定 / 返回」。<b>业绩分配是挂在工位上的独立一步</b>，不是派人时顺带填的一个字段。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== 泳道 05 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">05</span>
+        <span class="lane-name">结算 · 独立整页 + 9 种支付 + 电子签名</span>
+        <span class="lane-ask">收钱这一步，信息够不够一次做完？</span>
+        <span class="lane-count">4 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-E1-settle-pay-page.png" alt="美管加结算支付整页" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">11</span>结算页 · 支付方式一屏铺开</div>
+            <div class="shot-cap-d">
+              九个方式都带<b>数字热键</b>：会员卡 0 / 赠送金 1 / 现金 2 / 银联 3 / 微信 4 / 支付宝 5 / 点评 6 / 商场卡 7 / 代金券 8，
+              外加「混合支付」与「快捷支付方式配置」。会员卡与赠送金直接显示可用余额（￥754 / ￥52）。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-E2-membercard-pay-expanded.png" alt="美管加会员卡支付展开面板" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">12</span>选会员卡 · 原地展开不跳页</div>
+            <div class="shot-cap-d">
+              展开后给出「本次消费正在使用此会员卡」「卡金结算 48 元」与卡号，并同时亮明余额 ￥754、赠送金 ￥52。
+              底部是「结算签字 / 自动打印小票 / 不发送短信和微信消息」三个勾选项。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-E3-signature-pad-blocking.png" alt="美管加结算电子签名浮层" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">13</span>电子签名 · 默认开启且阻塞结算</div>
+            <div class="shot-cap-d">
+              全屏手写板覆盖整个内容区，底部三键：<b>清除重签 / 保存签名 / 改日再签</b>。
+              只要「结算签字」是勾选状态，点「结 算」与连按回车都不会提交 —— 必须签名或显式选择「改日再签」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-E4-settled-cleared.png" alt="美管加结算完成后收银台回到零态" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">14</span>结算完成 · 自动回零</div>
+            <div class="shot-cap-d">
+              单子结清后收银台<b>自动清空</b>：合计 ￥0、会员位回「散客」、单据表清行，
+              不需要再点一次「新建」—— 结完自动回到零态，直接开下一单。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="enum">
+        <div class="enum-h">支付方式 · 从结算页 DOM 逐项读出（每个方式带数字热键）</div>
+        <div class="enum-row">
+          <div class="enum-k">支付方式<em> · 9 项 + 混合支付</em></div>
+          <div class="enum-v">
+            <span class="is-default">会员卡 · 热键 0</span><span>赠送金 · 1</span><span>现金 · 2</span><span>银联 · 3</span>
+            <span>微信 · 4</span><span>支付宝 · 5</span><span>点评 · 6</span><span>商场卡 · 7</span><span>代金券 · 8</span>
+            <span>混合支付</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">项目分类<em> · 药丸切档</em></div>
+          <div class="enum-v">
+            <span class="is-default">全部</span><span>剪发</span><span>烫发</span><span>染发</span><span>护理</span><span>直发</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">结算页开关<em> · 4 项</em></div>
+          <div class="enum-v">
+            <span class="is-default">计客次 · 默认开</span><span class="is-default">结算签字 · 默认开</span><span>自动打印小票 · 默认关</span><span>不发送短信和微信消息 · 默认关</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pend">
+        <b>采集注记。</b>这家的输入框大量使用 <code>readonly</code> + 页面自绘小键盘（按键是 <code>am-touchable</code>，只认触摸事件），
+        派工与结算按钮同样只响应真实指针事件。故本次全部关键动作均在<b>真实鼠标点击</b>下完成，
+        手机号经「在此输入」小键盘缓冲区键入后回车提交。
+        <b>电子签名手写板未能在自动化下着墨</b>（合成 pointer / touch 序列着墨率始终 &lt;0.3%），已改用「改日再签」走通结算 —— 这一处留作真机补拍。
+      </div>
+    </div>
+
+    <!-- ========== 泳道 06 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">06</span>
+        <span class="lane-name">收尾 · 流水台账与挂单/并单</span>
+        <span class="lane-ask">钱收完之后，从哪查、能不能回头改？</span>
+        <span class="lane-count">3 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-F1-bill-record.png" alt="美管加流水台账" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">15</span>流水 · 本次结算已入账</div>
+            <div class="shot-cap-d">
+              首行即实测产生的那一笔：<b>X261014000415 · 10/14 14:02 · 周甜（800元）· 女士剪发 ×1 · ¥48 · 入账 ¥48 · 刘开文</b>。
+              单号、时间、顾客、消费内容、金额、入账、员工、备注八列一次给全。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-G1-hangup-page.png" alt="美管加挂单页工具条" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">16</span>挂单页 · 功能全，但藏着</div>
+            <div class="shot-cap-d">
+              深色底、单据/座位双视图。工具条同时给出开单、预约开单、团购核销、合并为一单、合并结算、收款、轮牌、刷卡找单、并单。
+              页面还内嵌一串教学视频入口（散客如何买单 / 老顾客进店做项目 / 卖品消费 / 如何使用挂单）——
+              等于承认这一屏<b>不好自解释</b>。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-G2-hangup-list.png" alt="美管加挂单列表带停留时长与并单" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">17</span>挂单列表 · 停留时长 + 并单</div>
+            <div class="shot-cap-d">
+              每一张挂着的单都给全：<b>顾客（散客）· 挂单时间 · 服务者 · 项目 · 价格 · 已停留时长</b>，
+              例如 <b>10/14 15:38 · 刘开文 卫飞 · 男士剪发 · ¥48 · @00:11:26</b>。
+              顶部可按「服务号 / 顾客 / 服务者姓名」查询（多关键字空格分隔），右上角是<b>「并单」</b>，
+              另有「已过期 / 已删除单据」开关；页面还挂着一条警示 ——「所有单号连续自增，删单或开单不结单后台都将会有严格审查」。
+              <b>挂单不是「暂存一下」，而是一个带停留时长与并单动作的独立台账</b>。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="enum">
+        <div class="enum-h">挂单/并单页动作 · 从 DOM 逐项读出</div>
+        <div class="enum-row">
+          <div class="enum-k">挂单页动作<em> · 11 项</em></div>
+          <div class="enum-v">
+            <span>开单</span><span>预约开单</span><span>团购核销</span><span>美团/抖音订单核销</span><span>核销</span>
+            <span>合并</span><span>合并为一单</span><span>合并结算</span><span>收款</span><span>轮牌</span>
+            <span>刷卡找单</span><span>并单</span><span>立即合并</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">流水页页签<em> · 10 项</em></div>
+          <div class="enum-v">
+            <span class="is-default">收款 · 默认</span><span>红包核销</span><span>商城订单核销</span><span>抖音团购核销</span>
+            <span>点评券核销</span><span>口碑券核销</span><span>异常单</span><span>重复单查询</span><span>欠款</span><span>返回旧版</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">流水筛选维度<em> · 8 项</em></div>
+          <div class="enum-v">
+            <span>消费部门</span><span>单据类型</span><span>项目类型</span><span>服务员工</span><span>付款方式</span>
+            <span>跨店消费</span><span>操作人</span><span>单号/手机号/卡号/服务号</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="miss">
+        <div class="miss-h">未采集 · 座位码开单</div>
+        <div class="miss-b">
+          该页存在 <code>page_workStationTip</code> / <code>page_workStationSetting</code>，挂单页头部也有「配置座位」与
+          「<b>长按座位下载座位码</b>」入口 —— 属于扫码开单触点。
+          本次未走通该子流程，<b>不作推断描述</b>，留待真机补采。
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>会员价自动改写单价，但不告诉人。</b>￥58 在单据里变成 ￥48，界面零提示。省钱是好事，收银员不知道钱变了是隐患 —— 抄它的自动化，但要补一条显式提示。</li>
+          <li><b>多人共担一个项目，是「行的横排能力」而不是「拆行」。</b>第一 / 第二 / 第三工位三列常驻，同一行项目可同时挂不同员工，项目仍是一行、一份金额，不拆单不重复计价；指派方式是「先选中单据行，再点员工」。但多人落进同一个工位单元格时只显示首位姓名 + 人数徽标（<b>刘开文 ＋ 2</b>），不进详情看不出第二个是谁 —— 这一点要改成把名字摊开。</li>
+          <li><b>业绩分配是派工之后独立的一步，而不是派人时顺带填的字段。</b>「请设置业绩」按工位逐行列人，占比默认按人数平摊（三人各 33.333%），也可手改 —— 多人共担一项时，「谁做」和「谁拿多少」分开确认，比塞在派工动作里更不容易漏。</li>
+          <li><b>结算做成整页而不是弹窗，信息容量立刻不同。</b>一屏能放下拆账、9 种支付、4 个开关和一个实时展开的会员卡面板。弹窗做不到这个密度。</li>
+          <li><b>支付方式带数字热键（0–8）。</b>键盘收银场景下这是效率开关，成本极低 —— 值得直接抄。</li>
+          <li><b>电子签名默认开启会挡路。</b>默认勾选、且不能跳过（只能「改日再签」），实际门店大概率第一件事就是关掉它。默认值应该反过来给。</li>
+          <li><b>结完自动回零，不用再点新建。</b>连续收银的场景下，这一步省得很实在。</li>
+          <li><b>挂单带停留时长，等于把「挂了多久」摆到台面上。</b>配合并单与「已过期/已删除」开关，挂单从「暂存一下」变成可管理的台账 —— 这是防漏单最省成本的一招。</li>
+          <li><b>反例：把 11 个动作塞进挂单页，靠教学视频补救。</b>功能全不等于好用，一屏收不下就必须分层。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 美问 ===================== -->
+  <section id="meiwen">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">美问<span>开单收银 · 表格式开单</span></h2>
+      <span class="sec-en">Meiwen · saas.mei1.com</span>
+    </div>
+
+
+    <div class="flow" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="fl">
+        <div class="fl-no">01</div>
+        <div class="fl-name">进入开单 · 客户类型四选一</div>
+        <div class="fl-desc">散客 · 建档 · 验券 · 新建档案</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">02</div>
+        <div class="fl-name">加项 · 八页签选择器</div>
+        <div class="fl-desc">项目 / 产品 / 套餐 / 卡 / 券</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">03</div>
+        <div class="fl-name">派工 · 一项目多人服务</div>
+        <div class="fl-desc">行内添加服务人员</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">04</div>
+        <div class="fl-name">收款 · 三步结算向导</div>
+        <div class="fl-desc">分配业绩与提成 → 预览 → 完成</div>
+      </div>
+      <div class="fl">
+        <div class="fl-no">05</div>
+        <div class="fl-name">收尾 · 订单列表</div>
+        <div class="fl-desc">台账 · 多条件筛选</div>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 01 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">01</span>
+        <span class="lane-name">进入开单 · 客户类型四选一</span>
+        <span class="lane-ask">开单前先要定什么？</span>
+        <span class="lane-count">1 张</span>
+      </div>
+
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-A1-order-entry-empty.png" alt="美问 开单收银页空态" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>开单收银 · 空单起步</div>
+            <div class="shot-cap-d">
+              页面标题「开单收银」右侧是门店切换（安迪美业）。三段结构：
+              <b>选择客户类型</b> → <b>开单内容</b> → <b>订单信息</b>；
+              右下角常驻「保存订单」与「确认收款」。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>用「客户类型」给开单前置分叉。</b>散客、已建档、验券、新建档案是四条不同路径，而不是让收银员在一张表单里自己判断该填哪些字段 —— 心智不互相污染。</li>
+          <li><b>进页面即一张空单，没有「新建」按钮。</b>省掉一次「先建单再填单」的跳转，对高频收银台是纯收益。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 02 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">02</span>
+        <span class="lane-name">加项 · 八页签选择器</span>
+        <span class="lane-ask">「卖什么」怎么一次找齐？</span>
+        <span class="lane-count">2 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-C1-item-picker-project.png" alt="美问 选择开单内容浮层" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>选择开单内容 · 八页签 + 宫格</div>
+            <div class="shot-cap-d">
+              页签把「能卖的东西」一次铺开：项目、产品、套餐、卡（开卡/续充/换卡升级）、电子券、纸质券，
+              外加两个老客专用页签 —— <b>历史消费</b>（按该客历史回冲）与 <b>可消费</b>（按已购权益消耗）。
+              网格每格带价格，勾选即计入左下角「已选择 N 件」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-C2-item-on-bill.png" alt="美问 项目落成单据行" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>落成单据行 · 行内可改价改量</div>
+            <div class="shot-cap-d">
+              单据表按<b>内容信息 / 单价 / 数量 / 金额</b>四列排布，每行还能就地改数量与小计。
+              行上方有 <b>批量改价</b> 与 <b>批量添加服务人员</b> 两个批量入口；
+              每个项目行下方常驻一行 <b>「服务技师：」</b>。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>把「项目 / 产品 / 套餐 / 卡 / 券」收进同一选择器。</b>收银员不用先判断「这是商品还是卡」，打开一个地方就能找齐，再用页签收窄。</li>
+          <li><b>「历史消费」与「可消费」是按客动态生成的页签。</b>老客进来时，可选项直接从他自己的历史与已购权益里长出来，而不是让收银员去翻档案。</li>
+          <li><b>浮层锚定按钮、不遮全屏。</b>加项时底下的单据表仍然可见，可以边看合计边加。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 03 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">03</span>
+        <span class="lane-name">派工 · 一个项目挂多名服务人员</span>
+        <span class="lane-ask">「多人服务同一个项目」怎么落库？</span>
+        <span class="lane-count">2 张</span>
+      </div>
+
+      <div class="shot-rail is-2">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-D1-staff-picker-multi.png" alt="美问 选择服务人员浮层多选" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>添加服务人员 · 可多选</div>
+            <div class="shot-cap-d">
+              浮层标题「请选择服务人员」，右上角「确定」。列表每行是<b>头像 + 姓名 + 工号</b>，
+              支持按技师名/工号搜索。<b>一次可勾选多人</b>，勾完统一确定。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-D2-one-item-multi-staff.png" alt="美问 一个项目挂两名服务人员" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>一行两技师 · 落库形态</div>
+            <div class="shot-cap-d">
+              项目「洗剪吹 ¥60.00」行下方显示 <b>服务技师：陆　君君　继续添加</b>。
+              金额与「还需支付 ¥60.00」不变 —— 人数不改变项目价格，只改变后续业绩与提成的分配。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>多人服务是「一行的属性」，不是「两行」。</b>把技师挂在项目行上，价格、数量、折扣都只有一份，避免了「同一个项目重复两行、金额重复计算」的常见坑。</li>
+          <li><b>行内「继续添加」把入口留在原地。</b>加第二个人不用回到表头或重开弹层。</li>
+          <li><b>表头提供「批量添加服务人员」。</b>整单同一批人的场景一次搞定，不必逐行点。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 04 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">04</span>
+        <span class="lane-name">收款 · 三步结算向导</span>
+        <span class="lane-ask">收钱之前系统还要求做什么？</span>
+        <span class="lane-count">5 张</span>
+      </div>
+
+      <div class="shot-rail is-3">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-E1-settle-blocked-prompt.png" alt="美问 未选支付方式时的收款拦截" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>先拦一下 · 未选支付方式</div>
+            <div class="shot-cap-d">
+              弹层只显示应收金额 <b>¥ 60.00</b> 与两个出口「直接减免」「返回收银」。<b>不静默结账</b>。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-E2-cash-pay-selected.png" alt="美问 选现金支付后金额落行" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">7</span>支付方式落到项目行</div>
+            <div class="shot-cap-d">
+              底部一键「批量选择支付方式」（现金 / POS / 扫码 / 其它），选中后<b>金额直接写进每一行</b>：
+              该行「现金：￥ 60.00」，「还需支付：¥ 0.00」。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-E3-settle-kpi-split.png" alt="美问 结算第一步 分配业绩与提成" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">8</span>第 1 步 · 分配业绩与提成</div>
+            <div class="shot-cap-d">
+              表头三段进度：<b>1 分配业绩与提成 / 2 收银预览 / 3 完成</b>。
+              按品项（洗剪吹）给出业绩 ¥60.00、卡耗 ¥0.00、赠送卡耗 ¥0.00；下方<b>每位服务人员一行</b>，
+              各有「点钟/轮牌」「分配业绩」「分配卡耗」「提成」「赠送卡耗」，并带「平分业绩」「按比例分配」批量动作。
+              <b>多人服务的业绩拆分就发生在这一步。</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-E4-settle-preview.png" alt="美问 结算第二步 收银预览" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">9</span>第 2 步 · 收银预览</div>
+            <div class="shot-cap-d">
+              进入第 2 段「收银预览」，底部动作变为「上一步 / 确认收银」——提交前还有一次回退机会。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-E5-settled-success.png" alt="美问 结算完成" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">10</span>第 3 步 · 完成</div>
+            <div class="shot-cap-d">
+              「订单收银成功！您可以继续收银或者返回订单列表」，出口三个：返回订单列表 / 新开一单 / 关闭。
+              另有 <b>收银后打印小票</b> 与 <b>需要电子签名</b> 两个开关；后者的签字板是<b>可选</b>的，
+              默认不阻塞结算 —— 签字板只在开关打开后才要求。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="enum">
+        <div class="enum-h">客户类型 · 开单内容页签 · 结算相关枚举（均从 DOM 逐项读出）</div>
+        <div class="enum-row">
+          <div class="enum-k">客户类型 <em>四选一</em></div>
+          <div class="enum-v">
+            <span>散客消费</span>
+            <span>已建档顾客</span>
+            <span>验券核销</span>
+            <span>新建顾客档案</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">开单内容页签 <em>8 项</em></div>
+          <div class="enum-v">
+            <span>项目</span>
+            <span>产品</span>
+            <span>套餐</span>
+            <span>卡</span>
+            <span>电子券</span>
+            <span>纸质券</span>
+            <span>历史消费</span>
+            <span>可消费</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">大类筛选 <em>随门店配置</em></div>
+          <div class="enum-v">
+            <span>全部</span>
+            <span>烫发</span>
+            <span>洗剪吹</span>
+            <span>染发</span>
+            <span>小类筛选（下拉）</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">批量支付方式 <em>4 项</em></div>
+          <div class="enum-v">
+            <span>现金支付</span>
+            <span>POS 支付</span>
+            <span>扫码支付</span>
+            <span>其它支付方式</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">订单信息字段 <em>6 项</em></div>
+          <div class="enum-v">
+            <span>流水单号</span>
+            <span>房间（下拉）</span>
+            <span>补单（开关）</span>
+            <span>备注信息</span>
+            <span>顾客到店（勾选）</span>
+            <span>同行人数（多位顾客一起结账）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>把「谁做的、谁拿多少」放进收款必经路径。</b>收款不是终点，而是先过一遍业绩与提成分配；这正是多人服务能落库的前提 —— 分配是<b>结构化的行</b>，不是备注里写一句话。</li>
+          <li><b>分配提供「平分业绩 / 按比例分配」。</b>两人以上时不必手算，一键摊平，再按需微调。</li>
+          <li><b>未指定支付方式先拦一层。</b>金额弹层只给「直接减免 / 返回收银」，避免误结账；同时又保留了免单的正规出口。</li>
+          <li><b>电子签名默认关。</b>需要时开启、不需要就走；比起默认开启（必须先签或点「改日再签」），不阻塞高频收银。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 泳道 05 ========== -->
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-no">05</span>
+        <span class="lane-name">收尾 · 订单列表</span>
+        <span class="lane-ask">收完钱这一单去了哪？</span>
+        <span class="lane-count">1 张</span>
+      </div>
+
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-F1-order-list.png" alt="美问 订单列表与筛选" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">11</span>订单列表 · 五组筛选</div>
+            <div class="shot-cap-d">
+              支付方式下拉把渠道分成两类：<b>业绩类</b>（现金 / POS / 预约金 / 微信支付 / 团购 / 支付宝 / 扫码支付 / 抖音验券 / 卡买卡）与
+              <b>卡耗类</b>（会员卡耗 / 钱包 / 合伙人收益 / 券核销 / 赠品核销 / 积分抵现 / 店内活动 / 减免）。
+              类型下拉覆盖 14 种单据形态，含「尾款还清」「补款单」「退部分单」等业财细节。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="enum">
+        <div class="enum-h">订单列表下拉枚举（从页面 DOM 逐项读出）</div>
+        <div class="enum-row">
+          <div class="enum-k">支付方式 · 业绩类 <em>9 项</em></div>
+          <div class="enum-v">
+            <span>现金</span>
+            <span>POS</span>
+            <span>预约金</span>
+            <span>微信支付</span>
+            <span>团购</span>
+            <span>支付宝</span>
+            <span>扫码支付</span>
+            <span>抖音验券</span>
+            <span>卡买卡</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">支付方式 · 卡耗类 <em>8 项</em></div>
+          <div class="enum-v">
+            <span>会员卡耗</span>
+            <span>钱包</span>
+            <span>合伙人收益</span>
+            <span>券核销</span>
+            <span>赠品核销</span>
+            <span>积分抵现</span>
+            <span>店内活动</span>
+            <span>减免</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">订单状态 <em>5 个页签</em></div>
+          <div class="enum-v">
+            <span>待付款</span>
+            <span>已付款</span>
+            <span>尾款单</span>
+            <span>历史订单（已交班）</span>
+            <span>异常订单</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">单据类型 <em>14 项</em></div>
+          <div class="enum-v">
+            <span>项目单</span>
+            <span>产品单</span>
+            <span>套餐单</span>
+            <span>开卡单</span>
+            <span>充值单</span>
+            <span>退单</span>
+            <span>退卡</span>
+            <span>跨店消费</span>
+            <span>卡换卡/换购</span>
+            <span>微信活动验券单</span>
+            <span>尾款还清</span>
+            <span>补款单</span>
+            <span>退部分单</span>
+          </div>
+        </div>
+        <div class="enum-row">
+          <div class="enum-k">签字状态 <em>2 项</em></div>
+          <div class="enum-v">
+            <span>全部</span>
+            <span>已签字</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-h">可借鉴点</div>
+        <ul class="tk">
+          <li><b>支付方式分「业绩类 / 卡耗类」两组。</b>不是一条平铺的长列表 —— 先分性质再选渠道，口径上天然把「进钱」和「消耗权益」分开了。</li>
+          <li><b>「签字状态」是列表的筛选项。</b>把电子签名当成可检索的业务字段，而不是一张可有可无的图片。</li>
+          <li><b>状态页签覆盖「已交班」与「异常订单」。</b>收尾不止查今天，还预案了交班与异常两条线。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="miss">
+      <div class="miss-h">本次未采到的部分（已确认入口，未逐一截屏）</div>
+      <div class="miss-b">
+        <b>验券核销</b>弹层（客户类型之一，属平台券核销链路）、<b>新建顾客档案</b>表单与<b>已建档顾客</b>的选客联想下拉、
+        以及「订单信息」里的<b>房间</b>下拉与<b>同行人数</b>步进器的展开态。
+        这些入口都可点开，只是本轮把预算放在了加项与派工上；如需补齐告知我即可。
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PART 2 ===================== -->
+  <div class="part">
+    <div class="part-hd">
+      <span class="part-no">PART 2</span>
+      <span class="part-title">业绩与提成 · 什么时候能改、怎么改</span>
+      <span class="sec-en">Commission Editing</span>
+    </div>
+    <p class="part-sub">
+      同样一笔单、同样两名技师，三家的钱是在<b>三个不同时刻</b>被定下来的。
+      这一部分只问一件事：要改一个人的业绩与提成，<b>得回到哪一屏、点几下、改得动哪些字段。</b>
+    </p>
+  </div>
+
+  <!-- ===================== 04 三时机对照 ===================== -->
+  <section id="perf-timing">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">三时机对照<span>开单中 / 结算中 / 结算后</span></h2>
+      <span class="sec-en">Timing Matrix</span>
+    </div>
+
+    <div class="note">
+      <div class="note-i">!</div>
+      <div>
+        <b>本部分数值前提。</b>三家的截图全部来自<b>真实登录的测试租户</b>。测试库默认没有业绩 / 提成规则，
+        单据数值恒为 <code>0</code>，所以本轮在测试环境里<b>造了非零数据</b>：开单、派工、改分配都按真实操作走，
+        只是把人名与金额换成了可辨识的值。下文所有数字<b>都是界面上真实渲染出来的</b>，不是后期标注上去的。
+      </div>
+    </div>
+
+    <div class="mx-wrap">
+      <table class="mx">
+        <thead>
+          <tr>
+            <th>产品</th>
+            <th>开单中<br>建单 · 加项 · 派工</th>
+            <th>结算中<br>收银向导</th>
+            <th>结算后<br>单据详情 · 流水</th>
+            <th>分配粒度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>博卡8</th>
+            <td>✗ 表单里 <code>员工 | 虚业绩 | 提成</code> 是一列<b>只读展示</b>，派工只能选人和服务类型</td>
+            <td>✗ 点「收款」零确认直接结账，<b>全程没有分配步骤</b></td>
+            <td><b>✓</b> 单据详情：「重算业绩」＋「修改服务人员」弹窗</td>
+            <td>大 / 中 / 小 / 四工，逐格</td>
+          </tr>
+          <tr>
+            <th>美管加</th>
+            <td><b>✓</b> 派工后弹出「请设置业绩」弹层，<b>占比 / 业绩 / 提成三列都能改</b><br>占比<b>此消彼长，已实测证实</b></td>
+            <td>✗ 结算页只负责收钱</td>
+            <td>△ 只有一个出口：「该单提成计算失败，是否立即重算？」</td>
+            <td>第一 / 第二 / 第三工位，逐行</td>
+          </tr>
+          <tr>
+            <th>美问</th>
+            <td>✗ 只能挂人，<b>加人不改金额</b>；新加的人默认<b>业绩留空、提成 0</b></td>
+            <td><b>✓</b>「确认收款」后进入第 1 步「分配业绩与提成」，逐人可改<br>另有 <code>平分业绩</code> / <code>按比例分配</code> 两个批量动作</td>
+            <td>✗ 结算后以查询为主</td>
+            <td>每位服务人员一行</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-h">一句话</div>
+      <ul class="tk">
+        <li><b>博卡8 放最后</b> —— 先开单、事后重算。收银台最快，但改账必须离开开单页。</li>
+        <li><b>美管加放最前</b> —— 派工那一刻就把占比定死，结算不必再判断一次；代价是派工的人得当场决定谁拿多少。</li>
+        <li><b>美问卡在收款当中</b> —— 三家唯一把分配设成收款<b>必经步骤</b>的做法，不分配完不放行；最准，也最慢。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 05 博卡8 ===================== -->
+  <section id="perf-boka8">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">博卡8 · 结算后改<span>先开单，事后重算</span></h2>
+      <span class="sec-en">Boka 8</span>
+    </div>
+
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-name">钱的三个落点：表单只读 → 收款不分配 → 详情重算</span>
+        <span class="lane-ask">改一个人的业绩，要几步？</span>
+      </div>
+
+      <p class="pn">
+        <b>① 开单表单里改不了。</b>项目行右侧的 <code>员工 | 虚业绩 | 提成</code> 是<b>一列只读展示</b>，
+        每个工位一段，实测渲染形如 <code>大工：晓萱 | 轮牌/B客 | 虚业绩:100 | 提成:20</code>。
+        派工时能做的只有两件事：把人填进大 / 中 / 小 / 四工某一列，以及选服务类型（轮牌 / 点牌）。
+      </p>
+      <p class="pn">
+        <b>② 收款过程里也没有分配。</b>点「收款」没有二次确认、没有支付方式窗口，直接结账并落到单据详情 ——
+        支付方式早在明细行里选好了。<b>整个收款链路不存在「业绩分配」这一步。</b>
+      </p>
+      <p class="pn">
+        <b>③ 改业绩的地方在单据详情。</b>详情页给的是两枚按钮加一条兜底路径：
+        <code>重算业绩</code>（按后台规则重跑一次）、
+        <code>修改服务人员</code>（弹窗里可改大 / 中 / 小 / 四工、服务类型、营业所属，并出现可填的 <b>业绩 · 提成</b>），
+        以及 <code>作废</code> → <code>重新结账</code>（回到编辑页 <code>/bill/cash/edit</code>，已结账的单也允许改）。
+      </p>
+
+      <p class="pn">
+        <b>④ 「重算业绩」会先问一句。</b>点下去弹出确认层：本单是<b>手输业绩 / 提成</b>，
+        是否改按业绩方案重算？并附两行规则说明 ——
+        <b>后台参数是「手输」就怎么选都按手输算；后台参数是「非手输」时，勾了才按方案算、不勾仍按手输算。</b>
+        等于说：<b>手填过的值默认不会被系统悄悄覆盖</b>，重算必须显式确认。
+      </p>
+
+      <div class="note">
+        <div class="note-i">◆</div>
+        <div>
+          <b>代价是路径长。</b>改一单业绩要「离开开单页 → 回列表 → 找单 → 进详情 → 开弹窗」，
+          开单高峰时会打断收银节奏。换来的是收银台极快 —— 前台不需要懂提成规则。
+        </div>
+      </div>
+
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-H2-detail-perf-gain-applied.png" alt="博卡8 单据详情显示改后的虚业绩与提成" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>改完后的单据详情 · 业绩真的变了</div>
+            <div class="shot-cap-d">
+              在「修改服务人员」里填好并保存后，页面提示 <b>更新成功</b>，消费信息行随即渲染为
+              <code>大工：晓萱 | 轮牌/B客 | 虚业绩:100 | 提成:20</code>、<code>中工：婉清 | 虚业绩:40 | 提成:8</code>、
+              <code>小工：赤霞珠 | 虚业绩:20 | 提成:4</code>。
+              上方常驻按钮组就是改账的全部入口：<b>修改账务日期 / 重算业绩 / 修改服务人员 / 打印 / 作废 / 卖卡充值 / 重新结账</b>。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-H1-edit-staff-perf-gain.png" alt="博卡8 修改服务人员弹窗中的业绩与提成输入框" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>「修改服务人员」弹窗 · 业绩与提成是可填输入框</div>
+            <div class="shot-cap-d">
+              每个工位一格，格内三件事：<b>人（工号/编号/名字）、服务类型、业绩 · 提成</b>。
+              这里的业绩与提成<b>不是展示，是输入框</b> —— 实测填入 <code>100 / 20</code>、<code>40 / 8</code>、<code>20 / 4</code> 后保存生效。
+              下方还有独立的<b>产品</b>区：<code>修改产品业绩比例</code> 与 <code>修改产品业绩金额</code> 两种切换。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/博卡8/boka8-H3-recalc-handinput-confirm.png" alt="博卡8 重算业绩时的手输业绩确认弹窗" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>「重算业绩」的确认层 · 手输值要不要被覆盖</div>
+            <div class="shot-cap-d">
+              不是点一下就重算。系统先声明<b>「此单是手输业绩/提成」</b>，再给出勾选项与两条规则：
+              后台参数为手输 → 勾不勾都按手输；后台参数为非手输 → 勾了按方案算、不勾仍按手输算。
+              <b>把「手填优先」写进了确认文案</b>，避免重算把人工调过的账悄悄冲掉。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 06 美管加 ===================== -->
+  <section id="perf-mgj">
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2 class="sec-title">美管加 · 开单中改<span>派工即定，占比此消彼长</span></h2>
+      <span class="sec-en">Meiguanjia</span>
+    </div>
+
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-name">两个弹层：一个只改占比，一个能直接填提成</span>
+        <span class="lane-ask">一行的钱怎么分到人头上？</span>
+      </div>
+
+      <p class="pn">
+        <b>先分清一件事：这是两个弹层，不是同一个。</b>名字只差「占比」两个字，能改的东西完全不同。
+      </p>
+
+      <div class="mx-wrap">
+        <table class="mx">
+          <thead>
+            <tr>
+              <th>弹层</th>
+              <th>表头字段</th>
+              <th>能改什么</th>
+              <th>业绩怎么来</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>请设置业绩占比</th>
+              <td>编号 / 姓名 / <b>占比</b> / 业绩</td>
+              <td>只有占比可改</td>
+              <td>跟着占比自动算</td>
+            </tr>
+            <tr>
+              <th>请设置业绩</th>
+              <td>编号 / 姓名 / <b>占比</b> / <b>业绩</b> / <b>提成</b></td>
+              <td>三列都是输入框，可把提成直接填死</td>
+              <td>可直接手填，脱离占比</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="pn">
+        <b>「此消彼长」已实测证实。</b>一行的钱是固定的，分成用百分比表示，一个人多拿必须有人少拿。
+        实测同项目挂一个人时占比 <code>100</code>；挂第二个人自动变 <code>50 / 50</code>；
+        挂第三个人变 <code>33.333 × 3</code> —— <b>总数始终锁死在 100</b>。
+        更关键的一步：把其中一个 <code>33.333</code> 手动改成 <code>50</code>，另外两人<b>当场被重排为 25 / 25</b>，
+        不需要人工配平。这就是百分比制最大的工程价值 ——
+        <b>「加起来不等于总额」在模型层面不可能发生。</b>
+      </p>
+      <p class="pn">
+        <b>提成是「占比优先、绝对额可覆盖」。</b>「请设置业绩」弹层里 <b>占比 / 业绩 / 提成三列都是输入框</b>：
+        改占比会自动算业绩；也可以绕过占比，直接把某人的<b>业绩</b>或<b>提成</b>填死
+        （实测把三个人的提成分别填成 <code>10 / 5 / 5</code>，保存后右侧员工栏显示业绩 <code>50 / 25 / 25</code>）。
+        两条路并存，但默认给的是占比。
+      </p>
+      <p class="pn">
+        <b>事后几乎不留口子。</b>结算页不再管业绩；若某单提成没算出来，系统会在单据上抛一句
+        「该单提成计算失败，是否立即重算？」—— 这是美管加唯一的结算后补救动作。
+      </p>
+
+      <div class="note">
+        <div class="note-i">◆</div>
+        <div>
+          <b>好处是结算不用第二次判断。</b>业绩在开单时就定死，收银台照单收钱即可。
+          <b>代价是派工的人要当场决定谁拿多少</b> —— 派工和分钱被压进了同一个动作。
+        </div>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-H1-setperf-3staff-33each.png" alt="美管加 请设置业绩弹层 三人各33.333" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>三人同项目 · 占比自动均分为 33.333</div>
+            <div class="shot-cap-d">
+              同一行挂上第三个人（卫飞 / 张方良 / 张海龙）后弹出「请设置业绩」，
+              表头是 <code>编号 | 姓名 | 占比 | 业绩 | 提成</code>，<b>三列全是输入框</b>。
+              此时三人占比各 <code>33.333</code>，业绩留空、提成 <code>0</code> ——
+              <b>系统只保证配比，金额要人填或由后台规则算。</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-H2-setperf-rebalance-50-25-25.png" alt="美管加 改占比后其余两人自动重排" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>改一个人 → 其余自动重排（此消彼长的实证）</div>
+            <div class="shot-cap-d">
+              把卫飞的占比从 <code>33.333</code> 改成 <code>50</code>，<b>没有动另外两行</b>，
+              张方良与张海龙<b>当场被重排成 25 / 25</b>，合计仍是 <code>100</code>。
+              这一屏是「占比制天然守恒」的直接证据：<b>系统不让总额失衡，不需要人工配平。</b>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-H3-setperf-gain-filled.png" alt="美管加 提成可绕过占比直接填写" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>提成可以绕过占比，直接填死</div>
+            <div class="shot-cap-d">
+              占比走 <code>50 / 25 / 25</code> 的同时，把提成分别填成 <code>10 / 5 / 5</code>，两者<b>并存不互相覆盖</b>。
+              说明美管加给的是<b>两条路</b>：<b>占比优先（自动配平）</b>，<b>绝对额为辅（人工指定）</b>。
+              对门店来说，前者防错、后者兜特殊约定。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美管加/mgj-H4-staff-panel-perf-50-25-25.png" alt="美管加 保存后右侧员工栏显示业绩50/25/25" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>保存后回到收银页 · 员工栏直接带出业绩</div>
+            <div class="shot-cap-d">
+              确认后右侧员工列表实时显示 <code>卫飞 50</code>、<code>张方良 25</code>、<code>张海龙 25</code>，
+              未参与的人（刘开文、李扬等）不显示数字。<b>分配结果不用翻页去找，就在收银主界面上。</b>
+              这正是「结算不用第二次判断」的落地形态。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 07 美问 ===================== -->
+  <section id="perf-mw">
+    <div class="sec-head">
+      <span class="sec-no">07</span>
+      <h2 class="sec-title">美问 · 结算中改<span>不走完分配，不给收款</span></h2>
+      <span class="sec-en">Meiwen</span>
+    </div>
+
+    <div class="lane">
+      <div class="lane-hd">
+        <span class="lane-name">确认收款 → 支付方式 → 第 1 步「分配业绩与提成」</span>
+        <span class="lane-ask">钱是在哪一屏被分掉的？</span>
+      </div>
+
+      <p class="pn">
+        <b>按钮叫「确认收款」，不是「确认付款」。</b>点它不会直接扣款：先弹一个只有金额的提示层
+        （<code>还需支付的金额为：¥60.00</code>，旁边有「直接减免」和退回），
+        指定支付方式后再点一次「确认收款」，才进入三步向导。
+      </p>
+      <p class="pn">
+        <b>第 1 步就是分配业绩与提成。</b>表头进度为 <code>1 分配业绩与提成 / 2 收银预览 / 3 完成</code>。
+        上方按品项给出 业绩 / 卡耗 / 赠送卡耗；下方<b>每位服务人员一行</b>，
+        <code>分配业绩</code>、<code>分配卡耗</code>、<code>提成</code> 都是<b>可改的输入框</b>，
+        另有 <code>平分业绩</code>、<code>按比例分配</code> 两个批量动作，也能继续 <code>添加服务人员</code>。
+      </p>
+      <p class="pn">
+        <b>新人默认拿零。</b>一件 ¥60 的项目先挂「陆」，<code>分配业绩 60 / 提成 36</code> 由规则算出；
+        再加入「君君」时，<b>陆的数字不变，君君两栏留空、提成 0</b>。
+        美问没有美管加那种「自动均分」的兜底 —— <b>多挂一个人就等于多一个要人工决定的坑</b>，
+        这也是它把两个批量动作放得这么显眼的原因。
+      </p>
+      <p class="pn">
+        <b>「按比例分配」按比例同时切业绩与提成。</b>点它弹出 <code>按比例分配业绩/卡耗</code> 小窗，
+        列出该品项下的服务人员与两个<b>空的</b>百分比输入框（不预填、不校验到 100 才让存）。
+        实测填入 <code>陆 60% / 君君 40%</code> 保存后：
+        业绩 <code>60 → 36 / 24</code>，提成 <code>36 → 21.6 / 14.4</code> ——
+        <b>不仅切业绩，连提成也按同一比例切</b>。而 <code>平分业绩</code> 不给弹窗、点了即生效，
+        直接变成 <code>30 / 30</code> 与 <code>18 / 18</code>。两种批量动作一个要问、一个不问，<b>交互手感并不统一</b>。
+      </p>
+      <p class="pn">
+        <b>这是三家唯一把分配设成收款必经步骤的做法。</b>「谁做的、谁拿多少」被放进收款主路径，
+        分配结果是<b>结构化的行</b>，而不是备注里的一句话 —— 后面能算、能查、能对账。
+        改完点「下一步」进第 2 步「收银预览」，金额与收银人一并复核后才真正收钱。
+      </p>
+
+      <div class="note">
+        <div class="note-i">◆</div>
+        <div>
+          <b>代价是收银当场多一步，而且必须在结账前做完。</b>排队时段收银员压力更大；
+          换来的是业绩不欠账 —— 单子结完，业绩一定是齐的。
+        </div>
+      </div>
+
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H1-settle-step1-perf-alloc.png" alt="美问 结算第1步分配业绩与提成的整体界面" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">1</span>第 1 步「分配业绩与提成」· 整屏结构</div>
+            <div class="shot-cap-d">
+              顶部是必经的三步进度 <code>1 分配业绩与提成 / 2 收银预览 / 3 完成</code>；
+              品项区给出 <code>业绩 ¥60.00</code>、<code>卡耗 ¥0.00</code>、<code>赠送卡耗 ¥0.00</code>；
+              表头为 <code>通过技师名／工号搜索 | 点钟/轮牌 | 分配业绩 | 分配卡耗 | 提成</code>，<b>每位技师一行</b>。
+              底部两个批量动作 <code>平分业绩</code>、<code>按比例分配</code> 与 <code>添加服务人员</code>。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H2-proportion-dialog-empty.png" alt="美问 按比例分配弹窗初始为空" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">2</span>点「按比例分配」· 弹窗是空的</div>
+            <div class="shot-cap-d">
+              弹出 <code>按比例分配业绩/卡耗</code> 小窗，带出当前品项与总额（洗剪吹 / 业绩 ¥60.00 / 卡耗 ¥0.00），
+              下面逐人一行，只有两个<b>空输入框</b>加一个「%」。
+              <b>不预填、也不做「合计必须 100%」的强校验</b> —— 比例全由人算。
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H3-proportion-60-40-entered.png" alt="美问 按比例分配填入60与40" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">3</span>填入 60% / 40%</div>
+            <div class="shot-cap-d">
+              手动把陆填 <code>60</code>、君君填 <code>40</code>。这一屏本身没有提示、没有预览，
+              <b>要等保存后才知道钱怎么落</b>。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="shot-rail is-2">
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H4-proportion-applied-60-40.png" alt="美问 按比例分配保存后业绩36-24提成21.6-14.4" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">4</span>保存后 · 业绩 <b>36 / 24</b>，提成 <b>21.6 / 14.4</b></div>
+            <div class="shot-cap-d">
+              最关键的一屏。<code>60 / 40</code> 的 60% 切给陆、40% 切给君君，<b>业绩被切成 36 / 24（合计仍是 60）</b>；
+              同时<b>提成也按同一比例被切</b>：陆原来的 <code>36</code> 变成 <code>21.6</code>，君君从 <code>0</code> 变成 <code>14.4</code>（合计仍是 36）。
+              <b>「按比例」作用于业绩与提成两层，不是只分业绩。</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H5-even-split-applied.png" alt="美问 平分业绩后30-30与18-18" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">5</span>对比 · 「平分业绩」点了即生效</div>
+            <div class="shot-cap-d">
+              同一个界面点 <code>平分业绩</code>，<b>不弹任何确认</b>，当场变成业绩 <code>30 / 30</code>、提成 <code>18 / 18</code>。
+              与「按比例分配」相比：<b>一个要填要保存，一个点下去就改完了</b> ——
+              两个并排的批量按钮，风险等级并不一样。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="shot-rail">
+        <div class="shot">
+          <div class="shot-frame">
+            <div class="shot-screen">
+              <img src="开单UI对比图/美问/mw-H6-settle-step2-preview.png" alt="美问 结算第2步收银预览" loading="lazy">
+            </div>
+          </div>
+          <div class="shot-cap">
+            <div class="shot-cap-t"><span class="no">6</span>第 2 步「收银预览」· 分配完才放行</div>
+            <div class="shot-cap-d">
+              分配确认后进度跳到第 2 步，汇总出 <code>合计 ¥60.00</code>、<code>收银人员：梅研</code>、
+              顾客到店与同行人数，并提供 <code>上一步</code> / <code>确认收银</code>，
+              以及「收银后打印小票」「需要电子签名」两个开关。
+              <b>业绩分配与收钱被串成同一条向导</b> —— 不分配完，走不到这一步。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 08 小结 ===================== -->
+  <section id="perf-takeaway">
+    <div class="sec-head">
+      <span class="sec-no">08</span>
+      <h2 class="sec-title">三种做法的取舍<span>改业绩这件事该放在哪</span></h2>
+      <span class="sec-en">Trade-offs</span>
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-h">可借鉴点</div>
+      <ul class="tk">
+        <li><b>时机跟着「谁知道该拿多少」走。</b>前台通常不懂提成规则，所以把分配放在收款环节（美问）或事后重算（博卡）更贴合真实分工；美管加压在派工那一刻，等于要求派工的人当场判断占比，人不熟练就难执行。</li>
+        <li><b>占比制天然守恒，绝对额自由但会出错。</b>用百分比，总和锁死 100%，一个人多拿必然有人少拿，系统层面就杜绝了「加起来不等于总额」——美管加实测把 <code>33.333</code> 改成 <code>50</code>，其余两人<b>自动重排为 25 / 25</b>，无需人工配平。用绝对额可以填出不平的账，得靠校验兜住。美管加两条路都给了，最值得抄的是<b>「占比优先、绝对额为辅」这个默认</b>。</li>
+        <li><b>批量分配按钮要有统一的风险等级。</b>美问把 <code>平分业绩</code> 和 <code>按比例分配</code> 并排放，但前者点了即改、后者要填要存 —— 同一排按钮，一个可撤销一个不可，操作者无从预判。凡是<b>直接覆盖已有数值</b>的动作，都该像博卡「重算业绩」那样先确认一次。</li>
+        <li><b>改业绩的入口要挂在单据详情上。</b>博卡把「重算业绩 / 修改服务人员 / 作废 / 重新结账」全放在一张详情页，不用回列表找单 —— 这一点比它把分配推后更值得抄。</li>
+        <li><b>「加人不改金额」应当写死。</b>三家在这一点上一致：多一个人服务同一项目，项目价格不变，变的只是业绩与提成的分配 —— 这是多人服务的定价前提，不能靠人记。</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div><span class="dot"></span>剑琅联盟 · 内部资料 · 美业 SaaS 开单流程逐屏拆解</div>
+    <div>截图口径：整窗实拍 · 真实登录测试环境</div>
+  </div>
+
+</div>
+
+<!-- ===================== Lightbox ===================== -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" type="button" aria-label="关闭">×</button>
+    <div class="lightbox-stage">
+      <button class="lightbox-nav lightbox-prev" type="button" aria-label="上一张">‹</button>
+      <img id="lightboxImg" alt="">
+      <button class="lightbox-nav lightbox-next" type="button" aria-label="下一张">›</button>
+    </div>
+    <div class="lightbox-panel">
+      <div class="lightbox-head">
+        <span class="lightbox-cap-t" id="lightboxCapT"></span>
+        <span class="lightbox-idx" id="lightboxIdx"></span>
+      </div>
+      <div class="lightbox-cap" id="lightboxCap"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightboxImg');
+  var capTitle = document.getElementById('lightboxCapT');
+  var capBody = document.getElementById('lightboxCap');
+  var idxEl = document.getElementById('lightboxIdx');
+  var prevBtn = lb.querySelector('.lightbox-prev');
+  var nextBtn = lb.querySelector('.lightbox-next');
+  var closeBtn = lb.querySelector('.lightbox-close');
+
+  /* 收集全部截图：图 + 标题 + 完整讲解，供大图翻页使用 */
+  var shots = [];
+  document.querySelectorAll('.shot').forEach(function (shot) {
+    var screen = shot.querySelector('.shot-screen');
+    var el = screen && screen.querySelector('img');
+    if (!el) return;
+    var t = shot.querySelector('.shot-cap-t');
+    var d = shot.querySelector('.shot-cap-d');
+    shots.push({
+      src: el.getAttribute('src'),
+      alt: el.getAttribute('alt') || '',
+      title: t ? t.innerHTML.trim() : (el.getAttribute('alt') || ''),
+      body: d ? d.innerHTML.trim() : ''
+    });
+  });
+
+  var cur = 0;
+
+  function render(i) {
+    if (!shots.length) return;
+    cur = (i + shots.length) % shots.length;
+    var s = shots[cur];
+    img.src = s.src;
+    img.alt = s.alt;
+    capTitle.innerHTML = s.title;
+    capBody.innerHTML = s.body;
+    capBody.scrollTop = 0;
+    idxEl.textContent = (cur + 1) + ' / ' + shots.length;
+  }
+
+  function open(i) {
+    render(i);
+    lb.hidden = false;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('open');
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.shot-screen').forEach(function (screen) {
+    screen.addEventListener('click', function () {
+      var el = screen.querySelector('img');
+      if (!el) return;
+      var src = el.getAttribute('src');
+      for (var i = 0; i < shots.length; i++) {
+        if (shots[i].src === src) { open(i); return; }
+      }
+    });
+  });
+
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); render(cur - 1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); render(cur + 1); });
+  closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); render(cur - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); render(cur + 1); }
+  });
+})();
+</script>
+
+</body>
+</html>
