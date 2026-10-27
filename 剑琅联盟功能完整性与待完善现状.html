@@ -10,7 +10,7 @@
     --navy-2: #1E3A5F;
     --steel: #35597F;
     --tint: #EDF2F7;
-    --bg: #F5F6F8;
+    --bg: #EBEEF2;
     --card: #FFFFFF;
     --line: #DEE3E9;
     --line-soft: #EDF0F4;
@@ -18,15 +18,10 @@
     --ink-soft: #5F6C7B;
     --ink-faint: #8D97A3;
 
-    /* 状态色 */
-    --st-ok: #2F7D68;
-    --st-ok-bg: #E7F1EE;
-    --st-part: #A8761B;
-    --st-part-bg: #F7EFE0;
-    --st-soon: #2C5C93;
-    --st-soon-bg: #E7EEF7;
+    --ok: #2F7D68;      --ok-bg: #E7F1EE;
+    --part: #A8761B;    --part-bg: #F7EFE0;
+    --soon: #2C5C93;    --soon-bg: #E7EEF7;
 
-    /* 必要性色（由深到浅 = 由重到轻） */
     --need-must: #1E3A5F;
     --need-core: #3F6A96;
     --need-plus: #9AA5B1;
@@ -37,1063 +32,311 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
+  html, body {
+    height: 100%;
     background: var(--bg);
-    color: var(--ink);
     font-family: var(--font-cjk);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    line-height: 1.65;
-    font-size: 14px;
+    overflow: hidden;
   }
 
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
-
-  /* ============ Hero ============ */
-  .hero {
-    padding: 64px 0 40px;
-    border-bottom: 1px solid var(--line);
-  }
-  .kicker {
-    font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--ink-faint); margin-bottom: 18px;
-  }
-  .hero h1 {
-    font-size: 38px; font-weight: 700; letter-spacing: 1px;
-    color: var(--navy); line-height: 1.25; margin-bottom: 14px;
-  }
-  .hero h1 em {
-    font-style: normal; color: var(--steel);
-  }
-  .hero-sub {
-    font-size: 15px; color: var(--ink-soft); max-width: 720px; line-height: 1.85;
+  #stage {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px; height: 720px;
+    transform-origin: 0 0;
+    background: var(--card);
+    box-shadow: 0 18px 50px rgba(23,41,61,.16);
+    overflow: hidden;
   }
 
-  .verdict {
-    margin-top: 34px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
-    border-radius: 14px;
-    padding: 28px 32px;
-    color: #fff;
-  }
-  .verdict-label {
-    font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: rgba(255,255,255,.5); margin-bottom: 12px;
-  }
-  .verdict p {
-    font-size: 19px; font-weight: 700; line-height: 1.6; letter-spacing: .3px;
-  }
-  .verdict p b { color: #E9C46A; }
-  .verdict-sub {
-    margin-top: 14px; font-size: 13px; color: rgba(255,255,255,.72);
-    line-height: 1.85; border-top: 1px solid rgba(255,255,255,.14); padding-top: 14px;
+  .page {
+    height: 100%;
+    padding: 30px 46px 26px;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* ============ 指标带 ============ */
-  .stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 14px; margin-top: 28px;
+  /* ---------- 头部 ---------- */
+  .hd {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--navy-2);
   }
-  .stat {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 18px 20px;
+  .hd-l .kick {
+    font-size: 9.5px; letter-spacing: 2.6px; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 7px;
   }
-  .stat-k {
-    font-size: 10.5px; letter-spacing: 1.4px; color: var(--ink-faint);
-    text-transform: uppercase; margin-bottom: 10px;
+  .hd-l h1 {
+    font-size: 26px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--navy); line-height: 1.15;
   }
-  .stat-v {
+  .hd-l h1 em { font-style: normal; color: var(--steel); }
+  .hd-r {
+    display: flex; gap: 22px; padding-bottom: 3px;
+  }
+  .kpi { text-align: right; }
+  .kpi-v {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 30px; font-weight: 700; line-height: 1; color: var(--navy-2);
+    font-size: 21px; font-weight: 700; line-height: 1;
+    color: var(--navy-2); font-variant-numeric: tabular-nums;
+  }
+  .kpi-v small { font-size: 12px; color: var(--ink-faint); font-weight: 400; }
+  .kpi-v.warn { color: var(--part); }
+  .kpi-k {
+    font-size: 9.5px; letter-spacing: 1.3px; color: var(--ink-faint);
+    margin-top: 5px; text-transform: uppercase;
+  }
+
+  /* ---------- 表 ---------- */
+  .tbl { flex: 1 1 auto; min-height: 0; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+  thead th {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 1.6px;
+    color: var(--ink-faint); text-transform: uppercase;
+    text-align: left; padding: 0 10px 7px; border-bottom: 1px solid var(--line);
+  }
+  thead th.c { text-align: center; }
+
+  tbody tr { border-bottom: 1px solid var(--line-soft); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td {
+    padding: 7px 10px; font-size: 12.5px; vertical-align: middle;
+    height: 40px;
+  }
+  tbody tr.gap-row { background: #FCFAF4; }
+
+  .no {
+    font-family: Georgia, serif; font-size: 12px; color: var(--ink-faint);
     font-variant-numeric: tabular-nums;
   }
-  .stat-v small { font-size: 15px; color: var(--ink-faint); font-weight: 400; }
-  .stat-d { font-size: 11.5px; color: var(--ink-soft); margin-top: 8px; }
-  .stat.is-thin .stat-v { color: var(--st-part); }
+  .nm { font-size: 13px; font-weight: 600; color: var(--navy-2); letter-spacing: .2px; }
+  .nm span { display: block; font-size: 10.5px; color: var(--ink-faint); font-weight: 400; margin-top: 1px; letter-spacing: 0; }
 
-  /* ============ 章节 ============ */
-  section { padding-top: 56px; }
-  .sec-head {
-    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
-    padding-bottom: 14px; margin-bottom: 22px;
-    border-bottom: 1px solid var(--line);
-  }
-  .sec-no {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    color: #fff; background: var(--navy-2);
-    padding: 4px 10px; border-radius: 4px;
-  }
-  .sec-title { font-size: 23px; font-weight: 700; letter-spacing: 1.5px; color: var(--navy-2); }
-  .sec-title span { font-weight: 400; color: var(--ink-faint); font-size: 15px; letter-spacing: .5px; margin-left: 10px; }
-  .sec-en { margin-left: auto; font-size: 11px; letter-spacing: 2px; color: var(--ink-faint); text-transform: uppercase; }
-
-  .lead {
-    font-size: 14.5px; color: var(--ink-soft); line-height: 1.95;
-    max-width: 920px; margin-bottom: 26px;
-  }
-  .lead b { color: var(--ink); }
-  code {
-    font-family: ui-monospace, "SF Mono", Consolas, monospace;
-    font-size: .88em; background: var(--tint);
-    padding: 1px 5px; border-radius: 3px; color: var(--navy-2);
-  }
-
-  /* ============ 标尺 ============ */
-  .rulers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .ruler {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; padding: 22px 24px;
-  }
-  .ruler-h {
-    font-size: 12px; letter-spacing: 1.6px; color: var(--ink-faint);
-    text-transform: uppercase; padding-bottom: 12px; margin-bottom: 16px;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .ruler-h b { color: var(--ink); letter-spacing: 1px; }
-  .ruler-row { display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--line-soft); }
-  .ruler-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .ruler-tag { flex: none; width: 92px; }
-  .ruler-txt { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
-  .ruler-txt b { color: var(--ink); }
-
-  /* 状态 chip */
   .chip {
-    display: inline-block; font-size: 11px; font-weight: 700;
-    padding: 3px 9px; border-radius: 4px; letter-spacing: .3px; white-space: nowrap;
+    display: inline-block; font-size: 10.5px; font-weight: 700;
+    padding: 2px 8px; border-radius: 3px; letter-spacing: .2px; white-space: nowrap;
   }
-  .chip.ok   { color: var(--st-ok);   background: var(--st-ok-bg); }
-  .chip.part { color: var(--st-part); background: var(--st-part-bg); }
-  .chip.soon { color: var(--st-soon); background: var(--st-soon-bg); }
+  .chip.ok   { color: var(--ok);   background: var(--ok-bg); }
+  .chip.part { color: var(--part); background: var(--part-bg); }
+  .chip.soon { color: var(--soon); background: var(--soon-bg); }
 
-  /* 必要性 chip */
   .need {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex; align-items: center; gap: 5px;
     font-size: 11.5px; font-weight: 700; white-space: nowrap;
   }
-  .need::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%; flex: none;
-  }
-  .need.must { color: var(--need-must); }
-  .need.must::before { background: var(--need-must); }
-  .need.core { color: var(--need-core); }
-  .need.core::before { background: var(--need-core); }
-  .need.plus { color: var(--need-plus); }
-  .need.plus::before { background: var(--need-plus); }
+  .need::before { content: ""; width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .need.must { color: var(--need-must); } .need.must::before { background: var(--need-must); }
+  .need.core { color: var(--need-core); } .need.core::before { background: var(--need-core); }
+  .need.plus { color: var(--need-plus); } .need.plus::before { background: var(--need-plus); }
 
-  /* 证据 */
-  .ev {
-    font-size: 10.5px; letter-spacing: .4px; white-space: nowrap;
-    padding: 2px 7px; border-radius: 3px; border: 1px solid var(--line);
-    color: var(--ink-faint); background: #FAFBFC;
-  }
-  .ev.has { color: var(--st-ok); border-color: #C9DFD8; background: #F2F8F6; }
+  .note { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  .note b { color: var(--ink); font-weight: 600; }
+  .note i { font-style: normal; color: var(--part); font-weight: 600; }
+  .note u { text-decoration: none; color: var(--soon); font-weight: 600; }
 
-  /* ============ 全景矩阵 ============ */
-  .matrix-card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; overflow: hidden;
-  }
-  table.mx { width: 100%; border-collapse: collapse; }
-  table.mx thead th {
-    background: #F8FAFC; font-size: 10.5px; font-weight: 700;
-    letter-spacing: 1.4px; color: var(--ink-faint); text-transform: uppercase;
-    text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line);
-  }
-  table.mx thead th.c { text-align: center; }
-  table.mx tbody td, table.mx tbody th {
-    padding: 13px 16px; border-bottom: 1px solid var(--line-soft);
-    font-size: 13px; text-align: left; font-weight: 400; vertical-align: middle;
-  }
-  table.mx tbody tr:last-child td, table.mx tbody tr:last-child th { border-bottom: none; }
-  table.mx tbody th { font-weight: 600; color: var(--ink); }
-  .mx-no {
-    font-family: Georgia, serif; font-size: 12px; color: var(--ink-faint);
-    display: inline-block; width: 22px;
-  }
-  .seg-row td {
-    background: #F2F5F8; font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    color: var(--steel); text-transform: uppercase; padding: 9px 16px !important;
-  }
-  .seg-row .seg-en { color: var(--ink-faint); font-weight: 400; margin-left: 8px; letter-spacing: 1px; }
   td.c { text-align: center; }
 
-  /* ============ 交叉表 ============ */
-  .cross-hd { margin: 34px 0 14px; }
-  .cross-hd h3 { font-size: 16px; font-weight: 700; color: var(--navy-2); letter-spacing: .8px; }
-  .cross-hd p { font-size: 13px; color: var(--ink-soft); margin-top: 8px; line-height: 1.85; max-width: 860px; }
-
-  table.cross { width: 100%; border-collapse: separate; border-spacing: 6px; }
-  table.cross th {
-    font-size: 10.5px; letter-spacing: 1.4px; color: var(--ink-faint);
-    text-transform: uppercase; font-weight: 700; padding: 8px 6px; text-align: center;
+  /* ---------- 结论条 ---------- */
+  .concl {
+    flex: none;
+    margin-top: 12px;
+    background: var(--navy-2);
+    border-radius: 9px;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 16px;
+    color: #fff;
   }
-  table.cross th.rowh { text-align: left; width: 96px; }
-  table.cross td {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 10px; padding: 14px 12px; vertical-align: top;
-    min-height: 62px; text-align: center;
+  .concl-l {
+    font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,.5); flex: none;
   }
-  table.cross td.empty { background: #FAFBFC; border-style: dashed; color: var(--ink-faint); font-size: 12px; }
-  table.cross td.hot { border-color: #E3C98F; background: #FDF8ED; }
-  td.rowseg {
-    background: transparent !important; border: none !important;
-    text-align: left !important; font-size: 12px; font-weight: 700;
-    color: var(--steel); padding: 6px 0 !important; vertical-align: middle !important;
-  }
-  .xit {
-    display: inline-flex; align-items: baseline; gap: 6px;
-    font-size: 12.5px; margin: 3px 4px; padding: 3px 9px;
-    background: var(--tint); border-radius: 4px; color: var(--ink); font-weight: 600;
-  }
-  .xit i { font-style: normal; font-family: Georgia, serif; font-size: 10.5px; color: var(--ink-faint); }
-
-  /* ============ 逐项卡片 ============ */
-  .seg-block { margin-bottom: 34px; }
-  .seg-label {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 11px; letter-spacing: 2.5px; color: var(--steel);
-    text-transform: uppercase; font-weight: 700;
-    padding-bottom: 10px; margin-bottom: 14px;
-    border-bottom: 1px solid var(--line);
-  }
-  .seg-label em { font-style: normal; font-size: 15px; letter-spacing: 1px; color: var(--navy-2); }
-  .seg-label .seg-count { margin-left: auto; font-size: 10.5px; color: var(--ink-faint); letter-spacing: .5px; font-weight: 400; }
-
-  .cap {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 20px 22px; margin-bottom: 12px;
-    display: grid; grid-template-columns: 250px 1fr; gap: 24px;
-  }
-  .cap-l { min-width: 0; }
-  .cap-no {
-    font-family: Georgia, serif; font-size: 11px; color: var(--ink-faint);
-    letter-spacing: 1px; margin-bottom: 6px;
-  }
-  .cap-name { font-size: 15.5px; font-weight: 700; color: var(--navy-2); line-height: 1.4; margin-bottom: 10px; }
-  .cap-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
-  .cap-r { min-width: 0; font-size: 13px; line-height: 1.85; color: var(--ink-soft); }
-  .cap-r dl { display: grid; grid-template-columns: 48px 1fr; gap: 6px 12px; }
-  .cap-r dt { font-size: 11px; color: var(--ink-faint); letter-spacing: 1px; padding-top: 3px; }
-  .cap-r dd { color: var(--ink-soft); }
-  .cap-r dd b { color: var(--ink); }
-  .cap-r dd .warn { color: var(--st-part); font-weight: 600; }
-
-  /* ============ 缺口链路 ============ */
-  .chain {
-    display: flex; align-items: stretch; gap: 0;
-    margin: 24px 0 8px; flex-wrap: wrap;
-  }
-  .chain-node {
-    flex: 1 1 0; min-width: 132px;
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 10px; padding: 14px 12px; text-align: center;
-    position: relative;
-  }
-  .chain-arrow {
-    flex: none; width: 26px; display: flex; align-items: center; justify-content: center;
-    color: var(--line); font-size: 15px;
-  }
-  .cn-t { font-size: 12.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 5px; }
-  .cn-s { font-size: 10.5px; color: var(--ink-faint); letter-spacing: .5px; }
-  .cn-flag {
-    display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 700;
-    padding: 2px 7px; border-radius: 3px;
-  }
-  .chain-node.ok .cn-flag { color: var(--st-ok); background: var(--st-ok-bg); }
-  .chain-node.gap {
-    border: 1.5px dashed #D9B65F; background: #FDF8ED;
-  }
-  .chain-node.gap .cn-t { color: #8A6413; }
-  .chain-node.gap .cn-flag { color: #8A6413; background: #F5E6C2; }
-
-  /* ============ 待上线 ============ */
-  .soon-card {
-    background: var(--card); border: 1px solid var(--line);
-    border-left: 3px solid var(--st-soon);
-    border-radius: 12px; padding: 24px 26px;
-  }
-  .soon-card h3 { font-size: 17px; color: var(--navy-2); margin-bottom: 14px; letter-spacing: .5px; }
-  .soon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
-  .soon-item { background: #F8FAFC; border-radius: 9px; padding: 14px 16px; }
-  .soon-k { font-size: 10.5px; letter-spacing: 1.4px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
-  .soon-v { font-size: 13px; color: var(--ink); line-height: 1.7; font-weight: 600; }
-  .soon-v span { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12px; margin-top: 4px; }
-
-  /* ============ 结论 ============ */
-  .takeaways { display: grid; gap: 14px; }
-  .tk {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 20px 24px;
-    display: grid; grid-template-columns: 34px 1fr; gap: 18px;
-  }
-  .tk-n {
-    font-family: Georgia, serif; font-size: 20px; font-weight: 700;
-    color: var(--line); line-height: 1.3;
-  }
-  .tk-b h4 { font-size: 14.5px; color: var(--navy-2); margin-bottom: 8px; letter-spacing: .3px; }
-  .tk-b p { font-size: 13px; color: var(--ink-soft); line-height: 1.9; }
-  .tk-b p b { color: var(--ink); }
-
-  .note-strip {
-    background: #F8FAFC; border: 1px solid var(--line-soft);
-    border-radius: 12px; padding: 18px 22px; margin-top: 22px;
-  }
-  .note-strip h4 { font-size: 12px; letter-spacing: 1.4px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 12px; }
-  .note-strip ul { list-style: none; }
-  .note-strip li {
-    font-size: 12.5px; color: var(--ink-soft); line-height: 1.9;
-    padding-left: 14px; position: relative;
-  }
-  .note-strip li::before {
-    content: ""; position: absolute; left: 0; top: 10px;
-    width: 4px; height: 4px; border-radius: 50%; background: var(--ink-faint);
-  }
-  .note-strip li b { color: var(--ink); }
-
-  .footer {
-    margin-top: 64px; padding-top: 20px;
-    border-top: 1px solid var(--line);
-    display: flex; justify-content: space-between;
-    font-size: 11.5px; color: var(--ink-faint); letter-spacing: 1.5px;
-  }
-  .footer .dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--navy-2); display: inline-block; margin-right: 8px;
+  .concl-m { font-size: 13.5px; font-weight: 700; letter-spacing: .3px; line-height: 1.45; }
+  .concl-m b { color: #E9C46A; }
+  .concl-r {
+    margin-left: auto; flex: none;
+    font-size: 11.5px; color: rgba(255,255,255,.68); line-height: 1.6; text-align: right;
   }
 
-  @media (max-width: 860px) {
-    .wrap { padding: 0 20px 60px; }
-    .hero h1 { font-size: 28px; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .rulers { grid-template-columns: 1fr; }
-    .cap { grid-template-columns: 1fr; gap: 14px; }
-    .soon-grid { grid-template-columns: 1fr; }
-    .verdict p { font-size: 16px; }
+  /* ---------- 脚注 ---------- */
+  .ft {
+    flex: none;
+    margin-top: 10px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; color: var(--ink-faint); letter-spacing: .8px;
   }
-
-  @media print {
-    body { background: #fff; }
-    section { page-break-inside: avoid; }
-    .verdict { background: #1E3A5F !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ft .lg { display: flex; align-items: center; gap: 14px; }
+  .ft .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--navy-2); display: inline-block; margin-right: 6px;
   }
+  .ft .sep { color: var(--line); }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<main id="stage">
+  <div class="page">
 
-  <!-- ================= Hero ================= -->
-  <header class="hero">
-    <div class="kicker">剑琅联盟 · Jianlang Alliance</div>
-    <h1>功能完整性与<em>待完善</em>现状</h1>
-    <p class="hero-sub">
-      十项核心能力，用两把尺子量：一把量<b>完成度</b>（做完了没有），一把量<b>必要性</b>（缺了会怎样）。
-      两个维度不能互相替代 —— 一项功能做得再完整，如果只落在增值层，它就不该占用上线窗口；
-      一项功能再简单，只要落在必备层，它就是门店还能不能开门的问题。
-    </p>
-
-    <div class="verdict">
-      <div class="verdict-label">一句话结论</div>
-      <p>
-        底座稳，上层没做满。真正挡住刚需层的，是那项<b>已经开发完、只差上线</b>的能力。
-      </p>
-      <div class="verdict-sub">
-        营业必备 3 项全部完整，门店不会因为缺功能而停摆。
-        刚需层 2 项里只完成 1 项 —— 缺的那一项不需要再投研发。
-        两个「功能不全」全部落在增值层，属于亮点没做满，不构成经营风险。
+    <!-- 头部 -->
+    <div class="hd">
+      <div class="hd-l">
+        <div class="kick">剑琅联盟 · Jianlang Alliance</div>
+        <h1>功能完整性与<em>待完善</em>现状</h1>
       </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-k">营业必备</div>
-        <div class="stat-v">3<small>/3</small></div>
-        <div class="stat-d">100% 完整 · 零缺口</div>
-      </div>
-      <div class="stat is-thin">
-        <div class="stat-k">经营刚需</div>
-        <div class="stat-v">1<small>/2</small></div>
-        <div class="stat-d">50% · 最薄的一层</div>
-      </div>
-      <div class="stat">
-        <div class="stat-k">竞争增值</div>
-        <div class="stat-v">3<small>/5</small></div>
-        <div class="stat-d">60% · 缺口都在这里</div>
-      </div>
-      <div class="stat">
-        <div class="stat-k">已开发待上线</div>
-        <div class="stat-v">1<small>项</small></div>
-        <div class="stat-d">零成本即可补齐</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ================= 01 标尺 ================= -->
-  <section id="s01">
-    <div class="sec-head">
-      <span class="sec-no">01</span>
-      <h2 class="sec-title">怎么读这份盘点<span>两把尺子，六个刻度</span></h2>
-      <div class="sec-en">How to read</div>
-    </div>
-
-    <p class="lead">
-      「做完了没有」和「缺了会怎样」是两个问题。
-      只讲完成度，会把所有功能压成一句「70% 完整」；只讲必要性，又说不清到底还差什么。
-      所以这份材料把两项分开量，<b>每项能力同时给出一个状态、一个档位</b>。
-    </p>
-
-    <div class="rulers">
-      <div class="ruler">
-        <div class="ruler-h"><b>尺子一 · 完成度</b> —— 做到哪一步了</div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="chip ok">功能完整</span></div>
-          <div class="ruler-txt"><b>主流程闭环，门店可以直接用。</b>不需要绕道、不需要人工兜底。</div>
+      <div class="hd-r">
+        <div class="kpi">
+          <div class="kpi-v">3<small>/3</small></div>
+          <div class="kpi-k">必备</div>
         </div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="chip part">功能不全</span></div>
-          <div class="ruler-txt"><b>有底座，但某一层没做透。</b>能用，只是用起来不趁手，或者要人补位。</div>
+        <div class="kpi">
+          <div class="kpi-v warn">1<small>/2</small></div>
+          <div class="kpi-k">刚需</div>
         </div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="chip soon">功能待上线</span></div>
-          <div class="ruler-txt"><b>开发已完成，尚未对门店开放。</b>差的不是研发，是上线。</div>
+        <div class="kpi">
+          <div class="kpi-v">3<small>/5</small></div>
+          <div class="kpi-k">增值</div>
         </div>
-      </div>
-
-      <div class="ruler">
-        <div class="ruler-h"><b>尺子二 · 必要性</b> —— 缺了会怎样</div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="need must">营业必备</span></div>
-          <div class="ruler-txt"><b>缺了店开不了张。</b>收不了钱、发不出工资 —— 门店当天就得停摆。</div>
-        </div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="need core">经营刚需</span></div>
-          <div class="ruler-txt"><b>天天用，影响效率与收入。</b>缺了有土办法兜底，但会持续失血。</div>
-        </div>
-        <div class="ruler-row">
-          <div class="ruler-tag"><span class="need plus">竞争增值</span></div>
-          <div class="ruler-txt"><b>不影响运转，是差异点。</b>决定的是「为什么选你」，不是「能不能用你」。</div>
+        <div class="kpi">
+          <div class="kpi-v">1<small>项</small></div>
+          <div class="kpi-k">已开发待上线</div>
         </div>
       </div>
     </div>
 
-    <div class="note-strip">
-      <h4>关于两套命名</h4>
-      <ul>
-        <li><b>为什么不用「辅助功能」。</b>「必备 / 辅助 / 增值」三个词不同量纲 —— 前两个和后一个回答的不是同一个问题。而且把会员管理、员工提成叫「辅助」，是站不住的：那是门店的账本和工资单。</li>
-        <li><b>所以统一按「缺失后果」定义。</b>营业必备 = 停业；经营刚需 = 失血；竞争增值 = 少一个理由。三档共用同一把尺，才能横向比较。</li>
-        <li><b>证据标记。</b>部分能力的界面证据尚未取回，卡片中以 <span class="ev has">已核验</span> / <span class="ev">待取证</span> 区分 —— 未取证的只做方向判断，不作为既有结论对外引用。</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================= 02 全景 ================= -->
-  <section id="s02">
-    <div class="sec-head">
-      <span class="sec-no">02</span>
-      <h2 class="sec-title">能力全景<span>按门店经营链路排，缺口自己会浮出来</span></h2>
-      <div class="sec-en">Landscape</div>
-    </div>
-
-    <p class="lead">
-      十项能力按<b>一家店真实的一天</b>排序：客人怎么来（接客）→ 怎么收钱（开单）→ 怎么留下来（留客）→ 怎么算账（经营）→ 怎么再拉回来（增长）。
-      这样排之后，<b>哪一段有断点、断在哪一格</b>不需要再解释。
-    </p>
-
-    <div class="matrix-card">
-      <table class="mx">
+    <!-- 十项 -->
+    <div class="tbl">
+      <table>
+        <colgroup>
+          <col style="width:46px">
+          <col style="width:180px">
+          <col style="width:100px">
+          <col style="width:90px">
+          <col>
+        </colgroup>
         <thead>
           <tr>
-            <th style="width:44%">能力</th>
-            <th class="c" style="width:13%">链路位置</th>
-            <th class="c" style="width:15%">完成度</th>
-            <th class="c" style="width:16%">必要性</th>
-            <th class="c" style="width:12%">证据</th>
+            <th class="c">#</th>
+            <th>能力</th>
+            <th class="c">完成度</th>
+            <th class="c">必要性</th>
+            <th>简述</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="seg-row"><td colspan="5">接客 <span class="seg-en">Acquire</span></td></tr>
           <tr>
-            <th><span class="mx-no">⑤</span>在线预约</th>
-            <td class="c">接客</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need core">经营刚需</span></td>
-            <td class="c"><span class="ev">待取证</span></td>
+            <td class="c"><span class="no">01</span></td>
+            <td><div class="nm">开单记账</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need must">必备</span></td>
+            <td class="note">无纸化开单，<b>加项 → 派工 → 收款</b>一条线走完；挂单、取单、作废、重结齐备。</td>
           </tr>
           <tr>
-            <th><span class="mx-no">⑧</span>美团点评核销</th>
-            <td class="c">接客</td>
-            <td class="c"><span class="chip soon">功能待上线</span></td>
-            <td class="c"><span class="need core">经营刚需</span></td>
-            <td class="c"><span class="ev has">已核验</span></td>
-          </tr>
-
-          <tr class="seg-row"><td colspan="5">开单 <span class="seg-en">Checkout</span></td></tr>
-          <tr>
-            <th><span class="mx-no">①</span>开单记账</th>
-            <td class="c">开单</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need must">营业必备</span></td>
-            <td class="c"><span class="ev has">已核验</span></td>
-          </tr>
-
-          <tr class="seg-row"><td colspan="5">留客 <span class="seg-en">Retain</span></td></tr>
-          <tr>
-            <th><span class="mx-no">②</span>会员管理</th>
-            <td class="c">留客</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need must">营业必备</span></td>
-            <td class="c"><span class="ev">待取证</span></td>
+            <td class="c"><span class="no">02</span></td>
+            <td><div class="nm">会员管理</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need must">必备</span></td>
+            <td class="note">档案、消费记录、储值计次、群组筛选；<b>储值余额就是门店的负债表</b>。</td>
           </tr>
           <tr>
-            <th><span class="mx-no">⑦</span>公众号 / 小程序</th>
-            <td class="c">留客</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need plus">竞争增值</span></td>
-            <td class="c"><span class="ev">待取证</span></td>
+            <td class="c"><span class="no">03</span></td>
+            <td><div class="nm">员工管理</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need must">必备</span></td>
+            <td class="note">不止算提成，含<b>完整工资核算（底薪+提成+扣款）</b>，能直接出工资表。</td>
           </tr>
           <tr>
-            <th><span class="mx-no">⑨</span>服务日志</th>
-            <td class="c">留客</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need plus">竞争增值</span></td>
-            <td class="c"><span class="ev">待取证</span></td>
-          </tr>
-
-          <tr class="seg-row"><td colspan="5">经营 <span class="seg-en">Operate</span></td></tr>
-          <tr>
-            <th><span class="mx-no">③</span>员工管理 · 业绩提成 / 薪资</th>
-            <td class="c">经营</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need must">营业必备</span></td>
-            <td class="c"><span class="ev has">已核验</span></td>
+            <td class="c"><span class="no">04</span></td>
+            <td><div class="nm">经营周报</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need plus">增值</span></td>
+            <td class="note">日/周/月报表与趋势；不参与收银发薪，但是<b>老板愿意续费的依据</b>。</td>
           </tr>
           <tr>
-            <th><span class="mx-no">④</span>经营周报</th>
-            <td class="c">经营</td>
-            <td class="c"><span class="chip ok">功能完整</span></td>
-            <td class="c"><span class="need plus">竞争增值</span></td>
-            <td class="c"><span class="ev">待取证</span></td>
+            <td class="c"><span class="no">05</span></td>
+            <td><div class="nm">在线预约</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need core">刚需</span></td>
+            <td class="note">线上预约 + 到店提醒；技师时间不可库存，预约把档期从口头约定变成可排。</td>
           </tr>
-
-          <tr class="seg-row"><td colspan="5">增长 <span class="seg-en">Grow</span></td></tr>
-          <tr>
-            <th><span class="mx-no">⑥</span>营销短信</th>
-            <td class="c">增长</td>
-            <td class="c"><span class="chip part">功能不全</span></td>
-            <td class="c"><span class="need plus">竞争增值</span></td>
-            <td class="c"><span class="ev has">已核验</span></td>
+          <tr class="gap-row">
+            <td class="c"><span class="no">06</span></td>
+            <td><div class="nm">营销短信</div></td>
+            <td class="c"><span class="chip part">不全</span></td>
+            <td class="c"><span class="need plus">增值</span></td>
+            <td class="note">能筛人群、也能发出去，<i>缺的是自动触发场景</i>：预约未到、次卡将尽、生日关怀。</td>
           </tr>
           <tr>
-            <th><span class="mx-no">⑩</span>优惠券推送</th>
-            <td class="c">增长</td>
-            <td class="c"><span class="chip part">功能不全</span></td>
-            <td class="c"><span class="need plus">竞争增值</span></td>
-            <td class="c"><span class="ev has">已核验</span></td>
+            <td class="c"><span class="no">07</span></td>
+            <td><div class="nm">公众号 / 小程序</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need plus">增值</span></td>
+            <td class="note">消费推送、会员卡与券自查；是<b>载体不是能力</b>，权益线下也能核。</td>
+          </tr>
+          <tr>
+            <td class="c"><span class="no">08</span></td>
+            <td><div class="nm">美团点评核销</div></td>
+            <td class="c"><span class="chip soon">待上线</span></td>
+            <td class="c"><span class="need core">刚需</span></td>
+            <td class="note">抖音 + 美团<b>双平台已开发完成</b>；<u>只差上线</u>，不核销这笔钱就进不了自己的流水。</td>
+          </tr>
+          <tr>
+            <td class="c"><span class="no">09</span></td>
+            <td><div class="nm">服务日志</div></td>
+            <td class="c"><span class="chip ok">完整</span></td>
+            <td class="c"><span class="need plus">增值</span></td>
+            <td class="note">项目详情 + 效果图留档；生活美容是亮点，<b>医美 / 问题肌应升为刚需</b>（举证凭据）。</td>
+          </tr>
+          <tr class="gap-row">
+            <td class="c"><span class="no">10</span></td>
+            <td><div class="nm">优惠券推送</div></td>
+            <td class="c"><span class="chip part">不全</span></td>
+            <td class="c"><span class="need plus">增值</span></td>
+            <td class="note">能筛客群、能发代金券，<i>与 ⑥ 同源</i>：券发得出去，但不知道什么时机发给谁。</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="cross-hd">
-      <h3>把两个维度叠起来看，形状是这样的</h3>
-      <p>
-        横轴是缺了会怎样，纵轴是做到哪一步。格子里的数字对应上面的编号。
-        一眼能看出两件事：<b>第一列（营业必备）全满</b>，以及<b>第一行（未完成）只出现在最右边</b>。
-      </p>
+    <!-- 结论 -->
+    <div class="concl">
+      <div class="concl-l">结论</div>
+      <div class="concl-m">只推动一件事：把 <b>⑧ 美团点评核销</b> 上线 —— 刚需层唯一的洞，且零研发成本。</div>
+      <div class="concl-r">必备层零缺口，门店不会因缺功能停摆<br>两个「不全」都在增值层，不构成经营风险</div>
     </div>
 
-    <table class="cross">
-      <thead>
-        <tr>
-          <th class="rowh"></th>
-          <th>营业必备</th>
-          <th>经营刚需</th>
-          <th>竞争增值</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="rowseg">功能完整</td>
-          <td><span class="xit"><i>①</i>开单记账</span><span class="xit"><i>②</i>会员管理</span><span class="xit"><i>③</i>员工管理</span></td>
-          <td><span class="xit"><i>⑤</i>在线预约</span></td>
-          <td><span class="xit"><i>④</i>经营周报</span><span class="xit"><i>⑦</i>公众号/小程序</span><span class="xit"><i>⑨</i>服务日志</span></td>
-        </tr>
-        <tr>
-          <td class="rowseg">功能不全</td>
-          <td class="empty">—</td>
-          <td class="empty">—</td>
-          <td><span class="xit"><i>⑥</i>营销短信</span><span class="xit"><i>⑩</i>优惠券推送</span></td>
-        </tr>
-        <tr>
-          <td class="rowseg">功能待上线</td>
-          <td class="empty">—</td>
-          <td class="hot"><span class="xit"><i>⑧</i>美团点评核销</span></td>
-          <td class="empty">—</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-strip">
-      <h4>三个可以直接引用的读法</h4>
-      <ul>
-        <li><b>第一列全满 —— 门店不会因为缺功能而停摆。</b>营业必备 3 项全部完成，这是底气所在，值得明确讲出来，而不是含糊地说「整体还行」。</li>
-        <li><b>越往上层，缺口越多。</b>必备 3/3、刚需 1/2、增值 3/5。所谓「七成完整」是把三个层级平均掉得出的数字，<b>真实形态是「底座稳、上层待补」</b>，不是「底座不牢」。</li>
-        <li><b>唯一的高亮格是 ⑧。</b>它落在刚需层、状态是未上线、且不需要再投研发 —— 全表只有这一格同时满足这三个条件。</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================= 03 逐项 ================= -->
-  <section id="s03">
-    <div class="sec-head">
-      <span class="sec-no">03</span>
-      <h2 class="sec-title">逐项现状<span>做完的、没做透的、没上线的</span></h2>
-      <div class="sec-en">Item by item</div>
+    <!-- 脚注 -->
+    <div class="ft">
+      <div class="lg">
+        <span><span class="dot"></span>剑琅联盟 · 内部资料</span>
+        <span class="sep">|</span>
+        <span>完成度：完整 / 不全 / 待上线</span>
+        <span class="sep">|</span>
+        <span>必要性按缺失后果：必备=停业 · 刚需=失血 · 增值=少一个理由</span>
+      </div>
+      <div>2026-10 · 对内团队对齐</div>
     </div>
 
-    <p class="lead">
-      每项四行：<b>做到了什么</b>（现状）、<b>凭什么是这个状态</b>（依据）、<b>还差什么</b>（差距）、<b>该怎么读数</b>（判断）。
-      差距栏只写真实存在的缺口，不凑数、不美化。
-    </p>
+  </div>
+</main>
 
-    <!-- ---- 接客 ---- -->
-    <div class="seg-block">
-      <div class="seg-label"><em>接客</em> Acquire<span class="seg-count">2 项 · 刚需 2</span></div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">05</div>
-          <div class="cap-name">在线预约</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need core">经营刚需</span>
-            <span class="ev">待取证</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>顾客线上预约、到店提醒。技师时间是不可库存资源，预约把「谁几点有空」从口头约定变成可排的档期。</dd>
-            <dt>依据</dt><dd>能力已具备。落点在于<b>提醒是否自动触发</b> —— 若仍需店员手动发，它与 ⑥ 是同源问题。</dd>
-            <dt>差距</dt><dd class="warn">提醒的自动化程度待确认。手动提醒会随忙碌被跳过，等于预约没闭环。</dd>
-            <dt>读数</dt><dd>刚需层。缺了靠电话微信也能排，但档期冲突与空档损耗会持续发生。</dd>
-          </dl>
-        </div>
-      </div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">08</div>
-          <div class="cap-name">美团点评核销</div>
-          <div class="cap-tags">
-            <span class="chip soon">功能待上线</span>
-            <span class="need core">经营刚需</span>
-            <span class="ev has">已核验</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>抖音与美团<b>双平台均已开发完成</b>，核销后自动开单、金额进门店流水、提成落到人头。</dd>
-            <dt>依据</dt><dd>唯一「从 0 到 1」的新能力。其余九项是把已有链路做顺手，这一项是把没有的补上。</dd>
-            <dt>差距</dt><dd class="warn">只差上线。开发侧不欠工作量，欠的是一个上线动作。</dd>
-            <dt>读数</dt><dd>刚需层里唯一的洞。<b>一个人决定整层能否从 50% 跳到 100%。</b>详见第 05 节。</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- 开单 ---- -->
-    <div class="seg-block">
-      <div class="seg-label"><em>开单</em> Checkout<span class="seg-count">1 项 · 必备 1</span></div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">01</div>
-          <div class="cap-name">开单记账</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need must">营业必备</span>
-            <span class="ev has">已核验</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>无纸化开单，<b>加项 → 派工 → 收款</b>一条线走完。挂单、取单、作废、重新结账齐备，已结账的单也允许回头改。</dd>
-            <dt>依据</dt><dd>门店最高频、最不能出错的动作。三家同行（博卡8 / 美管加 / 美问）在这一环的差异，本质都是<b>派工与分钱的耦合方式</b>不同。</dd>
-            <dt>差距</dt><dd class="warn">派工到业绩的分配依赖事前设置，收银员需要理解提成口径；高峰期改账要离开开单页。</dd>
-            <dt>读数</dt><dd>必备层。它完成了，门店才有一天的流水。<b>这一项不允许「不全」。</b></dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- 留客 ---- -->
-    <div class="seg-block">
-      <div class="seg-label"><em>留客</em> Retain<span class="seg-count">3 项 · 必备 1 / 增值 2</span></div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">02</div>
-          <div class="cap-name">会员管理</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need must">营业必备</span>
-            <span class="ev">待取证</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>会员信息、消费记录、储值计次、客户群组精准筛选。<b>储值余额与次卡次数就是门店的负债表</b> —— 这是它必须落在必备层的原因。</dd>
-            <dt>依据</dt><dd>美业现金流靠预付。会员账不清，钱就不是老板的。</dd>
-            <dt>差距</dt><dd class="warn">筛选能力有，<b>但筛完没有出口</b> —— 圈出一批人之后，系统没有下一步动作。这个断点与 ⑥⑩ 是同一条链路上的问题。</dd>
-            <dt>读数</dt><dd>必备层且完整，底座没问题。<b>它的价值止步于「看得见」，还没走到「用得上」。</b></dd>
-          </dl>
-        </div>
-      </div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">07</div>
-          <div class="cap-name">微信公众号 / 小程序</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need plus">竞争增值</span>
-            <span class="ev">待取证</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>消费推送、会员卡与优惠券自查。顾客在微信里能看见自己的余额与权益。</dd>
-            <dt>依据</dt><dd>降低「我的卡还剩多少」这类咨询，把权益透明化交给顾客自己查。</dd>
-            <dt>差距</dt><dd class="warn">它是<b>载体，不是能力</b>。权益线下也能核，所以缺了不致命。</dd>
-            <dt>读数</dt><dd>增值层。决定顾客觉得你专业不专业，不决定门店能不能开门。</dd>
-          </dl>
-        </div>
-      </div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">09</div>
-          <div class="cap-name">服务日志</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need plus">竞争增值</span>
-            <span class="ev">待取证</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>记录客户所做项目详情、上传效果图。技师的手法与顾客的变化被留了档。</dd>
-            <dt>依据</dt><dd>复购说服靠「你上次做完是这样」，不靠口头记忆。</dd>
-            <dt>差距</dt><dd class="warn">增值层是<b>按生活美容业态</b>定的。<b>若面向医美或问题肌业态，应升为刚需</b> —— 效果图是纠纷举证的唯一凭据。</dd>
-            <dt>读数</dt><dd>增值层，可作亮点讲。但业态一变，档位就该跟着变，不要把这一条写死。</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- 经营 ---- -->
-    <div class="seg-block">
-      <div class="seg-label"><em>经营</em> Operate<span class="seg-count">2 项 · 必备 1 / 增值 1</span></div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">03</div>
-          <div class="cap-name">员工管理 · 业绩提成 / 薪资</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need must">营业必备</span>
-            <span class="ev has">已核验</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>员工信息 + 业绩提成 + <b>完整工资核算（底薪 + 提成 + 扣款）</b>。不只是「提成能算」，而是能直接出工资表。</dd>
-            <dt>依据</dt><dd>提成是技师收入的全部依据。算不出发不出工资，人就留不住。</dd>
-            <dt>差距</dt><dd class="warn">提成方案有多套口径，新店配置有学习成本；改账依赖事后重算，高峰期会打断收银节奏。</dd>
-            <dt>读数</dt><dd>必备层，且做到了同行多数只到「提成」这一层的<b>「工资表」深度</b>。这一点值得单独标出来。</dd>
-          </dl>
-        </div>
-      </div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">04</div>
-          <div class="cap-name">经营周报</div>
-          <div class="cap-tags">
-            <span class="chip ok">功能完整</span>
-            <span class="need plus">竞争增值</span>
-            <span class="ev">待取证</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>日 / 周 / 月营业报表、门店业绩报表、增长趋势分析。</dd>
-            <dt>依据</dt><dd>老板做决策的依据。但它不参与收银与发薪，所以不进必备层。</dd>
-            <dt>差距</dt><dd class="warn">功能本身完整。<b>风险在定位上</b>：它被归入增值层后，文档里「老板 / 决策视角」没有任何一项高于增值。</dd>
-            <dt>读数</dt><dd>增值层里<b>最该先做满的一项</b>。原因不在于它对经营有多必需，而在于它是老板愿意续费的心理依据 —— 门店运营者看功能，付钱的人看报表。</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- 增长 ---- -->
-    <div class="seg-block">
-      <div class="seg-label"><em>增长</em> Grow<span class="seg-count">2 项 · 增值 2 · 唯一缺口所在</span></div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">06</div>
-          <div class="cap-name">营销短信</div>
-          <div class="cap-tags">
-            <span class="chip part">功能不全</span>
-            <span class="need plus">竞争增值</span>
-            <span class="ev has">已核验</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd><b>能筛人群，也能发出去。</b>通道可用、圈选可用，缺的是「什么时候该发、发给谁、发什么」的成体系场景。</dd>
-            <dt>依据</dt><dd>缺的不是通道，是产品化。典型缺位场景：预约未到店、次卡余额将尽、项目到期复购、生日关怀、沉睡客唤醒。</dd>
-            <dt>差距</dt><dd class="warn">这五个场景有共同前提 —— <b>都必须自动触发</b>。靠人记得发，就一定发不出来。</dd>
-            <dt>读数</dt><dd>不是「链路断」，是<b>「链路已通、停在裸通道」</b>。性质不同，成本也不同：补通道贵，补场景便宜。</dd>
-          </dl>
-        </div>
-      </div>
-
-      <div class="cap">
-        <div class="cap-l">
-          <div class="cap-no">10</div>
-          <div class="cap-name">优惠券推送</div>
-          <div class="cap-tags">
-            <span class="chip part">功能不全</span>
-            <span class="need plus">竞争增值</span>
-            <span class="ev has">已核验</span>
-          </div>
-        </div>
-        <div class="cap-r">
-          <dl>
-            <dt>现状</dt><dd>可筛选分类客群、可发送代金券。与 ⑥ 是同一条链路上的两段。</dd>
-            <dt>依据</dt><dd>发券是促销动作，不影响到店与收款。</dd>
-            <dt>差距</dt><dd class="warn">与 ⑥ 同源：<b>券能发，但不知道该在什么时机发给谁</b>。</dd>
-            <dt>读数</dt><dd>与 ⑥ <b>合并为一个缺口</b>看，而不是两个孤立缺陷。合起来讲是「会员标签能筛，但筛完没有出口」——这比两条并列更有结构，也更能推导下一步。</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 04 缺口 ================= -->
-  <section id="s04">
-    <div class="sec-head">
-      <span class="sec-no">04</span>
-      <h2 class="sec-title">唯一的结构性缺口<span>营销触达：底座已通，场景待补</span></h2>
-      <div class="sec-en">The gap</div>
-    </div>
-
-    <p class="lead">
-      ⑥ 与 ⑩ 不该被读成两个「功能不全」。它们是同一条链路上的上下两段，合起来才说得清：
-      <b>链路是通的，只是停在最原始的那一层。</b>
-    </p>
-
-    <div class="chain">
-      <div class="chain-node ok">
-        <div class="cn-t">人群圈选</div>
-        <div class="cn-s">会员标签 · 群组</div>
-        <span class="cn-flag">已具备</span>
-      </div>
-      <div class="chain-arrow">›</div>
-      <div class="chain-node ok">
-        <div class="cn-t">内容 / 券</div>
-        <div class="cn-s">短信 · 代金券</div>
-        <span class="cn-flag">已具备</span>
-      </div>
-      <div class="chain-arrow">›</div>
-      <div class="chain-node ok">
-        <div class="cn-t">触达通道</div>
-        <div class="cn-s">短信 · 微信</div>
-        <span class="cn-flag">已具备</span>
-      </div>
-      <div class="chain-arrow">›</div>
-      <div class="chain-node gap">
-        <div class="cn-t">场景编排</div>
-        <div class="cn-s">自动触发 · 时机</div>
-        <span class="cn-flag">缺口在此</span>
-      </div>
-      <div class="chain-arrow">›</div>
-      <div class="chain-node ok">
-        <div class="cn-t">到店 / 核销</div>
-        <div class="cn-s">预约 · 收银</div>
-        <span class="cn-flag">已具备</span>
-      </div>
-    </div>
-
-    <p class="lead" style="margin-top:18px">
-      前三格和后一格都能用，<b>断在第四格</b>。这意味着要补的不是外部通道、不是数据打通，
-      而是一层<b>产品设计</b>——把「什么情况下自动发一条什么」写成规则。
-    </p>
-
-    <div class="takeaways">
-      <div class="tk">
-        <div class="tk-n">01</div>
-        <div class="tk-b">
-          <h4>性质判断：不是「链路断」，是「停在裸通道」</h4>
-          <p>
-            如果通道没接、人群没通，那是能力和数据问题，要投入外部资源。
-            而现在是<b>底座全部就位，只缺一层规则编排</b>——补的是产品设计，成本低一个量级。
-          </p>
-        </div>
-      </div>
-      <div class="tk">
-        <div class="tk-n">02</div>
-        <div class="tk-b">
-          <h4>该补的五个场景</h4>
-          <p>
-            <b>预约未到店</b>（挽回流失）、<b>次卡余额将尽</b>（自然复购窗口）、<b>项目到期</b>（效果周期提醒）、
-            <b>生日关怀</b>（低成本情感触达）、<b>沉睡客唤醒</b>（分层召回）。
-            共同前提是<b>必须自动触发</b>——凡是要人记得发的，最终都会不发。
-          </p>
-        </div>
-      </div>
-      <div class="tk">
-        <div class="tk-n">03</div>
-        <div class="tk-b">
-          <h4>为什么它排在 ⑧ 之后</h4>
-          <p>
-            这一整条链路落在<b>增值层</b>，慢一点不会让门店停摆。
-            而 ⑧ 落在刚需层。所以即便这个缺口看起来更「像产品问题」，<b>优先级也应排在 ⑧ 之后</b>——
-            不是它不重要，是它不紧急。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 05 待上线 ================= -->
-  <section id="s05">
-    <div class="sec-head">
-      <span class="sec-no">05</span>
-      <h2 class="sec-title">唯一一项待上线<span>不是欠账，是增量</span></h2>
-      <div class="sec-en">Pending</div>
-    </div>
-
-    <p class="lead">
-      ⑧ 不应该被归进「待完善」。它是十项里<b>唯一补空白的能力</b>，其余九项都是把已有链路做顺手。
-      把增量讲成欠账，等于自己降级。
-    </p>
-
-    <div class="soon-card">
-      <h3>美团点评核销 · 抖音 + 美团双平台均已开发完成</h3>
-      <p style="font-size:13.5px;color:var(--ink-soft);line-height:1.9">
-        门店的客流入口正在从「路过」变成「线上先买券」。核销要解决的是最后一百米：
-        <b>顾客手里已经有券了，门店能不能在收银台上把这张券变成订单、流水和业绩。</b>
-        它不只是多了一个功能，而是把平台上的流量真正接进门店的账里。
-      </p>
-
-      <div class="soon-grid">
-        <div class="soon-item">
-          <div class="soon-k">补的是什么</div>
-          <div class="soon-v">账外的钱
-            <span>券在平台侧完成交易，门店侧不核销，这笔钱就永远进不了自己的流水与提成。</span>
-          </div>
-        </div>
-        <div class="soon-item">
-          <div class="soon-k">为什么是刚需</div>
-          <div class="soon-v">客流已迁移
-            <span>顾客先买券再到店已成常态。不接核销，等于把已付款的客人挡在账外。</span>
-          </div>
-        </div>
-        <div class="soon-item">
-          <div class="soon-k">为什么优先</div>
-          <div class="soon-v">零研发成本
-            <span>开发已完成。这份材料推动的唯一动作是「上线」，不是「立项」。</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="note-strip" style="margin-top:20px">
-        <h4>上线后盯什么</h4>
-        <ul>
-          <li><b>核销订单占比</b>（核销订单 ÷ 门店总订单）—— 基线为 0，看的是「开始出现」，不是改善幅度。</li>
-          <li><b>核销订单金额占比</b>（核销实收 ÷ 门店总实收）—— 验证这笔钱是否真的并进了同一本账。</li>
-          <li><b>核销是否能自动带出业绩归属</b> —— 若核销后提成要人工补，等于把刚补上的洞又开了一个小的。</li>
-        </ul>
-        <p style="font-size:12.5px;color:var(--ink-soft);margin-top:12px;line-height:1.9">
-          这三条不是验收清单，是<b>判断它有没有真正并入经营</b>的三面镜子。第一项涨了、第二项没涨，说明核销了但金额没记账；前两项都涨了、第三项要人工补，说明账进了、人没认。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 06 结论 ================= -->
-  <section id="s06">
-    <div class="sec-head">
-      <span class="sec-no">06</span>
-      <h2 class="sec-title">结论与下一步<span>只推动一件事</span></h2>
-      <div class="sec-en">Next</div>
-    </div>
-
-    <div class="takeaways">
-      <div class="tk">
-        <div class="tk-n">01</div>
-        <div class="tk-b">
-          <h4>必备层 100% 覆盖，这不是小事</h4>
-          <p>
-            收钱（①）、记账本（②）、发工资（③）三件事全部做完了。
-            很多系统是在必备层就露怯的 —— <b>我们这一层没有洞，这是可以正面讲的底气</b>。
-          </p>
-        </div>
-      </div>
-      <div class="tk">
-        <div class="tk-n">02</div>
-        <div class="tk-b">
-          <h4>刚需层 50%，而缺的那一项不需要研发</h4>
-          <p>
-            <b>⑧ 一个人决定整层能否从 50% 跳到 100%。</b>
-            这是全表唯一「零开发成本即可补齐」的缺口。如果这份材料只推动一个动作，就是让它上线 ——
-            它的投入产出比高过任何新增需求。
-          </p>
-        </div>
-      </div>
-      <div class="tk">
-        <div class="tk-n">03</div>
-        <div class="tk-b">
-          <h4>两个「不全」都在增值层，不构成经营风险</h4>
-          <p>
-            ⑥⑩ 合起来是<b>一条链路停在裸通道</b>，不是两个孤立缺陷。
-            补它便宜（是产品设计不是外部接入），但优先级应排在 ⑧ 之后 ——
-            <b>不紧急，不是不重要。</b>
-          </p>
-        </div>
-      </div>
-      <div class="tk">
-        <div class="tk-n">04</div>
-        <div class="tk-b">
-          <h4>下一步的次序，建议就按这个来</h4>
-          <p>
-            <b>第一步</b>：⑧ 定上线时间 —— 唯一同时满足「刚需 + 已完成 + 未上线」的项。
-            <b>第二步</b>：④ 把报表做满 —— 增值层里老板视角的续费依据。
-            <b>第三步</b>：⑥⑩ 补场景编排 —— 便宜，但不急。
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="note-strip">
-      <h4>口径与边界</h4>
-      <ul>
-        <li><b>状态来自产品方自评</b>，本材料负责把它结构化、与必要性交叉，并指出交叉后浮现的结论；不替代逐项的验收测试。</li>
-        <li><b>标「待取证」的五项</b>（②④⑤⑦⑨）只做了方向判断，未取得界面证据。对外引用前应先补齐截图，或改为定性表述。</li>
-        <li><b>必要性分档按生活美容业态给出。</b>若面向医美 / 问题肌，⑨ 服务日志应从增值升为刚需（效果图是纠纷举证凭据）。</li>
-        <li><b>⑧ 的范围已确认为抖音 + 美团双平台开发完成</b>，尚待上线；上线时间未在本材料中给定。</li>
-      </ul>
-    </div>
-
-    <div class="footer">
-      <div><span class="dot"></span>剑琅联盟 · 内部资料</div>
-      <div>功能完整性与待完善现状 · 对内团队对齐用</div>
-    </div>
-  </section>
-
-</div>
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  function fit() {
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform =
+      'translate(' + ((window.innerWidth - 1280 * s) / 2) + 'px,' +
+      ((window.innerHeight - 720 * s) / 2) + 'px) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
 
 </body>
 </html>
