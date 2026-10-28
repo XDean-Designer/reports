@@ -123,6 +123,9 @@
     gap: 11px;
     align-items: stretch;
   }
+  /* 条目较多的组：单行 4 列，避免折行撑高整屏 */
+  .grp-cards.four { grid-template-columns: repeat(4, 1fr); gap: 9px; }
+  .grp-cards.four .e-desc { font-size: 10.5px; line-height: 1.45; }
 
   .entry {
     display: flex; flex-direction: column;
@@ -237,7 +240,7 @@
           <span class="grp-en">Diagnosis</span>
           <span class="grp-tip">背景、诊断与价值论证</span>
         </div>
-        <div class="grp-cards">
+        <div class="grp-cards four">
           <a class="entry" href="剑琅联盟美业趋势与启示.html">
             <div class="e-title">美业趋势与启示</div>
             <p class="e-desc">行业两极分化与存量经营的判断、美丽田园战略内核拆解，以及特色小店与单店效率的路径。</p>
@@ -245,6 +248,10 @@
           <a class="entry" href="剑琅联盟转化漏斗与增长诊断.html">
             <div class="e-title">转化漏斗与增长诊断</div>
             <p class="e-desc">9 级转化漏斗、三处卡点归因与 7 家门店回访汇总及解决方案。</p>
+          </a>
+          <a class="entry" href="剑琅联盟RTB埋点分析与续费漏斗.html">
+            <div class="e-title">RTB 埋点分析与续费漏斗</div>
+            <p class="e-desc">SLS 日志还原 RTB 链路与续费漏斗，定位两处 P0 故障。</p>
           </a>
           <a class="entry" href="剑琅联盟功能价值汇报.html">
             <div class="e-title">功能价值汇报 · 三大支柱</div>
