@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漏斗 GAP 分析 · RTB 功能设计论证</title>
+<style>
+  :root {
+    --navy: #17293D;
+    --navy-2: #1E3A5F;
+    --steel: #35597F;
+    --tint: #EDF2F7;
+    --bg: #EBEEF2;
+    --card: #FFFFFF;
+    --line: #DEE3E9;
+    --line-soft: #EDF0F4;
+    --ink: #22303F;
+    --ink-soft: #5F6C7B;
+    --ink-faint: #8D97A3;
+
+    --ok: #2F7D68;      --ok-bg: #E7F1EE;
+    --part: #A8761B;    --part-bg: #F7EFE0;
+    --soon: #2C5C93;    --soon-bg: #E7EEF7;
+    --bad: #A33A32;     --bad-bg: #F8E9E7;
+
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-num: Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: var(--font-cjk);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 0 46px;
+  }
+
+  .slot { width: 100%; max-width: 1280px; margin: 0 auto 24px; }
+  .card {
+    width: 1280px; height: 720px;
+    transform-origin: 0 0;
+    background: var(--card);
+    box-shadow: 0 18px 50px rgba(23,41,61,.16);
+    overflow: hidden;
+  }
+  .page { height: 100%; padding: 26px 44px 20px; display: flex; flex-direction: column; }
+
+  /* ---------- 头部 ---------- */
+  .hd {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding-bottom: 11px; border-bottom: 2px solid var(--navy-2); flex: none;
+  }
+  .hd-l .kick {
+    font-size: 9.5px; letter-spacing: 2.6px; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 6px;
+  }
+  .hd-l h1 {
+    font-size: 25px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--navy); line-height: 1.15;
+  }
+  .hd-l h1 em { font-style: normal; color: var(--steel); }
+  .hd-l .sub { font-size: 11.5px; color: var(--ink-faint); margin-top: 7px; letter-spacing: .5px; }
+  .hd-r { display: flex; gap: 22px; padding-bottom: 3px; }
+  .kpi { text-align: right; }
+  .kpi-v {
+    font-family: var(--font-num); font-size: 22px; font-weight: 700;
+    line-height: 1; color: var(--navy-2); font-variant-numeric: tabular-nums;
+  }
+  .kpi-v small { font-size: 11px; color: var(--ink-faint); font-weight: 400; }
+  .kpi-v.ok { color: var(--ok); }
+  .kpi-v.warn { color: var(--part); }
+  .kpi-v.bad { color: var(--bad); }
+  .kpi-k {
+    font-size: 9.5px; letter-spacing: 1.2px; color: var(--ink-faint);
+    margin-top: 5px; text-transform: uppercase;
+  }
+
+  /* ---------- 小节标题 ---------- */
+  .sec-hd { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 8px; flex: none; }
+  .sec-hd:first-of-type { margin-top: 12px; }
+  .sec-hd .sn {
+    font-family: var(--font-num); font-size: 12.5px; font-weight: 700;
+    color: #fff; background: var(--navy-2); border-radius: 3px;
+    padding: 1px 7px; letter-spacing: .5px;
+  }
+  .sec-hd h2 { font-size: 13.5px; font-weight: 700; color: var(--navy-2); letter-spacing: .6px; }
+  .sec-hd .sd { font-size: 10.5px; color: var(--ink-faint); margin-left: auto; letter-spacing: .4px; }
+
+  .chip {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 1px 7px; border-radius: 3px; white-space: nowrap;
+  }
+  .chip.ok   { color: var(--ok);   background: var(--ok-bg); }
+  .chip.part { color: var(--part); background: var(--part-bg); }
+  .chip.soon { color: var(--soon); background: var(--soon-bg); }
+  .chip.bad  { color: var(--bad);  background: var(--bad-bg); }
+  .chip.plain{ color: var(--ink-faint); background: var(--tint); }
+
+  /* ---------- 结论主卡 ---------- */
+  .lead {
+    border: 1px solid var(--line); border-left: 4px solid var(--ok);
+    border-radius: 4px; background: #F8FCFA;
+    padding: 13px 18px 14px; margin-top: 14px; flex: none;
+  }
+  .lead .lt {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 1.6px;
+    color: var(--ok); margin-bottom: 7px;
+  }
+  .lead .lh { font-size: 17.5px; font-weight: 700; color: var(--navy); line-height: 1.45; }
+  .lead .lh b { color: var(--ok); }
+  .lead .ld { font-size: 11.5px; color: var(--ink-soft); margin-top: 7px; line-height: 1.6; }
+
+  /* ---------- 四层归因 ---------- */
+  .layers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .lyr {
+    border: 1px solid var(--line); border-radius: 4px; background: #FCFDFE;
+    padding: 11px 13px 12px; position: relative; overflow: hidden;
+  }
+  .lyr::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--steel);
+  }
+  .lyr.zero { background: #F8FCFA; }
+  .lyr.zero::before { background: var(--ok); }
+  .lyr.tech::before { background: var(--bad); }
+  .lyr.ops::before  { background: var(--part); }
+  .lyr.scale::before{ background: #B9C2CC; }
+  .lyr .ln { font-size: 10px; letter-spacing: 1.3px; color: var(--ink-faint); margin-bottom: 8px; }
+  .lyr .lv {
+    font-family: var(--font-num); font-size: 30px; font-weight: 700; line-height: 1;
+    color: var(--navy-2); font-variant-numeric: tabular-nums;
+  }
+  .lyr .lv small { font-size: 11px; color: var(--ink-faint); font-weight: 400; margin-left: 4px; }
+  .lyr.zero .lv { color: var(--ok); }
+  .lyr.tech .lv { color: var(--bad); }
+  .lyr.ops  .lv { color: var(--part); }
+  .lyr.scale .lv{ color: #8D97A3; }
+  .lyr .lx { font-size: 10.5px; color: var(--ink-soft); line-height: 1.5; margin-top: 8px; }
+
+  /* ---------- 水槽漏斗 ---------- */
+  .trough-wrap {
+    --f-basin: #FFF9F0;
+    --f-basin-stroke: #D8CDBA;
+    --f-water: #B8E4E6;
+    --f-water-ink: #3A8A8C;
+    --f-leak: #F0A091;
+    --f-leak-ink: #B04A38;
+    --f-hold: #A8D9C0;
+    --f-hold-ink: #2F7D68;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .trough-legend {
+    display: flex; gap: 18px; justify-content: center;
+    font-size: 9.5px; color: var(--ink-soft); margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .trough-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .trough-legend i {
+    width: 11px; height: 9px; border-radius: 2px; border: 1px solid;
+    display: inline-block;
+  }
+  .trough-legend .sw.water { background: var(--f-water); border-color: #8EC8CA; }
+  .trough-legend .sw.leak  { background: var(--f-leak);  border-color: #D98B79; }
+  .trough-legend .sw.hold  { background: var(--f-hold);  border-color: #86C4A8; }
+
+  .funnel { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .stage { width: var(--w); margin: 0 auto; }
+  .stage .basin {
+    position: relative; border-radius: 6px;
+    border: 1.5px solid var(--f-basin-stroke);
+    background: var(--f-basin); overflow: hidden; min-height: 56px;
+  }
+  .stage .water {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: var(--fill); background: var(--f-water);
+  }
+  .stage .label {
+    position: relative; z-index: 2;
+    padding: 7px 13px 8px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .stage .label .name { font-weight: 700; font-size: 12.5px; color: #3A342C; letter-spacing: .3px; }
+  .stage .label .name i {
+    font-style: normal; font-size: 9.5px; font-weight: 700; color: #8A8278;
+    margin-right: 6px; letter-spacing: 1px;
+  }
+  .stage .label .nums { text-align: right; font-size: 10.5px; color: #5A5248; line-height: 1.4; white-space: nowrap; }
+  .stage .label .nums .big {
+    font-family: var(--font-num); font-size: 19px; font-weight: 700;
+    color: var(--f-water-ink); margin-right: 3px; font-variant-numeric: tabular-nums;
+  }
+  .stage .label .nums .rate { font-weight: 700; color: #3A342C; }
+
+  .spout {
+    width: 14px; height: 9px; background: var(--f-basin-stroke);
+    clip-path: polygon(0 0, 100% 0, 72% 100%, 28% 100%);
+    margin: 0 auto 1px;
+  }
+  .drip-zone {
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px; flex-wrap: wrap; min-height: 30px; padding: 2px 0;
+  }
+  .drip {
+    position: relative; display: inline-block; text-decoration: none;
+    border-radius: 999px; padding: 2px 10px 2px 21px;
+    font-size: 10px; font-weight: 700; line-height: 1.5;
+    background: #FFF5F2; border: 1.2px solid var(--f-leak); color: var(--f-leak-ink);
+  }
+  .drip::before {
+    content: ""; position: absolute; left: 7px; top: 50%;
+    width: 7px; height: 9px; transform: translateY(-55%);
+    background: var(--f-leak);
+    clip-path: polygon(50% 100%, 0 28%, 22% 0, 78% 0, 100% 28%);
+  }
+  .drip.hold {
+    background: #F4FBF7; border-color: var(--f-hold); color: var(--f-hold-ink);
+  }
+  .drip.hold::before { background: var(--f-hold); clip-path: none; border-radius: 50%; height: 6px; }
+
+  /* ---------- 右栏解读 ---------- */
+  .read { display: flex; flex-direction: column; gap: 9px; }
+  .rcard {
+    border: 1px solid var(--line); border-left: 3px solid var(--navy-2);
+    border-radius: 3px; padding: 9px 13px 10px; background: #FCFDFE;
+  }
+  .rcard.g { border-left-color: var(--ok); background: #F8FCFA; }
+  .rcard.a { border-left-color: var(--part); background: #FDFBF6; }
+  .rcard-t {
+    font-size: 12px; font-weight: 700; color: var(--navy-2);
+    margin-bottom: 4px; display: flex; align-items: baseline; gap: 7px;
+  }
+  .rcard-t .tag {
+    font-size: 9px; font-weight: 700; letter-spacing: .6px;
+    padding: 1px 5px; border-radius: 2px; color: #fff; background: var(--navy-2); flex: none;
+  }
+  .rcard.g .rcard-t .tag { background: var(--ok); }
+  .rcard.a .rcard-t .tag { background: var(--part); }
+  .rcard-d { font-size: 10.8px; color: var(--ink-soft); line-height: 1.58; }
+  .rcard-d b { color: var(--ink); font-weight: 600; }
+  .rcard-d code {
+    font-family: Consolas, monospace; font-size: 10px;
+    background: var(--tint); padding: 0 3px; border-radius: 2px; color: var(--navy-2);
+  }
+
+  /* ---------- 7 步链路 ---------- */
+  .chain { display: flex; align-items: stretch; gap: 0; }
+  .chain .ck {
+    flex: 1; border: 1px solid var(--line); border-right: none;
+    padding: 7px 9px 8px; background: #FCFDFE; position: relative;
+  }
+  .chain .ck:last-child { border-right: 1px solid var(--line); border-radius: 0 3px 3px 0; }
+  .chain .ck:first-child { border-radius: 3px 0 0 3px; }
+  .chain .ck .ci {
+    font-family: var(--font-num); font-size: 10px; font-weight: 700;
+    color: var(--ink-faint); letter-spacing: .5px;
+  }
+  .chain .ck .cn { font-size: 10.5px; font-weight: 600; color: var(--navy-2); margin-top: 3px; line-height: 1.35; }
+  .chain .ck .cs { font-size: 9.5px; margin-top: 5px; font-weight: 700; letter-spacing: .3px; }
+  .chain .ck.pass .cs { color: var(--ok); }
+  .chain .ck.drop { background: #FDFAF9; }
+  .chain .ck.drop .cs { color: var(--bad); }
+
+  /* ---------- GAP 三卡 ---------- */
+  .gaplist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+  .gap {
+    border: 1px solid var(--line); border-radius: 4px; background: #FCFDFE;
+    padding: 11px 13px 12px; display: flex; flex-direction: column;
+  }
+  .gap.g1 { border-top: 3px solid var(--part); }
+  .gap.g2 { border-top: 3px solid var(--bad); }
+  .gap.g3 { border-top: 3px solid var(--bad); }
+  .gap-hd { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+  .gap-hd .gid {
+    font-family: var(--font-num); font-size: 11px; font-weight: 700;
+    color: #fff; background: var(--navy-2); border-radius: 2px; padding: 1px 6px;
+  }
+  .gap-hd .gt { font-size: 12.5px; font-weight: 700; color: var(--navy-2); line-height: 1.3; }
+  .gap-row { font-size: 10.8px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 5px; }
+  .gap-row .k {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .8px;
+    color: var(--ink-faint); margin-right: 5px;
+  }
+  .gap-row b { color: var(--ink); font-weight: 600; }
+  .gap-row.at { padding-top: 6px; border-top: 1px dashed var(--line); margin-top: auto; }
+  .gap-row.at .verdict { font-weight: 700; }
+  .gap-row.at .verdict.no { color: var(--ok); }
+  .gap-owner {
+    margin-top: 7px; font-size: 10px; font-weight: 700;
+    padding: 4px 8px; border-radius: 3px; letter-spacing: .3px;
+  }
+  .gap-owner.ops   { color: var(--part); background: var(--part-bg); }
+  .gap-owner.tech  { color: var(--bad);  background: var(--bad-bg); }
+
+  /* ---------- 收口条 ---------- */
+  .verdict-bar {
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid #CBE4D9; background: #F3FAF6; border-radius: 4px;
+    padding: 9px 15px; margin-top: 12px; flex: none;
+  }
+  .verdict-bar .vb-n {
+    font-family: var(--font-num); font-size: 26px; font-weight: 700;
+    color: var(--ok); line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .verdict-bar .vb-t { font-size: 11.5px; color: var(--ink-soft); line-height: 1.5; }
+  .verdict-bar .vb-t b { color: var(--navy-2); font-weight: 700; }
+
+  /* ---------- 证据清单 ---------- */
+  .evl { display: flex; flex-direction: column; gap: 7px; }
+  .ev {
+    display: flex; gap: 10px; align-items: flex-start;
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 8px 12px; background: #FCFDFE;
+  }
+  .ev .en {
+    font-family: var(--font-num); font-size: 13px; font-weight: 700;
+    color: var(--steel); line-height: 1.2; flex: none; width: 16px;
+  }
+  .ev .et { font-size: 11px; color: var(--ink-soft); line-height: 1.55; }
+  .ev .et b { color: var(--navy-2); font-weight: 700; display: block; margin-bottom: 2px; font-size: 11.5px; }
+
+  /* ---------- 待办 ---------- */
+  .todo { display: flex; flex-direction: column; gap: 8px; }
+  .td {
+    display: flex; align-items: flex-start; gap: 9px;
+    border: 1px solid var(--line); border-radius: 3px; padding: 9px 12px; background: #FCFDFE;
+  }
+  .td .tn {
+    font-family: var(--font-num); font-size: 10.5px; font-weight: 700; color: #fff;
+    background: var(--steel); border-radius: 2px; padding: 1px 5px; flex: none; margin-top: 1px;
+  }
+  .td .tx { font-size: 11px; color: var(--ink-soft); line-height: 1.5; }
+  .td .tx b { color: var(--navy-2); font-weight: 700; display: block; font-size: 11.5px; margin-bottom: 2px; }
+  .td .to {
+    margin-left: auto; font-size: 9.5px; font-weight: 700; letter-spacing: .5px;
+    padding: 2px 7px; border-radius: 2px; flex: none; white-space: nowrap;
+  }
+  .td .to.dev { color: var(--bad); background: var(--bad-bg); }
+  .td .to.ops { color: var(--part); background: var(--part-bg); }
+
+  .closing {
+    border: 1px solid var(--line); border-top: 2px solid var(--navy-2);
+    background: #FAFCFE; border-radius: 3px; padding: 11px 16px 12px;
+  }
+  .closing .ct { font-size: 9.5px; font-weight: 700; letter-spacing: 1.6px; color: var(--ink-faint); margin-bottom: 6px; }
+  .closing .cd { font-size: 12.5px; color: var(--ink); line-height: 1.62; }
+  .closing .cd b { color: var(--steel); font-weight: 700; }
+
+  /* ---------- 关切对照 ---------- */
+  .qmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .q {
+    border: 1px solid var(--line); border-radius: 4px; background: #FCFDFE;
+    padding: 10px 13px 11px;
+  }
+  .q .qq {
+    font-size: 10.5px; font-weight: 700; color: var(--steel);
+    letter-spacing: .4px; margin-bottom: 7px;
+    padding-bottom: 6px; border-bottom: 1px dashed var(--line);
+  }
+  .q .qa { font-size: 11px; color: var(--ink-soft); line-height: 1.6; }
+  .q .qa b { color: var(--navy-2); font-weight: 700; }
+
+  /* ---------- 反向验证 ---------- */
+  .neg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .nq {
+    border: 1px solid var(--line); border-top: 3px solid #B9C2CC;
+    border-radius: 4px; background: #FBFCFD; padding: 10px 13px 11px;
+  }
+  .nq .nn {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--ink-faint); margin-bottom: 7px;
+  }
+  .nq .nt { font-size: 11px; color: var(--ink); line-height: 1.55; margin-bottom: 8px; }
+  .nq .nt b { color: var(--navy-2); }
+  .nq .nr {
+    font-size: 10.5px; color: var(--ok); line-height: 1.55;
+    background: #F3FAF6; border-radius: 3px; padding: 6px 9px;
+  }
+  .nq .nr b { font-weight: 700; }
+
+  /* ---------- 可证伪预测 ---------- */
+  .pred {
+    border: 1px solid var(--line); border-radius: 4px; background: #FAFCFE;
+    padding: 11px 15px 12px;
+  }
+  .pred .pt {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--ink-faint); margin-bottom: 9px;
+  }
+  .pred .pt b { color: var(--navy-2); }
+  .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .pi .pin {
+    font-family: var(--font-num); font-size: 10.5px; font-weight: 700;
+    color: #fff; background: var(--steel); border-radius: 2px;
+    padding: 1px 5px; margin-right: 6px;
+  }
+  .pi .pif { font-size: 10.8px; color: var(--ink-soft); line-height: 1.55; }
+  .pi .pif b { color: var(--navy-2); font-weight: 700; }
+
+  /* ---------- 页脚 ---------- */
+  .ft {
+    flex: none; margin-top: auto; padding-top: 9px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 9.5px; color: var(--ink-faint); letter-spacing: .7px;
+  }
+  .ft .lg { display: flex; align-items: center; gap: 12px; }
+  .ft .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--navy-2); display: inline-block; margin-right: 5px;
+  }
+  .ft .sep { color: var(--line); }
+</style>
+</head>
+<body>
+
+<!-- ================= P1 结论 ================= -->
+<div class="slot" id="p1"><div class="card"><div class="page">
+  <div class="hd">
+    <div class="hd-l">
+      <div class="kick">RTB Funnel Gap Analysis · 2026.10.22 — 10.28</div>
+      <h1>RTB 的功能设计<em>没有卡住店主</em></h1>
+      <div class="sub">9 家门店进入版本中心，6 家走通从选套餐到拿到付款码的全程 —— 链路本身是通的</div>
+    </div>
+    <div class="hd-r">
+      <div class="kpi"><div class="kpi-v ok">6/9<small>家</small></div><div class="kpi-k">走通下单全链</div></div>
+      <div class="kpi"><div class="kpi-v ok">0<small>个</small></div><div class="kpi-k">设计层卡点</div></div>
+      <div class="kpi"><div class="kpi-v warn">39%</div><div class="kpi-k">版本中心触达</div></div>
+    </div>
+  </div>
+
+  <div class="lead">
+    <div class="lt">核心结论</div>
+    <div class="lh">续费转化的瓶颈不在产品设计，而在<b>设计层之外的三个环节</b></div>
+    <div class="ld">
+      把 7 天的 RTB 链路拆成「设计层 / 技术层 / 运营层 / 规模层」四段归因后，
+      设计层卡点为 <b>0</b>。三个实际卡点分别落在客户端兼容、服务端接口与到期触达上；
+      而这三个环节，改动产品界面并不会让它们变好。
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">01</span><h2>四层归因：卡点分布</h2>
+    <span class="sd">按「改哪一层才能解决」归类，非按影响大小</span></div>
+
+  <div class="layers">
+    <div class="lyr zero">
+      <div class="ln">设计层 · 流程 / 信息 / 路径</div>
+      <div class="lv">0<small>个卡点</small></div>
+      <div class="lx">下单链路 6 个步骤，没有任何一步<br>出现稳定跳失；层级与入口均无异常</div>
+    </div>
+    <div class="lyr tech">
+      <div class="ln">技术层 · 客户端 / 服务端</div>
+      <div class="lv">2<small>个卡点</small></div>
+      <div class="lx">Android 5.0.19 提交入口失效；<br>付款二维码接口 10-28 14:20 起报错</div>
+    </div>
+    <div class="lyr ops">
+      <div class="ln">运营层 · 触达 / 提醒</div>
+      <div class="lv">1<small>个卡点</small></div>
+      <div class="lx">23 家在约门店中 14 家从未打开<br>版本中心 —— 到期提醒没有把人带进来</div>
+    </div>
+    <div class="lyr scale">
+      <div class="ln">规模层 · 样本 / 基数</div>
+      <div class="lv">23<small>家在约</small></div>
+      <div class="lx">其中体验版 4 家、7 天内到期 6 家；<br>基数小，比率只作形态参考</div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">02</span><h2>样本口径</h2>
+    <span class="sd">来源：生产日志 7 日全量 + 合约续费清单</span></div>
+
+  <div class="rcard">
+    <div class="rcard-d">
+      本次分析覆盖 <b>23 家在约门店</b>，其中体验版 4 家、7 天内到期 6 家、已过期 2 家；
+      7 日内实际进入版本中心 <b>9 家</b>，最终成功提交订单 <b>6 家</b>。
+      样本不大，因此下文的漏斗只用于判断「链路能不能走通」，不用于评价「转化率高低」——
+      这一点很关键，它避免了一个 23 家体量的样本被误读成大盘结论。
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">03</span><h2>对三个关切的直接回答</h2>
+    <span class="sd">一句话一条，不展开</span></div>
+
+  <div class="qmap">
+    <div class="q">
+      <div class="qq">功能设计够不够用？</div>
+      <div class="qa">6 家门店各自独立走通了「选套餐 → 变更合约 → 拿到付款码」全程 —— <b>功能是能用的</b>。</div>
+    </div>
+    <div class="q">
+      <div class="qq">店主在哪一步流失？</div>
+      <div class="qa">漏斗内部全程只丢 3 家；<b>真正的大头是 61% 的门店根本没进漏斗</b>。</div>
+    </div>
+    <div class="q">
+      <div class="qq">需不需要改版？</div>
+      <div class="qa">不需要。<b>三个卡点分别落在客户端、服务端与运营触达</b>，改界面一处都治不好。</div>
+    </div>
+  </div>
+
+  <div class="ft"><div class="lg"><span><span class="dot"></span>剑琅联盟 · 内部资料</span>
+    <span class="sep">|</span><span>生产日志 2026-10-22 ~ 10-28</span></div>
+    <div>第 1 / 4 页</div></div>
+</div></div></div>
+
+<!-- ================= P2 漏斗 ================= -->
+<div class="slot" id="p2"><div class="card"><div class="page">
+  <div class="hd">
+    <div class="hd-l">
+      <div class="kick">Step 02 · Funnel</div>
+      <h1>漏斗：<em>内部平坦，断点在两端</em></h1>
+      <div class="sub">分母 = 7 日内进入过版本中心的 9 家门店；刻度为门店数，非请求数</div>
+    </div>
+    <div class="hd-r">
+      <div class="kpi"><div class="kpi-v">9<small>家</small></div><div class="kpi-k">漏斗起点</div></div>
+      <div class="kpi"><div class="kpi-v ok">6<small>家</small></div><div class="kpi-k">终点 · 下单成功</div></div>
+      <div class="kpi"><div class="kpi-v">67%</div><div class="kpi-k">累计留存</div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:600px 1fr;gap:26px;margin-top:12px;">
+    <div class="trough-wrap">
+      <div class="trough-legend">
+        <span><i class="sw water"></i>水位 = 仍在往下走的门店</span>
+        <span><i class="sw leak"></i>水滴 = 掉点</span>
+        <span><i class="sw hold"></i>绿点 = 无掉点</span>
+      </div>
+
+      <div class="funnel">
+        <div class="stage" style="--w:560px;--fill:100%;">
+          <div class="basin"><div class="water"></div>
+            <div class="label">
+              <div class="name"><i>①</i>进入版本中心</div>
+              <div class="nums"><span class="big">9</span>家 · <span class="rate">100%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="spout"></div>
+        <div class="drip-zone">
+          <span class="drip hold">同一屏内连续完成 · 无掉点</span>
+        </div>
+
+        <div class="stage" style="--w:560px;--fill:100%;">
+          <div class="basin"><div class="water"></div>
+            <div class="label">
+              <div class="name"><i>②</i>查看套餐并选中</div>
+              <div class="nums"><span class="big">9</span>家 · <span class="rate">100%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="spout"></div>
+        <div class="drip-zone">
+          <span class="drip">2 家停在此 · 样本量下不构成信号</span>
+        </div>
+
+        <div class="stage" style="--w:470px;--fill:78%;">
+          <div class="basin"><div class="water"></div>
+            <div class="label">
+              <div class="name"><i>③</i>变更合约</div>
+              <div class="nums"><span class="big">7</span>家 · <span class="rate">78%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="spout"></div>
+        <div class="drip-zone">
+          <span class="drip">1 家 · 付款二维码生成失败</span>
+        </div>
+
+        <div class="stage" style="--w:400px;--fill:67%;">
+          <div class="basin"><div class="water"></div>
+            <div class="label">
+              <div class="name"><i>④</i>提交订单成功</div>
+              <div class="nums"><span class="big">6</span>家 · <span class="rate">67%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="read">
+      <div class="rcard g">
+        <div class="rcard-t"><span class="tag">读法 1</span>前两级没有任何掉点</div>
+        <div class="rcard-d">
+          ① 与 ② 都是 9 家：凡进过版本中心的门店，<b>全部都完成了套餐的查看与选中</b>，
+          中间没有一家掉队。入口到决策这一段，没有多余的一步。
+        </div>
+      </div>
+      <div class="rcard a">
+        <div class="rcard-t"><span class="tag">读法 2</span>掉点次数只有 3 次</div>
+        <div class="rcard-d">
+          整条链路上丢掉的 3 家门店：<b>2 家</b>在选完套餐后离开、<b>1 家</b>卡在二维码。
+          9 家样本里 1 家等于 11 个百分点，<b>这种量级不足以归因到设计</b>。
+        </div>
+      </div>
+      <div class="rcard g">
+        <div class="rcard-t"><span class="tag">读法 3</span>真正的缺口在漏斗上游</div>
+        <div class="rcard-d">
+          23 家在约门店里，<b>14 家从未打开过版本中心</b>。
+          这不是漏斗漏掉的，是<b>没进入漏斗</b>——页面设计对没打开页面的人不产生作用。
+        </div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-t"><span class="tag">读法 4</span>不能拿它比转化率高低</div>
+        <div class="rcard-d">
+          23 家体量下，67% 不能当作大盘转化率对外引用。
+          它的价值在于证明<b>链路可以走通</b>：有 6 家门店真的走到了最后一步。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">03</span><h2>下单链路逐段看：哪一步有请求、哪一步没有</h2>
+    <span class="sd">有请求 = 用户真的点到了；无请求 = 断在点击之前</span></div>
+
+  <div class="chain">
+    <div class="ck pass"><div class="ci">STEP 1</div><div class="cn">进入<br>版本中心</div><div class="cs">9 家 ✓</div></div>
+    <div class="ck pass"><div class="ci">STEP 2</div><div class="cn">套餐<br>列表</div><div class="cs">9 家 ✓</div></div>
+    <div class="ck pass"><div class="ci">STEP 3</div><div class="cn">选中<br>套餐</div><div class="cs">9 家 ✓</div></div>
+    <div class="ck pass"><div class="ci">STEP 4</div><div class="cn">变更<br>合约</div><div class="cs">7 家 ✓</div></div>
+    <div class="ck pass"><div class="ci">STEP 5</div><div class="cn">提交<br>订单</div><div class="cs">10 次 / 8 成</div></div>
+    <div class="ck pass"><div class="ci">STEP 6</div><div class="cn">扫码<br>支付</div><div class="cs">外跳 · 不可见</div></div>
+  </div>
+
+  <div class="ft"><div class="lg"><span><span class="dot"></span>剑琅联盟 · 内部资料</span>
+    <span class="sep">|</span><span>门店数口径，同一门店多次操作只计 1 家</span></div>
+    <div>第 2 / 4 页</div></div>
+</div></div></div>
+
+<!-- ================= P3 GAP 归因 ================= -->
+<div class="slot" id="p3"><div class="card"><div class="page">
+  <div class="hd">
+    <div class="hd-l">
+      <div class="kick">Step 03 · Gap Attribution</div>
+      <h1>三个卡点，<em>都不在设计层</em></h1>
+      <div class="sub">每个卡点都给出了「现象 → 证据 → 归属层 → 谁来修」的完整链路</div>
+    </div>
+    <div class="hd-r">
+      <div class="kpi"><div class="kpi-v warn">1<small>个</small></div><div class="kpi-k">运营层</div></div>
+      <div class="kpi"><div class="kpi-v bad">2<small>个</small></div><div class="kpi-k">技术层</div></div>
+      <div class="kpi"><div class="kpi-v ok">0<small>个</small></div><div class="kpi-k">设计层</div></div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">01</span><h2>GAP 清单</h2>
+    <span class="sd">「是否设计问题」一列为本页核心判断</span></div>
+
+  <div class="gaplist">
+    <div class="gap g1">
+      <div class="gap-hd"><span class="gid">G01</span><span class="gt">上游触达缺口</span></div>
+      <div class="gap-row"><span class="k">现象</span>23 家在约门店中 <b>14 家</b>（61%）7 日内从未打开过版本中心。</div>
+      <div class="gap-row"><span class="k">证据</span>日志中这 14 家完全没有 <code>/versionCenter</code> 请求；6 家成功下单的门店，全部来自进过版本中心的那 9 家。</div>
+      <div class="gap-row"><span class="k">机制</span>门店只在「自己想起来快到期」时才点进来，系统没有主动把人带到这个页面。</div>
+      <div class="gap-row at"><span class="k">归属</span>运营层 —— 到期提醒 / 续费触达<br>
+        <span class="verdict no">不是设计问题</span>：用户没有进入页面，页面内的信息结构不参与决策。</div>
+      <div class="gap-owner ops">建议：运营补到期推送，产品侧无需改动</div>
+    </div>
+
+    <div class="gap g2">
+      <div class="gap-hd"><span class="gid">G02</span><span class="gt">Android 5.0.19 提交无请求</span></div>
+      <div class="gap-row"><span class="k">现象</span>该版本共 <b>37 次</b>选中套餐、<b>35 次</b>查询预付信息，<b>0 次</b>进入提交流程。</div>
+      <div class="gap-row"><span class="k">证据</span>同版本 iOS 有 3 次成功下单；升到 5.0.20 的 Android 设备可正常提交。<b>只有「Android + 5.0.19」这个组合失效。</b></div>
+      <div class="gap-row"><span class="k">机制</span>提交动作在发出请求之前就中断了 —— 属于该版本的客户端兼容问题。</div>
+      <div class="gap-row at"><span class="k">归属</span>技术层 —— 客户端版本兼容<br>
+        <span class="verdict no">不是设计问题</span>：按钮位置、文案、交互路径都未改变，5.0.20 同一界面可以提交。</div>
+      <div class="gap-owner tech">建议：客户端排查 + 推动 5.0.19 强制升级</div>
+    </div>
+
+    <div class="gap g3">
+      <div class="gap-hd"><span class="gid">G03</span><span class="gt">付款二维码生成失败</span></div>
+      <div class="gap-row"><span class="k">现象</span>10-28 <b>14:20</b> 之后集中出现 22 次「二维码失败」，此前 3 小时为 <b>0</b>；其中 12 次为「生成合同商城付款二维码错误」。</div>
+      <div class="gap-row"><span class="k">证据</span>10-22 ~ 10-27 共 8 笔下单<b>全部成功</b>；10-28 的两笔<b>全部失败</b>。其中一家门店在 10-24 用同一客户端成功过，只有时间不同。</div>
+      <div class="gap-row"><span class="k">机制</span>订单已经提交成功、合约已经变更，失败发生在<b>生成付款码</b>这一步 —— 支付通道，不在交互层。</div>
+      <div class="gap-row at"><span class="k">归属</span>技术层 —— 服务端接口<br>
+        <span class="verdict no">不是设计问题</span>：用户已经点到了最后一步，失败由接口返回，与界面无关。</div>
+      <div class="gap-owner tech">建议：服务端排查二维码服务，属当日新增</div>
+    </div>
+  </div>
+
+  <div class="verdict-bar">
+    <div class="vb-n">0</div>
+    <div class="vb-t">
+      <b>三个卡点中，落在设计层的数量为 0。</b>
+      设计层的问题是「步骤太多、入口难找、信息看不懂」，表现为<b>某一步骤稳定掉一大截且与版本、时间无关</b>。
+      本次数据里没有出现这种形态：链路内部平坦，掉点全部带上具体的版本边界或时间边界。
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">02</span><h2>反向验证：如果真是设计问题，应该看到什么</h2>
+    <span class="sd">三个「设计缺陷必然留下、而本次全部缺席」的信号</span></div>
+
+  <div class="neg">
+    <div class="nq">
+      <div class="nn">预期信号 1</div>
+      <div class="nt">某一步骤<b>稳定掉一大截</b>，且与客户端版本、时间点都无关</div>
+      <div class="nr">实际：链路上最陡一段也只有 2 家（78%），<b>9 家样本里不足以构成信号</b></div>
+    </div>
+    <div class="nq">
+      <div class="nn">预期信号 2</div>
+      <div class="nt">掉点在<b>所有平台、所有版本上均匀分布</b></div>
+      <div class="nr">实际：两处掉点分别锁死在「Android 5.0.19」和「10-28 14:20 之后」</div>
+    </div>
+    <div class="nq">
+      <div class="nn">预期信号 3</div>
+      <div class="nt">同一版本内<b>有人能过、有人过不去</b>（个体差异）</div>
+      <div class="nr">实际：Android 5.0.19 <b>37 次操作 0 次提交</b>，整齐失效，更像版本问题</div>
+    </div>
+  </div>
+
+  <div class="ft"><div class="lg"><span><span class="dot"></span>剑琅联盟 · 内部资料</span>
+    <span class="sep">|</span><span>G02 与 G03 均有版本 / 时间对照，可反向验证</span></div>
+    <div>第 3 / 4 页</div></div>
+</div></div></div>
+
+<!-- ================= P4 结论与建议 ================= -->
+<div class="slot" id="p4"><div class="card"><div class="page">
+  <div class="hd">
+    <div class="hd-l">
+      <div class="kick">Step 04 · Conclusion</div>
+      <h1>产品侧无需返工，<em>三件事转出去</em></h1>
+      <div class="sub">四条独立证据指向同一结论；修复动作全部落在产品设计之外</div>
+    </div>
+    <div class="hd-r">
+      <div class="kpi"><div class="kpi-v ok">无需</div><div class="kpi-k">设计层返工</div></div>
+      <div class="kpi"><div class="kpi-v bad">2<small>件</small></div><div class="kpi-k">转技术</div></div>
+      <div class="kpi"><div class="kpi-v warn">1<small>件</small></div><div class="kpi-k">转运营</div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:14px;">
+    <div>
+      <div class="sec-hd" style="margin-top:0;"><span class="sn">01</span><h2>为什么能确定不是设计问题</h2></div>
+      <div class="evl">
+        <div class="ev"><div class="en">1</div><div class="et"><b>全链路被真实走通过</b>
+          6 家门店完整走完「进入版本中心 → 选套餐 → 变更合约 → 提交订单 → 拿到付款码」。设计是否有阻断，最直接的检验就是有没有人从头走到尾 —— 有，且不止一家。</div></div>
+        <div class="ev"><div class="en">2</div><div class="et"><b>掉点都带外部边界</b>
+          两处掉点分别绑定「Android + 5.0.19」这一版本组合、和「10-28 14:20」这一时间点。设计缺陷不会挑版本、也不会挑小时。</div></div>
+        <div class="ev"><div class="en">3</div><div class="et"><b>同一门店前后对照</b>
+          同一家门店、同一客户端版本，10-24 下单成功、10-28 失败。中间没有客户端发版，变量只有时间 —— 指向服务端。</div></div>
+        <div class="ev"><div class="en">4</div><div class="et"><b>失效版本升级后恢复</b>
+          5.0.20 的 Android 设备在同一界面可以提交。若为设计问题，不会因为升一个小版本就好。</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-hd" style="margin-top:0;"><span class="sn">02</span><h2>接下来做什么</h2>
+        <span class="sd">产品侧不立项</span></div>
+      <div class="todo">
+        <div class="td"><span class="tn">01</span><div class="tx"><b>排查 5.0.19 提交入口失效并推动升级</b>
+          该版本共 374 条请求，是 Android 端占比最高的版本，属存量用户，建议强制升级或热修。</div><span class="to dev">技术</span></div>
+        <div class="td"><span class="tn">02</span><div class="tx"><b>排查付款二维码接口报错</b>
+          10-28 14:20 起新增，已打掉 2 笔真实订单，属当日线上问题，优先级最高。</div><span class="to dev">技术</span></div>
+        <div class="td"><span class="tn">03</span><div class="tx"><b>补到期提醒与续费触达</b>
+          61% 的在约门店 7 日内没进过版本中心。把人带到页面上，是当前唯一还有量级空间的杠杆。</div><span class="to ops">运营</span></div>
+      </div>
+
+      <div class="closing" style="margin-top:12px;">
+        <div class="ct">一句话结论</div>
+        <div class="cd">
+          RTB 的功能设计<b>不是当前续费的瓶颈</b>：只要门店进到版本中心，
+          六个里有四个能走到下单。真正压住续费的是<b>没人提醒他们进来</b>，和<b>进来之后被两个线上问题挡住</b> ——
+          两者都不需要通过改设计来解决。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><span class="sn">03</span><h2>三个可证伪的预测</h2>
+    <span class="sd">如果以下任一条在 3 天内不成立，本页结论就应该被推翻</span></div>
+
+  <div class="pred">
+    <div class="pt">这三个预测都能用同一套日志直接验证 —— <b>结论是否成立，不取决于本次分析，取决于修复后的数据</b></div>
+    <div class="pgrid">
+      <div class="pi">
+        <div class="pif"><span class="pin">01</span>5.0.19 的 Android 设备升级或热修后，
+          该版本应重新出现 <b>大于 0 次的提交请求</b>。</div>
+      </div>
+      <div class="pi">
+        <div class="pif"><span class="pin">02</span>二维码接口修复后，
+          下单成功率应<b>回到 8/10 的水平</b>，而非维持在 8/10 以下。</div>
+      </div>
+      <div class="pi">
+        <div class="pif"><span class="pin">03</span>补上到期提醒后，
+          进版本中心的门店应从 <b>9 家升到 12 家以上</b>，下单家数同向上升。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft"><div class="lg"><span><span class="dot"></span>剑琅联盟 · 内部资料</span>
+    <span class="sep">|</span><span>数据窗口 2026-10-22 ~ 10-28 · 生产环境</span></div>
+    <div>第 4 / 4 页</div></div>
+</div></div></div>
+
+<script>
+(function () {
+  function fit() {
+    var w = Math.min(window.innerWidth, 1280);
+    var s = w / 1280;
+    document.querySelectorAll('.slot').forEach(function (slot) {
+      var card = slot.querySelector('.card');
+      if (!card) return;
+      card.style.transform = 'scale(' + s + ')';
+      slot.style.height = (720 * s) + 'px';
+    });
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+
+</body>
+</html>

@@ -126,6 +126,10 @@
   /* 条目较多的组：单行 4 列，避免折行撑高整屏 */
   .grp-cards.four { grid-template-columns: repeat(4, 1fr); gap: 9px; }
   .grp-cards.four .e-desc { font-size: 10.5px; line-height: 1.45; }
+  /* 5 条：单行 5 列 */
+  .grp-cards.five { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .grp-cards.five .e-title { font-size: 12px; }
+  .grp-cards.five .e-desc { font-size: 10px; line-height: 1.42; }
 
   .entry {
     display: flex; flex-direction: column;
@@ -240,7 +244,7 @@
           <span class="grp-en">Diagnosis</span>
           <span class="grp-tip">背景、诊断与价值论证</span>
         </div>
-        <div class="grp-cards four">
+        <div class="grp-cards five">
           <a class="entry" href="剑琅联盟美业趋势与启示.html">
             <div class="e-title">美业趋势与启示</div>
             <p class="e-desc">行业两极分化与存量经营的判断、美丽田园战略内核拆解，以及特色小店与单店效率的路径。</p>
@@ -252,6 +256,10 @@
           <a class="entry" href="剑琅联盟RTB埋点分析与续费漏斗.html">
             <div class="e-title">RTB 埋点分析与续费漏斗</div>
             <p class="e-desc">SLS 日志还原 RTB 链路与续费漏斗，定位两处 P0 故障。</p>
+          </a>
+          <a class="entry" href="漏斗GAP分析-RTB功能设计论证.html">
+            <div class="e-title">RTB 功能设计论证</div>
+            <p class="e-desc">四层归因定位卡点：设计层 0 个，问题在客户端、服务端与到期触达。</p>
           </a>
           <a class="entry" href="剑琅联盟功能价值汇报.html">
             <div class="e-title">功能价值汇报 · 三大支柱</div>
