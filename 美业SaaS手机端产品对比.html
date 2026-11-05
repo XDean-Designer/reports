@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国内主流美业 SaaS 手机端产品对比</title>
+<style>
+  :root {
+    --navy: #17293D;
+    --navy-2: #1E3A5F;
+    --steel: #35597F;
+    --tint: #EDF2F7;
+    --bg: #F5F7FA;
+    --card: #FFFFFF;
+    --line: #DFE4EA;
+    --line-soft: #EDF0F4;
+    --ink: #22303F;
+    --ink-soft: #5A6776;
+    --ink-faint: #8D97A3;
+    --ok: #2F7D68;      --ok-bg: #E7F1EE;
+    --part: #A8761B;    --part-bg: #F8F0DF;
+    --bad: #A33A32;     --bad-bg: #F8E9E7;
+    --soon: #2C5C93;    --soon-bg: #E9EFF8;
+    /* A 暖 / B 冷 */
+    --ca: #9A6A12;  --ca-deep: #7A520C;  --ca-soft: #FCF6EA;  --ca-line: #E5CB96;
+    --cb: #2A5A93;  --cb-deep: #1E4570;  --cb-soft: #F3F8FD;  --cb-line: #AEC8E6;
+    /* 我方 */
+    --own: #17293D; --own-soft: #F1F4F8; --own-line: #B9C5D3;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-num: Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); font-family: var(--font-cjk); color: var(--ink);
+         -webkit-font-smoothing: antialiased; line-height: 1.7; }
+
+  /* ---------- 布局骨架 ---------- */
+  .shell { display: grid; grid-template-columns: 168px minmax(0, 1080px);
+           gap: 54px; max-width: 1366px; margin: 0 auto; padding: 0 32px; }
+
+  /* 左侧进度轨 */
+  .rail { position: sticky; top: 0; height: 100vh; padding: 58px 0 40px;
+          display: flex; flex-direction: column; }
+  .rail .brand { font-size: 10px; letter-spacing: 2.4px; color: var(--ink-faint);
+                 text-transform: uppercase; margin-bottom: 3px; }
+  .rail .brand-cn { font-size: 13px; font-weight: 700; color: var(--navy-2);
+                    letter-spacing: .5px; padding-bottom: 14px;
+                    border-bottom: 1px solid var(--line); margin-bottom: 15px; }
+  .rail nav { display: flex; flex-direction: column; gap: 0; }
+  .rail a { display: flex; align-items: center; gap: 9px; text-decoration: none;
+            padding: 5px 0 5px 2px; font-size: 11.5px; color: var(--ink-faint);
+            letter-spacing: .2px; transition: color .22s; position: relative; }
+  .rail a::before { content: ""; position: absolute; left: -13px; top: 50%;
+                    width: 3px; height: 0; background: var(--navy-2);
+                    border-radius: 2px; transform: translateY(-50%);
+                    transition: height .25s; }
+  .rail a .idx { font-family: var(--font-num); font-size: 9.5px; font-weight: 700;
+                 color: #B7C0CB; min-width: 13px; }
+  .rail a:hover { color: var(--ink-soft); }
+  .rail a.on { color: var(--navy-2); font-weight: 700; }
+  .rail a.on::before { height: 14px; }
+  .rail a.on .idx { color: var(--navy-2); }
+  .rail a.a.on { color: var(--ca-deep); }
+  .rail a.a.on::before { background: var(--ca); }
+  .rail a.a.on .idx { color: var(--ca); }
+  .rail a.b.on { color: var(--cb-deep); }
+  .rail a.b.on::before { background: var(--cb); }
+  .rail a.b.on .idx { color: var(--cb); }
+  .rail a.ai.on { color: var(--navy); }
+  .rail a.ai.on::before { background: var(--navy); }
+  .rail .bar { margin-top: 18px; height: 2px; background: var(--line-soft); border-radius: 2px;
+               overflow: hidden; }
+  .rail .bar i { display: block; height: 100%; width: 0; background: var(--navy-2);
+                 border-radius: 2px; transition: width .12s linear; }
+
+  main { padding: 0 0 120px; min-width: 0; }
+
+  /* ---------- 封面：只留主标题 ---------- */
+  .cover { padding: 106px 0 62px; border-bottom: 1px solid var(--line); }
+  .cover h1 { font-size: 46px; font-weight: 700; letter-spacing: 1.6px; color: var(--navy);
+              line-height: 1.24; }
+  .cover h1 em { font-style: normal; color: var(--steel); }
+
+  /* ---------- 章节 ---------- */
+  section { padding: 62px 0 10px; }
+  section:last-of-type { padding-bottom: 40px; }
+  section.a, section.b, section.ai { margin: 56px 0 0; padding: 34px 30px 40px;
+                                     border-radius: 16px; }
+  section.a { background: #FBF4E6; border: 1px solid #EFDCB8; }
+  section.b { background: #EEF5FC; border: 1px solid #C8DBEF; }
+  section.ai { background: #F2F5F9; border: 1px solid #D2DBE6; }
+  .s-head { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 26px; }
+  .s-head .num { font-family: var(--font-num); font-size: 13px; font-weight: 700; color: #fff;
+                 background: var(--navy-2); border-radius: 6px; padding: 3px 9px;
+                 letter-spacing: .5px; flex: none; margin-top: 5px; }
+  .s-head .tt { flex: 1; }
+  .s-head h2 { font-size: 25px; font-weight: 700; color: var(--navy); letter-spacing: .4px;
+               line-height: 1.4; }
+  .s-head .desc { font-size: 13px; color: var(--ink-faint); margin-top: 7px; line-height: 1.7; }
+  section.a .s-head .num { background: var(--ca); }
+  section.b .s-head .num { background: var(--cb); }
+  section.ai .s-head .num { background: var(--navy); }
+
+  /* 子标题 */
+  .sub { display: flex; align-items: baseline; gap: 10px; margin: 34px 0 16px; }
+  .sub .sn { font-family: var(--font-num); font-size: 11px; font-weight: 700;
+             color: var(--ink-faint); letter-spacing: 1px; }
+  .sub h3 { font-size: 16px; font-weight: 700; color: var(--navy-2); letter-spacing: .3px; }
+  .sub:first-child { margin-top: 0; }
+
+  /* ---------- 分类对照 ---------- */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cls { border-radius: 12px; padding: 24px 26px 24px; position: relative; overflow: hidden; }
+  .cls.a { background: #FAF1DD; border: 1px solid #E2C489; }
+  .cls.b { background: #E8F1FA; border: 1px solid #ADC8E4; }
+  .cls::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .cls.a::after { background: var(--ca); }
+  .cls.b::after { background: var(--cb); }
+  .cls .top { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+  .cls .tt { font-size: 17px; font-weight: 700; letter-spacing: .3px; }
+  .cls.a .tt { color: var(--ca-deep); }
+  .cls.b .tt { color: var(--cb-deep); }
+  .cls .en { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase;
+             color: var(--ink-faint); margin-top: 2px; }
+  .cls .body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.8; }
+  .cls .body b { color: var(--ink); font-weight: 600; }
+  .cls .fact { margin-top: 15px; padding-top: 13px; border-top: 1px dashed; display: flex;
+               flex-wrap: wrap; gap: 7px; }
+  .cls.a .fact { border-color: var(--ca-line); }
+  .cls.b .fact { border-color: var(--cb-line); }
+  .cls .fact i { font-style: normal; font-size: 11px; padding: 3px 9px; border-radius: 20px;
+                 background: #fff; color: var(--ink-soft); border: 1px solid var(--line); }
+
+  /* ---------- 产品卡矩阵 ---------- */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+           padding: 20px 20px 18px; display: flex; flex-direction: column;
+           transition: box-shadow .25s, transform .25s; }
+  .pcard:hover { box-shadow: 0 10px 30px rgba(23,41,61,.09); transform: translateY(-2px); }
+  .pcard.a { border-top: 3px solid var(--ca); }
+  .pcard.b { border-top: 3px solid var(--cb); }
+  .pcard .ph { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+  .pcard .ic { width: 34px; height: 34px; border-radius: 9px; flex: none;
+               display: flex; align-items: center; justify-content: center; }
+  .pcard.a .ic { background: var(--ca-soft); }
+  .pcard.b .ic { background: var(--cb-soft); }
+  .pcard .nm { font-size: 15px; font-weight: 700; color: var(--navy-2); letter-spacing: .2px; }
+  .pcard .sub2 { font-size: 11px; color: var(--ink-faint); margin-top: 2px; line-height: 1.5; }
+  .pcard .tag { margin-left: auto; font-size: 10px; font-weight: 700; padding: 3px 8px;
+                border-radius: 4px; white-space: nowrap; flex: none; }
+  .pcard.a .tag { background: var(--ca-soft); color: var(--ca-deep); }
+  .pcard.b .tag { background: var(--cb-soft); color: var(--cb-deep); }
+  .pcard .tag.none { background: #F2F4F6; color: var(--ink-faint); }
+
+  .pcard dl { display: grid; grid-template-columns: 62px 1fr; gap: 7px 10px;
+              font-size: 12.5px; padding: 12px 0 0; border-top: 1px solid var(--line-soft); }
+  .pcard dt { color: var(--ink-faint); font-size: 11.5px; }
+  .pcard dd { color: var(--ink-soft); }
+  .pcard dd b { color: var(--ink); font-weight: 600; }
+  .pcard .numb { font-family: var(--font-num); font-variant-numeric: tabular-nums;
+                 font-weight: 700; color: var(--navy-2); }
+
+  /* 我方宽卡 */
+  .pcard.own { grid-column: 1 / -1; border: 1.5px solid var(--own-line);
+               border-top: 3px solid var(--own);
+               background: linear-gradient(180deg, #FAFBFD 0%, #FFFFFF 42%);
+               padding: 22px 26px 20px; }
+  .pcard.own:hover { transform: none; box-shadow: 0 8px 26px rgba(23,41,61,.10); }
+  .pcard.own .ph { margin-bottom: 16px; }
+  .pcard.own .ic { background: var(--own); }
+  .pcard.own .badge { margin-left: auto; font-size: 10.5px; font-weight: 700; color: #fff;
+                      background: var(--own); padding: 3px 10px; border-radius: 4px;
+                      letter-spacing: 1px; flex: none; }
+  .own-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  .own-row dl { border-top: 1px solid var(--line-soft); padding-top: 13px; }
+
+  .score { display: inline-flex; align-items: baseline; gap: 4px; }
+  .score b { font-family: var(--font-num); font-size: 15px; font-weight: 700;
+             font-variant-numeric: tabular-nums; }
+  .score b.ok { color: var(--ok); } .score b.mid { color: var(--steel); }
+  .score b.warn { color: var(--part); } .score b.bad { color: var(--bad); }
+  .score span { font-size: 10.5px; color: var(--ink-faint); }
+
+  .chip { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+          border-radius: 4px; white-space: nowrap; }
+  .chip.ok { color: var(--ok); background: var(--ok-bg); }
+  .chip.part { color: var(--part); background: var(--part-bg); }
+  .chip.bad { color: var(--bad); background: var(--bad-bg); }
+  .chip.plain { color: var(--ink-soft); background: var(--tint); }
+  .chip.own { color: #fff; background: var(--own); }
+
+  /* ---------- 截图 ---------- */
+  .shotgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+              align-items: start; }
+  .shotgrid.stretch { align-items: stretch; }
+  .shotgrid.stretch .shot { height: 100%; }
+  .shotgrid.two { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .shotgrid.eight { grid-template-columns: repeat(4, 1fr); gap: 20px 16px; }
+  .shotgrid.eight > .shot > img { aspect-ratio: 780 / 1688; object-fit: cover;
+                                  object-position: top center; height: auto; }
+  .shot { display: flex; flex-direction: column; }
+  .shot .sh { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+  .shot .sh .ic { width: 30px; height: 30px; border-radius: 8px; flex: none;
+                  display: flex; align-items: center; justify-content: center; }
+  section.a .shot .sh .ic { background: var(--ca-soft); }
+  section.b .shot .sh .ic { background: var(--cb-soft); }
+  section.ai .shot .sh .ic { background: #E3E9F1; }
+  .shot .sh .nm { font-size: 14.5px; font-weight: 700; color: var(--navy-2); }
+  .shot .sh .mt { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+  .shot .sh .no { font-family: var(--font-num); font-size: 10px; font-weight: 700;
+                  color: #fff; background: var(--ink-faint); width: 18px; height: 18px;
+                  border-radius: 50%; display: flex; align-items: center;
+                  justify-content: center; flex: none; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: 8px;
+              border: 1px solid #D3DAE2; background: #fff;
+              box-shadow: 0 4px 16px rgba(23,41,61,.07); }
+  .shot .cap { font-size: 11px; color: var(--ink-faint); margin-top: 9px; line-height: 1.6; }
+  /* 一卡两屏：同一场景的第 1 / 第 2 页 */
+  .shot .pgs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .shot .pgs .pg { display: flex; flex-direction: column; }
+  .shot .pgs .pg .pl { font-size: 10.5px; color: var(--ink-soft); margin-top: 8px;
+                       line-height: 1.5; text-align: center; }
+  .shot .pgs .pg .pl b { font-family: var(--font-num); color: var(--navy-2); margin-right: 4px; }
+  .shot .pgs.single .pg { grid-column: 1 / -1; width: 50%; margin: 0 auto; }
+  .shot .rel { position: relative; }
+  .shot .chipcorner { position: absolute; top: 10px; right: 10px; z-index: 2;
+                      background: rgba(23,41,61,.9); color: #fff; font-size: 10.5px;
+                      font-weight: 700; letter-spacing: .3px; padding: 4px 10px;
+                      border-radius: 20px; backdrop-filter: blur(2px); }
+
+  /* 待补虚框 */
+  .ph-box { border: 1.5px dashed #C2CBD7; border-radius: 10px; background: #FAFBFD;
+            aspect-ratio: 9 / 19.5; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 9px; padding: 18px;
+            text-align: center; }
+  .ph-box .pt { font-size: 13px; font-weight: 700; color: var(--ink-soft);
+                letter-spacing: .5px; }
+  .ph-box .pd { font-size: 11.5px; color: var(--ink-faint); line-height: 1.65; }
+
+  /* 无截图说明卡 */
+  .expl { border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column;
+          gap: 12px; }
+  .expl.a { background: #FFFDF8; border: 1px solid var(--ca-line); }
+  .expl.b { background: #FBFDFF; border: 1px solid var(--cb-line); }
+  .expl.own { background: #FBFCFE; border: 1px solid var(--own-line); }
+  .sticky { position: sticky; top: max(84px, calc(50vh - 268px)); }
+  .expl .et { font-size: 13px; font-weight: 700; color: var(--navy-2);
+              display: flex; align-items: center; gap: 8px; }
+  .expl .ed { font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  .expl .ed b { color: var(--ink); font-weight: 600; }
+  .expl .kvs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .expl .kvs i { font-style: normal; font-size: 11px; padding: 3px 9px; border-radius: 20px;
+                 background: #fff; border: 1px solid var(--line); color: var(--ink-soft); }
+  .expl .foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line);
+                font-size: 11.5px; color: var(--ink-faint); line-height: 1.65; }
+
+  /* ---------- AI：手机三联 ---------- */
+  .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 14px;
+               border: 1px solid #D3DAE2; background: #fff;
+               box-shadow: 0 6px 20px rgba(23,41,61,.10); }
+  .phone .pc { font-size: 11px; color: var(--ink-faint); margin-top: 9px; line-height: 1.55;
+               text-align: center; }
+
+  /* ---------- AI：结论双栏 ---------- */
+  .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  .vcard { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+           padding: 20px 22px 18px; }
+  .vcard h4 { font-size: 13px; font-weight: 700; color: var(--navy-2); margin-bottom: 3px;
+              display: flex; align-items: center; gap: 7px; }
+  .vcard .vh { font-size: 11px; color: var(--ink-faint); margin-bottom: 13px; }
+  .vlist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .vlist li { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7;
+              padding-left: 15px; position: relative; }
+  .vlist li::before { content: ""; position: absolute; left: 0; top: 9px;
+                      width: 5px; height: 5px; border-radius: 50%; background: #C1CBD6; }
+  .vcard.no .vlist li::before { background: #D9B1AC; }
+  .vcard.yes .vlist li::before { background: #9DC7BC; }
+  .vlist li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- AI：竞品双卡 ---------- */
+  .airow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .aicard { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+            padding: 22px 24px 20px; display: flex; flex-direction: column; }
+  .aicard .ah { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .aicard .an { font-size: 15px; font-weight: 700; color: var(--navy-2); }
+  .aicard .ad { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 14px; }
+  .aicard .figs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+                  padding: 13px 0; border-top: 1px solid var(--line-soft);
+                  border-bottom: 1px solid var(--line-soft); margin-bottom: 13px; }
+  .aicard .figs div { text-align: center; }
+  .aicard .figs b { display: block; font-family: var(--font-num); font-size: 15px;
+                    font-weight: 700; color: var(--navy-2);
+                    font-variant-numeric: tabular-nums; }
+  .aicard .figs span { font-size: 10px; color: var(--ink-faint); line-height: 1.4;
+                       display: block; margin-top: 3px; }
+  .aicard .txt { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .aicard .txt b { color: var(--ink); font-weight: 600; }
+  .aicard .jud { margin-top: auto; padding-top: 12px; font-size: 11.5px;
+                 color: var(--cb-deep); line-height: 1.65; }
+  .aicard .jud b { font-weight: 700; }
+
+  /* ---------- AI：矩阵 ---------- */
+  .matrix { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+            padding: 18px 22px 16px; margin-top: 26px; }
+  .mx-wrap { position: relative; padding-left: 34px; padding-bottom: 26px; }
+  .mx-plot { position: relative; height: 400px; border-left: 1px solid #D8DFE8;
+             border-bottom: 1px solid #D8DFE8; }
+  .mx-plot::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0;
+                     border-left: 1px dashed #E3E8EF; }
+  .mx-plot::after { content: ""; position: absolute; top: 50%; left: 0; right: 0;
+                    border-top: 1px dashed #E3E8EF; }
+  .mx-target { position: absolute; right: 0; top: 0; width: 50%; height: 100%;
+               background: #F4F8FD; border-left: 1px dashed #DCE6F2; }
+  .mx-tlabel { position: absolute; right: 16px; top: 16px; text-align: right; }
+  .mx-tlabel b { display: block; font-size: 11.5px; font-weight: 700; color: var(--cb-deep); }
+  .mx-tlabel span { font-size: 10.5px; color: #7C94AF; }
+  .mx-dot { position: absolute; transform: translate(-50%, -50%); display: flex;
+            align-items: center; gap: 6px; }
+  .mx-dot i { width: 8px; height: 8px; border-radius: 50%; background: #9FB0C2;
+              flex: none; box-shadow: 0 0 0 4px rgba(159,176,194,.16); }
+  .mx-dot span { font-size: 11.5px; color: var(--ink-soft); white-space: nowrap;
+                 background: rgba(255,255,255,.9); padding: 1px 5px; border-radius: 4px; }
+  .mx-dot.us i { width: 11px; height: 11px; background: var(--own);
+                 box-shadow: 0 0 0 5px rgba(23,41,61,.13); }
+  .mx-dot.us span { font-size: 12px; font-weight: 700; color: #fff; background: var(--own);
+                    padding: 3px 9px; border-radius: 20px; }
+  .mx-y { position: absolute; left: 0; font-size: 10px; color: var(--ink-faint);
+          letter-spacing: 1.4px; writing-mode: vertical-rl; }
+  .mx-yt { top: 2px; }
+  .mx-yb { bottom: 30px; }
+  .mx-xl { display: flex; justify-content: space-between; font-size: 10.5px;
+           color: var(--ink-faint); letter-spacing: 1px; }
+
+  /* ---------- AI：流程图 ---------- */
+  .flowbox { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+             padding: 22px 26px 14px; }
+  .flow { width: 100%; height: auto; display: block; }
+  .flow text { font-family: var(--font-cjk); }
+  /* 5.1 内的引导示例分隔条 */
+  .exhead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+            margin: 30px 0 14px; padding-top: 22px; border-top: 1px dashed var(--line); }
+  .exh-l { font-family: var(--font-num); font-size: 10.5px; font-weight: 700;
+           letter-spacing: 1.6px; color: #fff; background: var(--navy-2);
+           padding: 4px 9px; border-radius: 4px; }
+  .exh-r { font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; }
+  .exh-r b { color: var(--ink-soft); }
+  /* 八步在小屏挤不下，允许横向滑动 */
+  @media (max-width: 900px) {
+    .flowbox { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .flow { min-width: 760px; }
+    .flowhint { display: block; }
+  }
+  .flowhint { display: none; font-size: 10.5px; color: var(--ink-faint);
+              letter-spacing: .4px; margin: -6px 0 12px; }
+
+  /* ---------- AI：痛点映射 ---------- */
+  .painbox { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+             overflow: hidden; }
+  .pain { width: 100%; border-collapse: collapse; }
+  .pain th { font-size: 11px; font-weight: 700; color: var(--ink-faint); text-align: left;
+             padding: 13px 16px; background: #F7F9FB; letter-spacing: .6px;
+             border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .pain td { padding: 14px 16px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.7;
+             vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+  .pain tr:last-child td { border-bottom: 0; }
+  .pain td:first-child { font-weight: 700; color: var(--navy-2); font-size: 13px; width: 20%; }
+  .pain td:nth-child(2) { width: 40%; color: var(--ink-faint); }
+  .pain td:nth-child(3) b { color: var(--ink); font-weight: 600; }
+  .pain tr:hover td { background: #FCFDFE; }
+
+  /* ---------- 收尾论点 ---------- */
+  .takeaways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+               margin-top: 22px; }
+  .tk { background: var(--own-soft); border: 1px solid var(--own-line); border-radius: 10px;
+        padding: 17px 18px 15px; }
+  .tk .tn { font-family: var(--font-num); font-size: 11px; font-weight: 700;
+            color: var(--own); opacity: .55; }
+  .tk h5 { font-size: 13px; font-weight: 700; color: var(--navy); margin: 5px 0 7px;
+           letter-spacing: .2px; }
+  .tk p { font-size: 12px; color: var(--ink-soft); line-height: 1.7; }
+  .tk p b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- 数据对比 ---------- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cbox { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+          padding: 22px 24px 20px; }
+  .cbox h3 { font-size: 14px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px;
+             letter-spacing: .3px; }
+  .cbox .cd { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 18px; }
+  .vrow { display: grid; grid-template-columns: 96px 1fr 62px; align-items: center;
+          gap: 11px; margin-bottom: 10px; }
+  .vrow .lb { font-size: 12px; color: var(--ink-soft); text-align: right;
+              white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .vrow.us .lb { font-weight: 700; color: var(--own); }
+  .vrow .tr { height: 17px; background: var(--tint); border-radius: 3px; overflow: hidden; }
+  .vrow .fl { height: 100%; border-radius: 3px; }
+  .vrow .fl.a { background: var(--ca); }
+  .vrow .fl.b { background: var(--cb); }
+  .vrow .fl.big { background: var(--bad); }
+  .vrow .fl.us { background: var(--own); }
+  .vrow .vl { font-family: var(--font-num); font-size: 12px; font-weight: 700;
+              color: var(--navy-2); text-align: right; font-variant-numeric: tabular-nums; }
+  .vrow .vl small { font-family: var(--font-cjk); font-size: 9.5px; font-weight: 400;
+                    color: var(--ink-faint); }
+
+  /* ---------- 备注 ---------- */
+  .remarks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 26px; }
+  .remark { display: flex; gap: 12px; font-size: 12.5px; color: var(--ink-soft);
+            line-height: 1.75; }
+  .remark i { font-style: normal; font-family: var(--font-num); font-size: 11px;
+              font-weight: 700; color: #fff; background: var(--ink-faint);
+              width: 19px; height: 19px; border-radius: 50%; flex: none;
+              display: flex; align-items: center; justify-content: center;
+              margin-top: 3px; }
+  .remark b { color: var(--ink); font-weight: 600; }
+
+  .endnote { margin-top: 40px; border-radius: 12px; background: #F9FAFC;
+             border: 1px solid var(--line); padding: 20px 24px;
+             font-size: 12px; color: var(--ink-faint); line-height: 1.8; }
+  .endnote b { color: var(--ink-soft); }
+  .endnote a { color: var(--cb); text-decoration: none; border-bottom: 1px dotted #AEC8E6; }
+  .endnote a:hover { color: var(--cb-deep); }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width: 1180px) {
+    .shell { grid-template-columns: 1fr; max-width: 880px; padding: 0 24px; }
+    .rail { display: none; }
+    .cards, .shotgrid, .shotgrid.eight, .phones, .takeaways { grid-template-columns: repeat(2, 1fr); }
+    .duo, .compare, .verdict, .airow { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 36px; }
+    .pcard.own { grid-column: auto; }
+    .own-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .cards, .shotgrid, .shotgrid.eight, .shotgrid.two, .phones, .takeaways,
+    .remarks, .aicard .figs { grid-template-columns: 1fr; }
+    .cover { padding: 64px 0 40px; }
+    .cover h1 { font-size: 27px; letter-spacing: .8px; }
+    .s-head h2 { font-size: 20px; }
+    .mx-plot { height: 320px; }
+    .pain td:first-child, .pain td:nth-child(2) { width: auto; }
+    .painbox { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="brand">Competitor Report</div>
+    <div class="brand-cn">美业 SaaS 手机端对比</div>
+    <nav id="nav">
+      <a href="#s1" data-t="s1"><span class="idx">01</span>分类思路</a>
+      <a href="#s2" data-t="s2"><span class="idx">02</span>六款速览</a>
+      <a href="#s3" class="a" data-t="s3"><span class="idx">03</span>A 类实拍</a>
+      <a href="#s4" class="b" data-t="s4"><span class="idx">04</span>B 类实拍</a>
+      <a href="#s5" class="ai" data-t="s5"><span class="idx">05</span>触达 → 引导</a>
+      <a href="#s6" class="ai" data-t="s6"><span class="idx">06</span>AI 格局</a>
+      <a href="#s7" data-t="s7"><span class="idx">07</span>数据对比</a>
+    </nav>
+    <div class="bar"><i id="pbar"></i></div>
+  </aside>
+
+  <main>
+    <!-- 封面 -->
+    <header class="cover">
+      <h1>国内主流美业 SaaS 手机端，<em>分两类看</em></h1>
+    </header>
+
+    <!-- 01 分类思路 -->
+    <section id="s1">
+      <div class="s-head">
+        <div class="num">01</div>
+        <div class="tt">
+          <h2>分类思路</h2>
+          <div class="desc">业务主体在哪、移动端是辅助补充还是独立主工作台 —— 不以包体大小作为唯一判断标准</div>
+        </div>
+      </div>
+
+      <div class="duo">
+        <div class="cls a">
+          <div class="top">
+            <svg width="52" height="44" viewBox="0 0 52 44" fill="none">
+              <rect x="1" y="6" width="34" height="24" rx="2.5" fill="#E5CB96"/>
+              <rect x="4.5" y="9.5" width="27" height="15" rx="1.5" fill="#FCF6EA"/>
+              <rect x="14" y="32" width="8" height="3.5" rx="1.2" fill="#C9A45E"/>
+              <rect x="9.5" y="36" width="17" height="2.6" rx="1.3" fill="#C9A45E"/>
+              <rect x="38" y="13" width="12.5" height="21" rx="2.6" fill="#9A6A12"/>
+              <rect x="40" y="16.5" width="8.5" height="12" rx="1.2" fill="#FCF6EA"/>
+              <circle cx="44.2" cy="31" r="1.1" fill="#FCF6EA"/>
+            </svg>
+            <div>
+              <div class="tt">A 类 · 移动端轻辅助型</div>
+              <div class="en">Mobile as Assistant</div>
+            </div>
+          </div>
+          <div class="body">
+            业务主体在 <b>PC 端 / 收银一体机</b>，手机端（App 或小程序）仅承担看板、预约、核销、开单、
+            业绩查看等轻量操作；<b>复杂配置、库存、深度报表、连锁权限依赖 PC</b>。
+          </div>
+          <div class="fact">
+            <i>手机是配角</i><i>装完仍需回电脑</i><i>包体普遍更轻</i>
+          </div>
+        </div>
+
+        <div class="cls b">
+          <div class="top">
+            <svg width="40" height="44" viewBox="0 0 40 44" fill="none">
+              <rect x="6" y="1" width="28" height="42" rx="4.5" fill="#2A5A93"/>
+              <rect x="8.5" y="4.5" width="23" height="33" rx="2" fill="#F3F8FD"/>
+              <rect x="10.8" y="7" width="9" height="9" rx="1.4" fill="#6E9BCB"/>
+              <rect x="21.2" y="7" width="9" height="9" rx="1.4" fill="#AEC8E6"/>
+              <rect x="10.8" y="18" width="9" height="9" rx="1.4" fill="#AEC8E6"/>
+              <rect x="21.2" y="18" width="9" height="9" rx="1.4" fill="#6E9BCB"/>
+              <rect x="10.8" y="29" width="19.4" height="5" rx="1.4" fill="#6E9BCB"/>
+              <circle cx="20" cy="40.2" r="1.4" fill="#8FB4DA"/>
+            </svg>
+            <div>
+              <div class="tt">B 类 · 移动端全功能主工作台型</div>
+              <div class="en">Mobile as Workspace</div>
+            </div>
+          </div>
+          <div class="body">
+            手机 App 本身即可承载门店绝大多数核心经营闭环（建卡项、收银、会员、营销、对账报表），
+            <b>门店可脱离 PC 独立运营</b>。
+          </div>
+          <div class="fact">
+            <i>手机即工作台</i><i>装完即可跑店</i><i>PC 仅辅助</i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 六款速览 -->
+    <section id="s2">
+      <div class="s-head">
+        <div class="num">02</div>
+        <div class="tt">
+          <h2>六款速览</h2>
+          <div class="desc">包体、评分、类别与设备支持 · 评分括号内为评分数 · 包体单位 MB</div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <!-- 博卡 -->
+        <div class="pcard a">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="1.5" y="1.5" width="13" height="13" rx="3.5" fill="#9A6A12"/>
+                <circle cx="6" cy="6.4" r="1.5" fill="#FCF6EA"/>
+                <circle cx="10" cy="6.4" r="1.5" fill="#FCF6EA"/>
+                <rect x="5" y="9.6" width="6" height="1.4" rx=".7" fill="#FCF6EA"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">博卡小店通</div>
+              <div class="sub2">PC 管理后台为核心</div>
+            </div>
+            <div class="tag none">小程序</div>
+          </div>
+          <dl>
+            <dt>分类</dt><dd><span class="chip plain">A 类 · 小程序</span></dd>
+            <dt>iOS 包</dt><dd>无（小程序）</dd>
+            <dt>评分</dt><dd>—</dd>
+            <dt>类别</dt><dd>小程序</dd>
+            <dt>设备</dt><dd>—</dd>
+            <dt>定位</dt><dd>移动端仅预约、核销、开单、看业绩</dd>
+          </dl>
+        </div>
+
+        <!-- 美管加 -->
+        <div class="pcard a">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="3" y="1" width="10" height="14" rx="2.4" fill="#9A6A12"/>
+                <rect x="4.6" y="3.2" width="6.8" height="8.6" rx="1" fill="#FCF6EA"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">美管加</div>
+              <div class="sub2">连锁向 SaaS</div>
+            </div>
+            <div class="tag a">截图 ✓</div>
+          </div>
+          <dl>
+            <dt>分类</dt><dd><span class="chip plain">A 类 · APP</span></dd>
+            <dt>iOS 包</dt><dd><span class="numb">35.0</span></dd>
+            <dt>评分</dt><dd><span class="score"><b class="warn">2.9</b><span>610</span></span></dd>
+            <dt>类别</dt><dd><span class="chip plain">生活</span></dd>
+            <dt>设备</dt><dd>未标注</dd>
+            <dt>定位</dt><dd>PC 承载权限、报表、库存</dd>
+          </dl>
+        </div>
+
+        <!-- 有赞 -->
+        <div class="pcard b">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="3" y="1" width="10" height="14" rx="2.4" fill="#2A5A93"/>
+                <rect x="4.6" y="3.2" width="6.8" height="8.6" rx="1" fill="#F3F8FD"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">有赞美业</div>
+              <div class="sub2">中小美业移动优先</div>
+            </div>
+            <div class="tag b">截图 ✓</div>
+          </div>
+          <dl>
+            <dt>分类</dt><dd><span class="chip plain">B 类 · APP</span></dd>
+            <dt>iOS 包</dt><dd><span class="numb">116.2</span></dd>
+            <dt>评分</dt><dd><span class="score"><b class="mid">3.8</b><span>139</span></span></dd>
+            <dt>类别</dt><dd><span class="chip plain">商务</span></dd>
+            <dt>设备</dt><dd><span class="chip part">仅 iPhone</span></dd>
+            <dt>定位</dt><dd>手机可建卡项、收银、全报表</dd>
+          </dl>
+        </div>
+
+        <!-- 美团 -->
+        <div class="pcard b">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="4" width="14" height="9" rx="1.8" fill="#2A5A93"/>
+                <rect x="2.4" y="5.4" width="11.2" height="6.2" rx=".8" fill="#F3F8FD"/>
+                <rect x="6.5" y="1.4" width="3" height="2" rx=".6" fill="#2A5A93"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">美团经营宝</div>
+              <div class="sub2">原美团开店宝 · 平台型</div>
+            </div>
+            <div class="tag b">截图 ✓</div>
+          </div>
+          <dl>
+            <dt>分类</dt><dd><span class="chip plain">B 类 · APP</span></dd>
+            <dt>iOS 包</dt><dd><span class="numb">251.1</span></dd>
+            <dt>评分</dt><dd><span class="score"><b class="bad">2.2</b><span>5486</span></span></dd>
+            <dt>类别</dt><dd><span class="chip plain">商务</span></dd>
+            <dt>设备</dt><dd>未标注</dd>
+            <dt>定位</dt><dd>平台团购订单、核销、评价、营销</dd>
+          </dl>
+        </div>
+
+        <!-- 店来客 -->
+        <div class="pcard b">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="4" y="1" width="8" height="14" rx="2" fill="#2A5A93"/>
+                <rect x="5.3" y="3" width="5.4" height="9" rx=".8" fill="#F3F8FD"/>
+                <rect x="6.4" y="6" width="3.2" height="1.4" rx=".7" fill="#6E9BCB"/>
+                <rect x="6.4" y="8.6" width="3.2" height="1.4" rx=".7" fill="#AEC8E6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">店来客美业</div>
+              <div class="sub2">夫妻店可纯手机运营</div>
+            </div>
+            <div class="tag b">截图 ✓</div>
+          </div>
+          <dl>
+            <dt>分类</dt><dd><span class="chip plain">B 类 · APP</span></dd>
+            <dt>iOS 包</dt><dd><span class="numb">47.7</span></dd>
+            <dt>评分</dt><dd><span class="score"><b class="ok">4.6</b><span>407</span></span></dd>
+            <dt>类别</dt><dd><span class="chip plain">商务</span></dd>
+            <dt>设备</dt><dd><span class="chip ok">iPhone、iPad</span></dd>
+            <dt>定位</dt><dd>储值、次卡、收银、提成、库存</dd>
+          </dl>
+        </div>
+
+        <!-- 剑琅联盟（我方） -->
+        <div class="pcard own">
+          <div class="ph">
+            <div class="ic">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="2" width="12" height="12" rx="3.2" fill="#17293D"/>
+                <path d="M5.2 8.2 7.2 10.2 10.9 6.1" stroke="#fff" stroke-width="1.7"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">剑琅联盟</div>
+              <div class="sub2">手机端为主工作台 · 内嵌 AI 助手</div>
+            </div>
+            <div class="badge">我方</div>
+          </div>
+          <div class="own-row">
+            <dl>
+              <dt>分类</dt><dd><span class="chip own">B 类 · APP</span></dd>
+              <dt>iOS 包</dt><dd><span class="numb">167.2</span></dd>
+              <dt>评分</dt><dd><span class="score"><b class="mid">4.0</b><span>35</span></span></dd>
+              <dt>类别</dt><dd><span class="chip plain">商务</span></dd>
+            </dl>
+            <dl>
+              <dt>最新版本</dt><dd><span class="numb">5.0.20</span> <span class="chip plain">2026-10-28</span></dd>
+              <dt>设备</dt><dd><span class="chip ok">iPhone、iPad</span></dd>
+              <dt>定位</dt><dd>开单、会员、营销、数据 · 已上线 AI 助手</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 A 类实拍 -->
+    <section id="s3" class="a">
+      <div class="s-head">
+        <div class="num">03</div>
+        <div class="tt">
+          <h2>A 类 · App Store 页面实拍</h2>
+          <div class="desc">两家均属轻辅助定位；其中仅美管加有独立商店页面，博卡小店通按实际形态说明</div>
+        </div>
+      </div>
+
+      <div class="shotgrid two stretch">
+        <!-- 博卡说明 -->
+        <div class="shot">
+          <div class="sticky">
+            <div class="sh">
+              <div class="ic">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <rect x="1.5" y="1.5" width="13" height="13" rx="3.5" fill="#9A6A12"/>
+                  <circle cx="6" cy="6.4" r="1.5" fill="#FCF6EA"/>
+                  <circle cx="10" cy="6.4" r="1.5" fill="#FCF6EA"/>
+                  <rect x="5" y="9.6" width="6" height="1.4" rx=".7" fill="#FCF6EA"/>
+                </svg>
+              </div>
+              <div>
+                <div class="nm">博卡小店通</div>
+                <div class="mt">微信小程序 · 无安装包</div>
+              </div>
+            </div>
+            <div class="expl a">
+              <div class="et">
+                <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 1.5 14 4.5v3.2c0 3-2.5 5.5-6 6.8-3.5-1.3-6-3.8-6-6.8V4.5L8 1.5Z"
+                        fill="#E5CB96"/>
+                  <path d="M5.4 7.6 7.2 9.4l3.4-3.5" stroke="#7A520C" stroke-width="1.6"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                无需下载与安装
+              </div>
+              <div class="ed">
+                博卡主力移动端入口<b>不是 App，而是微信小程序</b>。微信内搜索「博卡小店通」或扫码进入，
+                中间<b>没有应用商店、没有下载、没有安装</b>这三步。
+              </div>
+              <div class="ed">
+                移动端只承担<b>预约、核销、简单开单、业绩查看</b>；卡项配置、连锁权限、库存、深度报表
+                全部回 PC 管理后台，属典型的 A 类辅助定位。
+              </div>
+              <div class="kvs">
+                <i>无安装包</i><i>无商店详情页</i><i>无评分</i><i>入口寄生微信</i>
+              </div>
+              <div class="foot">
+                因无应用商店页面，本页不提供商店截图，按实际形态作说明。
+              </div>
+            </div>
+            <div class="cap">小程序形态 · 无 App Store 页面</div>
+          </div>
+        </div>
+
+        <!-- 美管加截图 -->
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="3" y="1" width="10" height="14" rx="2.4" fill="#9A6A12"/>
+                <rect x="4.6" y="3.2" width="6.8" height="8.6" rx="1" fill="#FCF6EA"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">美管加</div>
+              <div class="mt">iOS 35.0MB · 2.9 分（610）</div>
+            </div>
+          </div>
+          <img src="assets/competitor-shots/meiguanjia_all.png"
+               alt="美管加 App Store 手机版详情页整页截图">
+          <div class="cap">App Store 手机版详情页整页 · 用户评论与隐私声明区已跳过并在断点标注</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 B 类实拍 -->
+    <section id="s4" class="b">
+      <div class="s-head">
+        <div class="num">04</div>
+        <div class="tt">
+          <h2>B 类 · App Store 页面实拍</h2>
+          <div class="desc">四家均有独立应用页面 · 装完即可独立跑店 · 两列并排，整页不裁切</div>
+        </div>
+      </div>
+
+      <div class="shotgrid two">
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="3" y="1" width="10" height="14" rx="2.4" fill="#2A5A93"/>
+                <rect x="4.6" y="3.2" width="6.8" height="8.6" rx="1" fill="#F3F8FD"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">有赞美业</div>
+              <div class="mt">116.2MB · 3.8 分（139）· 仅 iPhone</div>
+            </div>
+          </div>
+          <img src="assets/competitor-shots/youzan_all.png"
+               alt="有赞美业 App Store 手机版详情页整页截图">
+          <div class="cap">App Store 手机版详情页整页 · 用户评论与隐私声明区已跳过并在断点标注</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="4" width="14" height="9" rx="1.8" fill="#2A5A93"/>
+                <rect x="2.4" y="5.4" width="11.2" height="6.2" rx=".8" fill="#F3F8FD"/>
+                <rect x="6.5" y="1.4" width="3" height="2" rx=".6" fill="#2A5A93"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">美团经营宝</div>
+              <div class="mt">251.1MB · 2.2 分（5486）</div>
+            </div>
+          </div>
+          <img src="assets/competitor-shots/meituan_all.png"
+               alt="美团经营宝 App Store 手机版详情页整页截图">
+          <div class="cap">App Store 手机版详情页整页 · 用户评论与隐私声明区已跳过并在断点标注</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="4" y="1" width="8" height="14" rx="2" fill="#2A5A93"/>
+                <rect x="5.3" y="3" width="5.4" height="9" rx=".8" fill="#F3F8FD"/>
+                <rect x="6.4" y="6" width="3.2" height="1.4" rx=".7" fill="#6E9BCB"/>
+                <rect x="6.4" y="8.6" width="3.2" height="1.4" rx=".7" fill="#AEC8E6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">店来客美业</div>
+              <div class="mt">47.7MB · 4.6 分（407）· iPhone、iPad</div>
+            </div>
+          </div>
+          <img src="assets/competitor-shots/dianlaike_all.png"
+               alt="店来客 App Store 手机版详情页整页截图">
+          <div class="cap">App Store 手机版详情页整页 · 用户评论与隐私声明区已跳过并在断点标注</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="2" width="12" height="12" rx="3.2" fill="#17293D"/>
+                <path d="M5.2 8.2 7.2 10.2 10.9 6.1" stroke="#fff" stroke-width="1.7"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">剑琅联盟</div>
+              <div class="mt">167.2MB · 4.0 分（35）· iPhone、iPad</div>
+            </div>
+            <div class="badge" style="margin-left:auto;font-size:10px;font-weight:700;color:#fff;
+                 background:#17293D;padding:3px 8px;border-radius:4px;letter-spacing:1px;">我方</div>
+          </div>
+          <img src="assets/jianlang/jl_store_page.png"
+               alt="剑琅联盟 App Store 手机版详情页整页截图">
+          <div class="cap">App Store 手机版详情页整页 · 4.0 分（35）· 167.2MB · v5.0.20 · 中国区 2026-11-05 快照</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 从触达到新手引导全链路 -->
+    <section id="s5" class="ai">
+      <div class="s-head">
+        <div class="num">05</div>
+        <div class="tt">
+          <h2>从触达到新手引导：AI 在每一步开口</h2>
+          <div class="desc">从触达、下载、开屏到首页新手引导的八步实拍 · AI 不是入口里的一个按钮，而是每一步都主动开口的那个人</div>
+        </div>
+      </div>
+
+      <div class="flowbox">
+        <div class="flowhint">← 左右滑动查看完整八步 →</div>
+        <svg class="flow" viewBox="0 0 1080 232" role="img"
+             aria-label="登录开店主流程八步，AI 在分流与首页两处介入">
+          <defs>
+            <marker id="arw" markerWidth="7" markerHeight="7" refX="5.6" refY="2.6"
+                    orient="auto">
+              <path d="M0,0 L5.6,2.6 L0,5.2 z" fill="#B6C1CE"/>
+            </marker>
+          </defs>
+
+          <!-- 主连接线 -->
+          <line x1="52" y1="112" x2="1024" y2="112" stroke="#DFE5EC" stroke-width="2"
+                marker-end="url(#arw)"/>
+
+          <!-- AI 介入括号 -->
+          <path d="M862 66 L862 54 L1054 54 L1054 66" stroke="#2A5A93" stroke-width="1.4"
+                fill="none" stroke-dasharray="4 3"/>
+          <text x="958" y="44" text-anchor="middle" font-size="11" font-weight="700"
+                fill="#2A5A93" letter-spacing="1.2">AI 从此处接手</text>
+
+          <!-- 步骤 1 -->
+          <circle cx="52" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="52" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">1</text>
+          <text x="52" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">应用商店</text>
+          <text x="52" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">搜索 · 详情 · 下载</text>
+
+          <!-- 步骤 2 -->
+          <circle cx="191" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="191" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">2</text>
+          <text x="191" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">开屏动画</text>
+          <text x="191" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">同屏弹用户条款</text>
+
+          <!-- 步骤 3 -->
+          <circle cx="330" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="330" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">3</text>
+          <text x="330" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">开屏图</text>
+          <text x="330" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">品牌主视觉</text>
+
+          <!-- 步骤 4 -->
+          <circle cx="470" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="470" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">4</text>
+          <text x="470" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">登录</text>
+          <text x="470" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">手机号 + 验证码</text>
+
+          <!-- 步骤 5 -->
+          <circle cx="610" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="610" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">5</text>
+          <text x="610" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">开店 · 选店</text>
+          <text x="610" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">请选择您的角色</text>
+
+          <!-- 步骤 6 -->
+          <circle cx="749" cy="112" r="17" fill="#EDF2F7" stroke="#C9D3DE" stroke-width="1.4"/>
+          <text x="749" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#5A6776">6</text>
+          <text x="749" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#22303F">确认门店信息</text>
+          <text x="749" y="171" text-anchor="middle" font-size="10" fill="#8D97A3">名称 · 区域 · 执照</text>
+
+          <!-- 步骤 7 -->
+          <circle cx="889" cy="112" r="17" fill="#2A5A93" stroke="#2A5A93" stroke-width="1.4"/>
+          <text x="889" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#fff">7</text>
+          <text x="889" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#1E4570">分流选角色</text>
+          <text x="889" y="171" text-anchor="middle" font-size="10" fill="#7A8DA6">开启你的掌门之路</text>
+
+          <!-- 步骤 8 -->
+          <circle cx="1028" cy="112" r="17" fill="#17293D" stroke="#17293D" stroke-width="1.4"/>
+          <text x="1028" y="117" text-anchor="middle" font-size="12" font-weight="700"
+                fill="#fff">8</text>
+          <text x="1028" y="152" text-anchor="middle" font-size="12.5" font-weight="700"
+                fill="#17293D">首页 · AI 引导</text>
+          <text x="1028" y="171" text-anchor="middle" font-size="10" fill="#7A8DA6">首次进入自动弹出</text>
+
+          <!-- 底部注释 -->
+          <text x="52" y="208" font-size="10.5" fill="#8D97A3">
+            开屏动画一屏内含用户条款确认，随后是品牌开屏图；分流页点「我要管理店铺」→ 直接进首页，首次进入时 AI 助手主动开口
+          </text>
+        </svg>
+      </div>
+
+      <div class="sub">
+        <span class="sn">5.1</span>
+        <h3>八步实拍</h3>
+      </div>
+
+            <div class="shotgrid eight">
+        <div class="shot">
+          <div class="sh"><span class="no">1</span>
+            <div>
+              <div class="nm">应用商店</div>
+              <div class="mt">搜索 · 详情 · 下载</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_store_head.png" alt="剑琅联盟 应用商店详情页顶部">
+          <div class="cap">4.0 分（35 个评分）· 商务类 · 167.2MB</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">2</span>
+            <div>
+              <div class="nm">开屏动画</div>
+              <div class="mt">同屏弹用户条款</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_splash_anim.png" alt="剑琅联盟 开屏动画，同屏弹出用户条款与隐私政策确认">
+          <div class="cap">开屏动画与用户条款同屏：同意《用户服务协议》《隐私政策》才放行</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">3</span>
+            <div>
+              <div class="nm">开屏图</div>
+              <div class="mt">品牌主视觉</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_splash.jpg" alt="剑琅联盟 品牌开屏图">
+          <div class="cap">剑琅联盟 logo ·「剑琅生活，让美业更简单」</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">4</span>
+            <div>
+              <div class="nm">登录</div>
+              <div class="mt">手机号 + 验证码</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_login.png" alt="剑琅联盟 登录页">
+          <div class="cap">「欢迎来到剑琅联盟」· 登录与注册同一入口</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">5</span>
+            <div>
+              <div class="nm">开店 / 选店</div>
+              <div class="mt">请选择您的角色</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_role_select.png" alt="剑琅联盟 选择角色页">
+          <div class="cap">我是老板 / 我要开店 / 我是美业顾问 · 三条并行入口</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">6</span>
+            <div>
+              <div class="nm">确认门店信息</div>
+              <div class="mt">建店资料一次填完</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_confirm_store.png" alt="剑琅联盟 确认门店信息页">
+          <div class="cap">门店名称 / 所在区域 / 门店简称 / 角色 / 营业执照</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">7</span>
+            <div>
+              <div class="nm">分流选角色</div>
+              <div class="mt">开启你的掌门之路</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_split.png" alt="剑琅联盟 分流页 开启你的掌门之路">
+          <div class="cap">我要管理店铺 → 进首页；服务顾客 / 看数据 → 进对应角色视图</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh"><span class="no">8</span>
+            <div>
+              <div class="nm">首页 · AI 主动引导</div>
+              <div class="mt">首次进入即开口</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_home_ai.png" alt="剑琅联盟 首页 AI 助手主动引导">
+          <div class="cap">AI 面板自动弹出，预置「查询业绩 / 新增会员 / 开店宝典 / 查看预约」</div>
+        </div>
+      </div>
+
+      <div class="exhead">
+        <div class="exh-l">AI 引导示例</div>
+        <div class="exh-r">同一个入口，能<b>问得到</b>，也要能<b>办得成</b> —— 这是「助手」和「搜索框」的分界线</div>
+      </div>
+
+      <div class="shotgrid two">
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="1.6" y="2" width="12.8" height="12" rx="2" fill="#17293D"/>
+                <path d="M4.4 5.6h7.2M4.4 8h7.2M4.4 10.4h4.4" stroke="#fff"
+                      stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">问得到 · 价目表</div>
+              <div class="mt">一句话把整本价目表拉出来</div>
+            </div>
+          </div>
+          <div class="pgs">
+            <div class="pg">
+              <img src="assets/jianlang/jl_price_list.png" alt="剑琅联盟 AI 助手直接回答门店价目表">
+              <div class="pl"><b>①</b>一句话问出整本价目表</div>
+            </div>
+            <div class="pg">
+              <img src="assets/jianlang/jl_price_list_2.png" alt="剑琅联盟 AI 列出三种价目表录入方式">
+              <div class="pl"><b>②</b>再问「怎么录入」→ 给三种方式</div>
+            </div>
+          </div>
+          <div class="cap">①「已查询到 15 个店铺项目，共 3 个类目」· 报价带数字；② 手动逐个录入 / 上传一张价目表图片 / 拍照或录像 —— 三条路都从同一句话里长出来</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="5.4" r="2.8" fill="#17293D"/>
+                <path d="M2.6 14.2c.6-2.9 2.7-4.4 5.4-4.4s4.8 1.5 5.4 4.4"
+                      stroke="#17293D" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">办得成 · 添加员工</div>
+              <div class="mt">从回答直接落到业务表单</div>
+            </div>
+          </div>
+          <div class="pgs single">
+            <div class="pg">
+              <img src="assets/jianlang/jl_add_staff.png" alt="剑琅联盟 AI 对话里直接给出新增员工表单">
+              <div class="pl"><b>②</b>表单在对话里直接落地</div>
+            </div>
+          </div>
+          <div class="cap">员工管理 →「新增员工」· 姓名 / 岗位 / 手机号 / 底薪 / 提成比例 一屏填完，填完即入库</div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <span class="sn">5.2</span>
+        <h3>日常：AI 常驻，且与业务同屏</h3>
+      </div>
+
+      <div class="shotgrid two">
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <path d="M2 4.2A2.2 2.2 0 0 1 4.2 2h7.6A2.2 2.2 0 0 1 14 4.2v5.2a2.2 2.2 0 0 1-2.2 2.2H7.4L4 14v-2.4h.2A2.2 2.2 0 0 1 2 9.4V4.2Z"
+                      fill="#17293D"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">日常 · AI 常驻</div>
+              <div class="mt">底部导航正中的一级入口</div>
+            </div>
+          </div>
+          <img src="assets/jianlang/jl_daily_ai.png" alt="剑琅联盟 首页 底部导航居中 AI 入口">
+          <div class="cap">关掉也还在 · 与「首页」「小店」「客户」「我的」并列</div>
+        </div>
+
+        <div class="shot">
+          <div class="sh">
+            <div class="ic">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="2" width="12" height="7.6" rx="1.8" fill="#17293D"/>
+                <rect x="4.6" y="11.4" width="6.8" height="2.6" rx="1.3" fill="#5C748F"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm">AI 与业务同屏</div>
+              <div class="mt">问完直接看数、顺手开单</div>
+            </div>
+          </div>
+          <div class="rel">
+            <img src="assets/jianlang/jl_ai_same.png" alt="剑琅联盟 AI 对话面板展开，预置业务指令">
+            <span class="chipcorner">对话层浮在业务屏之上</span>
+          </div>
+          <div class="cap">不跳页 · 对话与业务在同一屏完成，问完顺手开单</div>
+        </div>
+      </div>
+
+      <div class="endnote" style="margin-top:16px;padding:16px 20px;">
+        <b>一句话：</b>首启引导只解决「知道有这东西」，<b>常驻</b>才解决「每天会用它」。
+        博卡智能体把 AI 做成了另一个要下载的 App（2.5MB、单独登录）；
+        我们把它放进了店员本来就每天打开的工作台，<b>零新增下载成本</b>。
+      </div>
+
+      <div class="sub">
+        <span class="sn">5.3</span>
+        <h3>五个痛点，落到五条能力</h3>
+      </div>
+
+      <div class="painbox">
+        <table class="pain">
+          <thead>
+            <tr>
+              <th>痛点</th>
+              <th>现场表现</th>
+              <th>AI 接手的动作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>复杂功能用不会</td>
+              <td>卡项组合、提成规则、库存调拨的配置门槛高，配错一次就不敢再动</td>
+              <td><b>对话式配置</b>：说清需求 → AI 给出配置草案 → 人工确认后落库</td>
+            </tr>
+            <tr>
+              <td>服务中腾不出手</td>
+              <td>洗头、做脸、烫染时手上有水有药水，开单和加项只能事后补录，容易漏单</td>
+              <td><b>一句话补录</b>：语音或短句完成开单、核销、加项、改预约</td>
+            </tr>
+            <tr>
+              <td>增值功能没意识</td>
+              <td>经营分析、会员分层、活动模板长年不点开，买了等于没买</td>
+              <td><b>主动触达</b>：首启推送、按场景提醒、日报周报自动生成并解读</td>
+            </tr>
+            <tr>
+              <td>新人培训周期长</td>
+              <td>老带新靠口口相传，标准不统一，新人上手普遍要两三周</td>
+              <td><b>内嵌操作教练</b>：问一句教一步，能代办的直接代办</td>
+            </tr>
+            <tr>
+              <td>报表看不懂</td>
+              <td>有数据没结论，翻完报表仍不知道下一步该做什么</td>
+              <td><b>结论先行</b>：先给异常定位与归因，再给建议动作，可一键执行</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="takeaways">
+        <div class="tk">
+          <div class="tn">01</div>
+          <h5>场景站位不同</h5>
+          <p>竞品的 AI 在办公室与线上，<b>我们的在服务现场</b>。店员不用切换 App、不用走到电脑前。</p>
+        </div>
+        <div class="tk">
+          <div class="tn">02</div>
+          <h5>数据本来就在手里</h5>
+          <p>开单、会员、卡项、提成的数据都在自己的系统里，<b>AI 有据可依</b>，不必外挂对接。</p>
+        </div>
+        <div class="tk">
+          <div class="tn">03</div>
+          <h5>不用再装一个 App</h5>
+          <p>AI 内嵌在工作台，对比博卡智能体另开独立端，<b>用户零新增下载成本</b>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 AI Agent 格局 -->
+    <section id="s6" class="ai">
+      <div class="s-head">
+        <div class="num">06</div>
+        <div class="tt">
+          <h2>AI Agent 格局：三家都做了，但都不在服务现场</h2>
+          <div class="desc">按公开可查的资料与商店实拍陈列：博卡智能体、有赞「加我智能」、美团「妙手」</div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <span class="sn">6.1</span>
+        <h3>博卡智能体 · 独立成端，做的是顾客侧</h3>
+      </div>
+
+      <div class="phones">
+        <div class="phone">
+          <img src="assets/competitor-shots/boka_agent_s1.png"
+               alt="博卡智能体 对话修改预约时间">
+          <div class="pc">对话下达指令 → 系统写回预约（改时间成功）</div>
+        </div>
+        <div class="phone">
+          <img src="assets/competitor-shots/boka_agent_s2.png"
+               alt="博卡智能体 登录页">
+          <div class="pc">登录页写明「仅限博卡商户使用」</div>
+        </div>
+        <div class="phone">
+          <img src="assets/competitor-shots/boka_agent_s3.png"
+               alt="博卡智能体 多门店识别">
+          <div class="pc">一个账号识别多家门店，逐店询问</div>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <div class="vcard no">
+          <h4>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6.4" stroke="#A33A32" stroke-width="1.5"/>
+              <path d="M5.4 5.4 10.6 10.6M10.6 5.4 5.4 10.6" stroke="#A33A32"
+                    stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            它没有碰的地方
+          </h4>
+          <div class="vh">店员在系统里的操作，一件都没接管</div>
+          <ul class="vlist">
+            <li><b>不碰工位操作</b>：开单、加项、核销、业绩分摊、库存调拨都不在其能力范围</li>
+            <li><b>不做经营结论</b>：能查余额和消费史，不出复盘、不给建议动作</li>
+            <li><b>不服务服务现场</b>：定位是到店前的预约与到店后的查询，不在洗头、做脸、烫染的那两小时里</li>
+            <li><b>依赖主系统</b>：仅限博卡商户登录，是主系统的顾客侧外挂</li>
+          </ul>
+        </div>
+
+        <div class="vcard yes">
+          <h4>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6.4" stroke="#2F7D68" stroke-width="1.5"/>
+              <path d="M5.2 8.2 7.1 10.1 10.9 6.2" stroke="#2F7D68" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            它证明的事
+          </h4>
+          <div class="vh">三条对行业有信息量的事实</div>
+          <ul class="vlist">
+            <li><b>AI 独立成端被接受</b>：老牌厂商用单独 App 承载 AI，愿意为它单开一个下载入口</li>
+            <li><b>「说一句 → 系统动作」跑通了</b>：改预约不是给建议，是真写回业务数据</li>
+            <li><b>选了低风险切口</b>：顾客侧改预约，错了代价小；店员侧开单算错钱，没人敢先做</li>
+            <li><b>行业窗口已打开</b>：头部开始教育市场，跟进者不必再解释「AI 有什么用」</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub">
+        <span class="sn">6.2</span>
+        <h3>另外两家：一个做运营闭环，一个做数据建议</h3>
+      </div>
+
+      <div class="airow">
+        <div class="aicard">
+          <div class="ah">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <rect x="3" y="1" width="10" height="14" rx="2.4" fill="#2A5A93"/>
+              <rect x="4.6" y="3.2" width="6.8" height="8.6" rx="1" fill="#F3F8FD"/>
+            </svg>
+            <div class="an">有赞 · 加我智能 / 有赞龙虾</div>
+          </div>
+          <div class="ad">AI 经营底座 + 数字员工（AI 客销、AI 数据分析师、营销专家）</div>
+          <div class="figs">
+            <div><b>18,220</b><span>活跃商家（2025）</span></div>
+            <div><b>3,600万</b><span>智能体调用量</span></div>
+            <div><b>2.41亿</b><span>引导成交额</span></div>
+          </div>
+          <div class="txt">
+            把 AI 分四层铺开：获客、转化、复购、经营。数字员工能<b>真的发券、真做内容、真托管店铺</b>，
+            不是只回一句话。AI 数据分析师可用自然语言取数，直接出复盘与建议。
+          </div>
+          <div class="jud"><b>判断：</b>强，但战场在线上运营与营销后台 —— 管理者在办公室用，不在店员的手上。</div>
+        </div>
+
+        <div class="aicard">
+          <div class="ah">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="4" width="14" height="9" rx="1.8" fill="#2A5A93"/>
+              <rect x="2.4" y="5.4" width="11.2" height="6.2" rx=".8" fill="#F3F8FD"/>
+            </svg>
+            <div class="an">美团 · 妙手（CatPaw）</div>
+          </div>
+          <div class="ad">2026-07-27 上线，9 月启用中文名「妙手」，已在餐饮、美业、宠物医院验证</div>
+          <div class="figs">
+            <div><b>9万</b><span>内部使用员工</span></div>
+            <div><b>3万+</b><span>搭建 Agent 数</span></div>
+            <div><b>1h→10min</b><span>酒店场景查数调房</span></div>
+          </div>
+          <div class="txt">
+            定位很清楚：<b>汇总数据、识别异常、生成报表与待办</b>。官方口径是「不会替老板做决定」，
+            改价这类动作仍由人确认。移动端可发起任务、远程确认。
+          </div>
+          <div class="jud"><b>判断：</b>数据与建议能力强，<b>执行刻意留给人</b> —— 它主动放弃了「动手」这一段。</div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <span class="sn">6.3</span>
+        <h3>把三家放同一张图上：他们都在左半边</h3>
+      </div>
+
+      <div class="matrix">
+        <div class="mx-wrap">
+          <div class="mx-plot">
+            <div class="mx-target"></div>
+            <div class="mx-tlabel">
+              <b>店员 · 服务现场</b>
+              <span>目前只有我方</span>
+            </div>
+
+            <div class="mx-dot" style="left:21%;top:68%;">
+              <i></i><span>博卡智能体</span>
+            </div>
+            <div class="mx-dot" style="left:39%;top:57%;">
+              <i></i><span>美团妙手</span>
+            </div>
+            <div class="mx-dot" style="left:36%;top:23%;">
+              <i></i><span>有赞龙虾</span>
+            </div>
+            <div class="mx-dot us" style="left:76%;top:34%;">
+              <i></i><span>剑琅联盟</span>
+            </div>
+          </div>
+          <div class="mx-xl">
+            <span>← 顾客 / 管理者后台</span>
+            <span>店员 · 服务现场 →</span>
+          </div>
+          <span class="mx-y mx-yt">动手执行</span>
+          <span class="mx-y mx-yb">只给建议</span>
+        </div>
+      </div>
+
+      <div class="endnote" style="margin-top:18px;padding:16px 20px;">
+        <b>读图：</b>横轴是「AI 站在谁旁边」，纵轴是「AI 只说话还是真动手」。
+        三家全部落在<b>左半边</b>：博卡在顾客侧做预约与查询，美团在后台做数据与待办，
+        有赞在后台做运营与营销动作 —— 它们的用户是顾客或管理者，<b>都不在洗头、做脸、烫染的那两个小时里</b>。
+        <br><br>
+        右半边（店员侧、服务现场）目前只有我方。原因不是没人想到，而是<b>店员侧动手的容错最低</b>：
+        开错单、算错提成是真金白银。而这恰好是手机端主工作台厂商最有条件做的事 ——
+        数据、权限、动作链路本来就在自己手里。
+      </div>
+    </section>
+
+
+    <!-- 07 数据对比 -->
+    <section id="s7">
+      <div class="s-head">
+        <div class="num">07</div>
+        <div class="tt">
+          <h2>数据对比</h2>
+          <div class="desc">首装体积与 App Store 评分 · 仅陈列公示数据，用于横向参照</div>
+        </div>
+      </div>
+
+      <div class="compare">
+        <div class="cbox">
+          <h3>首装体积（iOS）</h3>
+          <div class="cd">单位 MB · App Store 公示快照；博卡为小程序，无安装包</div>
+          <div class="vrow">
+            <div class="lb">美管加</div>
+            <div class="tr"><div class="fl a" style="width:14%"></div></div>
+            <div class="vl">35.0</div>
+          </div>
+          <div class="vrow">
+            <div class="lb">店来客</div>
+            <div class="tr"><div class="fl b" style="width:19%"></div></div>
+            <div class="vl">47.7</div>
+          </div>
+          <div class="vrow">
+            <div class="lb">有赞美业</div>
+            <div class="tr"><div class="fl b" style="width:46%"></div></div>
+            <div class="vl">116.2</div>
+          </div>
+          <div class="vrow us">
+            <div class="lb">剑琅联盟</div>
+            <div class="tr"><div class="fl us" style="width:67%"></div></div>
+            <div class="vl">167.2</div>
+          </div>
+          <div class="vrow">
+            <div class="lb">美团经营宝</div>
+            <div class="tr"><div class="fl big" style="width:100%"></div></div>
+            <div class="vl">251.1</div>
+          </div>
+          <div class="endnote" style="margin-top:18px;padding:13px 16px;font-size:11.5px;">
+            A 类最轻（35MB），B 类跨度更大（47.7–251.1MB）。我方 <b>167.2MB</b> 处 B 类中位，
+            高于有赞、低于美团，<b>体积不是我们的差异点</b>。
+          </div>
+        </div>
+
+        <div class="cbox">
+          <h3>App Store 评分</h3>
+          <div class="cd">满分 5 分 · 括号内为评分数；无页面的小程序不参与</div>
+          <div class="vrow">
+            <div class="lb">店来客</div>
+            <div class="tr"><div class="fl" style="width:92%;background:#2F7D68"></div></div>
+            <div class="vl">4.6 <small>(407)</small></div>
+          </div>
+          <div class="vrow us">
+            <div class="lb">剑琅联盟</div>
+            <div class="tr"><div class="fl us" style="width:80%"></div></div>
+            <div class="vl">4.0 <small>(35)</small></div>
+          </div>
+          <div class="vrow">
+            <div class="lb">有赞美业</div>
+            <div class="tr"><div class="fl" style="width:76%;background:#35597F"></div></div>
+            <div class="vl">3.8 <small>(139)</small></div>
+          </div>
+          <div class="vrow">
+            <div class="lb">美管加</div>
+            <div class="tr"><div class="fl" style="width:58%;background:#A8761B"></div></div>
+            <div class="vl">2.9 <small>(610)</small></div>
+          </div>
+          <div class="vrow">
+            <div class="lb">美团经营宝</div>
+            <div class="tr"><div class="fl" style="width:44%;background:#A33A32"></div></div>
+            <div class="vl">2.2 <small>(5486)</small></div>
+          </div>
+          <div class="endnote" style="margin-top:18px;padding:13px 16px;font-size:11.5px;">
+            评分区间 <b>2.2 – 4.6</b>。我方 <b>4.0 分（35 个评分）</b>排第二，高于有赞、美管加、美团；
+            <b>评分数偏少</b>，样本量还不足以说明口碑。
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  var pbar = document.getElementById('pbar');
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var secs = links.map(function (a) {
+    return document.getElementById(a.getAttribute('data-t'));
+  });
+
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var y = window.scrollY + 120;
+    var cur = 0;
+    secs.forEach(function (s, i) {
+      if (s && s.getBoundingClientRect().top + window.scrollY <= y) cur = i;
+    });
+    // 滚到底时强制高亮最后一章（末章太短，阈值判断会漏掉）
+    if (h > 0 && window.scrollY >= h - 4) cur = secs.length - 1;
+    links.forEach(function (a, i) {
+      a.classList.toggle('on', i === cur);
+    });
+    var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+    pbar.style.width = (p * 100) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
