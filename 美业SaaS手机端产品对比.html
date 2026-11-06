@@ -267,6 +267,19 @@
   .subdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.78;
              margin: -4px 0 18px; }
 
+  /* ---------- 08 三件先做的事 ---------- */
+  .road { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 4px; }
+  .rc { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+        padding: 20px 22px 21px; }
+  .rc .rk { display: inline-block; font-family: var(--font-num); font-size: 10.5px;
+            font-weight: 700; letter-spacing: .8px; color: #fff; background: var(--navy-2);
+            border-radius: 5px; padding: 2px 8px; }
+  .rc.p1 .rk { background: var(--cb); }
+  .rc.p2 .rk { background: var(--steel); }
+  .rc .rt { font-size: 15px; font-weight: 700; color: var(--navy-2); letter-spacing: .3px;
+            line-height: 1.45; margin-top: 13px; }
+  .rc .rgo { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; margin-top: 8px; }
+
   /* ---------- 博卡：同一款 App 的 B 端一面 ---------- */
   .bokaB { margin-top: 22px; background: #F9FAFC; border: 1px solid var(--line);
            border-radius: 12px; padding: 18px 20px 20px; }
@@ -517,13 +530,14 @@
     .rail { display: none; }
     .cards, .shotgrid, .shotgrid.eight, .phones, .takeaways { grid-template-columns: repeat(2, 1fr); }
     .duo, .compare, .verdict, .airow { grid-template-columns: 1fr; }
+    .road { grid-template-columns: 1fr; }
     .cover h1 { font-size: 36px; }
     .pcard.own { grid-column: auto; }
     .own-row { grid-template-columns: 1fr; }
   }
   @media (max-width: 720px) {
     .cards, .shotgrid, .shotgrid.eight, .shotgrid.two, .phones, .phones.two, .takeaways,
-    .remarks, .aicard .figs, .bokaB .blist { grid-template-columns: 1fr; }
+    .remarks, .aicard .figs, .bokaB .blist, .road { grid-template-columns: 1fr; }
     .cover { padding: 64px 0 40px; }
     .cover h1 { font-size: 27px; letter-spacing: .8px; }
     .s-head h2 { font-size: 20px; }
@@ -549,6 +563,7 @@
       <a href="#s5" class="ai" data-t="s5"><span class="idx">05</span>触达 → 引导</a>
       <a href="#s6" class="ai" data-t="s6"><span class="idx">06</span>AI 格局</a>
       <a href="#s7" data-t="s7"><span class="idx">07</span>数据对比</a>
+      <a href="#s8" class="ai" data-t="s8"><span class="idx">08</span>三件先做</a>
     </nav>
     <div class="bar"><i id="pbar"></i></div>
   </aside>
@@ -1709,6 +1724,42 @@
             <b>评分数偏少</b>，样本量还不足以说明口碑。
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 08 回到我们：三件先做的事 -->
+    <section id="s8" class="ai">
+      <div class="s-head">
+        <div class="num">08</div>
+        <div class="tt">
+          <h2>回到我们：三件先做的事</h2>
+          <div class="desc">01–07 是判断，这一节是动作 · 三件事按顺序推进，不并列</div>
+        </div>
+      </div>
+
+      <div class="road">
+        <div class="rc p0">
+          <div class="rk">P0</div>
+          <div class="rt">让 AI 接住新用户</div>
+          <div class="rgo">新人进来，第一个动作由 AI 带着做完，而不是先看教程</div>
+        </div>
+
+        <div class="rc p1">
+          <div class="rk">P1</div>
+          <div class="rt">把三个高频页理顺</div>
+          <div class="rgo">开单、预约、储值，功能一项不加，只调整呈现层级</div>
+        </div>
+
+        <div class="rc p2">
+          <div class="rk">P2</div>
+          <div class="rt">让 AI 渗进 RTB 各模块</div>
+          <div class="rgo">AI 出现在卡住的那一步，而不是再开一个聊天入口</div>
+        </div>
+      </div>
+
+      <div class="endnote" style="margin-top:20px;padding:16px 20px;">
+        <b>一句话：</b>P0 抢的是「第一印象」，P1 补的是「基本功」，P2 建的是「护城河」。
+        前两件不做，第三件做得再多，也<b>没有人能走到它面前</b>。
       </div>
     </section>
 
