@@ -262,6 +262,24 @@
                box-shadow: 0 6px 20px rgba(23,41,61,.10); }
   .phone .pc { font-size: 11px; color: var(--ink-faint); margin-top: 9px; line-height: 1.55;
                text-align: center; }
+  .phones.two { grid-template-columns: repeat(2, 1fr); max-width: 560px; margin: 0 auto; gap: 22px; }
+
+  .subdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.78;
+             margin: -4px 0 18px; }
+
+  /* ---------- 博卡：同一款 App 的 B 端一面 ---------- */
+  .bokaB { margin-top: 22px; background: #F9FAFC; border: 1px solid var(--line);
+           border-radius: 12px; padding: 18px 20px 20px; }
+  .bokaB .bh { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+               margin-bottom: 15px; }
+  .bokaB .bh b { font-size: 13px; color: var(--navy-2); }
+  .bokaB .bh span { font-size: 11px; color: var(--ink-faint); }
+  .bokaB .blist { list-style: none; display: grid; grid-template-columns: 1fr 1fr;
+                  gap: 8px 24px; margin-top: 18px; }
+  .bokaB .blist li { font-size: 12px; color: var(--ink-soft); line-height: 1.72;
+                     padding-left: 14px; position: relative; }
+  .bokaB .blist li::before { content: ""; position: absolute; left: 0; top: .68em;
+                             width: 5px; height: 5px; border-radius: 50%; background: var(--cb); }
 
   /* ---------- AI：结论双栏 ---------- */
   .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
@@ -504,8 +522,8 @@
     .own-row { grid-template-columns: 1fr; }
   }
   @media (max-width: 720px) {
-    .cards, .shotgrid, .shotgrid.eight, .shotgrid.two, .phones, .takeaways,
-    .remarks, .aicard .figs { grid-template-columns: 1fr; }
+    .cards, .shotgrid, .shotgrid.eight, .shotgrid.two, .phones, .phones.two, .takeaways,
+    .remarks, .aicard .figs, .bokaB .blist { grid-template-columns: 1fr; }
     .cover { padding: 64px 0 40px; }
     .cover h1 { font-size: 27px; letter-spacing: .8px; }
     .s-head h2 { font-size: 20px; }
@@ -1327,7 +1345,7 @@
 
       <div class="endnote" style="margin-top:16px;padding:16px 20px;">
         <b>一句话：</b>首启引导只解决「知道有这东西」，<b>常驻</b>才解决「每天会用它」。
-        博卡智能体把 AI 做成了另一个要下载的 App（2.5MB、单独登录）；
+        博卡智能体把 AI 做成了另一个要下载的 App（2.6MB、单独登录）；
         我们把它放进了店员本来就每天打开的工作台，<b>零新增下载成本</b>。
       </div>
 
@@ -1406,25 +1424,53 @@
 
       <div class="sub">
         <span class="sn">6.1</span>
-        <h3>博卡智能体 · 独立成端，做的是顾客侧</h3>
+        <h3>博卡智能体 · 独立成端：顾客改约，店长问数</h3>
       </div>
+
+      <p class="subdesc">同一款 App，两个商店讲了两套话术：App Store 只讲「智能预约助手」，三张实拍全是顾客侧；
+        安卓商店把自己归进<b>「商家工具」</b>，开场是「门店智能助手」，底部四个入口是营收 / 客服 / 培训 / 销售。</p>
 
       <div class="phones">
         <div class="phone">
           <img src="assets/competitor-shots/boka_agent_s1.png"
-               alt="博卡智能体 对话修改预约时间">
-          <div class="pc">对话下达指令 → 系统写回预约（改时间成功）</div>
+               alt="博卡智能体 对话完成预约">
+          <div class="pc">一句「周五上午 10:30 的发型师」→ 真的写回预约</div>
         </div>
         <div class="phone">
           <img src="assets/competitor-shots/boka_agent_s2.png"
                alt="博卡智能体 登录页">
-          <div class="pc">登录页写明「仅限博卡商户使用」</div>
+          <div class="pc">手机号登录，未注册的号码直接自动注册 —— 进入门槛很低</div>
         </div>
         <div class="phone">
           <img src="assets/competitor-shots/boka_agent_s3.png"
-               alt="博卡智能体 多门店识别">
-          <div class="pc">一个账号识别多家门店，逐店询问</div>
+               alt="博卡智能体 开场页">
+          <div class="pc">开场只给两个动作：我要预约 / 修改预约</div>
         </div>
+      </div>
+
+      <div class="bokaB">
+        <div class="bh">
+          <b>同一款 App 的另一面：B 端入口</b>
+          <span>应用宝 Android v1.3.9（2026-07-22）· 类目「商家工具」</span>
+        </div>
+        <div class="phones two">
+          <div class="phone">
+            <img src="assets/competitor-shots/boka_agent_b1.png"
+                 alt="博卡智能体 安卓端首页：门店智能助手与营收、客服、培训、销售四个入口">
+            <div class="pc">「我是门店智能助手」：产品使用、软件操作、选型销售，以及「门店营收和员工业绩」</div>
+          </div>
+          <div class="phone">
+            <img src="assets/competitor-shots/boka_agent_b2.png"
+                 alt="博卡智能体 客服端四项能力：运维支持、功能指导、权限与安全、数据分析">
+            <div class="pc">客服端自述四项能力，第四项直接是「数据分析：解读报表数据」</div>
+          </div>
+        </div>
+        <ul class="blist">
+          <li><b>营收 / 业绩可问</b>：首页陈列出「门店营收和员工业绩」入口，底部为「营收」单开了一个 tab</li>
+          <li><b>客服 / 培训 / 销售 三条 B 端线</b>：解账号与权限、教收银与报表、按行业推荐选型</li>
+          <li><b>只到「告诉你数」</b>：指标能问、能解读；改单、改价、补录仍要回主系统手动做</li>
+          <li><b>两端话术不一致</b>：B 端能力没在 iOS 商店露出，iOS 简介只写「智能预约助手」</li>
+        </ul>
       </div>
 
       <div class="verdict">
@@ -1439,10 +1485,10 @@
           </h4>
           <div class="vh">店员在系统里的操作，一件都没接管</div>
           <ul class="vlist">
-            <li><b>不碰工位操作</b>：开单、加项、核销、业绩分摊、库存调拨都不在其能力范围</li>
-            <li><b>不做经营结论</b>：能查余额和消费史，不出复盘、不给建议动作</li>
-            <li><b>不服务服务现场</b>：定位是到店前的预约与到店后的查询，不在洗头、做脸、烫染的那两小时里</li>
-            <li><b>依赖主系统</b>：仅限博卡商户登录，是主系统的顾客侧外挂</li>
+            <li><b>不碰工位操作</b>：开单、加项、核销、业绩分摊、库存调拨都不在其能力范围 —— 它教你按哪一步，不替你按</li>
+            <li><b>能查不能改</b>：营收、业绩、报表能问、能解读；改单、改价、补录仍要回主系统手动完成</li>
+            <li><b>不服务服务现场</b>：定位是到店前的预约与到店后的查数，不在洗头、做脸、烫染的那两小时里</li>
+            <li><b>依赖主系统</b>：数据全部来自博卡主系统，脱离门店账号与权限，它一句也答不了</li>
           </ul>
         </div>
 
@@ -1455,12 +1501,12 @@
             </svg>
             它证明的事
           </h4>
-          <div class="vh">三条对行业有信息量的事实</div>
+          <div class="vh">四条对行业有信息量的事实</div>
           <ul class="vlist">
+            <li><b>B 端已经是 AI 的入口</b>：客服、培训、销售、营收四条线全做成对话 —— 门店老板被当成第一提问人</li>
             <li><b>AI 独立成端被接受</b>：老牌厂商用单独 App 承载 AI，愿意为它单开一个下载入口</li>
             <li><b>「说一句 → 系统动作」跑通了</b>：改预约不是给建议，是真写回业务数据</li>
-            <li><b>选了低风险切口</b>：顾客侧改预约，错了代价小；店员侧开单算错钱，没人敢先做</li>
-            <li><b>行业窗口已打开</b>：头部开始教育市场，跟进者不必再解释「AI 有什么用」</li>
+            <li><b>顺序是「先查后改」</b>：先做「教你做」和「告诉你数」；店员侧开单算错钱，没人敢先做</li>
           </ul>
         </div>
       </div>
@@ -1528,7 +1574,7 @@
               <span>目前只有我方</span>
             </div>
 
-            <div class="mx-dot" style="left:21%;top:68%;">
+            <div class="mx-dot" style="left:28%;top:52%;">
               <i></i><span>博卡智能体</span>
             </div>
             <div class="mx-dot" style="left:39%;top:57%;">
@@ -1552,7 +1598,7 @@
 
       <div class="endnote" style="margin-top:18px;padding:16px 20px;">
         <b>读图：</b>横轴是「AI 站在谁旁边」，纵轴是「AI 只说话还是真动手」。
-        三家全部落在<b>左半边</b>：博卡在顾客侧做预约与查询，美团在后台做数据与待办，
+        三家全部落在<b>左半边</b>：博卡横跨顾客与店长（一边改约、一边问营收），美团在后台做数据与待办，
         有赞在后台做运营与营销动作 —— 它们的用户是顾客或管理者，<b>都不在洗头、做脸、烫染的那两个小时里</b>。
         <br><br>
         右半边（店员侧、服务现场）目前只有我方。原因不是没人想到，而是<b>店员侧动手的容错最低</b>：
