@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 主入口 · 菜单降级</title>
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --ink: #1A1F1D;
+    --ink-soft: #5C6561;
+    --ink-faint: #9AA39E;
+    --line: #E6E8E6;
+    --line-strong: #D0D5D2;
+    --accent: #1F6B56;
+    --accent-soft: #E8F3EF;
+    --font-cjk: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN",
+                "思源黑体 SC", "思源黑体 CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-cjk); -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px 72px; }
+
+  /* —— Hero：留白 · 大标题 —— */
+  .hero {
+    border-bottom: 1px solid var(--line);
+    padding: 40px 0 36px;
+  }
+  .hero-inner { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+  .brand {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+  }
+  .brand-name { font-size: 14px; letter-spacing: 4px; font-weight: 600; }
+  .brand-sub { font-size: 10px; letter-spacing: 2px; color: var(--ink-faint); margin-top: 2px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 3px; font-weight: 700; color: var(--accent);
+  }
+  .kicker::before { content: ""; width: 20px; height: 1.5px; background: var(--accent); }
+  .hero h1 {
+    font-size: clamp(28px, 4.2vw, 40px); font-weight: 700; letter-spacing: 1px;
+    margin: 14px 0 12px; line-height: 1.28; max-width: 18em;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--accent);
+    display: inline;
+  }
+  .hero-one {
+    font-size: 14px; color: var(--ink-soft); max-width: 36em; line-height: 1.7;
+  }
+
+  section { margin-top: 44px; }
+  .sec-head {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+    padding-bottom: 10px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-no {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    color: var(--accent); font-variant-numeric: tabular-nums;
+  }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: .5px; }
+  .sec-en {
+    margin-left: auto; font-size: 11px; letter-spacing: 2px;
+    color: var(--ink-faint); text-transform: uppercase;
+  }
+  .line { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.7; max-width: 42em; }
+  .line b { color: var(--ink); font-weight: 600; }
+
+  /* —— 线框双机（拟物压档） —— */
+  .duo { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 12px; align-items: stretch; }
+  .arrow-col {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; color: var(--ink-faint); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-align: center;
+  }
+  .arrow-col svg { width: 28px; height: 28px; }
+  .phone-card { display: flex; flex-direction: column; gap: 8px; }
+  .phone-tag {
+    display: inline-flex; align-self: flex-start;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px;
+  }
+  .phone-tag.sub { color: var(--ink-faint); border-color: var(--line-strong); }
+  .phone-title { font-size: 15px; font-weight: 700; }
+  .phone-sub { font-size: 12px; color: var(--ink-faint); margin-top: -4px; }
+
+  .device {
+    border: 1.5px solid var(--ink); border-radius: 12px;
+    max-width: 240px; width: 100%; margin-top: 4px;
+    background: #fff;
+  }
+  .notch {
+    width: 40px; height: 3px; background: var(--line-strong);
+    margin: 8px auto 0; border-radius: 1px;
+  }
+  .screen { min-height: 240px; display: flex; flex-direction: column; }
+  .scr-top {
+    padding: 10px 12px 8px; font-size: 11px; font-weight: 700;
+    border-bottom: 1px solid var(--line);
+  }
+  .scr-body { flex: 1; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .bubble {
+    border: 1px solid var(--line-strong); padding: 6px 8px;
+    font-size: 11px; color: var(--ink-soft); line-height: 1.5; border-radius: 2px;
+  }
+  .bubble.me {
+    align-self: flex-end; border-color: var(--accent); color: var(--ink); font-weight: 600;
+  }
+  .draft {
+    border: 1px dashed var(--accent); padding: 8px;
+    font-size: 11px; color: var(--ink-soft); background: var(--accent-soft);
+  }
+  .draft b { color: var(--ink); }
+  .draft .btn {
+    display: inline-block; margin-top: 6px;
+    border: 1px solid var(--accent); color: var(--accent);
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 8px; background: #fff;
+  }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line); padding: 6px 2px 8px;
+  }
+  .tab { text-align: center; font-size: 9px; color: var(--ink-faint); }
+  .tab .ico {
+    width: 14px; height: 14px; margin: 0 auto 2px;
+    border: 1px solid var(--line-strong); border-radius: 2px;
+  }
+  .tab.on { color: var(--accent); font-weight: 700; }
+  .tab.on .ico { border-color: var(--accent); background: var(--accent-soft); }
+
+  .menu-list { display: flex; flex-direction: column; gap: 4px; }
+  .menu-row {
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid var(--line); padding: 7px 8px;
+    font-size: 11px; color: var(--ink-soft);
+  }
+  .menu-row span { color: var(--ink-faint); font-size: 10px; }
+  .menu-row.dim { opacity: .5; }
+  .hamburger { display: flex; flex-direction: column; gap: 2px; width: 12px; }
+  .hamburger i { display: block; height: 1.5px; background: var(--ink-faint); }
+
+  /* —— 对标 —— */
+  .peers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); }
+  .peer {
+    padding: 16px 14px 14px; border-right: 1px solid var(--line);
+  }
+  .peer:last-child { border-right: none; }
+  .peer-geo { font-size: 10px; letter-spacing: 1.5px; font-weight: 700; color: var(--ink-faint); margin-bottom: 4px; }
+  .peer-name { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .peer-fit { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 8px; }
+  .peer-fit b { color: var(--ink); }
+  .peer-hit {
+    font-size: 12px; color: var(--accent); font-weight: 600; line-height: 1.5;
+    padding-top: 8px; border-top: 1px solid var(--line);
+  }
+  .peer-note { margin-top: 12px; font-size: 12px; color: var(--ink-faint); line-height: 1.65; }
+
+  /* —— 开单绕行：双来源 + 线框步骤 —— */
+  .intake {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--line); margin-bottom: 4px;
+  }
+  .intake-col {
+    padding: 12px 14px; border-right: 1px solid var(--line);
+  }
+  .intake-col:last-child { border-right: none; }
+  .intake-k {
+    font-size: 10px; letter-spacing: 1.5px; font-weight: 700;
+    color: var(--accent); margin-bottom: 4px;
+  }
+  .intake-t { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .intake-d { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+  .intake-d b { color: var(--ink); }
+
+  .flow {
+    display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; gap: 4px; align-items: stretch;
+  }
+  .flow-step {
+    border: 1px solid var(--line); padding: 14px 12px;
+  }
+  .flow-step .n {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent); margin-bottom: 4px;
+  }
+  .flow-step .t { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .ticket {
+    border: 1px solid var(--line-strong); padding: 8px 10px;
+    font-size: 11.5px; color: var(--ink-soft); line-height: 1.6;
+  }
+  .ticket b { color: var(--ink); }
+  .ticket .tag {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    color: var(--accent); margin-bottom: 2px;
+  }
+  .flow-chev {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-faint); font-size: 16px;
+  }
+  .bypass {
+    margin-top: 12px; border-left: 2px solid var(--accent);
+    padding: 10px 0 10px 14px; font-size: 13px; color: var(--ink-soft);
+  }
+  .bypass b { color: var(--ink); }
+
+  /* —— 四模块 —— */
+  .mods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); }
+  .mod {
+    padding: 14px 12px; border-right: 1px solid var(--line);
+  }
+  .mod:last-child { border-right: none; }
+  .mod h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .mod dl { font-size: 12px; line-height: 1.6; }
+  .mod dt { color: var(--accent); font-size: 10px; letter-spacing: 1px; font-weight: 700; margin-top: 6px; }
+  .mod dd { color: var(--ink-soft); }
+  .mod dd b { color: var(--ink); }
+
+  /* —— 横切 / 成功 —— */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); }
+  .cell {
+    padding: 16px 14px; border-right: 1px solid var(--line);
+  }
+  .cell:last-child { border-right: none; }
+  .cell .k { font-size: 10px; letter-spacing: 2px; font-weight: 700; color: var(--ink-faint); margin-bottom: 6px; }
+  .cell .t { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .cell .d { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  footer {
+    margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 11px; color: var(--ink-faint);
+    display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+  }
+
+  @media (max-width: 820px) {
+    .duo, .flow, .intake { grid-template-columns: 1fr; }
+    .peers, .mods, .three, .two { grid-template-columns: 1fr; }
+    .peer, .mod, .cell, .intake-col { border-right: none; border-bottom: 1px solid var(--line); }
+    .peer:last-child, .mod:last-child, .cell:last-child, .intake-col:last-child { border-bottom: none; }
+    .arrow-col, .flow-chev { transform: rotate(90deg); min-height: 24px; padding: 4px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark">剑</div>
+      <div>
+        <div class="brand-name">剑琅联盟</div>
+        <div class="brand-sub">AGENT AS DEFAULT ENTRY</div>
+      </div>
+    </div>
+    <div class="kicker">SaaS → Agent</div>
+    <h1>Agent 做主入口<br><em>菜单式 UI 降级为兜底与精细配置</em></h1>
+    <p class="hero-one">一切展开只服务这一句：日常经营走助手；菜单留下干「搞不定」和「要精细」的事。</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">主判断</h2>
+      <div class="sec-en">Thesis</div>
+    </div>
+    <p class="line"><b>默认路径 = Agent</b>（说 / 拍 → 草稿 → 确认）。<b>降级路径 = 菜单 UI</b>（兜底操作 + 业绩/提成/权限等精细配置）。</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">主入口与降级</h2>
+      <div class="sec-en">Default vs Fallback</div>
+    </div>
+    <p class="line">前台是底部「AI 助手」；后厨是汉堡菜单。搞不定或要精细调，才进后厨。</p>
+
+    <div class="duo">
+      <div class="phone-card">
+        <span class="phone-tag">主入口 · 默认</span>
+        <div class="phone-title">AI 助手 TAB</div>
+        <div class="phone-sub">说话 · 拍照 · 出草稿</div>
+        <div class="device">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="scr-top">AI 助手</div>
+            <div class="scr-body">
+              <div class="bubble me">给张姐剪发 38，小王做的</div>
+              <div class="draft">
+                <b>草稿待确认</b><br>
+                张姐 · 剪发 ¥38 · 小王
+                <div class="btn">确认写入</div>
+              </div>
+              <div class="bubble">拍照价目墙 → 价目草稿</div>
+            </div>
+            <div class="tabbar">
+              <div class="tab"><div class="ico"></div>开单</div>
+              <div class="tab"><div class="ico"></div>流水</div>
+              <div class="tab on"><div class="ico"></div>助手</div>
+              <div class="tab"><div class="ico"></div>我的</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-col">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M8 20h20M22 12l10 8-10 8" stroke="#9AA39E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        搞不定<br>才进来
+      </div>
+
+      <div class="phone-card">
+        <span class="phone-tag sub">降级 · 兜底 / 精细</span>
+        <div class="phone-title">菜单式 UI</div>
+        <div class="phone-sub">设置 · 批量 · 权限</div>
+        <div class="device">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="scr-top" style="display:flex;justify-content:space-between;align-items:center;">
+              更多
+              <div class="hamburger"><i></i><i></i><i></i></div>
+            </div>
+            <div class="scr-body">
+              <div class="menu-list">
+                <div class="menu-row">业绩设置 <span>精细</span></div>
+                <div class="menu-row">提成设置 <span>精细</span></div>
+                <div class="menu-row">权限管理 <span>精细</span></div>
+                <div class="menu-row dim">批量改价 / 分类 <span>兜底</span></div>
+                <div class="menu-row dim">表单开单 <span>兜底</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">对标 · 谁在这么做</h2>
+      <div class="sec-en">Peers</div>
+    </div>
+    <p class="line">证明的是同一句：<b>助手默认进，菜单留下精细与兜底</b>。我们落在开单 / 价目。（点名，不挂链）</p>
+    <div class="peers">
+      <div class="peer">
+        <div class="peer-geo">海外 · 商家 SaaS</div>
+        <div class="peer-name">Shopify Sidekick</div>
+        <div class="peer-fit">自然语言做事：填表、改订单、建商品；<b>先草稿再 Apply</b>。复杂仍回 Admin。</div>
+        <div class="peer-hit">全计划可用 · 官方主推商家助手</div>
+      </div>
+      <div class="peer">
+        <div class="peer-geo">海外 · 客服</div>
+        <div class="peer-name">Intercom Fin</div>
+        <div class="peer-fit"><b>Agent 先接待</b>，人工收件箱降级为兜底与升级。</div>
+        <div class="peer-hit">平均自主解决约 56% · 标杆客户更高</div>
+      </div>
+      <div class="peer">
+        <div class="peer-geo">国内 · 商家</div>
+        <div class="peer-name">有赞 · 加我智能</div>
+        <div class="peer-fit">后台功能爆炸 → <b>智能助手入口</b>；AI 出简界面再执行。</div>
+        <div class="peer-hit">公司披露 AI 活跃商家约 1.8 万+</div>
+      </div>
+    </div>
+    <p class="peer-note">
+      行业背书：Salesforce 提「Agent 即新 UI」。先粗后细近亲：Ramp / Expensify（先记账，事后补类目）——同构于快捷开单 → 改单。
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">开单绕行（含小程序自助订单）</h2>
+      <div class="sec-en">Two Intake Paths</div>
+    </div>
+    <p class="line">两条入单源，共用「中转 → 补全 → 确认入库」。Agent 收拢半成品、引导补字段；系统<strong>事后可改</strong>（项目/产品、员工、业绩与提成），不重做「业绩设置 / 提成设置」。</p>
+
+    <div class="intake">
+      <div class="intake-col">
+        <div class="intake-k">来源 A · 店内</div>
+        <div class="intake-t">语音 / 快捷开单</div>
+        <div class="intake-d">先记金额或一句口述 → 半成品进中转</div>
+      </div>
+      <div class="intake-col">
+        <div class="intake-k">来源 B · C 端</div>
+        <div class="intake-t">小程序自助买单</div>
+        <div class="intake-d">顾客已付；订单缺字段，<b>不能直接入系统</b></div>
+      </div>
+    </div>
+
+    <div class="flow" style="margin-top:12px">
+      <div class="flow-step">
+        <div class="n">STEP 1</div>
+        <div class="t">半成品中转</div>
+        <div class="ticket">
+          <div class="tag">Agent 收拢整理</div><br>
+          保存待办单<br>
+          <b>引导店主处理</b>
+        </div>
+      </div>
+      <div class="flow-chev">→</div>
+      <div class="flow-step">
+        <div class="n">STEP 2</div>
+        <div class="t">补全必要字段</div>
+        <div class="ticket">
+          <div class="tag">常见缺口</div><br>
+          项目/产品 · 服务员工<br>
+          <b>业绩 · 提成</b>
+        </div>
+      </div>
+      <div class="flow-chev">→</div>
+      <div class="flow-step">
+        <div class="n">STEP 3</div>
+        <div class="t">确认入库</div>
+        <div class="ticket">
+          <div class="tag">复用改单逻辑</div><br>
+          店主确认写入<br>
+          <b>进入正式流水</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="bypass">
+      <b>AI 预判：</b>按历史/当下语境预填最可能项目、员工、业绩——用户免填或少填，仍可改。<br>
+      <b>绕开什么：</b>开单不必先过「业绩设置」「提成设置」；复杂规则留在降级菜单。
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">四模块 · 谁主谁留</h2>
+      <div class="sec-en">Modules</div>
+    </div>
+    <div class="mods">
+      <div class="mod">
+        <h3>价目</h3>
+        <dl>
+          <dt>AGENT</dt><dd><b>拍照墙</b> → 名+价草稿</dd>
+          <dt>UI 留</dt><dd>分类 · 批量 · 隐藏</dd>
+        </dl>
+      </div>
+      <div class="mod">
+        <h3>员工</h3>
+        <dl>
+          <dt>AGENT</dt><dd><b>建人</b>（名·工种·手机）</dd>
+          <dt>UI 留</dt><dd>权限 · 提成规则</dd>
+        </dl>
+      </div>
+      <div class="mod">
+        <h3>开单</h3>
+        <dl>
+          <dt>AGENT</dt><dd><b>语音/快捷 + 小程序半成品</b>中转·预填·改单</dd>
+          <dt>UI 留</dt><dd>表单兜底 · 复杂改价</dd>
+        </dl>
+      </div>
+      <div class="mod">
+        <h3>会员卡</h3>
+        <dl>
+          <dt>AGENT</dt><dd><b>套模板办卡</b> · 扣卡</dd>
+          <dt>UI 留</dt><dd>卡种配置 · 提醒</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2 class="sec-title">横切三规则</h2>
+      <div class="sec-en">Guards</div>
+    </div>
+    <div class="three">
+      <div class="cell">
+        <div class="k">ENTRY</div>
+        <div class="t">独立底部 TAB</div>
+        <div class="d">助手与开单/流水并列</div>
+      </div>
+      <div class="cell">
+        <div class="k">TRUST</div>
+        <div class="t">先草稿后写入</div>
+        <div class="d">确认前不落库</div>
+      </div>
+      <div class="cell">
+        <div class="k">AUTH</div>
+        <div class="t">原则上仅老板</div>
+        <div class="d">店员最多提报草稿</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-no">07</span>
+      <h2 class="sec-title">成功看什么</h2>
+      <div class="sec-en">Success</div>
+    </div>
+    <div class="two">
+      <div class="cell">
+        <div class="k">主入口是否成立</div>
+        <div class="t">Agent 建单占比</div>
+        <div class="d">语音 / 拍照 / 快捷→改单 经助手写入的比例</div>
+      </div>
+      <div class="cell">
+        <div class="k">是否接到真开单</div>
+        <div class="t">周活跃开单店数</div>
+        <div class="d">不是聊天活跃，是开单行为</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>剑琅联盟 · Agent 主入口方案</span>
+    <span>留白提纲 · 线框示意 · 2026-11-08</span>
+  </footer>
+</main>
+</body>
+</html>
