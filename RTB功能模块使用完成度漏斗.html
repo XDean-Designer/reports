@@ -193,14 +193,14 @@
     <div class="hd-r">
       <div class="kpi"><div class="kpi-v">75<small>家</small></div><div class="kpi-k">核心使用店</div></div>
       <div class="kpi"><div class="kpi-v ok">93.1%</div><div class="kpi-k">开单 · 流程型最高</div></div>
-      <div class="kpi"><div class="kpi-v warn">0<small>个</small></div><div class="kpi-k">可归因产品缺陷</div></div>
+      <div class="kpi"><div class="kpi-v bad">3<small>个</small></div><div class="kpi-k">待优化模块</div></div>
     </div>
   </div>
 
   <div class="lead">
     <div class="lt">核心结论</div>
-    <div class="lh">没有模块「用不了」　低数值来自<b>场景、属性与口径</b></div>
-    <div class="ld">9 个模块，7 个有真实完成记录，2 个纯只读不可测。</div>
+    <div class="lh">流程本身没断，断在<b>从 0 到 1 的配置</b></div>
+    <div class="ld">9 个模块，3 个有可复现的优化证据，其余 6 个由场景与属性解释。</div>
   </div>
 
   <div class="sec-hd"><span class="sn">01</span><h2>模块完成度总览</h2>
@@ -657,92 +657,89 @@
 <div class="slot" id="p6"><div class="card"><div class="page">
   <div class="hd">
     <div class="hd-l">
-      <div class="kick">Conclusion · 归因、口径与后续</div>
-      <h1>低数值的每种解释，<em>都没指向产品缺陷</em></h1>
-      <div class="sub">但现有数据也不足以证明「完全没有问题」</div>
+      <div class="kick">Optimization · 数据指向的产品优化清单</div>
+      <h1>优化重心不在流程，<em>在「从 0 到 1」</em></h1>
+      <div class="sub">3 个功能模块有可复现的数据支撑，其余是场景与属性</div>
     </div>
     <div class="hd-r">
-      <div class="kpi"><div class="kpi-v ok">0<small>个</small></div><div class="kpi-k">可归因缺陷</div></div>
-      <div class="kpi"><div class="kpi-v warn">3<small>个</small></div><div class="kpi-k">不可测模块</div></div>
-      <div class="kpi"><div class="kpi-v">1<small>项</small></div><div class="kpi-k">待复测</div></div>
+      <div class="kpi"><div class="kpi-v warn">3<small>个</small></div><div class="kpi-k">需优化模块</div></div>
+      <div class="kpi"><div class="kpi-v">47<small>家</small></div><div class="kpi-k">从未建过项目</div></div>
+      <div class="kpi"><div class="kpi-v">38<small>家</small></div><div class="kpi-k">卡模板一条没有</div></div>
     </div>
   </div>
 
-  <div class="sec-hd"><span class="sn">01</span><h2>逐个模块的归因</h2>
-    <span class="sd">同一个低数值，原因完全不同</span></div>
+  <div class="sec-hd"><span class="sn">01</span><h2>优化需求清单</h2>
+    <span class="sd">按证据强度排序，每条都能复算</span></div>
 
   <table class="tight">
     <thead><tr>
-      <th style="width:130px">模块</th>
-      <th class="r" style="width:70px">完成率</th>
-      <th style="width:110px">归因类型</th>
-      <th>解释</th>
+      <th style="width:96px">模块</th>
+      <th style="width:52px">优先级</th>
+      <th>数据证据</th>
+      <th style="width:196px">建议动作</th>
     </tr></thead>
     <tbody>
-      <tr><td><span class="nm">预约管理</span></td><td class="r num">5.3%</td>
-        <td><span class="chip part">场景不适用</span></td>
-        <td class="remark">小型店无排期需求</td></tr>
-      <tr><td><span class="nm">卡模板设置</span></td><td class="r num">16.0%</td>
-        <td><span class="chip plain">维护型属性</span></td>
-        <td class="remark">配一次，看而不改即完成</td></tr>
-      <tr><td><span class="nm">优惠券发放</span></td><td class="r num">21.7%</td>
-        <td><span class="chip plain">用量不足</span></td>
-        <td class="remark">25 次，样本不够</td></tr>
-      <tr><td><span class="nm">价目商品</span></td><td class="r num">38.1%</td>
-        <td><span class="chip plain">维护型属性</span></td>
-        <td class="remark">调用来自开单，改价低频</td></tr>
-      <tr style="background:#FAFBFC"><td><span class="nm">客户建档</span></td><td class="r">—</td>
-        <td><span class="chip plain">口径缺失</span></td>
-        <td class="remark">无起点接口，19/21 含在开卡</td></tr>
-      <tr><td><span class="nm">客户办卡 / 充值</span></td><td class="r num">89.7%</td>
-        <td><span class="chip ok">链路正常</span></td>
-        <td class="remark">约束在渗透面</td></tr>
-      <tr><td><span class="nm">开单记账</span></td><td class="r num">93.1%</td>
-        <td><span class="chip ok">非开单场景</span></td>
-        <td class="remark">选品为起点，46 家不计流失</td></tr>
+      <tr><td><span class="nm">价目商品</span></td>
+        <td><span class="chip bad">P0</span></td>
+        <td class="remark"><b>47 家一条项目都没有</b>；有项目的店选品率 <b>75%</b>，没项目的只有 <b>17%</b></td>
+        <td class="remark">空态给行业项目模板，一键导入</td></tr>
+      <tr style="background:#FAFBFC"><td><span class="nm">卡模板设置</span></td>
+        <td><span class="chip part">P1</span></td>
+        <td class="remark"><b>38 家列表恒为空</b>，与产品自报「未建卡」零误差；<b>0 家</b>进过编辑页，中位看 15 次空白</td>
+        <td class="remark">空态给推荐模板（储值 100 / 500）</td></tr>
+      <tr><td><span class="nm">开单记账</span></td>
+        <td><span class="chip plain">P2</span></td>
+        <td class="remark">6 家四项配齐却 <b>0 选品</b>，建单 5–64 次后直接退出</td>
+        <td class="remark">开单首屏给「最近项目 / 常用项」</td></tr>
     </tbody>
   </table>
 
-  <div class="sec-hd"><span class="sn">02</span><h2>学习期污染：可量化，不改结论</h2>
-    <span class="sd">38 家窗口内新开 vs 37 家存量店</span></div>
+  <div class="sec-hd"><span class="sn">02</span><h2>一条链：没项目，开单就选不出东西</h2>
+    <span class="sd">把「46 家非开单场景」重新拆开看</span></div>
 
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px;">
-    <div class="rcard">
-      <div class="rcard-t"><span class="tag">开单</span>换口径后差距消失</div>
-      <div class="rcard-d">
-        <div class="cmp" style="font-size:9.5px;"><span>触达 新 <b class="b">13.2%</b> / 存 <b class="b">59.5%</b></span></div>
-        <div class="cmp" style="font-size:9.5px;margin-top:1px;"><span>意图 新 <b class="b">100%</b> / 存 <b class="b">91.7%</b></span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+    <div>
+      <div class="rcard g">
+        <div class="rcard-t"><span class="tag">有服务项目</span>28 家 · 选品 21 家</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin:4px 0 3px;">
+          <span style="font-family:var(--font-num);font-size:26px;font-weight:700;color:var(--ok);">75%</span>
+          <span style="font-size:10.5px;color:var(--ink-faint);">开单选品率</span>
+        </div>
+        <div class="bar-wrap"><div class="bar g" style="width:75%"></div></div>
       </div>
     </div>
-    <div class="rcard">
-      <div class="rcard-t"><span class="tag">办卡</span>新店低 8 点</div>
-      <div class="rcard-d"><div class="cmp" style="font-size:9.5px;"><span>新 <b class="b">83.3%</b></span><span class="vs">VS</span><span>存 <b class="b">91.3%</b></span></div></div>
-    </div>
-    <div class="rcard">
-      <div class="rcard-t"><span class="tag">建档</span>渗透率，非完成率</div>
-      <div class="rcard-d"><div class="cmp" style="font-size:9.5px;"><span>新 <b class="b">13.2%</b></span><span class="vs">VS</span><span>存 <b class="b">40.5%</b></span></div></div>
-    </div>
-    <div class="rcard">
-      <div class="rcard-t"><span class="tag">预约</span>两边都近零</div>
-      <div class="rcard-d"><div class="cmp" style="font-size:9.5px;"><span>新 <b class="b">2.6%</b></span><span class="vs">VS</span><span>存 <b class="b">8.1%</b></span></div></div>
+    <div>
+      <div class="rcard r">
+        <div class="rcard-t"><span class="tag">无服务项目</span>47 家 · 选品 8 家</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin:4px 0 3px;">
+          <span style="font-family:var(--font-num);font-size:26px;font-weight:700;color:var(--bad);">17%</span>
+          <span style="font-size:10.5px;color:var(--ink-faint);">开单选品率</span>
+        </div>
+        <div class="bar-wrap"><div class="bar r" style="width:17%"></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="sec-hd" style="margin:9px 0 6px;"><span class="sn">03</span><h2>这份数据能信到什么程度</h2>
-    <span class="sd">三条边界</span></div>
+  <div class="rcard a" style="margin-top:10px;">
+    <div class="rcard-t"><span class="tag">重读</span>46 家未选品里，39 家（84%）没有项目</div>
+    <div class="rcard-d">原来记作「非开单场景」。真实情况是<b>选品列表空着，无从下手</b>——不是不用，是没得选。</div>
+  </div>
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+  <div class="sec-hd"><span class="sn">03</span><h2>不列入优化的模块</h2>
+    <span class="sd">低数值，但原因不在产品</span></div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;">
     <div class="rcard">
-      <div class="rcard-t"><span class="tag">边界 1</span>只有接口，没有点击</div>
-      <div class="rcard-d">断点是<b>区间</b>，不是精确点。</div>
+      <div class="rcard-t"><span class="tag">预约管理</span>场景不适用</div>
+      <div class="rcard-d">16 家真正进入、4 家提交。<b>小型店无排期需求</b>，59 家只是首页预载。</div>
     </div>
     <div class="rcard">
-      <div class="rcard-t"><span class="tag">边界 2</span>75 家 ≠ 全平台</div>
-      <div class="rcard-d">占请求 99.1%，占比不外推到全部商家。</div>
+      <div class="rcard-t"><span class="tag">员工提成 · 经营报表</span>高频只读</div>
+      <div class="rcard-d">75 家全覆盖，6.5 万 / 3.4 万次。<b>每天在用，不是没在用</b>。</div>
     </div>
     <div class="rcard g">
-      <div class="rcard-t"><span class="tag">可信</span>横向与分群对比</div>
-      <div class="rcard-d">流程型 vs 维护型、新店 vs 存量的差是稳定的。</div>
+      <div class="rcard-t"><span class="tag">客户办卡 / 充值</span>链路完整</div>
+      <div class="rcard-d">89 触达 → 80 完成，<b>89.7%</b>。<b>没有流程断点</b>，约束在渗透面。</div>
     </div>
   </div>
 
@@ -750,10 +747,12 @@
               border-radius:3px;padding:10px 16px 11px;margin-top:9px;">
     <div style="font-size:9.5px;font-weight:700;letter-spacing:1.6px;color:var(--ink-faint);margin-bottom:6px;">一句话结论</div>
     <div style="font-size:12.5px;color:var(--ink);line-height:1.62;">
-      无证据表明存在产品设计缺陷；低数值由<b style="color:var(--steel)">场景、属性、低频与学习期</b>解释。
-      资源投向<b style="color:var(--steel)">扩大渗透</b>与<b style="color:var(--steel)">有需求商户的复测</b>，而非改造流程。
+      问题不在流程走不完，而在<b style="color:var(--steel)">第一步空着</b>——47 家没项目、38 家没卡模板。
+      先把<b style="color:var(--steel)">0 变成 1</b>，再谈后面的完成率。
     </div>
   </div>
+
+  <div class="note-line" style="margin-top:8px;"><b>复算依据：</b>空配置取两组独立判定——产品开店进度的 4 项勾选（4,109 次）与列表接口返回条数（卡模板 4,354 次、价目 3,430 次），两路结果零矛盾；选品率按 75 家核心店逐店交叉。</div>
 
   <div class="ft"><div class="lg"><span><span class="dot"></span>剑琅联盟 · 内部资料</span>
     <span class="sep">|</span><span>2026-10-27 ~ 11-09 · 636,274 条日志 · 250,481 个有效请求</span></div>
