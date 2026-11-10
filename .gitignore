@@ -4,9 +4,20 @@
 # 页面渲染快照：本地自查用，随改随失效，不入库
 preview/
 
-# 上架图素材：只跟踪《剑琅联盟应用商店视觉方案》页面实际引用的 9 张；
+# 上架图素材：只跟踪《剑琅联盟下载到上手》页面实际引用的 10 张；
 # 其余（_raw_* / m_*_full / shot_* / sb_* / live/ 等）是取图过程中的原图与中间产物，不入库
 assets/ppt/*
+!assets/ppt/jl_figma_store.png
+!assets/ppt/jl_search_now.jpg
+!assets/ppt/jl_search_after.png
+!assets/ppt/guide/
+!assets/ppt/guide/**
+!assets/ppt/kmm_1.jpg
+!assets/ppt/kmm_2.jpg
+!assets/ppt/kmm_3.jpg
+!assets/ppt/kmm_4.jpg
+!assets/ppt/kmm_5.jpg
+!assets/ppt/kmm_6.jpg
 !assets/ppt/jl_store_mobile.png
 !assets/ppt/kmm_store_mobile.png
 !assets/ppt/jl_1.jpg
@@ -16,3 +27,5 @@ assets/ppt/*
 !assets/ppt/jl_5.jpg
 !assets/ppt/jl_6.jpg
 !assets/ppt/jl_7.jpg
+!assets/ppt/desc/
+!assets/ppt/desc/**

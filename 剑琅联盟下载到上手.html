@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑琅联盟 · 下载到上手</title>
+<style>
+  :root {
+    --navy: #14243A;
+    --ink: #22303F;
+    --muted: #8A94A3;
+    --line: #E7E2E6;
+    --pink: #FFE4F0;
+    --coral: #E8577E;
+    --green: #2F7D68;
+    --font: "Jianlang Sans SC", "Noto Sans SC", "Source Han Sans SC", "思源黑体 SC",
+            "PingFang SC", "Microsoft YaHei", sans-serif;
+    --num: Georgia, "Times New Roman", serif;
+    --s: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); color: var(--ink); background: #EDEDF1;
+         -webkit-font-smoothing: antialiased; padding: 64px 0 130px; }
+
+  /* 纵向平铺：一页接一页往下滚 */
+  .frame { position: relative; width: calc(1920px * var(--s));
+           height: calc(1080px * var(--s)); margin: 0 auto 100px; }
+  .slide { width: 1920px; height: 1080px; position: absolute; top: 0; left: 0;
+           transform: scale(var(--s)); transform-origin: top left;
+           background: #fff; overflow: hidden;
+           box-shadow: 0 1px 2px rgba(23, 32, 48, .05),
+                       0 20px 52px rgba(23, 32, 48, .09); }
+  .pgnum { position: absolute; right: 3px; top: calc(1080px * var(--s) + 26px);
+           display: flex; gap: 10px; align-items: baseline;
+           font-size: 14px; letter-spacing: 1.6px; color: #A3ABB7; user-select: none; }
+  .pgnum b { font-family: var(--num); font-weight: 700; font-size: 16px; color: #7C8695; }
+  .pgnum i { font-style: normal; color: #C7CDD6; }
+  .pgnum em { font-style: normal; color: #B7BFCA; font-size: 12px; letter-spacing: 1.4px;
+              margin-left: 8px; }
+
+  .pad { position: absolute; inset: 0; padding: 92px 120px 96px; }
+  .kick { font-size: 21px; letter-spacing: 3.2px; color: var(--coral);
+          font-weight: 700; }
+  .kick span { color: #C9CFD8; letter-spacing: 1px; margin-right: 16px; }
+  h1 { font-size: 76px; font-weight: 800; color: var(--navy); letter-spacing: 1px;
+       line-height: 1.18; margin-top: 26px; }
+  h2 { font-size: 62px; font-weight: 800; color: var(--navy); letter-spacing: .8px;
+       line-height: 1.2; }
+  .rule { width: 64px; height: 5px; background: var(--coral); border-radius: 3px;
+          margin: 26px 0 0; }
+  /* ---------- 01 缘起 ---------- */
+  h2.xl { font-size: 74px; }
+  .orig-bg { position: absolute; left: 120px; right: 120px; top: 300px;
+             display: grid; grid-template-columns: 4px 1fr; gap: 32px; }
+  .orig-bg .bar { background: var(--coral); border-radius: 2px; width: 4px; }
+  .orig-bg p { font-size: 31px; color: #4A5563; line-height: 1.75; letter-spacing: .3px; }
+  .orig-bg p b { color: var(--navy); font-weight: 800; }
+
+  .lb { font-size: 19px; letter-spacing: 2.8px; color: #B0B7C2; }
+  .flow { position: absolute; left: 120px; right: 120px; top: 470px; }
+  .flow .row { position: relative; display: flex; margin-top: 40px; }
+  .step { position: relative; flex: 1; padding-top: 34px; font-size: 25px; font-weight: 700;
+          color: #3E4A59; letter-spacing: .4px; }
+  .step::before { content: ""; position: absolute; left: 0; top: 0; width: 11px; height: 11px;
+                  border-radius: 50%; background: #fff; border: 2px solid #C4CBD5;
+                  box-sizing: content-box; z-index: 2; }
+  .step::after { content: ""; position: absolute; left: 15px; top: 7px; right: 0; height: 1px;
+                 background: #E3DFE4; }
+  .step:last-child { flex: 0 0 auto; }
+  .step:last-child::after { display: none; }
+  .step.end { color: var(--coral); }
+  .step.end::before { background: var(--coral); border-color: var(--coral); }
+  .step small { display: block; font-weight: 400; font-size: 19px; color: #A9B1BD;
+                margin-top: 9px; letter-spacing: .3px; }
+  .flow .note { margin-top: 36px; font-size: 21px; color: #A9B1BD; letter-spacing: .3px; }
+
+  .todo3 { position: absolute; left: 120px; right: 120px; top: 764px; }
+  .todo3 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+                 margin-top: 32px; }
+  .todo3 .it { border-top: 2px solid var(--navy); padding-top: 22px; }
+  .todo3 .it .n { font-size: 21px; font-weight: 700;
+                  color: var(--coral); letter-spacing: 1.4px; }
+  .todo3 .it .t { font-size: 34px; font-weight: 800; color: var(--navy);
+                  letter-spacing: .6px; margin-top: 6px; line-height: 1.25; }
+  .todo3 .it .d { font-size: 20px; color: #8A94A3; letter-spacing: .3px; margin-top: 9px; }
+
+  /* ---------- 02 搜索列表 ---------- */
+  h2.sm2 { font-size: 56px; }
+  .pair { position: absolute; left: 622px; top: 250px; display: flex; gap: 64px; }
+  .pair .item { width: 306px; }
+  .pair img { display: block; width: 306px; height: 694px; border-radius: 14px;
+              background: #fff; border: 1px solid #E7E2E6;
+              box-shadow: 0 18px 44px rgba(40, 50, 70, .14); }
+  .pair .ph { width: 306px; height: 694px; border-radius: 14px;
+              border: 2px dashed #E9C9D5; background: #FFFAFC;
+              display: flex; flex-direction: column; align-items: center;
+              justify-content: center; text-align: center; }
+  .pair .ph b { font-size: 25px; font-weight: 700; color: #CF93A9; letter-spacing: .8px; }
+  .pair .ph span { font-size: 17px; color: #D5B9C4; letter-spacing: .2px;
+                   line-height: 1.7; margin-top: 14px; }
+  .pair .cap { margin-top: 20px; font-size: 19px; color: #A9B1BD;
+               letter-spacing: .3px; line-height: 1.45; }
+  .pair .cap b { color: #4A5563; font-weight: 700; margin-right: 6px; }
+  .pair .cap em { display: block; font-style: normal; font-size: 17px; color: #B7BFCA;
+                  margin-top: 7px; letter-spacing: .2px; }
+
+  /* ---------- 01 商店页 ---------- */
+  h2.sm { font-size: 56px; }
+  .phone { position: absolute; top: 250px; width: 340px; }
+  .phone.p1 { left: 120px; }
+  .phone.p2 { left: 490px; }
+  .phone.p3 { left: 860px; }
+  .phone img { display: block; width: 100%; height: 680px; object-fit: cover;
+                object-position: top; border-radius: 14px; background: #fff;
+                border: 1px solid #E7E2E6; box-shadow: 0 18px 44px rgba(40, 50, 70, .14); }
+  .phone.new img { border-color: #F6CBD9; box-shadow: 0 18px 44px rgba(232, 87, 126, .17); }
+  .pcap { position: absolute; top: 962px; width: 340px; font-size: 19px; color: #A9B1BD;
+          letter-spacing: .3px; line-height: 1.45; }
+  .pcap b { color: #4A5563; font-weight: 700; margin-right: 6px; }
+  .pcap em { display: block; font-style: normal; font-size: 17px; color: #B7BFCA;
+             margin-top: 7px; letter-spacing: .2px; }
+  .stats { position: absolute; left: 1272px; top: 250px; right: 120px; }
+  .stats .sh { font-size: 27px; font-weight: 800; color: var(--navy);
+               letter-spacing: .5px; display: flex; align-items: baseline;
+               padding-bottom: 10px; }
+  .stats .sh em { font-style: normal; font-size: 15px; font-weight: 700;
+                  color: var(--coral); background: #FFF0F5;
+                  border: 1px solid #FAD3E1; border-radius: 4px;
+                  padding: 3px 10px; margin-left: 12px; letter-spacing: .8px;
+                  transform: translateY(-3px); }
+  .stats .sorg { font-size: 17px; color: #A9B1BD; letter-spacing: .2px;
+                 line-height: 1.5; padding-bottom: 14px;
+                 border-bottom: 1px solid var(--line); }
+  .stat { padding: 22px 0 22px; border-bottom: 1px solid var(--line); }
+  .stat b { display: block; font-family: var(--num); font-size: 56px; font-weight: 700;
+            color: var(--navy); line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat b small { font-size: 26px; font-weight: 700; margin-left: 4px; letter-spacing: 0; }
+  .stat b.tx { font-family: inherit; font-size: 40px; letter-spacing: 1px; }
+  .stat span { display: block; font-size: 19px; color: #5C6675; letter-spacing: .3px;
+               margin-top: 10px; line-height: 1.5; }
+  .stats .tail { margin-top: 26px; font-size: 21px; color: var(--coral); font-weight: 700;
+                 letter-spacing: .4px; line-height: 1.55; }
+
+  /* ---------- 04 产品描述 ---------- */
+  .desc3 { position: absolute; left: 120px; right: 120px; top: 240px;
+           display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .desc3 .col { display: flex; flex-direction: column; min-width: 0; }
+  .desc3 .lab { font-size: 20px; font-weight: 800; color: var(--navy);
+                letter-spacing: .4px; margin-bottom: 12px; }
+  .desc3 .lab em { font-style: normal; font-size: 16px; font-weight: 700;
+                   color: #A9B1BD; letter-spacing: 1px; margin-left: 12px; }
+  .desc3 .lab .tag { display: inline-block; margin-left: 12px; font-size: 15px;
+                     font-weight: 700; color: var(--coral); background: #FFF0F5;
+                     border: 1px solid #FAD3E1; border-radius: 4px; padding: 2px 10px;
+                     letter-spacing: .6px; vertical-align: 2px; }
+  .desc3 .card { min-height: 460px; flex: 1; border-radius: 14px; background: #F8F8FA;
+                 border: 1px solid #E7E2E6; padding: 28px 26px 26px;
+                 box-shadow: 0 10px 28px rgba(40, 50, 70, .08);
+                 display: flex; flex-direction: column; }
+  .desc3 .col.hi .card { background: #FFFAFC; border-color: #F6CBD9;
+                         box-shadow: 0 18px 44px rgba(232, 87, 126, .14); }
+  .desc3 .card .sub { font-size: 17px; font-weight: 700; color: #8A94A3;
+                      letter-spacing: .3px; padding-bottom: 10px;
+                      border-bottom: 1px solid #E7E2E6; margin-bottom: 14px; }
+  .desc3 .col.hi .card .sub { color: #6E7887; border-bottom-color: #F0D6E0; }
+  .desc3 .card .body { font-size: 16px; color: #3E4A59; line-height: 1.66;
+                       letter-spacing: .2px; flex: 1; }
+  .desc3 .card .body p { margin: 0 0 8px; }
+  .desc3 .card .body p.mod { margin-bottom: 6px; }
+  .desc3 .card .body .mod { color: #2E3A4B; font-weight: 800; }
+  .desc3 .card .body p:last-child { margin-bottom: 0; }
+  .desc3 .card .body b { color: var(--coral); font-weight: 800; }
+  .desc3 .card .body strong { color: var(--navy); font-weight: 800; }
+  .desc3 .card .body .mute { color: #7C8695; }
+  .desc3 .pt { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+               font-size: 19px; color: #5C6675; letter-spacing: .3px; line-height: 1.5; }
+  .desc3 .pt b { color: var(--navy); font-weight: 800; }
+  .desc3 .col.hi .pt b { color: var(--coral); }
+  .desc-foot { position: absolute; left: 120px; right: 120px; bottom: 90px;
+               font-size: 20px; color: #8A94A3; letter-spacing: .3px;
+               padding-top: 18px; border-top: 1px solid var(--line); }
+  .desc-foot em { font-style: normal; color: var(--coral); font-weight: 700; }
+
+  /* ---------- 05 上架图 ---------- */
+  .seven { position: absolute; left: 120px; right: 120px; top: 288px;
+           display: grid; grid-template-columns: repeat(7, 1fr); gap: 22px; }
+  .seven figure { text-align: center; }
+  .seven img { width: 100%; height: auto; display: block; border-radius: 12px;
+               border: 1px solid #EFE7EC; box-shadow: 0 14px 34px rgba(60, 40, 60, .12); }
+  .seven figcaption { margin-top: 18px; font-size: 21px; color: #7C8695; letter-spacing: .4px; }
+  .seven figcaption b { color: var(--navy); font-weight: 700; margin-right: 4px; }
+  .seven .hero img { box-shadow: 0 18px 44px rgba(60, 40, 60, .20); }
+  .legend { position: absolute; left: 120px; right: 120px; bottom: 122px; font-size: 23px;
+            color: #8A94A3; letter-spacing: .3px; }
+  .legend b { color: var(--navy); }
+  .legend em { font-style: normal; color: var(--coral); font-weight: 700; }
+
+  /* ---------- 06 客满满 ---------- */
+  .six { position: absolute; left: 120px; right: 120px; top: 288px;
+         display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
+  .six figure { text-align: center; }
+  .six img { width: 100%; height: auto; display: block; border-radius: 12px;
+             border: 1px solid #EFE7EC; box-shadow: 0 14px 34px rgba(60, 40, 60, .12); }
+  .six figcaption { margin-top: 18px; font-size: 21px; color: #7C8695; letter-spacing: .4px; }
+  .six figcaption b { color: var(--navy); font-weight: 700; margin-right: 4px; }
+  .six .hero img { box-shadow: 0 18px 44px rgba(60, 40, 60, .20); }
+  .src { position: absolute; left: 120px; right: 120px; bottom: 132px;
+         font-size: 20px; color: #A9B1BD; letter-spacing: .3px;
+         padding-top: 22px; border-top: 1px solid var(--line);
+         display: flex; justify-content: space-between; }
+  .src b { color: #7C8695; font-weight: 700; }
+
+  /* ---------- 10 注册开店 ---------- */
+  .nine { position: absolute; left: 120px; right: 120px; top: 286px;
+          display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
+  .nine figure { text-align: center; }
+  .nine img { width: 100%; height: auto; display: block; border-radius: 12px;
+              border: 1px solid #EFE7EC; box-shadow: 0 14px 34px rgba(60, 40, 60, .12); }
+  .nine figcaption { margin-top: 16px; font-size: 21px; color: #7C8695; letter-spacing: .4px; }
+  .nine figcaption b { color: var(--navy); font-weight: 700; margin-right: 4px; }
+  .nine figcaption em { display: block; font-style: normal; font-size: 17px; color: #B0B7C2;
+                        margin-top: 7px; letter-spacing: .2px; line-height: 1.5; }
+
+  /* ---------- 11 新手引导 ---------- */
+  .gshot { position: absolute; left: 120px; top: 268px; width: 236px; }
+  .gshot img { display: block; width: 236px; height: auto; border-radius: 13px;
+               border: 1px solid #E7E2E6; box-shadow: 0 18px 44px rgba(40, 50, 70, .14); }
+  .gshot .cap { margin-top: 18px; font-size: 18px; color: #A9B1BD;
+                letter-spacing: .3px; line-height: 1.45; }
+  .gshot .cap b { display: block; color: #4A5563; font-weight: 700; margin-bottom: 8px; }
+
+  .fold { position: absolute; left: 420px; top: 276px; width: 630px; }
+  .fold .h { font-size: 20px; color: #A9B1BD; letter-spacing: 2.4px;
+             padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .fold .f { padding: 28px 0 26px; border-bottom: 1px dashed #E7E2E6; }
+  .fold .f:last-child { border-bottom: none; }
+  .fold .k { font-size: 31px; font-weight: 800; color: var(--navy); letter-spacing: .5px; }
+  .fold .d { font-size: 20px; color: #6E7887; line-height: 1.62; margin-top: 10px; }
+
+  .why { position: absolute; left: 1112px; right: 120px; top: 272px; }
+  .why .h { font-size: 20px; color: #A9B1BD; letter-spacing: 2.4px;
+            padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .why .it { padding: 22px 0 20px; border-bottom: 1px dashed #E7E2E6; }
+  .why .it:last-child { border-bottom: none; }
+  .why .k { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: .6px; }
+  .why .k em { font-style: normal; font-size: 16px; font-weight: 700;
+               color: #9AA4B2; letter-spacing: 1px; margin-left: 12px; }
+  .why .v { font-size: 19px; color: #6E7887; line-height: 1.6; margin-top: 10px; }
+  .why .v b { color: #4A5563; font-weight: 700; }
+
+  /* ---------- 12–14 两家怎么引导 ---------- */
+  .slots { position: absolute; left: 120px; top: 286px; display: grid; }
+  .slots.wx  { grid-template-columns: repeat(5, 232px); gap: 20px; }
+  .slots.dy1 { grid-template-columns: repeat(4, 254px); gap: 22px; }
+  .slots.dy2 { left: 120px; right: 120px; grid-template-columns: repeat(6, 1fr); gap: 26px; }
+
+  .slot { display: flex; flex-direction: column; align-items: center;
+          justify-content: center; text-align: center;
+          border: 2px dashed #E9C9D5; background: #FFFAFC; border-radius: 13px; }
+  .slots.wx .slot  { height: 503px; }
+  .slots.dy1 .slot { height: 550px; }
+  .slots.dy2 .slot { height: 500px; }
+  .slot b { font-family: var(--num); font-size: 34px; font-weight: 700;
+            color: #E2BCCB; letter-spacing: 1px; }
+  .slot span { font-size: 16px; color: #D5B9C4; margin-top: 14px;
+               line-height: 1.62; padding: 0 18px; letter-spacing: .2px; }
+
+  .slots figcaption { margin-top: 16px; font-size: 19px; color: #7C8695;
+                      letter-spacing: .3px; line-height: 1.45; }
+  .slots figcaption b { color: var(--navy); font-weight: 700; margin-right: 5px; }
+  .slots.dy1 figcaption { font-size: 18px; }
+  .slots.dy2 { top: 276px; }
+  .slots.dy2 .slot { height: 559px; position: relative; }
+  .slots.dy2 figcaption { text-align: center; font-size: 18px; }
+  .slots.dy2 figcaption .ex { font-style: normal; font-size: 15px; font-weight: 700;
+                              color: var(--coral); letter-spacing: .4px; margin-left: 6px;
+                              white-space: nowrap; }
+  .slots.dy2 .tag { position: absolute; left: 14px; top: 14px;
+                    font-size: 15px; font-weight: 700; letter-spacing: .8px;
+                    color: var(--coral); background: #FFF0F5;
+                    border: 1px solid #FAD3E1; border-radius: 4px; padding: 3px 11px; }
+
+  /* filled slots (Figma 实拍) */
+  .slots figure > img { display: block; width: 100%; border-radius: 13px;
+                        border: 1px solid #E7E2E6; background: #fff;
+                        box-shadow: 0 14px 34px rgba(40, 50, 70, .14);
+                        object-fit: cover; object-position: top; }
+  .slots.wx  figure > img { height: 503px; }
+  .slots.dy1 figure > img { height: 550px; }
+  .slots.dy2 figure > img { height: 550px; }
+  .slots.dy2 figure { position: relative; }
+  .slots.dy2 figure > .tag { position: absolute; left: 14px; top: 14px; z-index: 1;
+                             font-size: 15px; font-weight: 700; letter-spacing: .8px;
+                             color: var(--coral); background: #FFF0F5;
+                             border: 1px solid #FAD3E1; border-radius: 4px; padding: 3px 11px; }
+
+  .nt { position: absolute; top: 286px; }
+  .nt.wx { left: 1440px; right: 120px; }
+  .nt.dy { left: 1280px; right: 120px; }
+  .nt .h { font-size: 20px; color: #A9B1BD; letter-spacing: 2.4px;
+           padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .nt .i { padding: 20px 0 16px; border-bottom: 1px dashed #E7E2E6; }
+  .nt .i:last-child { border-bottom: none; }
+  .nt .k { font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: .4px; }
+  .nt .d { font-size: 18px; color: #6E7887; line-height: 1.6; margin-top: 8px; }
+
+  /* ---------- 15 三层手段 ---------- */
+  .judge { position: absolute; left: 120px; right: 120px; top: 272px;
+           font-size: 22px; color: #8A94A3; letter-spacing: .3px; }
+  .judge b { color: var(--navy); }
+  .judge em { font-style: normal; color: var(--coral); font-weight: 700; }
+  .lad { position: absolute; left: 120px; right: 120px; top: 330px; }
+  .lad .lh { display: grid; grid-template-columns: 54px 290px 1fr 340px; gap: 30px;
+             font-size: 17px; color: #BFC6D0; letter-spacing: 1.8px; padding-bottom: 14px; }
+  .lad .row { display: grid; grid-template-columns: 54px 290px 1fr 340px; gap: 30px;
+              align-items: center; padding: 34px 0; border-top: 1px solid var(--line); }
+  .lad .row:last-child { border-bottom: 1px solid var(--line); }
+  .lad .n { font-family: var(--num); font-size: 26px; font-weight: 700; color: #C4CBD5; }
+  .lad .t { font-size: 30px; font-weight: 800; color: var(--navy); letter-spacing: .5px; }
+  .lad .t small { display: block; font-size: 18px; font-weight: 400; color: #A9B1BD;
+                  margin-top: 7px; letter-spacing: .2px; }
+  .lad .w { font-size: 21px; color: #6E7887; line-height: 1.55; }
+  .lad .w b { color: #3E4A59; font-weight: 700; }
+  .lad .bar { height: 12px; background: #F3F0F3; border-radius: 6px; position: relative; }
+  .lad .bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px;
+                background: #CBD3DE; }
+  .lad .row.hi .bar i { background: var(--coral); }
+
+  .use { position: absolute; left: 120px; right: 120px; bottom: 132px;
+         padding-top: 26px; border-top: 1px solid var(--line);
+         display: flex; gap: 100px; }
+  .use .u { display: flex; align-items: baseline; gap: 18px; }
+  .use .who { font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: .4px;
+              width: 130px; }
+  .use .dots { font-size: 21px; letter-spacing: 7px; color: #DDE1E8; }
+  .use .dots i { font-style: normal; color: var(--coral); }
+  .use .txt { font-size: 20px; color: #8A94A3; letter-spacing: .3px; }
+
+  /* ---------- 16 结论 ---------- */
+  .cmp { position: absolute; left: 120px; right: 120px; top: 286px;
+         display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .cmp .b h3 { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: .3px;
+               padding-bottom: 16px; border-bottom: 2px solid var(--navy); }
+  .cmp .b.alt h3 { color: var(--coral); border-color: var(--coral); }
+  .cmp .b p { font-size: 22px; color: #6E7887; line-height: 1.65; margin-top: 18px;
+              padding-left: 22px; position: relative; }
+  .cmp .b p::before { content: ""; position: absolute; left: 0; top: 14px;
+                      width: 7px; height: 7px; border-radius: 50%; background: #C4CBD5; }
+  .cmp .b.alt p::before { background: #F2B9CB; }
+  .cmp .b p b { color: #3E4A59; font-weight: 700; }
+
+  .rules { position: absolute; left: 120px; right: 120px; top: 626px;
+           display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
+  .rl { position: absolute; left: 120px; top: 580px; font-size: 20px;
+        color: #A9B1BD; letter-spacing: 2.4px; }
+  .rules .r { border-top: 2px solid var(--navy); padding-top: 24px; }
+  .rules .r .k { font-size: 27px; font-weight: 800; color: var(--navy); letter-spacing: .4px; }
+  .rules .r .k em { font-style: normal; color: var(--coral); }
+  .rules .r .d { font-size: 21px; color: #6E7887; line-height: 1.65; margin-top: 14px; }
+
+  /* ---------- 04 结构 ---------- */
+  .anwrap { position: absolute; left: 120px; top: 272px; }
+  .anwrap img { display: block; height: 800px; width: auto; border-radius: 16px;
+                border: 1px solid #EFE7EC; box-shadow: 0 20px 50px rgba(60, 40, 60, .14); }
+  .mk { position: absolute; right: -16px; width: 32px; height: 32px; border-radius: 50%;
+        background: var(--coral); color: #fff; font-family: var(--num); font-size: 16px;
+        font-weight: 700; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 5px rgba(255,255,255,.94); z-index: 2; }
+  .lead { position: absolute; left: 100%; width: 178px; border-top: 1px dashed #D5D9E1; }
+  .parts { position: absolute; left: 700px; top: 272px; right: 120px; }
+  .parts .part { position: absolute; left: 0; right: 0; }
+  .part .t { font-size: 32px; font-weight: 700; color: var(--navy); letter-spacing: .3px; }
+  .part .d { font-size: 21px; color: #6E7887; margin-top: 8px; line-height: 1.6; }
+  .no { position: absolute; left: 690px; bottom: 128px; font-size: 22px; color: #A9B1BD;
+        letter-spacing: .4px; padding-top: 22px; border-top: 1px solid var(--line);
+        right: 120px; }
+  .no b { color: #7C8695; font-weight: 700; }
+
+  /* ---------- 04 覆盖 ---------- */
+  .cover2 { position: absolute; left: 120px; right: 120px; top: 292px;
+            display: grid; grid-template-columns: 1fr 96px 1fr; align-items: start; }
+  .panel h3 { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: .3px;
+              padding-bottom: 16px; border-bottom: 2px solid var(--navy); }
+  .panel h3 small { font-size: 17px; font-weight: 400; color: var(--muted); margin-left: 12px; }
+  .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+  .chips.four span { height: 148px; }
+  .chips span { height: 92px; border-radius: 10px; background: #FAF7F9; color: #4A5563;
+                font-size: 25px; letter-spacing: .4px; display: flex; align-items: center;
+                padding-left: 28px; border: 1px solid #F0EAEE; }
+  .chips span b { font-size: 16px; font-weight: 400; color: #A9B1BD; margin-left: 12px;
+                  letter-spacing: 0; }
+  .panel.right .chips span { background: #fff; border-color: #E7E2E6; color: var(--navy);
+                             font-weight: 700; }
+  .panel.right .chips span.plus { background: #FFF3F7; border-color: #F8D3E0;
+                                  color: var(--coral); }
+  .panel.right .chips span.plus::after { content: "＋"; font-size: 17px; margin-left: 10px;
+                                         color: #F0A8BF; }
+  .panel.right .chips span.ai { grid-column: 1 / -1; height: 74px; background: #fff;
+                                border: 1px dashed #D5DCE4; color: #7C8695;
+                                padding-right: 28px; }
+  .panel.right .chips span.ai::after { content: none; }
+  .panel.right .chips span.ai em { margin-left: auto; font-style: normal; font-size: 17px;
+                                   font-weight: 400; color: #A9B1BD; letter-spacing: .2px; }
+  .arrow { display: flex; justify-content: center; padding-top: 150px; }
+  .more { position: absolute; left: 120px; right: 120px; bottom: 132px;
+          padding-top: 24px; border-top: 1px solid var(--line);
+          display: flex; align-items: baseline; gap: 18px; }
+  .more .ml { font-size: 21px; color: #8A94A3; letter-spacing: .3px; }
+  .more .mv { font-size: 32px; font-weight: 800; color: var(--coral); letter-spacing: 1px; }
+
+  /* ---------- 07 包体 ---------- */
+  .bars { position: absolute; left: 120px; right: 120px; top: 306px; }
+  .bar { display: grid; grid-template-columns: 250px 1fr 190px; gap: 26px;
+         align-items: center; padding: 26px 0; }
+  .bar .n { font-size: 25px; color: #4A5563; letter-spacing: .3px; }
+  .bar .n small { display: block; font-size: 16px; color: var(--muted); margin-top: 5px; }
+  .bar .tr { height: 62px; background: #F5F2F4; border-radius: 5px; position: relative; }
+  .bar .tr::after { content: ""; position: absolute; left: 69.8%; top: -7px; bottom: -7px;
+                    border-left: 1px dashed #EFBECE; }
+  .bar .fl { height: 100%; border-radius: 5px; background: #C6CEDA; }
+  .bar .vl { font-family: var(--num); font-size: 33px; font-weight: 700; color: #6E7887;
+             text-align: right; font-variant-numeric: tabular-nums; }
+  .bar.us .n { color: var(--navy); font-weight: 700; }
+  .bar.us .fl { background: var(--coral); }
+  .bar.us .vl { color: var(--coral); }
+  .bars .note { margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line);
+                font-size: 22px; color: #8A94A3; letter-spacing: .3px;
+                display: flex; justify-content: space-between; }
+
+  .rail { position: fixed; left: 0; top: 0; height: 3px; background: var(--coral);
+          width: 0; z-index: 11; transition: width .18s linear; }
+
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    body { background: #fff; padding: 0; }
+    .frame { --s: 1; width: 1920px; height: 1080px; margin: 0;
+             page-break-after: always; }
+    .slide { transform: none; box-shadow: none; }
+    .pgnum, .rail { display: none; }
+  }
+
+  /* Run-to-Figma capture mode */
+  .capture-mode { padding: 0 !important; background: #fff !important; overflow: hidden !important; }
+  .capture-mode .rail,
+  .capture-mode .pgnum { display: none !important; }
+  .capture-mode .frame { display: none !important; margin: 0 !important;
+                         width: 1920px !important; height: 1080px !important; }
+  .capture-mode .frame.cap-on { display: block !important; }
+  .capture-mode .slide { transform: none !important; box-shadow: none !important; }
+</style>
+</head>
+<body>
+<div class="rail" id="rail"></div>
+
+<!-- 01 缘起 -->
+<div class="frame" data-sec="缘起">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>01</span>缘起</div>
+      <h2 class="xl">问题从下载那一步开始</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="orig-bg">
+      <div class="bar"></div>
+      <div>
+        <p>上次给 Danny 走 RTB 全流程，刚走到<b>「下载」</b>这一步，他就表示了不满意：商店里的物料、措辞、样式，没讲出我们的经营理念和价值主张。</p>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="lb">这次讲哪一段</div>
+      <div class="row">
+        <div class="step">搜索列表</div>
+        <div class="step">商店页</div>
+        <div class="step">下载安装</div>
+        <div class="step">启动</div>
+        <div class="step">注册开店</div>
+        <div class="step end">新手引导<small>价目表 · 添加员工</small></div>
+      </div>
+      <div class="note">官网是另一条渠道，不进这次正文。</div>
+    </div>
+    <div class="todo3">
+      <div class="lb">今天要定三件事</div>
+      <div class="grid">
+        <div class="it">
+          <div class="n">①</div>
+          <div class="t">改什么</div>
+          <div class="d">物料、措辞、样式</div>
+        </div>
+        <div class="it">
+          <div class="n">②</div>
+          <div class="t">先改什么</div>
+          <div class="d">优先级顺序</div>
+        </div>
+        <div class="it">
+          <div class="n">③</div>
+          <div class="t">什么时候交</div>
+          <div class="d">排期</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 02 搜索列表 -->
+<div class="frame" data-sec="搜索列表">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>02</span>搜索列表</div>
+      <h2 class="sm2">现状与改后</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="pair">
+      <div class="item">
+        <img src="assets/ppt/jl_search_now.jpg" alt="App Store 搜索「美业」结果列表 · 线上实拍">
+        <div class="cap"><b>现状</b>App Store 搜索「美业」
+          <em>线上实拍 · 原图未裁</em></div>
+      </div>
+      <div class="item">
+        <img src="assets/ppt/jl_search_after.png" alt="改后搜索列表 · 文案加亮">
+        <div class="cap"><b>改后</b>赋能商家增加收入
+          <em>红框标注处</em></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 03 商店页 -->
+<div class="frame" data-sec="商店页">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>03</span>商店页</div>
+      <h2 class="sm">和头部摆在同一排看</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="phone p1 new">
+      <img src="assets/ppt/jl_figma_store.png" alt="剑琅联盟改后上架图方案（Figma 长图截上部）">
+    </div>
+    <div class="phone p2">
+      <img src="assets/ppt/jl_store_mobile.png" alt="剑琅联盟 App Store 手机版商店页">
+    </div>
+    <div class="phone p3">
+      <img src="assets/ppt/kmm_store_mobile.png" alt="客满满 App Store 手机版商店页">
+    </div>
+    <div class="pcap" style="left:120px"><b>剑琅联盟</b>改后方案 · Figma
+      <em>长图截上部，到能力标签为止</em></div>
+    <div class="pcap" style="left:490px"><b>剑琅联盟</b>线上现版
+      <em>App Store 手机版 · 线上实拍</em></div>
+    <div class="pcap" style="left:860px"><b>客满满</b>竞品
+      <em>App Store 手机版 · 线上实拍</em></div>
+    <div class="stats">
+      <div class="sh">客满满<em>行业头部</em></div>
+      <div class="sorg">美团出品 · 互诚信息技术（上海）· 2016 年成立 · 注册资本 2 亿美元</div>
+      <div class="stat"><b>630<small>万</small></b><span>美团服务零售在合作的商家数，覆盖 200+ 个行业</span></div>
+      <div class="stat"><b>1,499<small>元起</small></b><span>每店每年 · 美业版；足疗基础 2,099、标准 3,599，三档在售</span></div>
+      <div class="stat"><b class="tx">双平台独占</b><span>美团 + 大众点评直连：预约同步 · 团购核销 · 评价回传</span></div>
+      <div class="tail">不是一个小工具，<br>是美团伸向美业的那只手。</div>
+    </div>
+  </section>
+</div>
+
+<!-- 04 产品描述 -->
+<div class="frame" data-sec="产品描述">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>04</span>产品描述</div>
+      <h2 class="sm2">上架图下面那一段</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="desc3">
+      <div class="col">
+        <div class="lab">剑琅联盟<em>线上现版</em></div>
+        <div class="card">
+          <div class="sub">商店页 · 产品描述原文 · 全 114 字</div>
+          <div class="body">
+            <p class="mute">剑琅联盟是由知名高端SPA连锁“丽妍雅集”品牌创办人倾力打造的美业社交拓客平台。平台注入“丽妍雅集”于美业20年成功店铺经营及拓客秘诀，集结资深互联网技术团队与美业专业团队，拓客新模式，帮助美业商户吸纳新客，营造优质拓客生态圈。</p>
+          </div>
+        </div>
+        <div class="pt">讲出身故事，<b>拓客增收没顶上</b></div>
+      </div>
+      <div class="col">
+        <div class="lab">客满满<em>竞品</em></div>
+        <div class="card">
+          <div class="sub">商店页 · 产品描述原文 · 全 350 字</div>
+          <div class="body">
+            <p class="mute">客满满，是美团专为美业商户打造的一款店铺管理系统，我们致力于帮老板服务好顾客、打理好店铺，助力商户提高收入、降低成本。</p>
+            <p class="mute">客满满为商户提供哪些功能：</p>
+            <p class="mute mod"><b class="mod">【会员营销】</b>提供多样的营销工具，发券、拼团、短信营销、微信公众号，帮老板拉更多的新客、让会员更愿意到店服务。</p>
+            <p class="mute mod"><b class="mod">【智慧预约】</b>连接微信、美团、大众点评帮助商户快速的接收和确认预约，智能安排店员与顾客的服务日程。</p>
+            <p class="mute mod"><b class="mod">【快捷收银】</b>能够满足顾客多样的支付方式，微信、支付宝、Pos机等，支持美团、大众点评团购验券。</p>
+            <p class="mute mod"><b class="mod">【财务对账】</b>提供准确、清晰的财务报表，解决商户账难记、账难对的问题。</p>
+            <p class="mute mod"><b class="mod">【店员管理】</b>提供店员管理工具，店员考勤、日报，实时掌握店员工作状态。</p>
+            <p class="mute mod"><b class="mod">【生意分析】</b>为老板提供全方位的数据分析，可以随时随地的掌握生意状态，让老板更了解生意更懂顾客。</p>
+          </div>
+        </div>
+        <div class="pt">主打管店，<b>增收停在口号</b></div>
+      </div>
+      <div class="col hi">
+        <div class="lab">改后方案<span class="tag">拟稿</span></div>
+        <div class="card">
+          <div class="sub">美业门店拓客增收工具</div>
+          <div class="body">
+            <p>剑琅联盟，专为美业门店做<strong>拓客</strong>和<strong>增收</strong>。<br>不只帮你管店，更帮你把客人引进来、把单子做上去。</p>
+            <p><b>拓客</b>：客源共享 · 客带客 · 社区团购，把门店接到更多客。</p>
+            <p><b>增收</b>：零成本卖货 · 培训提技 · 会员复购，多几条进账的路。</p>
+            <p>收银、预约、报表管好日常；说话就能开单、问数——AI 跟在后面，不单独当卖点。</p>
+          </div>
+        </div>
+        <div class="pt"><b>先拓客、再增收</b>，管店托底</div>
+      </div>
+    </div>
+    <div class="desc-foot">和上架图同一套话：<em>先说结果，再说能力，不讲出身。</em></div>
+  </section>
+</div>
+
+<!-- 05 上架图 -->
+<div class="frame" data-sec="上架图">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>05</span>上架图</div>
+      <h2>一张主图，六张卖点</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="seven">
+      <figure class="hero"><img src="assets/ppt/jl_1.jpg" alt="主图"><figcaption><b>主图</b></figcaption></figure>
+      <figure><img src="assets/ppt/jl_2.jpg" alt="经营"><figcaption><b>①</b>经营</figcaption></figure>
+      <figure><img src="assets/ppt/jl_3.jpg" alt="会员"><figcaption><b>②</b>会员</figcaption></figure>
+      <figure><img src="assets/ppt/jl_4.jpg" alt="获客"><figcaption><b>③</b>获客</figcaption></figure>
+      <figure><img src="assets/ppt/jl_5.jpg" alt="拓客"><figcaption><b>④</b>拓客</figcaption></figure>
+      <figure><img src="assets/ppt/jl_6.jpg" alt="培训"><figcaption><b>⑤</b>培训</figcaption></figure>
+      <figure><img src="assets/ppt/jl_7.jpg" alt="AI"><figcaption><b>⑥</b>AI</figcaption></figure>
+    </div>
+    <div class="legend"><em>七张分工不同</em>：一张讲日常，五张讲增量。</div>
+  </section>
+</div>
+
+<!-- 06 客满满 -->
+<div class="frame" data-sec="客满满">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>06</span>客满满</div>
+      <h2>一张主图，四张卖点</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="six">
+      <figure class="hero"><img src="assets/ppt/kmm_1.jpg" alt="主图左半"><figcaption><b>主图</b>左</figcaption></figure>
+      <figure class="hero"><img src="assets/ppt/kmm_2.jpg" alt="主图右半"><figcaption><b>主图</b>右</figcaption></figure>
+      <figure><img src="assets/ppt/kmm_3.jpg" alt="会员营销"><figcaption><b>①</b>会员营销</figcaption></figure>
+      <figure><img src="assets/ppt/kmm_4.jpg" alt="高效管理"><figcaption><b>②</b>高效管理</figcaption></figure>
+      <figure><img src="assets/ppt/kmm_5.jpg" alt="数据清晰"><figcaption><b>③</b>数据清晰</figcaption></figure>
+      <figure><img src="assets/ppt/kmm_6.jpg" alt="服务流程"><figcaption><b>④</b>服务流程</figcaption></figure>
+    </div>
+    <div class="src">
+      <span>全部 6 张，取自 App Store 商店页原图</span>
+      <span>前两张为同一张主图的左右两半 · 原图 1242 × 2208 未裁切</span>
+    </div>
+  </section>
+</div>
+
+<!-- 07 结构 -->
+<div class="frame" data-sec="结构">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>07</span>结构</div>
+      <h2>每张图只做三件事</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="anwrap">
+      <img src="assets/ppt/jl_2.jpg" alt="单张上架图结构">
+      <span class="mk" style="top:104px">A</span>
+      <span class="mk" style="top:212px">B</span>
+      <span class="mk" style="top:330px">C</span>
+      <span class="lead" style="top:119px"></span>
+      <span class="lead" style="top:227px"></span>
+      <span class="lead" style="top:345px"></span>
+    </div>
+    <div class="parts">
+      <div class="part" style="top:86px;">
+        <div class="t">一句话标题</div>
+        <div class="d">六个字说清这张图解决什么 —— 管好日常生意</div>
+      </div>
+      <div class="part" style="top:194px;">
+        <div class="t">三个能力词</div>
+        <div class="d">用「·」隔开，扫一眼知道覆盖什么 —— 收银 · 预约 · 经营报表</div>
+      </div>
+      <div class="part" style="top:312px;">
+        <div class="t">一张手机截图</div>
+        <div class="d">证明它真的长这样，实拍截图摆在这里</div>
+      </div>
+    </div>
+    <div class="no">不放：<b>功能清单</b> · <b>参数</b> · <b>价格</b></div>
+  </section>
+</div>
+
+<!-- 08 覆盖 -->
+<div class="frame" data-sec="覆盖">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>08</span>覆盖</div>
+      <h2>卖点一一对上，我们多三块</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="cover2">
+      <div class="panel">
+        <h3>客满满<small>卖点 4 张</small></h3>
+        <div class="chips four">
+          <span>会员营销</span>
+          <span>高效管理</span>
+          <span>数据清晰</span>
+          <span>服务流程</span>
+        </div>
+      </div>
+      <div class="arrow">
+        <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+          <path d="M6 23h30M28 13l10 10-10 10" stroke="#D9DEE6" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="panel right">
+        <h3>剑琅联盟<small>卖点 6 张</small></h3>
+        <div class="chips">
+          <span>经营</span>
+          <span>会员</span>
+          <span class="plus">获客</span>
+          <span class="plus">拓客</span>
+          <span class="plus">培训</span>
+          <span class="ai">AI<em>贯穿上面五块，不单列卖点</em></span>
+        </div>
+      </div>
+    </div>
+    <div class="more">
+      <span class="ml">头部四张卖点都在「管好店」，我们多讲：</span>
+      <span class="mv">获客 · 拓客 · 培训</span>
+    </div>
+  </section>
+</div>
+
+<!-- 09 包体 -->
+<div class="frame" data-sec="包体">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>09</span>包体</div>
+      <h2>175MB 不是问题</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="bars">
+      <div class="bar">
+        <div class="n">美团经营宝<small>美团 · 美业商家线上经营</small></div>
+        <div class="tr"><div class="fl" style="width:100%"></div></div>
+        <div class="vl">251.1 MB</div>
+      </div>
+      <div class="bar">
+        <div class="n">有赞门店<small>有赞 · 门店经营</small></div>
+        <div class="tr"><div class="fl" style="width:84.5%"></div></div>
+        <div class="vl">212.1 MB</div>
+      </div>
+      <div class="bar">
+        <div class="n">客满满<small>美团 · 专为美业打造</small></div>
+        <div class="tr"><div class="fl" style="width:78.4%"></div></div>
+        <div class="vl">196.9 MB</div>
+      </div>
+      <div class="bar us">
+        <div class="n">剑琅联盟<small>本次参照线</small></div>
+        <div class="tr"><div class="fl" style="width:69.8%"></div></div>
+        <div class="vl">175.3 MB</div>
+      </div>
+      <div class="note">
+        <span>三款头部都在我们之上</span>
+        <span>数据来源：App Store 手机版「信息」栏实拍</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 10 注册开店 -->
+<div class="frame" data-sec="注册开店">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>10</span>开店流程</div>
+      <h2>注册开店</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="nine">
+      <figure>
+        <img src="assets/jianlang/jl_splash_anim.png" alt="开屏动画与用户条款">
+        <figcaption><b>①</b>开屏 · 条款
+          <em>协议同屏，同意才放行</em></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/jianlang/jl_splash.jpg" alt="品牌开屏图">
+        <figcaption><b>②</b>开屏图
+          <em>品牌主视觉</em></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/jianlang/jl_login.png" alt="登录页">
+        <figcaption><b>③</b>登录
+          <em>手机号 + 验证码</em></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/jianlang/jl_role_select.png" alt="选择角色页">
+        <figcaption><b>④</b>选角色
+          <em>老板 / 开店 / 顾问</em></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/jianlang/jl_confirm_store.png" alt="确认门店信息页">
+        <figcaption><b>⑤</b>确认门店
+          <em>建店资料一次填完</em></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/jianlang/jl_split.png" alt="分流选角色页">
+        <figcaption><b>⑥</b>分流
+          <em>开启你的掌门之路</em></figcaption>
+      </figure>
+    </div>
+  </section>
+</div>
+
+<!-- 11 新手引导 -->
+<div class="frame" data-sec="新手引导">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>11</span>新手引导</div>
+      <h2>先看两家怎么做</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="gshot">
+      <img src="assets/jianlang/jl_home_now.jpg" alt="新店首次进入 RTB 首页">
+      <div class="cap"><b>现状</b>新店首次进首页</div>
+    </div>
+    <div class="fold">
+      <div class="h">我们的现状</div>
+      <div class="f">
+        <div class="k">进来是空的</div>
+        <div class="d">没有价目表、没有员工、没有一条记录，首页数字全是 0。</div>
+      </div>
+      <div class="f">
+        <div class="k">线上只有简易版</div>
+        <div class="d">现在这套引导没有分层，做法很简单。</div>
+      </div>
+      <div class="f">
+        <div class="k">要教的入口很多</div>
+        <div class="d">开单、预约、会员、报表、员工 —— 每一处都得告诉人在哪。</div>
+      </div>
+    </div>
+    <div class="why">
+      <div class="h">接下来看什么</div>
+      <div class="it">
+        <div class="k">只加红点<em>12 微信</em></div>
+        <div class="v">全程没有一个流程页，<b>入口上标个红点</b>就够；点进去还要说明，就在下一级再来一个。</div>
+      </div>
+      <div class="it">
+        <div class="k">三层都用<em>13–14 抖音</em></div>
+        <div class="v">红点、气泡、弹窗都会用，但<b>每次只出一层</b>；多数等用户先动手，少数如智能推荐主动弹。</div>
+      </div>
+      <div class="it">
+        <div class="k">手段只有三层<em>15</em></div>
+        <div class="v">判据一条：<b>用户能不能猜到点了会发生什么</b>。</div>
+      </div>
+      <div class="it">
+        <div class="k">落到我们身上<em>16</em></div>
+        <div class="v">入口类、动作类、概念类，<b>各用一层</b>。</div>
+      </div>
+    </div>
+    <div class="src">
+      <span>两家都没有流程式新手引导</span>
+    </div>
+  </section>
+</div>
+
+<!-- 12 微信 -->
+<div class="frame" data-sec="微信">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>12</span>微信</div>
+      <h2>只加红点，不做流程</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="slots wx">
+      <figure>
+        <img src="assets/ppt/guide/wx_01.png" alt="微信 · 首次进入非空态">
+        <figcaption><b>①</b>首次进入 · 非空态</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/wx_02.png" alt="微信 · 入口右上角红点">
+        <figcaption><b>②</b>入口右上角红点</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/wx_03.png" alt="微信 · 下一级再加一个">
+        <figcaption><b>③</b>下一级再加一个</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/wx_04.png" alt="微信 · 用过即消失">
+        <figcaption><b>④</b>用过即消失</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/wx_05.png" alt="微信 · 同类入口同一做法">
+        <figcaption><b>⑤</b>同类入口同一做法</figcaption>
+      </figure>
+    </div>
+    <div class="nt wx">
+      <div class="h">四条结论</div>
+      <div class="i">
+        <div class="k">没有流程页</div>
+        <div class="d">从头到尾没有一个「下一步」，也没有一页讲解。</div>
+      </div>
+      <div class="i">
+        <div class="k">红点接力</div>
+        <div class="d">入口一个红点；点进去还需要说明，就在下一级再来一个。</div>
+      </div>
+      <div class="i">
+        <div class="k">首屏不空</div>
+        <div class="d">微信团队的消息、新闻推送已经在列表里，用户自然知道在哪说话。</div>
+      </div>
+      <div class="i">
+        <div class="k">不解释操作</div>
+        <div class="d">只标位置，不写怎么用 —— 默认你本来就会。</div>
+      </div>
+    </div>
+    <div class="src">
+      <span><b>微信</b>全程没有一个流程页，也没有一句操作说明</span>
+      <span>红点接力：入口一个，下一级一个</span>
+    </div>
+  </section>
+</div>
+
+<!-- 13 抖音（一） -->
+<div class="frame" data-sec="抖音（一）">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>13</span>抖音（一）</div>
+      <h2>先让你看，不急着教你</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="slots dy1">
+      <figure>
+        <img src="assets/ppt/guide/dy1_01.png" alt="抖音 · 首进首页引导刷视频">
+        <figcaption><b>①</b>首进首页 · 引导刷视频</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy1_02.png" alt="抖音 · 点我引导登录">
+        <figcaption><b>②</b>点「我」· 引导登录</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy1_03.png" alt="抖音 · 资料设置可跳过">
+        <figcaption><b>③</b>资料设置 · 可跳过</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy1_04.png" alt="抖音 · 完成后不再打扰">
+        <figcaption><b>④</b>资料设置 · 可跳过· 完成不再打扰</figcaption>
+      </figure>
+    </div>
+    <div class="nt dy">
+      <div class="h">四条结论</div>
+      <div class="i">
+        <div class="k">首屏不打扰</div>
+        <div class="d">进来直接播视频，没有引导页、没有遮罩、没有弹窗。</div>
+      </div>
+      <div class="i">
+        <div class="k">只留一个钩子</div>
+        <div class="d">底部 tab 上「我」一个红点，其他什么都不做。</div>
+      </div>
+      <div class="i">
+        <div class="k">不设卡</div>
+        <div class="d">头像、昵称都能跳过，系统直接给一个随机昵称。</div>
+      </div>
+      <div class="i">
+        <div class="k">走完就收手</div>
+        <div class="d">这一轮结束就不再主动出现，除非你自己去点别的地方。</div>
+      </div>
+    </div>
+    <div class="src">
+      <span><b>抖音</b>首屏只有一句上滑提示，钩子是「我」上的红点</span>
+      <span>资料全可跳过，走完即收手</span>
+    </div>
+  </section>
+</div>
+
+<!-- 14 抖音（二） -->
+<div class="frame" data-sec="抖音（二）">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>14</span>抖音（二）</div>
+      <h2>用到哪，才在哪开口</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="slots dy2">
+      <figure>
+        <img src="assets/ppt/guide/dy2_01.png" alt="抖音 · 发布页文字红点">
+        <figcaption><b>①</b>发布页 · 文字</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy2_02.png" alt="抖音 · 文字模板气泡">
+        <figcaption><b>②</b>文字模板 · 气泡</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy2_03.png" alt="抖音 · 商城滑动">
+        <figcaption><b>③</b>商城 · 滑动</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy2_04.png" alt="抖音 · 个人页订单与banner">
+        <figcaption><b>④</b>个人页 · 订单 + banner</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy2_05.png" alt="抖音 · 朋友说明页">
+        <figcaption><b>⑤</b>朋友 · 说明页</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ppt/guide/dy2_06.png" alt="抖音 · 消息智能推荐">
+        <figcaption><b>⑥</b>消息 · 智能推荐<em class="ex">（主动弹）</em></figcaption>
+      </figure>
+    </div>
+    <div class="src">
+      <span><b>抖音</b>六处引导，多数是点进某个页面才出现</span>
+      <span>例外：消息的「智能推荐」主动弹出</span>
+    </div>
+  </section>
+</div>
+
+<!-- 15 三层手段 -->
+<div class="frame" data-sec="三层手段">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>15</span>三层手段</div>
+      <h2>手段只有三层</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="judge">
+      判据只有一条 —— <b>用户能不能凭常识猜到，点了会发生什么</b>
+    </div>
+    <div class="lad">
+      <div class="lh">
+        <span>层</span><span>手段</span><span>什么时候用</span><span>打扰程度</span>
+      </div>
+      <div class="row">
+        <div class="n">01</div>
+        <div class="t">红点<small>入口标记</small></div>
+        <div class="w">用户知道那是什么，只是<b>不知道在哪</b> —— 标个位置就够。</div>
+        <div class="bar"><i style="width:22%"></i></div>
+      </div>
+      <div class="row">
+        <div class="n">02</div>
+        <div class="t">气泡 · 动效<small>就地指一下</small></div>
+        <div class="w">知道要去哪，但<b>不知道点哪个</b> —— 指一下具体的位置。</div>
+        <div class="bar"><i style="width:52%"></i></div>
+      </div>
+      <div class="row hi">
+        <div class="n">03</div>
+        <div class="t">弹窗 · sheet · 说明页<small>单独占一屏</small></div>
+        <div class="w">概念本身是新的，连<b>「是什么」</b>都还没建立，得讲清价值。</div>
+        <div class="bar"><i style="width:88%"></i></div>
+      </div>
+    </div>
+    <div class="use">
+      <div class="u">
+        <span class="who">微信</span>
+        <span class="dots"><i>●</i>○○</span>
+        <span class="txt">全程只用第一层</span>
+      </div>
+      <div class="u">
+        <span class="who">抖音</span>
+        <span class="dots"><i>●</i><i>●</i><i>●</i></span>
+        <span class="txt">三层都用，但每次只出现一层</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 16 结论 -->
+<div class="frame" data-sec="结论">
+  <section class="slide">
+    <div class="pad">
+      <div class="kick"><span>16</span>结论</div>
+      <h2>轻可以学，省学不来</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="cmp">
+      <div class="b">
+        <h3>它们的用户，早被市场教过</h3>
+        <p>点赞、聊天、下单 —— <b>全民共识</b>，不用说也懂。</p>
+        <p>教育成本，市场已经替它们付过了。</p>
+        <p>所以只说「在哪」，不必说「怎么用」。</p>
+      </div>
+      <div class="b alt">
+        <h3>我们的客户，没人教过</h3>
+        <p>价目表、添加员工、开单记账 —— <b>每家店的叫法都不一样</b>。</p>
+        <p>行业里没有统一说法，教一次也传不下去。</p>
+        <p>所以除了「在哪」，还得说「是什么」。</p>
+      </div>
+    </div>
+    <div class="rl">落到我们身上，就三条</div>
+    <div class="rules">
+      <div class="r">
+        <div class="k"><em>入口类</em> → 红点</div>
+        <div class="d">知道那是什么，只是不知道在哪。</div>
+      </div>
+      <div class="r">
+        <div class="k"><em>动作类</em> → 气泡</div>
+        <div class="d">知道要去哪，但不知道点哪个。</div>
+      </div>
+      <div class="r">
+        <div class="k"><em>概念类</em> → 一页说清</div>
+        <div class="d">连「是什么」都还没建立，省不掉。</div>
+      </div>
+    </div>
+    <div class="more">
+      <span class="ml">一句话</span>
+      <span class="mv">轻只是结果。该讲的那一层，一层都不能省。</span>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var cap = new URLSearchParams(location.search).get('capture');
+  if (!cap) return;
+  document.documentElement.classList.add('capture-mode');
+  document.body.classList.add('capture-mode');
+  document.documentElement.style.setProperty('--s', '1');
+  var frames = Array.prototype.slice.call(document.querySelectorAll('.frame'));
+  var m = /^p0?(\d+)$/i.exec(cap);
+  var idx = m ? (parseInt(m[1], 10) - 1) : -1;
+  frames.forEach(function (f, i) {
+    if (i === idx) f.classList.add('cap-on');
+    else f.classList.remove('cap-on');
+  });
+})();
+</script>
+<script>
+(function () {
+  var frames = Array.prototype.slice.call(document.querySelectorAll('.frame'));
+  var rail = document.getElementById('rail');
+  if (document.body.classList.contains('capture-mode')) return;
+
+  // 页码插在每页卡片右下方的留白里
+  frames.forEach(function (f, k) {
+    var el = document.createElement('div');
+    el.className = 'pgnum';
+    el.innerHTML = '<b>' + ('0' + (k + 1)).slice(-2) + '</b>' +
+                   '<i>/</i><span>' + ('0' + frames.length).slice(-2) + '</span>' +
+                   '<em>' + (f.getAttribute('data-sec') || '') + '</em>';
+    f.appendChild(el);
+  });
+
+  function fit() {
+    var s = Math.min(1, (window.innerWidth - 88) / 1920);
+    document.documentElement.style.setProperty('--s', s);
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  function cur() {
+    var i = 0, min = Infinity;
+    frames.forEach(function (f, k) {
+      var d = Math.abs(f.getBoundingClientRect().top - 64);
+      if (d < min) { min = d; i = k; }
+    });
+    return i;
+  }
+  function sync() {
+    var i = cur();
+    rail.style.width = ((i + 1) / frames.length * 100) + '%';
+  }
+  window.addEventListener('scroll', sync, { passive: true });
+  sync();
+
+  function go(d) {
+    var i = Math.max(0, Math.min(frames.length - 1, cur() + d));
+    window.scrollTo({ top: frames[i].offsetTop - 64, behavior: 'smooth' });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) >= 0) {
+      e.preventDefault(); go(1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) >= 0) {
+      e.preventDefault(); go(-1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
